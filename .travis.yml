@@ -8,10 +8,10 @@ notifications:
   email: false
 
 before_script:
-  - cabal install shellcheck
+  - "cabal update"
+  - "cabal install shellcheck"
 
 script:
-  - shell
   - find . -maxdepth 1 -type f -name ".*" \
       | grep -vE "iface|gitconfig|intrc|yml" \
       | xargs shellcheck -e SC2046 -e SC2034 -e 2086
