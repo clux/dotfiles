@@ -1,15 +1,14 @@
-language: haskell
-sudo: false
+language: python
+python:
+  - "2.7"
 
-ghc:
-  - 7.8
+addons:
+  apt:
+    packages:
+    - shellcheck
 
 notifications:
   email: false
-
-before_script:
-  - "cabal update"
-  - "cabal install shellcheck"
 
 script:
   - find . -maxdepth 1 -type f -name ".*" \
