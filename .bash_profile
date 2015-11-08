@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for file in ~/.{bash_prompt,aliases,functions,path,extra,exports}; do
+for file in ~/.{bash_prompt,aliases,functions,extra,exports}; do
   [ -f "$file" ] && source "$file"
 done
 unset file
