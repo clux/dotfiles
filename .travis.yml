@@ -8,7 +8,4 @@ install:
   - cabal install shellcheck
 
 script:
-  - echo "no cabal file - skipping cabal install"
-
-test:
   - ./lint.sh
