@@ -1,0 +1,18 @@
+[user]
+  name = clux
+  email = analsandblaster@gmail.com
+[push]
+  default = simple
+[alias]
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  dif = diff
+  stat = diff --stat
+  st = status -s
+  pul = pull
+  ci = commit
+  cia = commit -am
+  amend = commit --amend -m
+  ping = commit --allow-empty -m \"ping hooks\"
+  uncommit = reset --soft HEAD^
+  unstage = reset HEAD
+  count = shortlog -sn

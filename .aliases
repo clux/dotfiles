@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# colors in gcc warnings and errors
+alias colorgcc="grc -es -c conf.gcc --colour=on"
+
+# navigation shortcuts
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias la="ls -la"
+alias lsd="ls -l | grep --color=never '^d'"
+
+# misc helpers
+alias week='date +%V'
+alias damage='du -hs * | sort -n | tail'
+
+alias localip="sudo ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | cut -d ' ' -f1"
+
+# copy helpers - may as well use the mac convention
+alias pbcopy='xclip -sel clip'
+alias pbpaste='xclip -sel clip -o'
+alias cwd='pwd | tr -d "\r\n" | xclip -sel clip'
+
+# rsync
+alias rsync-copy="rsync -avz --progress -h"
+alias rsync-move="rsync -avz --progress -h --remove-source-files"
+alias rsync-update="rsync -avzu --progress -h"
+alias rsync-synchronize="rsync -avzu --delete --progress -h"
+
+# issue this immediately after a long command
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history 1 | cut -c 8-)"'

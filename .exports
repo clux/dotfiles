@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# I suck at vim
+export EDITOR=/usr/bin/nano;
+export TERMINAL="urxvt";
+
+# Larger bash history (allow 32³ entries; default is 500)
+export HISTSIZE=50000000;
+export HISTFILESIZE=$HISTSIZE;
+export HISTCONTROL=ignoredups;
+# Make some commands not show up in history
+export HISTIGNORE=" *:ls:cd:cd -:pwd:exit:date:* --help:* -h";
+
+# Prefer GB English and use UTF-8
+export LANG="en_GB.UTF-8";
+export LC_ALL="en_GB.UTF-8";
+
+# Don’t clear the screen after quitting a manual page
+export MANPAGER="less -X";
+
+# By default compile everything with clang
+export CC=clang
+export CXX=clang++
+
+# want short ctest results without having to type --output-on-failure (or -V always)
+export CTEST_OUTPUT_ON_FAILURE=1
+export GTEST_COLOR=1
+
+# can just `z dl` now, but brotorr uses this
+export DOWNLOAD_DIR=/media/clux/Zeus/DL/
+
+# so we can run dotclux/tasks standalone
+export gh='git@github.com:'

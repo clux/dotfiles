@@ -1,0 +1,31 @@
+{
+	"bootstrapped": true,
+	"channels":
+	[
+		"https://packagecontrol.io/channel_v3.json"
+	],
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Bats (Bash Automated Testing System)",
+		"CMake",
+		"Generic Config",
+		"GitGutter",
+		"Markdown Preview",
+		"MarkdownEditing",
+		"Package Control",
+		"Rust",
+		"Seti_UI",
+		"Stylus",
+		"SublimeLinter",
+		"SublimeLinter-contrib-eslint",
+		"SublimeLinter-contrib-rustc",
+		"SublimeLinter-cppcheck",
+		"SublimeLinter-jshint",
+		"SublimeLinter-json",
+		"SublimeLinter-pylint",
+		"SublimeLinter-shellcheck"
+	]
+}
