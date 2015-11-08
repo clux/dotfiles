@@ -64,7 +64,7 @@
             },
             "shellcheck": {
                 "@disable": false,
-                "args": ["-e", "SC2086"],
+                "args": [],
                 "exclude": "",
                 "excludes": []
             }
