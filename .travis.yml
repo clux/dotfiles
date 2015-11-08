@@ -1,16 +1,11 @@
-language: python
-python:
-  - "2.7"
-
-addons:
-  apt:
-    packages:
-    - shellcheck
+language: haskell
+sudo: false
 
 notifications:
   email: false
 
-script:
-  - find . -maxdepth 1 -type f -name ".*" \
-      | grep -vE "iface|gitconfig|intrc|yml" \
-      | xargs shellcheck -e SC2046 -e SC2034 -e 2086
+install:
+  - cabal install shellcheck
+
+test:
+  - lint.sh
