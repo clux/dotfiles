@@ -1,6 +1,7 @@
 #!/bin/bash
 
 for file in ~/.{bash_prompt,aliases,functions,extra,exports}; do
+  # shellcheck source=/dev/null
   [ -f "$file" ] && source "$file"
 done
 unset file
