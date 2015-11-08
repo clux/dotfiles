@@ -1,14 +1,19 @@
 #!/bin/bash
+
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+  debian_chroot=$(cat /etc/debian_chroot)
+fi
+
 set_prompt () {
-  rc=$? # Must save this
-  Green='\[\e[0;32m\]'
-  White='\[\e[01;37m\]'
-  Red='\[\e[0;31m\]'
-  Yellow='\[\e[01;33m\]'
-  Blue="\[\033[0;34m\]"
-  Reset='\[\e[00m\]'
-  Flag='\342\232\221'
-  Voltage='\342\232\241'
+  local -r rc=$? # Must save this
+  local -r Green='\[\e[0;32m\]'
+  local -r White='\[\e[01;37m\]'
+  local -r Red='\[\e[0;31m\]'
+  local -r Yellow='\[\e[01;33m\]'
+  local -r Blue="\[\033[0;34m\]"
+  local -r Reset='\[\e[00m\]'
+  local -r Flag='\342\232\221'
+  local -r Voltage='\342\232\241'
 
   PS1=$([ $rc -ne 0 ] && echo -E "$Red[$rc]$Reset")
 
@@ -21,7 +26,7 @@ set_prompt () {
   # Color directory based on dirty status if relevant, otherwise white
   # NB: these works anywhere inside a repo, but we only check in the main directories
   if [ -d ".git" ]; then
-    res=$(git status)
+    local -r res=$(git status)
     # Check if ahead
     echo $res | grep -qE "ahead of '.*' by [0-9]*"
     PS1+=$([ $? -eq 0 ] && echo -n "$Yellow$Voltage")
