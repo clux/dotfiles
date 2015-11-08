@@ -1,4 +1,5 @@
 # dotfiles
+[![build status](https://secure.travis-ci.org/clux/dotfiles.svg)](http://travis-ci.org/clux/dotfiles)
 Separated from installation scripts because these are mostly install agnostic, and changes do not deserve full OS rebuilds to test.
 
 ## Usage
