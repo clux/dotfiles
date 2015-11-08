@@ -44,4 +44,3 @@ set_prompt () {
   PS1+="$Yellow\$$Reset " # yellow $
 }
 PROMPT_COMMAND='set_prompt'
-# Currently not used using @jfrazelle's prompt instead for now
