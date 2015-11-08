@@ -1,13 +1,17 @@
-[user]
-  name = clux
-  email = analsandblaster@gmail.com
-[push]
-  default = simple
 [alias]
+  l = log --pretty=oneline --graph --abbrev-commit
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+  st = status -s
+
   dif = diff
   stat = diff --stat
-  st = status -s
+
+  # Show verbose output about tags, branches or remotes
+  tags = tag -l
+  branches = branch -a
+  remotes = remote -v
+
   pul = pull
   ci = commit
   cia = commit -am
@@ -16,3 +20,30 @@
   uncommit = reset --soft HEAD^
   unstage = reset HEAD
   count = shortlog -sn
+
+  # Find commits by source code
+  fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
+
+  # Find commits by commit message
+  fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+
+[user]
+  name = clux
+  email = analsandblaster@gmail.com
+
+[github]
+  user = clux
+
+[push]
+  default = simple
+
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold # line info
+  old = red # deletions
+  new = green # additions
+
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
