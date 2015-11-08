@@ -42,8 +42,7 @@ json-validate() { jsonlint package.json -q ;}
 # scaffolding from templates folder
 
 node-init() {
-  local dir=$(dirname ${BASH_SOURCE[@]})
-  find $dir/templates/npm/ -type f -not -iname pkg.json -exec cp {} $PWD \;
+  find ~/.templates/npm/ -not -type d -not -iname pkg.json -exec cp {} $PWD \;
   pkginit
   echo "# $(basename $PWD)" > README.md
   badgify >> README.md

@@ -8,8 +8,12 @@ find $PWD -name ".*" -not -name ".gitignore" -type f -print -exec ln -sfn {} ~/ 
 echo "Symlinking files in .config to ~/.config"
 find $PWD/.config -maxdepth 1 -type f -print -exec ln -sfn {} ~/.config \;
 
+echo "Symlinking files in .templates to ~/.templates"
+mkdir -p ~/.templates/npm
+find $PWD/.templates/npm -maxdepth 1 -type f -print -exec ln -sfn {} ~/.templates/npm \;
+
 # symlink remaining folders that do not match normal patterns
-mkdir -p ~/.config/sublime-text-3/Packages/
+mkdir -p ~/.config/sublime-text-3/Packages
 echo "ln -sf ~/.config/sublime-text-3/Packages/User/ ~/.config/sublime-text-3/Packages/User"
 # copy static stuff
 cp .config/autostart/* ~/.config/autostart
