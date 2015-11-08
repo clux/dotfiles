@@ -28,12 +28,12 @@ set_prompt () {
   if [ -d ".git" ]; then
     local -r res=$(git status)
     # Check if ahead
-    echo $res | grep -qE "ahead of '.*' by [0-9]*"
+    echo "$res" | grep -qE "ahead of '.*' by [0-9]*"
     PS1+=$([ $? -eq 0 ] && echo -n "$Yellow$Voltage")
     # Check if stash
     PS1+=$([ -n "$(git stash list)" ] && echo -n "$Yellow$Flag")
     # Check if clean
-    echo $res | grep -q "nothing to commit";
+    echo "$res" | grep -q "nothing to commit";
     PS1+=$([ $? -eq 0 ] && echo -n "$Green" || echo -n "$Red")
   elif [ -d ".hg" ]; then
     # Checking if ahead skipped (requires hg outgoing which does network IO)

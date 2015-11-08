@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-cd $(dirname $0)
+cd "$(dirname "$0")"
 
 # Ensure directory trees exist
 mkdir -p ~/.config/sublime-text-3/Packages
