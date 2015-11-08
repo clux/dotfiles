@@ -13,7 +13,7 @@ mf() { filefind "$@" "*.md" | grep -vE "node_modules|bower_components" ;}
 ms() { mf "$1" | xargs grep "$2" 2> /dev/null ;}
 
 # C++ files
-cf() { find "$@" -type f -name *.cpp -o -name *.h -o -name *.c 2> /dev/null ;}
+cf() { find "$@" -type f -name "*.cpp" -o -name "*.h" -o -name "*.c" 2> /dev/null ;}
 cs() { cf "$1" | xargs grep "$2" 2> /dev/null ;}
 hf() { filefind "$@" "*.h" ;}
 hs() { hf "$1" | xargs grep "$2" 2> /dev/null ;}
@@ -60,11 +60,11 @@ rust-doc-update() {
 }
 
 polymer-doc-update() {
-  local repo=$(basename $PWD)
   if [ ! -d demo ]; then
     echo "No demo directory found"
     return
   fi
+  local repo=$(basename $PWD)
   mkdir components/$repo -p
   cp demo/* components/$repo
   find -maxdepth 1 -type f -exec cp {} components/$repo/ \;
@@ -103,12 +103,8 @@ ball () { tar czf "$1.tar" "${@:2}" ;}
 # -----------------------------------------------------------------------------
 # movie management
 
-movies-unsynced () {
-  ls /media/clux/Zorn/NewMP4/BluRay/ | grep "" > zornFiles.log
-  ls /media/clux/TOOL/MP4/Movies/ | grep "" > toolFiles.log
-  diff toolFiles.log zornFiles.log
-  rm toolFiles.log
-  rm zornFiles.log
+movies-diff () {
+  diff -u <(ls /media/clux/TOOL/MP4/Movies/) <(ls /media/clux/Zorn/NewMP4/BluRay/)
 }
 
 # usage: broxy_download after having copied a magnet to clipboard
