@@ -8,4 +8,4 @@ install:
   - cabal install shellcheck
 
 script:
-  - ./lint.sh
+  - find . -maxdepth 1 -executable -type f | xargs shellcheck -e SC1091
