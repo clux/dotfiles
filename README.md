@@ -4,7 +4,7 @@
 Separated from installation scripts because these are mostly install agnostic, and changes do not deserve full OS rebuilds to test.
 
 ## Usage
-Clone and `./install.sh`. This will symlink all files to `~`.
+Clone and run `./install.sh`. This symlinks all files herein to `$HOME` so they can be tracked.
 
 ## Manual configuration steps
 Some stuff is still manually configured, but the remaining stuff is all setup in such a way that they can be done while the standard [installation scripts](https://github.com/clux/dotclux) are going.
