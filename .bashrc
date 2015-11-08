@@ -1,10 +1,11 @@
-#!/bin/bash
-
 # Always have PATH fully set for non-interactive shells
 [ -f ~/.path ] && source ~/.path
 
 # If not running interactively, don't do anything
-[[ $- == *i* ]] || return
+[[ $- == *i* ]] || return 0
+
+# Append to history
+shopt -s histappend
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
