@@ -5,6 +5,7 @@ cd "$(dirname "$0")"
 
 # Ensure directory trees exist
 mkdir -p ~/.config/sublime-text-3/Packages
+mkdir -p ~/.config/autostart
 mkdir -p ~/.templates/npm
 
 echo "Symlinking .files to ~/"
