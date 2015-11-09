@@ -11,7 +11,6 @@ Some stuff is still manually configured, but the remaining stuff is all setup in
 
 ### UX
 
-- keyboard layout: add "us int dead", alt-shift change, caps compose
 - look and feel of UI:
   * effects: OFF
   * mouse: pad on, no clicks on pad, two finger basic
