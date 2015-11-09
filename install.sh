@@ -18,7 +18,7 @@ find "$PWD/.templates/npm" -maxdepth 1 -type f -print -exec ln -sfn {} ~/.templa
 
 # Do the annoying stuff first
 echo "Symlinking User package in sublime-text-3"
-ln -sf ~/.config/sublime-text-3/Packages/User/ ~/.config/sublime-text-3/Packages/User
+ln -sf "$PWD/.config/sublime-text-3/Packages/User" ~/.config/sublime-text-3/Packages/User
 
 echo "Symlinking files in .config/autostart to ~/.config/autostart"
 find "$PWD/.config/autostart" -maxdepth 1 -type f -print -exec ln -sfn {} ~/.config/autostart \;
