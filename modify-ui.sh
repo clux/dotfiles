@@ -22,10 +22,7 @@ gconftool-2 --set /apps/guake/keybindings/local/next_tab "<Primary>Right" --type
 gconftool-2 --set /apps/guake/keybindings/local/clipboard_copy "<Control><Shift>"c --type string
 gconftool-2 --set /apps/guake/keybindings/local/clipboard_paste "<Control><Shift>v" --type string
 
-# maybe do:
-#/desktop/gnome/accessibility/keyboard
-#/desktop/gnome/sound:
-#/desktop/gnome/peripherals/mouse:
-
-# cinnamon effects
+# cinnamon settings
 gsettings set org.cinnamon desktop-effects false
+gsettings set org.cinnamon.settings-daemon.peripherals.touchpad scroll-method 'two-finger-scrolling'
+gsettings set org.cinnamon.settings-daemon.peripherals.touchpad tap-to-click false

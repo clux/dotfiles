@@ -10,10 +10,12 @@ Clone and run `./install.sh`. This symlinks all files herein to `$HOME` so they 
 Some stuff is still manually configured, but the remaining stuff is all setup in such a way that they can be done while the standard [installation scripts](https://github.com/clux/dotclux) are going.
 
 ### UX
+Mostly locked down by [modify-ui.sh](./modify-ui.sh), but should still do these:
 
-- look and feel of UI:
-  * mouse: pad on, no clicks on pad, two finger basic
+- look and feel of UI
 - remove unnecessary startup apps
+
+Could add whatever we find necessary to the script next time.
 
 ### Configure sublime
 
