@@ -12,8 +12,8 @@ export HISTCONTROL=ignoredups;
 export HISTIGNORE="&:ls:exit:pwd:clear:mount:history:umount:cd:[ \t]*"
 
 # Prefer GB English and use UTF-8
-export LANG="en_GB.UTF-8";
-export LC_ALL="en_GB.UTF-8";
+export LANG="en_GB.UTF-8"
+export LC_ALL="en_GB.UTF-8"
 
 # Don’t clear the screen after quitting a manual page
 export MANPAGER="less -X";
@@ -25,6 +25,9 @@ export CXX=clang++
 # want short ctest results without having to type --output-on-failure (or -V always)
 export CTEST_OUTPUT_ON_FAILURE=1
 export GTEST_COLOR=1
+
+# shellcheck is better at just linting the current file
+export SHELLCHECK_OPTS="-e SC1091"
 
 # can just `z dl` now, but brotorr uses this
 export DOWNLOAD_DIR=/media/clux/Zeus/DL/

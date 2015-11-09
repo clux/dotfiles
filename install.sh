@@ -16,7 +16,7 @@ find "$PWD/.config" -maxdepth 1 -type f -print -exec ln -sfn {} ~/.config \;
 echo "Symlinking files in .templates to ~/.templates"
 find "$PWD/.templates/npm" -maxdepth 1 -type f -print -exec ln -sfn {} ~/.templates/npm \;
 
-# Do the annoying stuff first
+# Do the annoying stuff
 echo "Symlinking User package in sublime-text-3"
 ln -sf "$PWD/.config/sublime-text-3/Packages/User" ~/.config/sublime-text-3/Packages/User
 
