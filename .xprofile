@@ -1,0 +1,6 @@
+# Set keyboard layout
+setxkbmap -layout us,us \
+          -variant colemak,intl \
+          -option caps:none \
+          -option compose:caps \
+          -option grp:lalt_lshift_toggle

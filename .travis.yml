@@ -11,4 +11,4 @@ env:
   - SHELLCHECK_OPTS="-e SC1091 -s bash"
 
 script:
-  - shellcheck .bashrc .aliases .exports .bash_pro* .functions install.sh
+  - shellcheck .bashrc .aliases .exports .bash_pro* .functions install.sh .xprofile
