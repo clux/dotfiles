@@ -26,7 +26,7 @@ export CXX=clang++
 export CTEST_OUTPUT_ON_FAILURE=1
 export GTEST_COLOR=1
 
-# shellcheck is better at just linting the current file
+# use shellcheck for current file only
 export SHELLCHECK_OPTS="-e SC1091"
 
 # can just `z dl` now, but brotorr uses this
