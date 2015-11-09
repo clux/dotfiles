@@ -12,10 +12,8 @@ Some stuff is still manually configured, but the remaining stuff is all setup in
 ### UX
 
 - look and feel of UI:
-  * effects: OFF
   * mouse: pad on, no clicks on pad, two finger basic
 - remove unnecessary startup apps
-- configure guake (untick all checkboxes, 60% height, 4k buffer, 20% transparency, shortcuts)
 
 ### Configure sublime
 
