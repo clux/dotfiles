@@ -1,3 +1,4 @@
+
 # Set keyboard layout
 setxkbmap -layout us,us \
           -variant colemak,intl \
