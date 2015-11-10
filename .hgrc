@@ -3,6 +3,16 @@ mercurial_keyring =
 record =
 hgext.mq =
 purge =
+rebase =
+convert =
+color =
+
+[alias]
+lg = log --template "{date(date, '%d.%m.%y')} - {author|user} - {rev} - {desc}\n"
+count = !$HG log --template "{author|person}\n" | sort | uniq -c | sort -rn
+open = !xdg-open "$($HG paths default)/changeset/$1"
+fm = !$HG lg | grep $1
+lgme = lg -u ealbrigt
 
 [ui]
 username = Eirik Albrigtsen <ealbrigt@cisco.com>
