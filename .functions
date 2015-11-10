@@ -26,8 +26,6 @@ srchcmake() { filefind . "CMakeLists.txt" | xargs grep "$1" 2> /dev/null ;}
 
 # Create a new directory and enter it
 mkd() { mkdir -p "$@" && cd "$@" || return 1 ;}
-# Back out of a hg changeset ID that has made it to server
-hg-export-reverse() { hg export "$1" | patch -p1 -R; }
 
 # package/repo fetching shortcuts
 aptin() { sudo apt-get install "$1" ;}
