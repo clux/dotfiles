@@ -14,11 +14,10 @@ lg = log --template "{date(date, '%d.%m.%y')} - {author|user} - {rev} - {desc}\n
 mine = lg -u ealbrigt
 # sort contributors by commit frequency
 count = !$HG log --template "{author|person}\n" | sort | uniq -c | sort -rn
-# open
+# open changeset in browser
 open = !xdg-open "$($HG paths default)/changeset/$1"
 # find by commit message
 fm = !$HG lg | grep $1
-
 
 [ui]
 username = Eirik Albrigtsen <ealbrigt@cisco.com>
