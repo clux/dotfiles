@@ -11,6 +11,7 @@
 	[
 		"Bats (Bash Automated Testing System)",
 		"CMake",
+		"Dockerfile Syntax Highlighting",
 		"Generic Config",
 		"GitGutter",
 		"Markdown Preview",
