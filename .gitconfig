@@ -27,6 +27,9 @@
   # Find commits by commit message
   fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
 
+  # open changeset in browser
+  open = "!f() { xdg-open \"https://$(echo $(git config --get remote.origin.url) | cut -c 5- | tr : '/' | sed 's/.git//')/commit/$1\"; }; f"
+
 [user]
   name = clux
   email = analsandblaster@gmail.com
