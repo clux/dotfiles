@@ -1,0 +1,13 @@
+[extensions]
+mercurial_keyring =
+record =
+hgext.mq =
+purge =
+
+[ui]
+username = Eirik Albrigtsen <ealbrigt@cisco.com>
+
+[auth]
+lal.schemes = https http
+lal.prefix = hg.lal.cisco.com
+lal.username = ealbrigt
