@@ -1,18 +1,24 @@
 [extensions]
 mercurial_keyring =
 record =
-hgext.mq =
+mq =
 purge =
 rebase =
 convert =
 color =
 
 [alias]
+# single-line log
 lg = log --template "{date(date, '%d.%m.%y')} - {author|user} - {rev} - {desc}\n"
+# log own commits
+mine = lg -u ealbrigt
+# sort contributors by commit frequency
 count = !$HG log --template "{author|person}\n" | sort | uniq -c | sort -rn
+# open
 open = !xdg-open "$($HG paths default)/changeset/$1"
+# find by commit message
 fm = !$HG lg | grep $1
-lgme = lg -u ealbrigt
+
 
 [ui]
 username = Eirik Albrigtsen <ealbrigt@cisco.com>
