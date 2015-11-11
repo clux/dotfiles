@@ -144,3 +144,11 @@ man() {
     LESS_TERMCAP_us="$(printf "\e[1;32m")" \
     man "$@"
 }
+
+# -----------------------------------------------------------------------------
+
+zalgolize() {
+  local -r args="$@"
+  cd ~/local/node/lib
+  node -pe "require('zalgolize')(\"$args\")"
+}
