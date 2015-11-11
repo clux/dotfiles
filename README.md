@@ -4,13 +4,20 @@
 Separated from installation scripts because these are mostly install agnostic, and changes do not deserve full OS rebuilds to test.
 
 ## Usage
-Clone and run `./install.sh`. This symlinks all files herein to `$HOME` so they can be tracked.
+Clone and install:
+
+```sh
+./install.sh
+./install-ui.sh
+```
+
+The first symlinks all files herein to `$HOME` so they can be tracked. The second updates UI through dconf and gconf.
 
 ## Manual configuration steps
 Some stuff is still manually configured, but the remaining stuff is all setup in such a way that they can be done while the standard [installation scripts](https://github.com/clux/dotclux) are going.
 
 ### UX
-Mostly locked down by [modify-ui.sh](./modify-ui.sh), but should still do these:
+Mostly locked down at this point, but probably still need to:
 
 - look and feel of UI
 - remove unnecessary startup apps

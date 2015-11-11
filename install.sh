@@ -24,6 +24,3 @@ fi
 
 echo "Symlinking files in .config/autostart to ~/.config/autostart"
 find "$PWD/.config/autostart" -maxdepth 1 -type f -print -exec ln -sfn {} ~/.config/autostart \;
-
-echo "Overriding default UI settings through gconf and gsettings"
-./modify-ui.sh
