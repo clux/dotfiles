@@ -6,11 +6,19 @@
 
   dif = diff
   stat = diff --stat
+  cache = diff --cached
 
   # Show verbose output about tags, branches or remotes
   tags = tag -l
   branches = branch -a
   remotes = remote -v
+
+  # shortcuts
+  hub ="!f() { git clone git@github.com:$1.git; }; f"
+  bucket ="!f() { git clone git@bitbucket.org:$1.git; }; f"
+  # multi-clone shortcuts
+  hub-clux ="!f() { for i in $@; do git hub clux/$i; done; }; f"
+  bucket-clux ="!f() { for i in $@; do git bucket clux/$i; done; }; f"
 
   pul = pull
   ci = commit
