@@ -33,7 +33,6 @@ aptrem() { sudo apt-get remove "$1" ;}
 ghclone() { git clone git@github.com:clux/"$1".git ;}
 bbclone() { git clone git@bitbucket.org:clux/"$1".git ;}
 
-
 json-validate() { jsonlint package.json -q ;}
 
 # -----------------------------------------------------------------------------
@@ -42,8 +41,11 @@ json-validate() { jsonlint package.json -q ;}
 node-init() {
   find ~/.templates/npm/ -not -type d -not -iname pkg.json -exec cp {} "$PWD" \;
   pkginit
-  echo "# $(basename "$PWD")" > README.md
+  local -r dir="$(basename "$PWD")"
+  echo "# $dir" > README.md
   badgify >> README.md
+  sed "s/BASENAME/$dir/g" readme.md >> README.md
+  rm readme.md
 }
 
 # -----------------------------------------------------------------------------
