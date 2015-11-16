@@ -12,6 +12,10 @@ js() { jf "$1" | xargs grep "$2" 2> /dev/null ;}
 mf() { filefind "$@" "*.md" | grep -vE "node_modules|bower_components" ;}
 ms() { mf "$1" | xargs grep "$2" 2> /dev/null ;}
 
+# PY files
+pyf() { filefind "$@" "*.py" ;}
+pys() { pyf "$1" | xargs grep "$2" 2> /dev/null ;}
+
 # C++ files
 cf() { find "$@" -type f -name "*.cpp" -o -name "*.h" -o -name "*.c" 2> /dev/null ;}
 cs() { cf "$1" | xargs grep "$2" 2> /dev/null ;}
