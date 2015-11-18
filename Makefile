@@ -5,7 +5,7 @@ red = "\033[0;31m"$1"\033[0m"
 yellow = "\033[0;33m"$1"\033[0m"
 whiteb = "\033[1;37m"$1"\033[0m"
 
-.PHONY: config ui etc directories help
+.PHONY: config ui etc directories sublime help
 
 help:
 	@echo $(call greenb,"Please use make <target>' where <target> is one of:")

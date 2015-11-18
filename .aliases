@@ -4,7 +4,6 @@
 alias colorgcc="grc -es -c conf.gcc --colour=on"
 
 # navigation shortcuts
-alias dl="cd $DOWNLOAD_DIR"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
