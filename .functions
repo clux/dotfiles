@@ -30,7 +30,7 @@ srchcmake() { filefind . "CMakeLists.txt" | xargs grep "$1" 2> /dev/null ;}
 
 # Create a new directory and enter it
 mkd() { mkdir -p "$@" && cd "$@" || return 1 ;}
-dl() { cd "$DOWNLOAD_DIR" ;}
+dl() { cd "$DOWNLOAD_DIR" || return 1 ;}
 
 # package/repo fetching shortcuts
 aptin() { sudo apt-get install "$1" ;}
