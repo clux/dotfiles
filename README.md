@@ -7,8 +7,8 @@ Separated from installation scripts because these are mostly install agnostic, a
 Clone and install:
 
 ```sh
-./install.sh
-./install-ui.sh
+make config
+make ui
 ```
 
 The first symlinks all files herein to `$HOME` so they can be tracked. The second updates UI through dconf and gconf.
