@@ -1,0 +1,16 @@
+#!/bin/bash
+usernum=$(users | wc -w)
+time=$(uptime -p | cut -d "," -f 1 | cut -d " " -f 2-3)
+mem=$(free -t | grep "buffers/cache" | awk '{printf("%3.1f%%", $3/($3+$4) * 100)}')
+disk=$(df -l --total | grep total | awk '{printf("%3.1f%%", $3*100/$2)}')
+cpu=$(awk '{printf("%3.1f%%", $1*100/'"$(nproc)"') }' < /proc/loadavg )
+ifbytes() {
+  ifconfig eth0 | grep -oE "$1 bytes:.*" | cut -d ":" -f2 | awk '{printf("%3.1fGB\n", $1/1073741824)}'
+}
+
+echo "Sent $(ifbytes TX), recv $(ifbytes RX) $time - Sen"
+echo -e "Since last reboot: Sent: $(ifbytes TX)\nRecv: $(ifbytes RX)"
+echo "Users: $usernum"
+echo "Memory Usage: $mem"
+echo "Disk Usage: $disk"
+echo "CPU Usage: $cpu"

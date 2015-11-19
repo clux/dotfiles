@@ -60,4 +60,15 @@ ui:
 	@gsettings set org.cinnamon.settings-daemon.peripherals.touchpad tap-to-click false
 
 etc:
-	@echo $(call red, " overwriting files in /etc")
+	@echo $(call red, " Messing around with /etc")
+	@echo $(call red, " Updating motd")
+	@mkdir -p /etc/update-motd.d/
+	@rm /etc/motd
+	@ln -s /var/run/motd /etc/motd
+	@cp etc/update-motd.d/* /etc/update-motd.d/
+	@echo $(call red, " Disabling mail notification in pam sshd")
+	@sed -i.bak "s/.*pam_mail.so.*//" /etc/pam.d/sshd
+	@diff /etc/pam.d/sshd.bak /etc/pam.d/sshd || true
+	@echo $(call red, " Setting default XBKVARIANT to colemak")
+	@sed -i.bak 's/XKBVARIANT=.*/XKBVARIANT="colemak"/' /etc/default/keyboard
+	@diff /etc/default/keyboard.bak /etc/default/keyboard || true
