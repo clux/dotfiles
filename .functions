@@ -40,6 +40,17 @@ bbclone() { git clone git@bitbucket.org:clux/"$1".git ;}
 
 json-validate() { jsonlint package.json -q ;}
 
+# usage statistics
+mem() { free -t | grep "buffers/cache" | awk '{printf("%3.1f%%\n", $3*100/($3+$4))}' ;}
+disk(){ df -l --total | grep total | awk '{printf("%3.1f%%\n", $3*100/$2)}' ;}
+cpu() { awk '{printf("%3.1f%%\n", $1*100/'"$(nproc)"') }' < /proc/loadavg ;}
+
+ifbytes() {
+  # Find raw RX bytes/TX bytes value and divide it by 1024^3
+  sudo ifconfig eth0 | grep -oE "$1 bytes:.*" | cut -d ":" -f2 | awk '{printf("%3.1fGB\n", $1/1073741824)}'
+}
+network() { echo -e "Sent: $(ifbytes TX)\nRecv: $(ifbytes RX)" ;}
+
 # -----------------------------------------------------------------------------
 # scaffolding from templates folder
 
