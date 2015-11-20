@@ -1,4 +1,0 @@
-#!/bin/bash
-export PATH=/usr/games:$PATH
-#echo | cowsay -f eyes | tail -9
-echo -e "$(hostname)\n$(lsb_release -si) $(lsb_release -sr)" | cowsay -n -f eyes | lolcat

@@ -62,10 +62,7 @@ ui:
 etc:
 	@echo $(call red, " Messing around with /etc")
 	@echo $(call red, " Updating motd")
-	@mkdir -p /etc/update-motd.d/
-	@rm /etc/motd
-	@ln -s /var/run/motd /etc/motd
-	@cp etc/update-motd.d/* /etc/update-motd.d/
+	@cp etc/profile.d/motd.sh /etc/profile.d/
 	@echo $(call red, " Disabling mail notification in pam sshd")
 	@sed -i.bak "s/.*pam_mail.so.*//" /etc/pam.d/sshd
 	@diff /etc/pam.d/sshd.bak /etc/pam.d/sshd || true
