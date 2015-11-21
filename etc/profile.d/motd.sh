@@ -17,21 +17,21 @@ APT=$(apt-get -s dist-upgrade | awk '/^Inst/ { print $2 }' | wc -l)
 
 disk=$(df -l --total | grep total | awk '{printf("%3.1f%%", $3*100/$2)}')
 swap=$(free -m | tail -n 1 | awk '{print $3}')
+
 # Memory
 #meminuse=$(free -t -m | grep "buffers/cache" | awk '{print $3" MB";}')
 memtotal=$(free -t -m | grep "Mem" | awk '{print $2" MB";}')
 memusage=$(free -t | grep "buffers/cache" | awk '{printf("%3.1f%%", $3/($3+$4) * 100)}')
 
 # Processes
-#PSA=$(ps -Afl | wc -l)
-#PSU=$(ps U $USER h | wc -l)
+PSA=$(ps -Afl | wc -l)
+PSU=$(ps U $USER h | wc -l)
 
-pm2statuses=$(pm2 jlist | json -a pm2_env.status)
-PSPM2=$($pm2statuses | wc -l)
-PSPM2DONE=$($pm2statuses | grep stopped | wc -l)
+pm2total=$(pm2 jlist | json -a pm2_env.status | wc -l)
+pm2online=$(pm2 jlist | json -a pm2_env.status | grep -c online)
 
 #System uptime
-uptime=$(cat /proc/uptime | cut -f1 -d.)
+uptime=$(cut -f1 -d. < /proc/uptime)
 upDays=$((uptime/60/60/24))
 upHours=$((uptime/60/60%24))
 upMins=$((uptime/60%60))
@@ -42,26 +42,32 @@ W="\033[00;37m"
 B="\033[01;36m"
 R="\033[01;34m"
 X="\033[01;37m"
-A="\033[01;32m"
+#A="\033[01;32m"
 
-echo "Welcome to $(uname -n)" | cowsay -f eyes | lolcat
+# TODO: color percentages based on how high they are
+
+#echo "Welcome to $(uname -n) on $(lsb_release -si) $(lsb_release -sr)" | cowsay -f eyes | lolcat
+echo -e "$(hostname)\n$(lsb_release -si) $(lsb_release -sr)" | cowsay -n -f eyes | lolcat
 echo -e "$R======================================================="
 echo -e "  $R KERNEL$W $KERNEL"
 echo -e "  $R CPU$W $CPU"
-echo -e "  $R ARCH$W $ARCH"
+#echo -e "  $R ARCH$W $ARCH"
 echo -e "  $R SYSTEM$W $APT packages can be updated"
 echo -e "  $R USERS$W Currently $(users | wc -w) users logged on"
 echo -e "$R======================================================="
-echo -e "  $R CPU Usage$W $cpu5 (5 min)"
-echo -e "  $R Memory Used$W $memusage of $memtotal"
-if [ $swap -ne 0 ]; then
-echo -e "  $R Swap in use$W  $swap MB"
+echo -e "  $R Load$W $cpu5 (5 min)"
+echo -e "  $R Memory$W $memusage of $memtotal"
+if [ "$swap" -ne 0 ]; then
+echo -e "  $R Swap$W  $swap MB"
 fi
-if [ $PSPM2 -ne 0 ]; then
-echo -e "  $R Jobs$W Completed $PSPM2DONE out of $PSPM2"
+if [ "$pm2total" -ne 0 ]; then
+echo -e "  $R Jobs$W $pm2online online out of $pm2total total"
 fi
+#echo -e "  $R Processes$W You run $PSU out of $PSA total processes"
+if [ "$RECV" != "0.0GB" ]; then
 echo -e "  $R Network$W RX $RECV $B-$W TX $SENT"
+fi
 echo -e "  $R System Uptime$W $upDays days $upHours hours $upMins minutes $upSecs seconds"
-echo -e "  $R Disk Space Used$W $disk"
+echo -e "  $R Disk$W $disk"
 echo -e "$R======================================================="
 echo -e "$X"
