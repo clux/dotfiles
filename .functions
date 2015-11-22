@@ -3,6 +3,7 @@
 # -----------------------------------------------------------------------------
 # helpers to search through specific file types
 filefind() { find "$1" -type f -name "$2" 2> /dev/null ;}
+tre() { tree -aC -I "node_modules|.git"  --dirsfirst "$@" | less -R ;}
 
 # JS files
 jf() { filefind "$@" "*.js" | grep -vE "node_modules|bower_components|\.min" ;}
@@ -50,6 +51,7 @@ ifbytes() {
   sudo ifconfig eth0 | grep -oE "$1 bytes:.*" | cut -d ":" -f2 | awk '{printf("%3.1fGB\n", $1/1073741824)}'
 }
 network() { echo -e "Sent: $(ifbytes TX)\nRecv: $(ifbytes RX)" ;}
+process() { ps U $USER | egrep -v "chrome|cinnamon|gvfs" ;}
 
 # -----------------------------------------------------------------------------
 # scaffolding from templates folder
