@@ -51,7 +51,7 @@ ifbytes() {
   sudo ifconfig eth0 | grep -oE "$1 bytes:.*" | cut -d ":" -f2 | awk '{printf("%3.1fGB\n", $1/1073741824)}'
 }
 network() { echo -e "Sent: $(ifbytes TX)\nRecv: $(ifbytes RX)" ;}
-process() { ps U $USER | egrep -v "chrome|cinnamon|gvfs" ;}
+process() { ps U "$USER" | egrep -v "chrome|cinnamon|gvfs" ;}
 
 # -----------------------------------------------------------------------------
 # scaffolding from templates folder
