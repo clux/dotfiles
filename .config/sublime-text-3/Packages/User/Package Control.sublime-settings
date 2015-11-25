@@ -10,6 +10,7 @@
 	"installed_packages":
 	[
 		"Bats (Bash Automated Testing System)",
+		"Clang Format",
 		"CMake",
 		"Dockerfile Syntax Highlighting",
 		"Generic Config",

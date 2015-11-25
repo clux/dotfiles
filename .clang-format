@@ -1,0 +1,9 @@
+---
+Language: Cpp
+BasedOnStyle: LLVM
+ColumnLimit: 100
+BreakBeforeBraces: Mozilla
+IndentWidth: 2
+UseTab: Never
+...
+
