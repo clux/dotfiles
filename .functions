@@ -51,9 +51,29 @@ ifbytes() {
   sudo ifconfig eth0 | grep -oE "$1 bytes:.*" | cut -d ":" -f2 | awk '{printf("%3.1fGB\n", $1/1073741824)}'
 }
 network() { echo -e "Sent: $(ifbytes TX)\nRecv: $(ifbytes RX)" ;}
-pstree() { ps --ppid 2 --deselect --forest -o "cputime,pid,stat,user,args" --width "$(tput cols)" | less -RX ;}
-pstreefull() { ps -e --forest -o "cputime,pid,stat,user,args" --width "$(tput cols)" | less -RX ;}
-pstreemine() { ps U "$USER" --forest --width "$(tput cols)" | less -RX ;}
+
+# process tree
+# pstree <- simple tree hiding ppid 2
+# pstree f <- full tree
+# pstree u [user] <- user tree for $USER or passed in user
+pstree() {
+  local full=$([ "$1" = "f" ] && echo "1")
+  local usr=""
+  if [ "$1" = "u" ]; then
+    usr=$([ -n "$2" ] && echo "$2" || echo "$USER")
+  fi
+  local flags=""
+  if [ -n "$full" ]; then
+    flags="-e -o cputime,pid,stat,user,args"
+  elif [ -n "$usr" ]; then
+    flags="U $usr -o cputime,pid,stat,args"
+  else
+    # Simple multi-user, filtering away PPID 2
+    flags="--ppid 2 --deselect -o cputime,pid,stat,user,args"
+  fi
+  # shellcheck disable=SC2086
+  ps $flags --forest --width "$(tput cols)" | less -RX
+}
 kill-tabs() { pkill -u "$USER" -f "chrome.*renderer" ;}
 
 # -----------------------------------------------------------------------------
