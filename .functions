@@ -57,7 +57,7 @@ network() { echo -e "Sent: $(ifbytes TX)\nRecv: $(ifbytes RX)" ;}
 # pstree f <- full tree
 # pstree u [user] <- user tree for $USER or passed in user
 pstree() {
-  local full=$([ "$1" = "f" ] && echo "1")
+  local -r full=$([ "$1" = "f" ] && echo "1")
   local usr=""
   if [ "$1" = "u" ]; then
     usr=$([ -n "$2" ] && echo "$2" || echo "$USER")

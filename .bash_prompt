@@ -97,7 +97,7 @@ prompt_git() {
 # A bit slow, because mercurial is slow, and not showing branch
 prompt_hg() {
   local s='';
-  local status="$(hg status)"
+  local -r status="$(hg status)"
   # Check if the current directory is in a hg repository.
   if [ "$?" -eq 0 ]; then
 

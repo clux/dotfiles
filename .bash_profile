@@ -1,7 +1,6 @@
 #!/bin/bash
 
-for file in ~/.{bash_prompt,exports,aliases,functions,extra}; do
-  # shellcheck disable=SC1091
+for file in ~/{.bash_prompt,.exports,.aliases,.functions,.extra}; do
   [ -f "$file" ] && source "$file"
 done
 unset file
