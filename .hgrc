@@ -5,7 +5,7 @@ mq =
 purge =
 rebase =
 convert =
-color =
+#color =
 
 [alias]
 # single-line log
