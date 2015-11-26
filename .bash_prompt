@@ -118,7 +118,7 @@ prompt_hg() {
 
     # ignore branch on hg - as hg is stupidly slow
     [ -n "${s}" ] && s=" [${s}]"
-    echo -e "${red}${s}"
+    echo -e "${orange}${s}"
   fi;
 }
 
@@ -127,10 +127,9 @@ set_prompt() {
   # Return code when non-zero
   PS1=$([ "$rc" -ne 0 ] && echo -e "${red}[$rc]${reset}")
 
-  # Highlight the hostname when connected via SSH.
+  # Show the hostname when connected via SSH
   if [ -n "${SSH_TTY}" ]; then
-    PS1+="INTTY"
-    PS1+="${bold}${orange}\\h${reset}" # otherwise ignore showing \\h
+    PS1+="${bold}${violet}\\h${reset}:"
   fi
 
   # Make foldername red when root

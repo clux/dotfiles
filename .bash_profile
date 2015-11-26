@@ -1,7 +1,7 @@
 #!/bin/bash
 
 for file in ~/.{bash_prompt,exports,aliases,functions,extra}; do
-  # shellcheck source=/dev/null
+  # shellcheck disable=SC1091
   [ -f "$file" ] && source "$file"
 done
 unset file
@@ -16,3 +16,11 @@ shopt -s cdspell
 shopt -s histappend
 
 source ~/local/z/z.sh
+
+# Add tab completion for SSH hostnames based on ~/.ssh/config
+# ignoring wildcards
+[ -e "$HOME/.ssh/config" ] && complete -o "default" \
+  -o "nospace" \
+  -W "$(grep "^Host" ~/.ssh/config | \
+  grep -v "[?*]" | cut -d " " -f2 | \
+  tr ' ' '\n')" scp sftp ssh
