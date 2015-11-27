@@ -1,6 +1,7 @@
 #!/bin/bash
 export PATH=/usr/games:$PATH
-# TODO: needs local/node/bin for jsontool
+export PATH=/sbin:$PATH
+export PATH=/home/clux/local/node/bin:$PATH
 
 cpu5=$(awk '{printf("%3.1f%%", $2*100/'"$(nproc)"') }' < /proc/loadavg)
 ifbytes() {
@@ -13,7 +14,7 @@ SENT=$(ifbytes TX)
 KERNEL=$(uname -r)
 CPU=$(awk -F '[ :][ :]+' '/^model name/ { print $2; exit; }' /proc/cpuinfo)
 ARCH=$(uname -m)
-APT=$(apt-get -s dist-upgrade | awk '/^Inst/ { print $2 }' | wc -l)
+#APT=$(apt-get -s dist-upgrade | awk '/^Inst/ { print $2 }' | wc -l)
 
 disk=$(df -l --total | grep total | awk '{printf("%3.1f%%", $3*100/$2)}')
 swap=$(free -m | tail -n 1 | awk '{print $3}')
@@ -52,7 +53,7 @@ echo -e "$R======================================================="
 echo -e "  $R KERNEL$W $KERNEL"
 echo -e "  $R CPU$W $CPU"
 #echo -e "  $R ARCH$W $ARCH"
-echo -e "  $R SYSTEM$W $APT packages can be updated"
+#echo -e "  $R SYSTEM$W $APT packages can be updated"
 echo -e "  $R USERS$W Currently $(users | wc -w) users logged on"
 echo -e "$R======================================================="
 echo -e "  $R Load$W $cpu5 (5 min)"
