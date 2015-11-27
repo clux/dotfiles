@@ -22,7 +22,7 @@ if tput setaf 1 &> /dev/null; then
   violet="\[$(tput setaf 61)\]"
   white="\[$(tput setaf 15)\]"
   yellow="\[$(tput setaf 136)\]"
-  dircol="${bold}${black}"
+  dircol="${bold}${white}"
 else
   bold=''
   reset='\[\e[00m\]'
@@ -129,7 +129,7 @@ set_prompt() {
 
   # Show the hostname when connected via SSH
   if [ -n "${SSH_TTY}" ]; then
-    PS1+="${bold}${violet}\\h${reset}:"
+    PS1+="${bold}${green}\\h${reset}:"
   fi
 
   # Make foldername red when root
