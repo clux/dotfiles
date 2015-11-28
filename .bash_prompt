@@ -102,7 +102,7 @@ prompt_hg() {
   if [ "$?" -eq 0 ]; then
 
     # Check for changes
-    if echo "$status" | egrep -q "^M.*"; then
+    if echo "$status" | egrep -q "^M|^A|^R"; then
       s+='+'
     fi
 
