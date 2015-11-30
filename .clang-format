@@ -5,6 +5,8 @@ ColumnLimit: 100
 BreakBeforeBraces: Mozilla
 IndentWidth: 2
 UseTab: Never
+BinPackParameters: false
+BinPackArguments: false
 BreakConstructorInitializersBeforeComma: true
 ...
 
