@@ -1,6 +1,6 @@
 {
     "user": {
-        "debug": false,
+        "debug": true,
         "delay": 0.25,
         "error_color": "D02000",
         "gutter_theme": "Packages/SublimeLinter/gutter-themes/Default/Default.gutter-theme",
@@ -65,7 +65,8 @@
             "shellcheck": {
                 "@disable": false,
                 "args": [
-                    "-s bash"
+                    "-s",
+                    "bash"
                 ],
                 "exclude": "SC1091",
                 "excludes": []
@@ -76,8 +77,8 @@
         "passive_warnings": false,
         "paths": {
             "linux": [
-                "/home/clux/.cabal/bin",
-                "/home/clux/local/node/bin"
+                "~/.cabal/bin",
+                "~/local/node/bin"
             ],
             "osx": [],
             "windows": []
@@ -89,8 +90,8 @@
         },
         "rc_search_limit": 3,
         "shell_timeout": 10,
-        "show_errors_on_save": true,
-        "show_marks_in_minimap": true,
+        "show_errors_on_save": false,
+        "show_marks_in_minimap": false,
         "syntax_map": {
             "html (django)": "html",
             "html (rails)": "html",
