@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=$HOME/local/llvm-v3.7.0/tools/clang/tools/scan-build:$PATH
+export PATH=$HOME/local/llvm-v3.7.0/src/tools/clang/tools/scan-build:$PATH
 export PATH=$HOME/.cabal/bin:$PATH
 export PATH=$HOME/local/arcanist/bin:$PATH
 export PATH=$HOME/local/bin:$PATH

@@ -1,12 +1,29 @@
 ---
+ColumnLimit: 100
+IndentWidth: 2
+AlignTrailingComments: true
+UseTab: Never
+---
 Language: Cpp
 BasedOnStyle: LLVM
-ColumnLimit: 100
 BreakBeforeBraces: Mozilla
-IndentWidth: 2
-UseTab: Never
 BinPackParameters: false
 BinPackArguments: false
 BreakConstructorInitializersBeforeComma: true
+---
+Language: JavaScript
+BreakBeforeBraces: Attach
+#BreakBeforeBraces: custom
+#BraceWrapping: BeforeElse,BeforeCatch
+# Want the above custom brace style, but requires llvm 3.8
+SpacesInContainerLiterals: false
+# Currently only complains at no spaces after function keyword
+# This is not an issue if you name functions or use arrow functions
+# But stuff like wrap(inline-fn-here) will indent awfully
+# Still less of a pain than jscs
+#AlignConsecutiveDeclarations: false # llvm 3.8
+AlignConsecutiveAssignments: false
+AlignOperands: false
+ContinuationIndentWidth: 2
 ...
 
