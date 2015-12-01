@@ -25,7 +25,6 @@
 		"SublimeLinter",
 		"SublimeLinter-contrib-eslint",
 		"SublimeLinter-contrib-rustc",
-		"SublimeLinter-jshint",
 		"SublimeLinter-json",
 		"SublimeLinter-pylint",
 		"SublimeLinter-shellcheck"

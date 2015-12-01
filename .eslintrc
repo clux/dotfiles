@@ -10,7 +10,7 @@
     "classes": false,
     "defaultParams": false,
     "destructuring": true,
-    //"forOf": true,
+    "forOf": true,
     "generators": true,
     "globalReturn": false,
     //"modules": true,
