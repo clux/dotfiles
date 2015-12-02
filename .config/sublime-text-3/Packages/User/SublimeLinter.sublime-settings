@@ -78,7 +78,8 @@
         "paths": {
             "linux": [
                 "~/.cabal/bin",
-                "~/local/node/bin"
+                "~/local/node/bin",
+                "/home/clux/local/node/bin"
             ],
             "osx": [],
             "windows": []
