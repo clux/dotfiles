@@ -157,40 +157,65 @@ extract () {
 ball () { tar czf "$1.tar" "${@:2}" ;}
 
 # -----------------------------------------------------------------------------
-# movie management
+# Broxy + brotorr integrations
 
 movies-diff () {
   diff -u <(ls /media/clux/TOOL/MP4/Movies/) <(ls /media/clux/Zorn/NewMP4/BluRay/)
 }
 
-# usage: broxy_download after having copied a magnet to clipboard
+# Copy magnet to clipboard and hit this
 broxy-download () {
   # shellcheck disable=SC2029
   ssh broxy ./brotorr/torrent "\"$(xclip -o -sel clip)\""
 }
 
+# Find flags for helpers
+broxy-excludeflags() {
+  echo -e "-not -name '.*' -not -regex '.*Trash.*' -not -name tmp -printf '%p\n'"
+}
+broxy-dirflags() { echo -e "-mindepth $1 -maxdepth $1 -type d" ;}
+
+# Everything in DL - usually fetch from here
 broxy-check() {
-  ssh broxy ls dumptruck/DL
+  local -r flags=$(broxy-excludeflags)
+  local -r dirflags=$(broxy-dirflags 1)
+  # shellcheck disable=SC2029
+  ssh broxy "cd dumptruck/DL && find . $dirflags $flags"
 }
 
-# TODO: get some more helpers to find new stuff in other directories based on mtime
+# Everything
+broxy-all() {
+  local -r flags=$(broxy-excludeflags)
+  local -r dirflags=$(broxy-dirflags 2)
+  # shellcheck disable=SC2029
+  ssh broxy "cd dumptruck && find . $dirflags $flags"
+}
 
-# usage: `broxy_fetch name` where name is a substring from broxy_check
-broxy-fetch() {
-  local -r rs=$(ssh broxy ./list_downloads.sh | grep "$1")
-  test -n "$rs" || echo "No grep results for $1"
-  local -r fldr=$(echo "$rs" | cut -d '/' -f 6)
-  test -n "$fldr" || echo "Invalid folder for $rs"
-  if [ -n "$fldr" ]; then
+# Everything from last month
+broxy-latest() {
+  local -r flags=$(broxy-excludeflags)
+  local -r dirflags=$(broxy-dirflags 2)
+  # shellcheck disable=SC2029
+  ssh broxy "cd dumptruck && find . $dirflags -mtime -31 $flags"
+}
+
+# Grab from broxy with a pattern with confirmation
+broxy-grab() {
+  local -r rs=$(broxy-all | grep "$1")
+  echo "Will download:"
+  echo "$rs"
+  read -rp "Enter to continue.."
+  echo "Starting download"
+  echo "$rs" | while read -r line; do
+    fldr=$(echo "$line" | cut -d '/' -f2-)
     echo "Downloading $fldr"
-    rsync -cahzP -e ssh "broxy:$rs" .
-    alert
-  fi
+    rsync -cahzP -e ssh "broxy:/home/bro/dumptruck/$fldr" .
+  done
 }
 
 # -----------------------------------------------------------------------------
-
 # Get colors in manual pages
+
 man() {
   env \
     LESS_TERMCAP_mb="$(printf "\e[1;31m")" \
