@@ -240,3 +240,30 @@ npm-minor() {
 npm-major() {
   npm version major && git push && git push --tags && npm publish
 }
+
+# -----------------------------------------------------------------------------
+# Dynamic completion
+
+comp() {
+  # Search current makefile for targets on `make`
+  [ -r Makefile ] && \
+  complete -o "default" -o "nospace" -W \
+    "$(grep -oE "^[[:alnum:]_-]*:" Makefile | cut -d: -f1)" make
+}
+
+# -----------------------------------------------------------------------------
+# sshfs helper for quick sublime based editing
+
+remedit() {
+  mkdir -p ~/remote
+  sshfs "$1" ~/remote
+  subl ~/remote
+}
+remclose() {
+  fusermount -u ~/remote
+  rm -d ~/remote
+}
+
+# common mount points
+remedit-cloud() { remedit workstation:/home/clux/repos/cloudroot ;}
+remedit-sqbu() { remedit workstation:/home/clux/sqbu ;}
