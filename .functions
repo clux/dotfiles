@@ -39,23 +39,38 @@ aptrem() { sudo apt-get remove "$1" ;}
 ghclone() { git clone git@github.com:clux/"$1".git ;}
 bbclone() { git clone git@bitbucket.org:clux/"$1".git ;}
 
-json-validate() { jsonlint package.json -q ;}
+kill-tabs() { pkill -u "$USER" -f "chrome.*renderer" ;}
 
-# usage statistics
-mem() { free -t | grep "buffers/cache" | awk '{printf("%3.1f%%\n", $3*100/($3+$4))}' ;}
-disk(){ df -l --total | grep total | awk '{printf("%3.1f%%\n", $3*100/$2)}' ;}
+# -----------------------------------------------------------------------------
+# system statistics/usage
+
+mem() {
+  free -t \
+    | grep "buffers/cache" \
+    | awk '{printf("%3.1f%%\n", $3*100/($3+$4))}'
+}
+disk() {
+  # Total usage of currently mounted logical drives
+  df -l --total \
+    | grep total \
+    | awk '{printf("%3.1f%%\n", $3*100/$2)}'
+}
 cpu() { awk '{printf("%3.1f%%\n", $1*100/'"$(nproc)"') }' < /proc/loadavg ;}
 
 ifbytes() {
   # Find raw RX bytes/TX bytes value and divide it by 1024^3
-  sudo ifconfig eth0 | grep -oE "$1 bytes:.*" | cut -d ":" -f2 | awk '{printf("%3.1fGB\n", $1/1073741824)}'
+  sudo ifconfig eth0 \
+    | grep -oE "$1 bytes:.*" \
+    | cut -d ":" -f2 \
+    | awk '{printf("%3.1fGB\n", $1/1073741824)}'
 }
 network() { echo -e "Sent: $(ifbytes TX)\nRecv: $(ifbytes RX)" ;}
 
 # process tree
-# pstree <- simple tree hiding ppid 2
-# pstree f <- full tree
-# pstree u [user] <- user tree for $USER or passed in user
+#
+# pstree :: simple tree hiding kernel workers
+# pstree f :: full tree
+# pstree u [user] :: user tree for $USER or passed in user
 pstree() {
   local -r full=$([ "$1" = "f" ] && echo "1")
   local usr=""
@@ -73,9 +88,8 @@ pstree() {
   fi
   # shellcheck disable=SC2086
   ps $flags --forest --width $(($(tput cols)-1)) | ccze -A | less -RX
-  # NB: the minus one is to compensate for what ccze puts in there
+  # NB: the -1 is to compensate for what ccze puts in there
 }
-kill-tabs() { pkill -u "$USER" -f "chrome.*renderer" ;}
 
 # -----------------------------------------------------------------------------
 # scaffolding from templates folder
@@ -190,6 +204,7 @@ man() {
 }
 
 # -----------------------------------------------------------------------------
+# Publishing helpers
 
 npm-patch() {
   npm version patch && git push && git push --tags && npm publish
