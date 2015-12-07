@@ -32,3 +32,8 @@ alias rsync-synchronize="rsync -avzu --delete --progress -h"
 
 # issue this immediately after a long command
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history 1 | cut -c 8-)"'
+
+# node dev aliases for personal modules
+alias test='./node_modules/.bin/bndg test/*.test.js | faucet'
+alias tap='./node_modules/.bin/bndg test/*.test.js'
+alias cover='npm run coverage'
