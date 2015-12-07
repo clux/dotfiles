@@ -261,3 +261,4 @@ remclose() {
 # common mount points
 remedit-cloud() { remedit workstation:/home/clux/repos/cloudroot ;}
 remedit-sqbu() { remedit workstation:/home/clux/sqbu ;}
+remedit-b22() { remedit b22:/nu/ealbrigt/root ;}

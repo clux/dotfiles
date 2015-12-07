@@ -18,6 +18,7 @@ alias damage='du -hs * | sort -n | tail'
 alias sshu="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 alias dmesgtail="dmesg | tail -n 20 | ccze -A"
 alias localip="sudo ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | cut -d ' ' -f1"
+alias recentclear="echo > ~/.local/share/recently-used.xbel"
 
 # copy helpers - may as well use the mac convention
 alias pbcopy='xclip -sel clip'
@@ -37,3 +38,6 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 alias test='./node_modules/.bin/bndg test/*.test.js | faucet'
 alias tap='./node_modules/.bin/bndg test/*.test.js'
 alias cover='npm run coverage'
+
+# magic directories
+alias dme="z cloud dme && . bcm.complete.sh"
