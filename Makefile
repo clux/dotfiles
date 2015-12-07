@@ -31,6 +31,8 @@ config: directories
 	@find "$$PWD/.templates/npm" -maxdepth 1 -type f -print -exec ln -sfn {} ~/.templates/npm \;
 	@echo  $(call green," Linking .config/autostart to ~/.config/autostart")
 	@find "$$PWD/.config/autostart" -maxdepth 1 -type f -print -exec ln -sfn {} ~/.config/autostart \;
+	@echo  $(call green," Linking .config/profanity to ~/.config/profanity")
+	@find "$$PWD/.config/profanity" -maxdepth 1 -type f -print -exec ln -sfn {} ~/.config/profanity \;
 	@[ -d ~/.config/sublime-text-3/Packages/User ] || make sublime
 
 ui:
