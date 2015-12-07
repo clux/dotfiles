@@ -16,6 +16,7 @@ help:
 directories:
 	@mkdir -p ~/.config/sublime-text-3/Packages
 	@mkdir -p ~/.config/autostart
+	@mkdir -p ~/.config/profanity
 	@mkdir -p ~/.templates/npm
 
 sublime:
