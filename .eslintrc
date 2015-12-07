@@ -30,7 +30,7 @@
      * ES6
      */
     //"no-var": 2,                     // http://eslint.org/docs/rules/no-var
-    "prefer-const": 2,               // http://eslint.org/docs/rules/prefer-const
+    "prefer-const": 1,               // http://eslint.org/docs/rules/prefer-const
 
     /**
      * Variables
@@ -73,7 +73,7 @@
     // only allow proper whitespace (not hidden unicode stuff)
     "no-irregular-whitespace": 2,    // http://eslint.org/docs/rules/no-irregular-whitespace
     "no-invalid-regexp": 2,          // http://eslint.org/docs/rules/no-invalid-regexp
-    
+
     // this doesn't enforce Number.isNaN over isNaN but it's a start:
     "use-isnan": 2,                  // http://eslint.org/docs/rules/use-isnan
 
@@ -84,7 +84,7 @@
      */
     // we allow == only against null and typeof (therefor do not enable no-eq-null)
     "eqeqeq": [2, "smart" ],         // http://eslint.org/docs/rules/eqeqeq
-   
+
     // no arguments.callee/caller
     "no-caller": 2,                  // http://eslint.org/docs/rules/no-caller
     // no else after return in if
@@ -151,7 +151,7 @@
     "wrap-iife": [2, "any"],         // http://eslint.org/docs/rules/wrap-iife
 
     // no yoda conditions since we disallow cond-assign anyway so use case is gone
-    "yoda": [2, "never", {
+    "yoda": [1, "never", {
       "exceptRange": true // except when we test if 0 < a && a < 5
     }],                              // http://eslint.org/docs/rules/yoda
 
