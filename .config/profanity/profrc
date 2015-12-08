@@ -1,5 +1,7 @@
 [logging]
 chlog=true
 
-[connection]
-account=cisco
+[ui]
+statuses.console=all
+statuses.chat=online
+theme=boothj5
