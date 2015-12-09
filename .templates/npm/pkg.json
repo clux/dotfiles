@@ -16,7 +16,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "bandage": "^0.2.3",
+    "bandage": "^0.4.0",
     "istanbul": "^0.4.0"
   },
   "bugs": {
