@@ -163,10 +163,10 @@ movies-diff () {
   diff -u <(ls /media/clux/TOOL/MP4/Movies/) <(ls /media/clux/Zorn/NewMP4/BluRay/)
 }
 
-# Copy magnet to clipboard and hit this
+# xdg-mime handler
 broxy-download () {
   # shellcheck disable=SC2029
-  ssh broxy ./brotorr/torrent "\"$(xclip -o -sel clip)\""
+  ssh broxy ./brotorr/torrent \""$1"\"
 }
 
 # Find flags for helpers
