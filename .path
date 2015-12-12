@@ -4,4 +4,4 @@ export PATH=$HOME/.cabal/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/local/arcanist/bin:$PATH
 export PATH=$HOME/local/bin:$PATH
-export PATH=$HOME/local/node/bin:$PATH
+export PATH=/usr/local/node/bin:$PATH
