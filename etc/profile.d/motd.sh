@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=/usr/games:$PATH
 export PATH=/sbin:$PATH
-export PATH=/home/clux/local/node/bin:$PATH
+export PATH=/usr/local/node/bin:$PATH
 
 cpu5=$(awk '{printf("%3.1f%%", $2*100/'"$(nproc)"') }' < /proc/loadavg)
 ifbytes() {
