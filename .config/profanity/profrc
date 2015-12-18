@@ -38,3 +38,9 @@ otr.char=@
 
 [pgp]
 pgp.char=%
+
+[notifications]
+message=true
+
+[alias]
+transformers=/join transformers@conference.isj3.webex.com
