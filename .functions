@@ -41,17 +41,17 @@ bbclone() { git clone git@bitbucket.org:clux/"$1".git ;}
 
 kill-tabs() { pkill -u "$USER" -f "chrome.*renderer" ;}
 
-# initial attempt at git-ls for a quick overview of a collection of repositories
-git-ls() {
+# gls => ls | git prompt
+gls() {
   local -r dirs=$(find . -maxdepth 1 -mindepth 1 -type d)
   dir=$PWD
   for d in $dirs; do
-    cd $d
-    # use part of bash prompt command
-    echo -e "$d $(tput setaf 166)$(prompt_git_private)$(tput sgr0)"
+    cd "$d" || false
+    echo -en "$(tput setaf 33)${d:2} "
+    echo -e "$(tput setaf 166)$(show_git_differences)$(tput sgr0)"
     cd ..
   done
-  cd $dir
+  cd "$dir" || true
 }
 
 # -----------------------------------------------------------------------------
