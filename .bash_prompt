@@ -58,6 +58,11 @@ show_git_differences() {
       s+='+'
     fi;
 
+    # Check for ahead by commits
+    if git status | grep -q "branch is ahead"; then
+      s+='>'
+    fi
+
     # Check for unstaged changes.
     if ! git diff-files --quiet --ignore-submodules --; then
       s+='!'
