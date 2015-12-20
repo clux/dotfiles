@@ -49,7 +49,7 @@ gls() {
     cd "$d" || false
     echo -en "$(tput setaf 33)${d:2} "
     if [[ -d .git ]]; then
-      echo -en "$(tput setaf 166)$(show_git_differences)$(tput sgr0)"
+      echo -en "$(tput setaf 136)$(show_git_differences)$(tput sgr0)"
     fi
     echo
     cd ..
