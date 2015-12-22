@@ -5,7 +5,7 @@ export PATH=/usr/local/node/bin:$PATH
 
 cpu5=$(awk '{printf("%3.1f%%", $2*100/'"$(nproc)"') }' < /proc/loadavg)
 
-iface=$(ip link show | grep -Eo '2\: [[:alnum:]]*' | awk '{print $2}')
+iface=$(ip link show | grep "state UP" | awk '{print $2}' | cut -d':' -f1)
 netdata=$(ip -s link show "$iface" | awk -v ORS=" " '{ print $1 }')
 RECV=$(echo "$netdata" | cut -d" " -f4 | awk '{printf("%3.1fGB\n", $1/1073741824)}')
 SENT=$(echo "$netdata" | cut -d" " -f6 | awk '{printf("%3.1fGB\n", $1/1073741824)}')

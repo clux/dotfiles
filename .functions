@@ -74,8 +74,8 @@ disk() {
 cpu() { awk '{printf("%3.1f%%\n", $1*100/'"$(nproc)"') }' < /proc/loadavg ;}
 
 network() {
-  # normally eth0 equivalent is interface 2
-  local -r iface=$(ip link show | grep -Eo '2\: [[:alnum:]]*' | awk '{print $2}')
+  # first interface with state UP
+  loical -r iface=$(ip link show | grep "state UP" | awk '{print $2}' | cut -d':' -f1)
   # transferred numbers are in first column, print everything with space separation
   local -r netdata=$(ip -s link show "$iface" | awk -v ORS=" " '{ print $1 }')
   # convert relevant numbers to gigabytes
