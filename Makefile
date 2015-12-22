@@ -1,18 +1,19 @@
 define green
-	@tput setaf 2
+	@[ -n "$TERM" ] && tput setaf 2
 	@echo -n "$1"
-	@tput sgr0
+	@[ -n "$TERM" ] && tput sgr0
 	@echo -e "\t$2"
 endef
-define yellow
-	@tput setaf 1
+define red
+	@[ -n "$TERM" ] && tput setaf 1
 	@echo -n "$1"
-	@tput sgr0
+	@[ -n "$TERM" ] && tput sgr0
 	@echo -e "\t$2"
 endef
 
 
 .PHONY: config ui etc directories sublime help font has_font guake
+.PHONY: debkeyboard has_etc_keyboard
 
 help:
 	@tput bold
@@ -21,16 +22,21 @@ help:
 	$(call green," ui", "set gconf and dconf settings")
 	$(call green," etc", "echo install /etc files")
 
-etc:
-	$(call yellow, "Messing around with /etc")
-	$(call yellow, "Updating motd")
-	@cp etc/profile.d/motd.sh /etc/profile.d/
-	$(call yellow, "Disabling mail notification in pam sshd")
-	@sed -i.bak "s/.*pam_mail.so.*//" /etc/pam.d/sshd
-	@diff /etc/pam.d/sshd.bak /etc/pam.d/sshd || true
-	$(call yellow, "Setting default XBKVARIANT to colemak")
+has_etc_keyboard:
+	$(call green, "Guarding on debian /etc/default/keyboard")
+	[ -f /etc/default/keyboard ]
+
+debkeyboard: has_etc_keyboard
+	$(call red," etc","Setting default keyboard")
 	@sed -i.bak 's/XKBVARIANT=.*/XKBVARIANT="colemak"/' /etc/default/keyboard
 	@diff /etc/default/keyboard.bak /etc/default/keyboard || true
+
+etc:
+	$(call red," etc","Updating motd")
+	@cp etc/profile.d/motd.sh /etc/profile.d/
+	$(call red," pam","Disabling mail notification via ssh")
+	@sed -i.bak "s/.*pam_mail.so.*//" /etc/pam.d/sshd
+	@diff /etc/pam.d/sshd.bak /etc/pam.d/sshd || true
 
 directories:
 	@mkdir -p ~/.config/sublime-text-3/Packages
@@ -39,7 +45,7 @@ directories:
 	@mkdir -p ~/.templates/npm
 
 sublime:
-	$(call yellow, "Linking User package in sublime-text-3")
+	$(call red, "Linking User package in sublime-text-3")
 	@ln -s "$$PWD/.config/sublime-text-3/Packages/User" ~/.config/sublime-text-3/Packages/User
 
 config: directories
@@ -67,7 +73,7 @@ font: has_font
 	@gsettings set org.gnome.desktop.interface monospace-font-name 'Liberation Mono 11'
 	@gsettings set org.cinnamon.settings-daemon.plugins.xsettings hinting 'slight'
 
-guake:
+gconf:
 	$(call green, "Setting guake style")
 	@gconftool-2 --set /apps/guake/style/background/transparency 20 --type int
 	@gconftool-2 --set /apps/guake/style/font/style "Monospace 16" --type string
@@ -91,20 +97,8 @@ guake:
 	@gconftool-2 --set /apps/guake/keybindings/local/clipboard_copy "<Control><Shift>"c --type string
 	@gconftool-2 --set /apps/guake/keybindings/local/clipboard_paste "<Control><Shift>v" --type string
 
-cinnamon:
-	$(call green, "Setting cinnamon settings")
-	@gsettings set org.cinnamon desktop-effects false
-	@gsettings set org.cinnamon startup-animation false
-	@gsettings set org.cinnamon.settings-daemon.peripherals.touchpad scroll-method 'two-finger-scrolling'
-	@gsettings set org.cinnamon.settings-daemon.peripherals.touchpad tap-to-click false
-	@gsettings set org.cinnamon.settings-daemon.peripherals.keyboard numlock-state 'on'
-	@gsettings set org.nemo.preferences default-folder-viewer 'compact-view'
-	@gsettings set org.nemo.preferences show-hidden-files true
-	@gsettings set org.nemo.preferences executable-text-activation 'display'
-	@gsettings set org.cinnamon.desktop.media-handling autorun-never true
-	@gsettings set org.cinnamon.desktop.privacy remember-recent-files false
-	@gsettings set org.cinnamon.desktop.privacy recent-files-max-age 0
-	@gsettings set org.cinnamon.desktop.privacy old-files-age 30
-	@gsettings set org.cinnamon.desktop.privacy remove-old-trash-files true
+dconf:
+	$(call green, "Importing main dconf settings")
+	dconf load /org/ < org.dconf
 
-ui: guake cinnamon
+ui: gconf dconf

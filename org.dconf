@@ -1,0 +1,40 @@
+[cinnamon]
+desktop-effects=false
+startup-animation=false
+
+[cinnamon/settings-daemon/peripherals/touchpad]
+scroll-method='two-finger-scrolling'
+tap-to-click=false
+
+[cinnamon/settings-daemon/peripherals/keyboard]
+numlock-state='on'
+
+[cinnamon/desktop/media-handling]
+autorun-never=true
+
+[cinnamon/desktop/privacy]
+recent-files-max-age=0
+remember-recent-files=false
+remove-old-trash-files=true
+
+[cinnamon/desktop/interface]
+font-name='Liberation Sans 9'
+
+[cinnamon/desktop/wm/preferences]
+titlebar-font='Liberation Sans Bold 10'
+
+[gnome/desktop/interface]
+document-font-name='Liberation Sans 9'
+monospace-font-name='Liberation Mono 11'
+
+[gnome/libgnomekbd/keyboard]
+layouts=['us\tcolemak', 'us\tintl', 'no\tdvorak']
+options=['grp\tgrp:alt_shift_toggle', 'caps\tcaps:backspace']
+
+[nemo/preferences]
+executable-text-activation='display'
+default-folder-viewer='compact-view'
+show-hidden-files=true
+
+[nemo/desktop]
+font='Liberation Serif 9'
