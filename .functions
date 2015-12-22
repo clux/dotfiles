@@ -73,14 +73,16 @@ disk() {
 }
 cpu() { awk '{printf("%3.1f%%\n", $1*100/'"$(nproc)"') }' < /proc/loadavg ;}
 
-ifbytes() {
-  # Find raw RX bytes/TX bytes value and divide it by 1024^3
-  sudo ifconfig eth0 \
-    | grep -oE "$1 bytes:.*" \
-    | cut -d ":" -f2 \
-    | awk '{printf("%3.1fGB\n", $1/1073741824)}'
+network() {
+  # normally eth0 equivalent is interface 2
+  local -r iface=$(ip link show | grep -Eo '2\: [[:alnum:]]*' | awk '{print $2}')
+  # transferred numbers are in first column, print everything with space separation
+  local -r netdata=$(ip -s link show "$iface" | awk -v ORS=" " '{ print $1 }')
+  # convert relevant numbers to gigabytes
+  local -r RX=$(echo "$netdata" | cut -d" " -f4 | awk '{printf("%3.1fGB\n", $1/1073741824)}')
+  local -r TX=$(echo "$netdata" | cut -d" " -f6 | awk '{printf("%3.1fGB\n", $1/1073741824)}')
+  echo -e "Sent: ${TX}\nRecv: ${RX}"
 }
-network() { echo -e "Sent: $(ifbytes TX)\nRecv: $(ifbytes RX)" ;}
 
 # process tree
 #
