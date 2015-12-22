@@ -4,17 +4,15 @@ export PATH=/sbin:$PATH
 export PATH=/usr/local/node/bin:$PATH
 
 cpu5=$(awk '{printf("%3.1f%%", $2*100/'"$(nproc)"') }' < /proc/loadavg)
-ifbytes() {
-  ifconfig eth0 | grep -oE "$1 bytes:.*" | cut -d ":" -f2 | awk '{printf("%3.1fGB\n", $1/1073741824)}'
-}
 
-RECV=$(ifbytes RX)
-SENT=$(ifbytes TX)
+iface=$(ip link show | grep -Eo '2\: [[:alnum:]]*' | awk '{print $2}')
+netdata=$(ip -s link show "$iface" | awk -v ORS=" " '{ print $1 }')
+RECV=$(echo "$netdata" | cut -d" " -f4 | awk '{printf("%3.1fGB\n", $1/1073741824)}')
+SENT=$(echo "$netdata" | cut -d" " -f6 | awk '{printf("%3.1fGB\n", $1/1073741824)}')
 
 KERNEL=$(uname -r)
 CPU=$(awk -F '[ :][ :]+' '/^model name/ { print $2; exit; }' /proc/cpuinfo)
-ARCH=$(uname -m)
-#APT=$(apt-get -s dist-upgrade | awk '/^Inst/ { print $2 }' | wc -l)
+#ARCH=$(uname -m)
 
 disk=$(df -l --total | grep total | awk '{printf("%3.1f%%", $3*100/$2)}')
 swap=$(free -m | tail -n 1 | awk '{print $3}')
@@ -22,11 +20,11 @@ swap=$(free -m | tail -n 1 | awk '{print $3}')
 # Memory
 #meminuse=$(free -t -m | grep "buffers/cache" | awk '{print $3" MB";}')
 memtotal=$(free -t -m | grep "Mem" | awk '{print $2" MB";}')
-memusage=$(free -t | grep "buffers/cache" | awk '{printf("%3.1f%%", $3/($3+$4) * 100)}')
+memusage=$(free -t | grep Mem | awk '{ printf("%3.1f%%", $3*100/$2)}')
 
 # Processes
-PSA=$(ps -Afl | wc -l)
-PSU=$(ps U $USER h | wc -l)
+#PSA=$(ps -Afl | wc -l)
+#PSU=$(ps U $USER h | wc -l)
 
 pm2total=$(pm2 jlist | json -a pm2_env.status | wc -l)
 pm2online=$(pm2 jlist | json -a pm2_env.status | grep -c online)
