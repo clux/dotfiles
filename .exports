@@ -29,8 +29,11 @@ export GTEST_COLOR=1
 # use shellcheck for current file only
 export SHELLCHECK_OPTS="-e SC1091"
 
-# can just `z dl` now, but brotorr uses this
+# brotorr uses this
 export DOWNLOAD_DIR=/media/clux/Zeus/DL/
+if [[ $(hostname) == "broxy" ]]; then
+  export DOWNLOAD_DIR=/media/dumptruck/DL
+fi
 
 # so we can run dotclux/tasks standalone
 export gh='git@github.com:'
