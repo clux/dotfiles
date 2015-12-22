@@ -61,18 +61,6 @@ config: directories
 	@find "$$PWD/.config/profanity" -maxdepth 1 -type f -print -exec ln -sfn {} ~/.config/profanity \;
 	@[ -d ~/.config/sublime-text-3/Packages/User ] || make sublime
 
-has_font:
-	$(call green, "Guarding on Liberations font presence")
-	@find /usr/share/fonts/TTF/ | grep -q Liberation
-font: has_font
-	$(call green, "Setting cinnamon font settings")
-	@gsettings set org.cinnamon.desktop.interface font-name 'Liberation Sans 9'
-	@gsettings set org.nemo.desktop font 'Liberation Serif 9'
-	@gsettings set org.gnome.desktop.interface document-font-name 'Liberation Sans 9'
-	@gsettings set org.cinnamon.desktop.wm.preferences titlebar-font 'Liberation Sans Bold 10'
-	@gsettings set org.gnome.desktop.interface monospace-font-name 'Liberation Mono 11'
-	@gsettings set org.cinnamon.settings-daemon.plugins.xsettings hinting 'slight'
-
 gconf:
 	$(call green, "Setting guake style")
 	@gconftool-2 --set /apps/guake/style/background/transparency 20 --type int
@@ -97,8 +85,12 @@ gconf:
 	@gconftool-2 --set /apps/guake/keybindings/local/clipboard_copy "<Control><Shift>"c --type string
 	@gconftool-2 --set /apps/guake/keybindings/local/clipboard_paste "<Control><Shift>v" --type string
 
-dconf:
+has_font:
+	$(call green, "Guarding on Liberations font presence")
+	@find /usr/share/fonts/TTF/ | grep -q Liberation
+
+dconf: has_font
 	$(call green, "Importing main dconf settings")
-	dconf load /org/ < org.dconf
+	@dconf load /org/ < org.dconf
 
 ui: gconf dconf
