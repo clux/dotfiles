@@ -61,9 +61,8 @@ gls() {
 # system statistics/usage
 
 mem() {
-  free -t \
-    | grep "buffers/cache" \
-    | awk '{printf("%3.1f%%\n", $3*100/($3+$4))}'
+  free -t | grep Mem | awk '{ printf("%3.1f%%", $3*100/$2)}'
+  echo
 }
 disk() {
   # Total usage of currently mounted logical drives
@@ -75,7 +74,7 @@ cpu() { awk '{printf("%3.1f%%\n", $1*100/'"$(nproc)"') }' < /proc/loadavg ;}
 
 network() {
   # first interface with state UP
-  loical -r iface=$(ip link show | grep "state UP" | awk '{print $2}' | cut -d':' -f1)
+  local -r iface="$(ip link show | grep "state UP" | awk '{print $2}' | cut -d':' -f1)"
   # transferred numbers are in first column, print everything with space separation
   local -r netdata=$(ip -s link show "$iface" | awk -v ORS=" " '{ print $1 }')
   # convert relevant numbers to gigabytes
