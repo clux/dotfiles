@@ -13,6 +13,17 @@ help:
 	@echo $(call green," ui")"       set gconf and dconf settings"
 	@echo $(call green," etc")"      install /etc files"
 
+etc:
+	@echo $(call red, "Messing around with /etc")
+	@echo $(call red, "Updating motd")
+	@cp etc/profile.d/motd.sh /etc/profile.d/
+	@echo $(call red, "Disabling mail notification in pam sshd")
+	@sed -i.bak "s/.*pam_mail.so.*//" /etc/pam.d/sshd
+	@diff /etc/pam.d/sshd.bak /etc/pam.d/sshd || true
+	@echo $(call red, "Setting default XBKVARIANT to colemak")
+	@sed -i.bak 's/XKBVARIANT=.*/XKBVARIANT="colemak"/' /etc/default/keyboard
+	@diff /etc/default/keyboard.bak /etc/default/keyboard || true
+
 directories:
 	@mkdir -p ~/.config/sublime-text-3/Packages
 	@mkdir -p ~/.config/autostart
@@ -89,14 +100,3 @@ cinnamon:
 	@gsettings set org.cinnamon.desktop.privacy remove-old-trash-files true
 
 ui: guake cinnamon
-
-etc:
-	@echo $(call red, "Messing around with /etc")
-	@echo $(call red, "Updating motd")
-	@cp etc/profile.d/motd.sh /etc/profile.d/
-	@echo $(call red, "Disabling mail notification in pam sshd")
-	@sed -i.bak "s/.*pam_mail.so.*//" /etc/pam.d/sshd
-	@diff /etc/pam.d/sshd.bak /etc/pam.d/sshd || true
-	@echo $(call red, "Setting default XBKVARIANT to colemak")
-	@sed -i.bak 's/XKBVARIANT=.*/XKBVARIANT="colemak"/' /etc/default/keyboard
-	@diff /etc/default/keyboard.bak /etc/default/keyboard || true
