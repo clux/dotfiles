@@ -43,6 +43,8 @@ directories:
 	@mkdir -p ~/.config/autostart
 	@mkdir -p ~/.config/profanity
 	@mkdir -p ~/.templates/npm
+	@mkdir -p ~/.mpd/playlists
+	@mkdir -p ~/Music # should symlink this elsewhere manually
 
 sublime:
 	$(call red, "Linking User package in sublime-text-3")
@@ -59,6 +61,8 @@ config: directories
 	@find "$$PWD/.config/autostart" -maxdepth 1 -type f -print -exec ln -sfn {} ~/.config/autostart \;
 	$(call green, "Linking .config/profanity to ~/.config/profanity")
 	@find "$$PWD/.config/profanity" -maxdepth 1 -type f -print -exec ln -sfn {} ~/.config/profanity \;
+	$(call green, "Linking .ncmpcpp to ~/.ncmpcpp")
+	@find "$$PWD/.ncmpcpp" -maxdepth 1 -type f -print -exec ln -sfn {} ~/.ncmpcpp \;
 	@[ -d ~/.config/sublime-text-3/Packages/User ] || make sublime
 
 gconf:
