@@ -38,6 +38,13 @@ etc:
 	@sed -i.bak "s/.*pam_mail.so.*//" /etc/pam.d/sshd
 	@diff /etc/pam.d/sshd.bak /etc/pam.d/sshd || true
 
+services:
+	$(call red," systemd","enabling user services")
+	@systemctl --user start redshift-gtk
+	@systemctl --user enable redshift-gtk
+	@systemctl --user start mpd
+	@systemctl --user enable mpd
+
 directories:
 	@mkdir -p ~/.config/sublime-text-3/Packages
 	@mkdir -p ~/.config/autostart
