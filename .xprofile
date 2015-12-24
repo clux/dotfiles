@@ -11,18 +11,6 @@ setxkbmap -layout us,us \
           -option compose:caps \
           -option grp:lalt_lshift_toggle
 
-# tmux and default guake tabs
+# tmux and guake
 tmux start-server
-
 /usr/bin/guake &
-sleep 5 # apparently recommended by guake
-
-# guake tab 1: ncmpcpp
-guake --new-tab --execute="/usr/bin/bash"
-guake --execute="exec tmux attach-session -t 0" --rename-tab="ncmpcpp"
-# guake tab 2: profanity
-guake --new-tab --execute="/usr/bin/bash"
-guake --execute="exec tmux attach-session -t 1" --rename-tab="profanity"
-# guake tab 3: dev
-guake --new-tab --execute="/usr/bin/bash"
-guake --execute="exec tmux attach-session -t 2" --rename-tab="dev"
