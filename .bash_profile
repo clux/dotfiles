@@ -18,8 +18,8 @@ shopt -s histappend
 source ~/local/z/z.sh
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config
-# ignoring wildcards
-[ -e "$HOME/.ssh/config" ] && complete -o "default" \
+[ -e "$HOME/.ssh/config" ] || touch $HOME/.ssh/config
+complete -o "default" \
   -o "nospace" \
   -W "$(grep "^Host" ~/.ssh/config | \
   grep -v "[?*]" | cut -d " " -f2 | \
