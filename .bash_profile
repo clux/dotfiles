@@ -28,7 +28,7 @@ fi
 
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config
-[ -e "$HOME/.ssh/config" ] || touch $HOME/.ssh/config
+[ -e "$HOME/.ssh/config" ] || touch "$HOME/.ssh/config"
 complete -o "default" \
   -o "nospace" \
   -W "$(grep "^Host" ~/.ssh/config | \
