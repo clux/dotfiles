@@ -1,3 +1,4 @@
+
 define green
 	@[ -n "$TERM" ] && tput setaf 2
 	@echo -n "$1"
@@ -10,7 +11,6 @@ define red
 	@[ -n "$TERM" ] && tput sgr0
 	@echo -e "\t$2"
 endef
-
 
 .PHONY: config ui etc directories sublime help font has_font guake
 .PHONY: debkeyboard has_etc_keyboard
@@ -58,18 +58,13 @@ sublime:
 	@ln -s "$$PWD/.config/sublime-text-3/Packages/User" ~/.config/sublime-text-3/Packages/User
 
 config: directories
-	$(call green, "Linking .files to ~/")
-	@find "$$PWD" -name ".*" -not -name ".gitignore" -type f -print -exec ln -sfn {} ~/ \;
-	$(call green, "Linking .config to ~/.config")
-	@find "$$PWD/.config" -maxdepth 1 -type f -print -exec ln -sfn {} ~/.config \;
-	$(call green, "Linking .templates to ~/.templates")
-	@find "$$PWD/.templates/npm" -maxdepth 1 -type f -print -exec ln -sfn {} ~/.templates/npm \;
-	$(call green, "Linking .config/autostart to ~/.config/autostart")
-	@find "$$PWD/.config/autostart" -maxdepth 1 -type f -print -exec ln -sfn {} ~/.config/autostart \;
-	$(call green, "Linking .config/profanity to ~/.config/profanity")
-	@find "$$PWD/.config/profanity" -maxdepth 1 -type f -print -exec ln -sfn {} ~/.config/profanity \;
-	$(call green, "Linking .ncmpcpp to ~/.ncmpcpp")
-	@find "$$PWD/.ncmpcpp" -maxdepth 1 -type f -print -exec ln -sfn {} ~/.ncmpcpp \;
+	$(call green," ln","configs in \$$HOME")
+	@find "$$PWD" -maxdepth 1 -name ".*" -not -name ".gitignore" -type f -print -exec ln -sfn {} ~/ \;
+	$(call green," ln","configs subdirs in \$$HOME")
+	@for d in {,.config,.config/profanity,.templates/npm,.ncmpcpp}; do\
+		echo $$d; \
+	  find "$$PWD/$$d" -maxdepth 1 -type f -print -exec ln -sfn {} ~/$$d \; ; \
+	done
 	@[ -d ~/.config/sublime-text-3/Packages/User ] || make sublime
 
 gconf:
