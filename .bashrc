@@ -6,7 +6,7 @@
 
 # If running under guake, also run under tmux
 if [[ $PPID == $(pgrep -f guake) ]]; then
-  exec tmux
+  exec tmux new-session
 fi
 
 [ -f ~/.bash_profile ] && source ~/.bash_profile
