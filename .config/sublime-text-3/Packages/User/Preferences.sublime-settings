@@ -9,6 +9,7 @@
 	"highlight_line": true,
 	"ignored_packages":
 	[
+		"Makefile",
 		"Markdown",
 		"Vintage"
 	],
