@@ -25,12 +25,3 @@ if [ -x /usr/bin/dircolors ]; then
   alias fgrep='fgrep --color=auto'
   alias egrep='egrep --color=auto'
 fi
-
-
-# Add tab completion for SSH hostnames based on ~/.ssh/config
-[ -e "$HOME/.ssh/config" ] || touch "$HOME/.ssh/config"
-complete -o "default" \
-  -o "nospace" \
-  -W "$(grep "^Host" ~/.ssh/config | \
-  grep -v "[?*]" | cut -d " " -f2 | \
-  tr ' ' '\n')" scp sftp ssh
