@@ -63,7 +63,7 @@ config: directories
 	$(call green," ln","configs subdirs in \$$HOME")
 	@for d in {,.config,.config/profanity,.templates/npm,.ncmpcpp}; do\
 		echo $$d; \
-	  find "$$PWD/$$d" -maxdepth 1 -type f -print -exec ln -sfn {} ~/$$d \; ; \
+    find "$$PWD/$$d" -maxdepth 1 -type f -print -exec ln -sfn {} ~/$$d \; ; \
 	done
 	@[ -d ~/.config/sublime-text-3/Packages/User ] || make sublime
 
