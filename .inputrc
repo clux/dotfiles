@@ -1,8 +1,8 @@
 set show-all-if-ambiguous on
 set completion-ignore-case on
 
-"\e[A": history-search-backward
-"\e[B": history-search-forward
+"\e[A": history-search-backward # Up key
+"\e[B": history-search-forward  # Down key
 
 "\e[1~": beginning-of-line      # Home Key
 "\e[4~": end-of-line            # End Key
