@@ -11,6 +11,10 @@ setxkbmap -layout us,us \
           -option compose:caps \
           -option grp:lalt_lshift_toggle
 
+# X and URxvt stuff
+xrdb -merge ~/.Xresources
+# Consider running urxvtd here
+
 # tmux and guake
 tmux start-server
 /usr/bin/guake &
