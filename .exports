@@ -1,8 +1,6 @@
 #!/bin/bash
 
-# I suck at vim
 export EDITOR=/usr/bin/nano;
-export TERMINAL="urxvt";
 
 # Larger bash history (allow 32³ entries; default is 500)
 #export HISTSIZE=50000000;
