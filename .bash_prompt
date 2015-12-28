@@ -17,6 +17,7 @@ if tput setaf 1 &> /dev/null; then
   yellow="\[$(tput setaf 136)\]"
   dircol="${bold}${white}"
 else
+  # non-256 color terminal - compat only
   bold=''
   reset='\[\e[00m\]'
   #black="\e[1;30m"
