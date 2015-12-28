@@ -269,3 +269,11 @@ remclose() {
 remedit-cloud() { remedit workstation:/home/clux/repos/cloudroot ;}
 remedit-sqbu() { remedit workstation:/home/clux/sqbu ;}
 remedit-b22() { remedit b22:/nu/ealbrigt/root ;}
+
+# -----------------------------------------------------------------------------
+# ssh agent laziness
+
+key() {
+  keychain "$HOME/.ssh/$1_id_rsa" --timeout 120 --quiet --host agent
+  source ~/.keychain/agent-sh 2>/dev/null
+}
