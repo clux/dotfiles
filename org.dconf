@@ -38,6 +38,9 @@ media=@as []
 [cinnamon/desktop/media-handling]
 autorun-never=true
 
+[cinnamon/desktop/applications/terminal]
+exec='urxvt'
+
 [cinnamon/desktop/privacy]
 recent-files-max-age=0
 remember-recent-files=false
