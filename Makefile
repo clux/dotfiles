@@ -1,14 +1,14 @@
 
 define green
-	@tput setaf 2 || true
+	@tty -s && tput setaf 2
 	@echo -n "$1"
-	@tput sgr0 || true
+	@tty -s && tput sgr0
 	@echo -e "\t$2"
 endef
 define red
-	@tput setaf 1 || true
+	@tty -s && tput setaf 1
 	@echo -n "$1"
-	@tput sgr0 || true
+	@tty -s && tput sgr0
 	@echo -e "\t$2"
 endef
 
@@ -16,7 +16,7 @@ endef
 .PHONY: debkeyboard has_etc_keyboard
 
 help:
-	@tput bold
+	@tty -s && tput bold
 	$(call green,"Valid targets:")
 	$(call green," config", "symlink configuration files to ~/")
 	$(call green," ui", "set gconf and dconf settings")
