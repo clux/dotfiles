@@ -1,0 +1,14 @@
+# Security - public keys only
+PasswordAuthentication no
+ChallengeResponseAuthentication no
+AuthenticationMethods publickey
+AuthorizedKeysFile .ssh/authorized_keys
+
+# Misc
+Port 8702
+PrintMotd no
+LoginGraceTime 30
+
+# Privileges
+PermitRootLogin no
+UsePrivilegeSeparation sandbox

@@ -36,9 +36,10 @@ debkeyboard: has_etc_keyboard
 etc:
 	$(call red," etc","Updating motd")
 	@cp etc/profile.d/motd.sh /etc/profile.d/
-	$(call red," pam","Disabling mail notification via ssh")
-	@sed -i.bak "s/.*pam_mail.so.*//" /etc/pam.d/sshd
-	@diff /etc/pam.d/sshd.bak /etc/pam.d/sshd || true
+	$(call red," sshd","Updating sshd_config")
+	@diff /etc/ssh/sshd_config etc/ssh/sshd_config || true
+	@cp etc/ssh/sshd_config /etc/ssh/
+	@systemctl restart sshd
 
 services:
 	$(call red," systemd","enabling user services")
