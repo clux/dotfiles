@@ -61,7 +61,7 @@ config: directories
 	$(call green," ln","configs in \$$HOME")
 	@find "$$PWD" -maxdepth 1 -name ".*" -not -name ".gitignore" -type f -print -exec ln -sfn {} ~/ \;
 	$(call green," ln","configs subdirs in \$$HOME")
-	@for d in {,.config,.config/profanity,.templates/npm,.ncmpcpp}; do\
+	@set -B && for d in {.config,.config/profanity,.templates/npm,.ncmpcpp}; do\
 		echo $$d; \
     find "$$PWD/$$d" -maxdepth 1 -type f -print -exec ln -sfn {} ~/$$d \; ; \
 	done
