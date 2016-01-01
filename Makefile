@@ -53,6 +53,7 @@ directories:
 	@mkdir -p ~/.config/profanity
 	@mkdir -p ~/.templates/npm
 	@mkdir -p ~/.mpd/playlists
+	@mkdir -p ~/.ncmpcpp
 	@mkdir -p ~/Music # should symlink this elsewhere manually
 
 sublime:
