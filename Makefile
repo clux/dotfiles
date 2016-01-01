@@ -1,14 +1,14 @@
 
 define green
-	@[ -n "$TERM" ] && tput setaf 2
+	@[ tput setaf 1 &> /dev/null ] && tput setaf 2
 	@echo -n "$1"
-	@[ -n "$TERM" ] && tput sgr0
+	@[ tput setaf 1 &> /dev/null ] && tput sgr0
 	@echo -e "\t$2"
 endef
 define red
-	@[ -n "$TERM" ] && tput setaf 1
+	@[ tput setaf 1 &> /dev/null ] && tput setaf 1
 	@echo -n "$1"
-	@[ -n "$TERM" ] && tput sgr0
+	@[ tput setaf 1 &> /dev/null ] && tput sgr0
 	@echo -e "\t$2"
 endef
 
