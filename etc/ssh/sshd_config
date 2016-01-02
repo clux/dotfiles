@@ -12,3 +12,4 @@ LoginGraceTime 30
 # Privileges
 PermitRootLogin no
 UsePrivilegeSeparation sandbox
+Subsystem sftp /usr/lib/ssh/sftp-server
