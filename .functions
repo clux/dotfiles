@@ -72,15 +72,23 @@ disk() {
 }
 cpu() { awk '{printf("%3.1f%%\n", $1*100/'"$(nproc)"') }' < /proc/loadavg ;}
 
-network() {
+iface() {
   # first interface with state UP
-  local -r iface="$(ip link show | grep "state UP" | awk '{print $2}' | cut -d':' -f1)"
+  ip link show | grep "state UP" | awk '{print $2}' | cut -d':' -f1
+}
+network() {
+  local -r iface="$(iface)"
   # transferred numbers are in first column, print everything with space separation
   local -r netdata=$(ip -s link show "$iface" | awk -v ORS=" " '{ print $1 }')
   # convert relevant numbers to gigabytes
   local -r RX=$(echo "$netdata" | cut -d" " -f4 | awk '{printf("%3.1fGB\n", $1/1073741824)}')
   local -r TX=$(echo "$netdata" | cut -d" " -f6 | awk '{printf("%3.1fGB\n", $1/1073741824)}')
   echo -e "Sent: ${TX}\nRecv: ${RX}"
+}
+
+localip() {
+  local -r iface="$(iface)"
+  ip addr show "$iface" | grep inet | awk '{ print $2 }'
 }
 
 # process tree
