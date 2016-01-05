@@ -1,6 +1,5 @@
 #!/bin/bash
 export PATH=$HOME/.cabal/bin:$PATH
-#export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/local/arcanist/bin:$PATH
 export PATH=$HOME/local/bin:$PATH
