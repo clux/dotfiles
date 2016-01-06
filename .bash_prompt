@@ -1,6 +1,14 @@
 # Colors. Allow unused:
 # shellcheck disable=SC2034
+
 if tput setaf 1 &> /dev/null; then
+  if [ "$(grep -Ei 'debian|buntu|mint' /etc/*release)" ]; then
+    # These distros do not appear to act on Xresources configuration
+    # This is a hack if your TERM is not correctly set for you.
+    # Note that you still need 256 color terminals installed
+    # E.g. find /lib/terminfo /usr/share/terminfo -name "*256*"
+    export TERM=xterm-256color
+  fi
   tput sgr0 # reset colors
   # Solarized colors, taken from http://git.io/solarized-colors.
   bold="\[$(tput bold)\]"
