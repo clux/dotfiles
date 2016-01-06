@@ -1,10 +1,9 @@
 #!/bin/bash
+source ~/.bash_prompt
+source ~/.functions
+source ~/.exports
+source ~/.aliases
 
-for file in ~/.{bash_prompt,exports,aliases,functions,extra}; do
-  # shellcheck source=/dev/null
-  [ -f "$file" ] && source "$file"
-done
-unset file
 # extra libs
 source ~/local/z/z.sh
 # absorb keychain managed keys on arch
