@@ -18,6 +18,7 @@ alias damage='du -hs * | sort -n | tail'
 alias sshu="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 alias dmesgtail="dmesg | tail -n 20 | ccze -A"
 alias recentclear="echo > ~/.local/share/recently-used.xbel"
+alias yaml="shyaml get-value" # cat file.yaml | yaml key
 
 # copy helpers - may as well use the mac convention
 alias pbcopy='xclip -sel clip'
