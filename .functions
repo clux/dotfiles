@@ -191,7 +191,7 @@ movies-diff () {
 # xdg-mime handler
 broxy-download () {
   # shellcheck disable=SC2029
-  ssh broxy ./brotorr/torrent \""$1"\"
+  ssh broxy "source ~/.path; source ~/.exports; ./brotorr/torrent \"$1\""
 }
 
 # Find flags for helpers
