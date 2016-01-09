@@ -4,7 +4,7 @@ source ~/.functions
 source ~/.exports
 source ~/.aliases
 
-# extra libs
+# directory jumping shortcut
 source ~/local/z/z.sh
 # absorb keychain managed keys on arch
 [ -f ~/.keychain/agent-sh ] && source ~/.keychain/agent-sh
