@@ -33,9 +33,21 @@ srchcmake() { filefind . "CMakeLists.txt" | xargs grep "$1" 2> /dev/null ;}
 mkd() { mkdir -p "$@" && cd "$@" || return 1 ;}
 dl() { cd "$DOWNLOAD_DIR" || return 1 ;}
 
-# package/repo fetching shortcuts
-aptin() { sudo apt-get install "$1" ;}
-aptrem() { sudo apt-get remove "$1" ;}
+# very common package/repo fetching shortcuts
+if lsb_release -a | grep -qEi "debian|mint|buntu"; then
+  pkgsrch() { apt-cache search "$1"; } # find package by name
+  pkgfile() { dpkg -S "$1" ;}
+  qlist() { dpkg-query -L "$1" ;}
+  inst() { sudo apt-get install "$1" ;}
+  rem() { sudo apt-get remove "$1" ;}
+else
+  pkgsrch() { pacman -Ss "$1" ;} # -Qs for what you have installed
+  pkgfile() { pacman -Qo "$1" ;}
+  qlist() { pacman -Ql "$1" ;}
+  inst() { sudo pacman -S "$1" ;}
+  rem() { sudo pacman -R "$1" ;}
+fi
+
 ghclone() { git clone git@github.com:clux/"$1".git ;}
 bbclone() { git clone git@bitbucket.org:clux/"$1".git ;}
 
