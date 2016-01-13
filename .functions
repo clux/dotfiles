@@ -38,14 +38,14 @@ if lsb_release -a | grep -qEi "debian|mint|buntu"; then
   pkgsrch() { apt-cache search "$1"; } # find package by name
   pkgfile() { dpkg -S "$1" ;}
   qlist() { dpkg-query -L "$1" ;}
-  inst() { sudo apt-get install "$1" ;}
-  rem() { sudo apt-get remove "$1" ;}
+  instpkg() { sudo apt-get install "$1" ;}
+  rempkg() { sudo apt-get remove "$1" ;}
 else
   pkgsrch() { pacman -Ss "$1" ;} # -Qs for what you have installed
   pkgfile() { pacman -Qo "$1" ;}
   qlist() { pacman -Ql "$1" ;}
-  inst() { sudo pacman -S "$1" ;}
-  rem() { sudo pacman -R "$1" ;}
+  instpkg() { sudo pacman -S "$1" ;}
+  rempkg() { sudo pacman -R "$1" ;}
 fi
 
 ghclone() { git clone git@github.com:clux/"$1".git ;}
