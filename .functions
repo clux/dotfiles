@@ -294,6 +294,6 @@ remedit-b22() { remedit b22:/nu/ealbrigt/root ;}
 # ssh agent laziness
 
 key() {
-  keychain "$HOME/.ssh/$1_id_rsa" --timeout 120 --quiet --host agent
+  keychain "$HOME/.ssh/$1_id" --timeout 120 --quiet --host agent
   source ~/.keychain/agent-sh
 }
