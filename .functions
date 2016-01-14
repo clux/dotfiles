@@ -40,7 +40,7 @@ if lsb_release -a | grep -qEi "debian|mint|buntu"; then
   qlist() { dpkg-query -L "$1" ;}
   instpkg() { sudo apt-get install "$1" ;}
   rempkg() { sudo apt-get remove "$1" ;}
-else
+elif which pacman 2> /dev/null; then
   pkgsrch() { pacman -Ss "$1" ;} # -Qs for what you have installed
   pkgfile() { pacman -Qo "$1" ;}
   qlist() { pacman -Ql "$1" ;}
