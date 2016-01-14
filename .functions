@@ -86,7 +86,7 @@ cpu() { awk '{printf("%3.1f%%\n", $1*100/'"$(nproc)"') }' < /proc/loadavg ;}
 
 iface() {
   # first interface with state UP
-  ip link show | grep "state UP" | awk '{print $2}' | cut -d':' -f1
+  ip link show | grep "state UP" | awk '{print $2}' | cut -d':' -f1 | head -n 1
 }
 network() {
   local -r iface="$(iface)"
