@@ -97,7 +97,7 @@ gconf:
 
 has_font:
 	$(call green, "Guarding on Liberations font presence")
-	@find /usr/share/fonts/TTF/ | grep -q Liberation
+	@find /usr/share/fonts/ | grep -q Liberation
 
 dconf: has_font
 	$(call green, "Importing main dconf settings")
