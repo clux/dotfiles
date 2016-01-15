@@ -14,13 +14,14 @@
   remotes = remote -v
 
   # shortcuts
-  hub ="!f() { git clone git@github.com:$1.git; }; f"
-  bucket ="!f() { git clone git@bitbucket.org:$1.git; }; f"
+  github ="!f() { git clone git@github.com:$1.git; }; f"
+  bitbucket ="!f() { git clone git@bitbucket.org:$1.git; }; f"
   # multi-clone shortcuts
-  hub-clux ="!f() { for i in $@; do git hub clux/$i; done; }; f"
-  bucket-clux ="!f() { for i in $@; do git bucket clux/$i; done; }; f"
+  hub ="!f() { for i in $@; do git github clux/$i; done; }; f"
+  bb ="!f() { for i in $@; do git bitbucket clux/$i; done; }; f"
 
   pul = pull
+  pulls = "!f() { git pull --recurse-submodules && git submodule update --recursive }; f"
   ci = commit
   cia = commit -am
   amend = commit --amend -m
