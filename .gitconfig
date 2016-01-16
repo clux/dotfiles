@@ -21,7 +21,7 @@
   bb ="!f() { for i in $@; do git bitbucket clux/$i; done; }; f"
 
   pul = pull
-  pulls = "!f() { git pull --recurse-submodules && git submodule update --recursive }; f"
+  pulls = "!f() { git pull --recurse-submodules && git submodule update --init --recursive; }; f"
   ci = commit
   cia = commit -am
   amend = commit --amend -m
