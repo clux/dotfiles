@@ -30,6 +30,8 @@
   unstage = reset HEAD
   count = shortlog -sn
 
+  setup = "!f() { [ -d ".git" ] || (git init && git add . && git commit --allow-empty -m 'init'); }; f"
+
   # Find commits by source code
   fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
 
