@@ -8,7 +8,7 @@ install:
   - cabal install shellcheck
 
 env:
-  - SHELLCHECK_OPTS="-e SC1091 -s bash"
+  - SHELLCHECK_OPTS="-e SC1091 -E SC1090 -s bash"
 
 script:
   - shellcheck .bashrc .aliases .exports .bash_pro* .functions .xprofile*
