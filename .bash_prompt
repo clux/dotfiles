@@ -2,7 +2,7 @@
 # shellcheck disable=SC2034
 
 if tput setaf 1 &> /dev/null; then
-  if lsb_release -a | grep -qEi "debian|mint|buntu|Gentoo"; then
+  if lsb_release -ds | grep -qEi "debian|mint|buntu|Gentoo"; then
     # These distros do not appear to act on Xresources configuration
     # This is a hack if your TERM is not correctly set for you.
     # Note that you still need 256 color terminals installed
