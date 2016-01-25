@@ -294,6 +294,11 @@ remedit-b22() { remedit b22:/nu/ealbrigt/root ;}
 # ssh agent laziness
 
 key() {
-  keychain "$HOME/.ssh/$1_id" --timeout $((8*60)) --quiet --host agent
+  local keys=""
+  for k in "$@"; do
+    keys="$keys $HOME/.ssh/${k}_id"
+  done
+  # shellcheck disable=SC2086
+  keychain --timeout $((8*60)) --quiet --host agent $keys
   source ~/.keychain/agent-sh
 }

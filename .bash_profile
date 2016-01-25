@@ -6,8 +6,14 @@ source ~/.aliases
 
 # directory jumping shortcut
 source ~/local/z/z.sh
-# absorb keychain managed keys on arch
-[ -f ~/.keychain/agent-sh ] && source ~/.keychain/agent-sh
+# absorb keychain managed keys
+if [ "$(hostname)" = "ealbrigt-ws" ]; then
+  key sqbu work
+elif [ "$(hostname)" = "kjttks" ]; then
+  key github main
+else
+  [ -f ~/.keychain/agent-sh ] && source ~/.keychain/agent-sh
+fi
 
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob
