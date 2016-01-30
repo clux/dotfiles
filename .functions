@@ -142,6 +142,7 @@ node-init() {
 }
 
 node-deopts() {
+  # shellcheck disable=SC2068
   node --trace_opt --trace_deopt --allow-natives-syntax $@
 }
 
