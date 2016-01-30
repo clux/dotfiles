@@ -141,6 +141,10 @@ node-init() {
   rm readme.md
 }
 
+node-deopts() {
+  node --trace_opt --trace_deopt --allow-natives-syntax $@
+}
+
 # -----------------------------------------------------------------------------
 # documentation generation for gh-pages
 
