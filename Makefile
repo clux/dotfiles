@@ -63,7 +63,7 @@ sublime:
 
 config: directories
 	$(call green," ln","configs in \$$HOME")
-	@find "$$PWD" -maxdepth 1 -name ".*" -not -name ".gitignore" -type f -print -exec ln -sfn {} ~/ \;
+	@find "$$PWD" -maxdepth 1 -name ".*" -not -name ".travis.yml" -type f -print -exec ln -sfn {} ~/ \;
 	$(call green," ln","configs subdirs in \$$HOME")
 	@for d in {.config,.config/profanity,.templates/npm,.ncmpcpp}; do\
 		echo $$d; \
