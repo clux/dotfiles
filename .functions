@@ -136,7 +136,7 @@ pstree() {
     flags="--ppid 2 --deselect -o cputime,pid,stat,user,args"
   fi
   # shellcheck disable=SC2086
-  ps $flags --forest --width $(($(tput cols)-1)) | less -RX
+  ps $flags --forest --width $(($(tput cols)-1)) | ccze -A | less -RX
   # NB: the -1 is to compensate for what ccze puts in there
 }
 
