@@ -46,13 +46,13 @@ elif lsb_release -ds | grep -qEi "Gentoo"; then
   # canonical qlist
   instpkg() { sudo emerge "$1" ;}
   rempkg() { sudo emerge -cav "$1" ;}
-elif which pacman 2> /dev/null; then
+elif hash pacman 2> /dev/null; then
   pkgsrch() { pacman -Ss "$1" ;} # -Qs for what you have installed
   pkgfile() { pacman -Qo "$1" ;}
   qlist() { pacman -Ql "$1" ;}
   instpkg() { sudo pacman -S "$1" ;}
   rempkg() { sudo pacman -R "$1" ;}
-elif which yum 2> /dev/null; then
+elif hash yum 2> /dev/null; then
   pkgsrch() { yum search "$1" ;}
   pkgfile() { yum whatprovides "$1" ;}
   qlist() { repoquery --list "$1" ;} # from yum-utils
