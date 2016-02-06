@@ -81,6 +81,9 @@ gls() {
   cd "$dir" || true
 }
 
+# convert yaml to json:
+# yaml file
+# yaml file [json key/args]
 yaml() {
   if [ -n "$2" ]; then
     # shellcheck disable=SC2068
