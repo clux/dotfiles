@@ -31,7 +31,7 @@ export GTEST_COLOR=1
 export SHELLCHECK_OPTS="-e SC1091"
 
 # brotorr uses this
-export DOWNLOAD_DIR=/media/clux/Zeus/DL/
+export DOWNLOAD_DIR=/mnt/zeus/DL/
 if [[ $(hostname) == "broxy" ]]; then
   export DOWNLOAD_DIR=/media/dumptruck/DL
 fi
