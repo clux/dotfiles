@@ -81,6 +81,15 @@ gls() {
   cd "$dir" || true
 }
 
+yaml() {
+  if [ -n "$2" ]; then
+    # shellcheck disable=SC2068
+    js-yaml "$1" | json $@
+  else
+    js-yaml "$1"
+  fi
+}
+
 # -----------------------------------------------------------------------------
 # system statistics/usage
 
