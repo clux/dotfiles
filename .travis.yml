@@ -1,14 +1,12 @@
 language: haskell
 sudo: false
-
 notifications:
-  email: false
-
+  email:
+    on_success: change
+    on_failure: always
 install:
   - cabal install shellcheck
-
 env:
-  - SHELLCHECK_OPTS="-e SC1091 -e SC1090 -s bash"
-
+  - 'SHELLCHECK_OPTS="-e SC1091 -e SC1090 -s bash"'
 script:
-  - shellcheck .bashrc .aliases .exports .bash_pro* .functions .xprofile*
+  - 'shellcheck .bashrc .aliases .exports .bash_pro* .functions .xprofile*'
