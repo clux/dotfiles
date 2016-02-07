@@ -1,0 +1,7 @@
+#!/bin/bash
+(
+  set -x
+  source ~/.functions
+  broxy-download "$1"
+) >> ~/.broxy.log 2>&1
+

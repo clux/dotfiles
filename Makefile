@@ -14,8 +14,9 @@ define red
 	@echo -e "\t$2"
 endef
 
-.PHONY: config ui etc directories sublime help font has_font guake
-.PHONY: debkeyboard has_etc_keyboard
+# All targets herein are technically PHONY, but this rarely matters
+# We list a few of them that MIGHT cause the `'target' is up to date` failure.
+.PHONY: config ui etc sublime help font xdg guake docker gconf dconf
 
 help:
 	@tput -T xterm bold
@@ -109,4 +110,9 @@ dconf: has_font
 	$(call green, "Importing main dconf settings")
 	@dconf load /org/ < org.dconf
 
-ui: gconf dconf
+xdg:
+	@sudo cp xdg/sshtorrent.desktop /usr/share/applications/
+	@cp xdg/magnet /home/clux/local/bin/magnet
+	@xdg-mime default sshtorrent.desktop x-scheme-handler/magnet
+
+ui: gconf dconf xdg
