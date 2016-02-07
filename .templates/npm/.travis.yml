@@ -1,16 +1,14 @@
 language: node_js
 sudo: false
-
 node_js:
   - 4
   - node
-
 notifications:
-  email: false
-
+  email:
+    on_success: change
+    on_failure: always
 before_script:
   - npm link
-
 after_success:
   - npm install coveralls
-  - npm run coverage | coveralls
+  - 'npm run coverage | coveralls'
