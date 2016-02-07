@@ -1,7 +1,7 @@
 # dotfiles
 [![build status](https://secure.travis-ci.org/clux/dotfiles.svg)](http://travis-ci.org/clux/dotfiles)
 
-All custom configuration files for packages installed via my [installation scripts](https://github.com/clux/dotclux). For combined usage, see the scripts therein.
+All custom configuration files for packages installed via my [installation scripts](https://github.com/clux/dotclux).
 
 ## Key Features
 
@@ -17,7 +17,7 @@ Plus a bunch of other small stuff. As usual, copy what you find interesting.
 
 Here is a screenshot of the terminal showing `z`, git prompt, the large `motd`, as well as return code and host name handling in the prompt.
 
-![terminal style!](https://github.com/clux/dotfiles/raw/master/terminal.png)
+![terminal style](https://github.com/clux/dotfiles/raw/master/terminal.png)
 
 ## Usage
 Clone and install:
@@ -26,13 +26,13 @@ Clone and install:
 make config
 make ui
 sudo make etc
-make xdg
+make xdg # asks for sudo
 ```
 
 The first symlinks all files herein to `$HOME` so they can be tracked. The second updates UI through `dconf` and `gconf`.
 
 ## Sublime
-Because sublime-text is annoyingly manual in some areas:
+Some manual steps required.
 
 - [license](https://mail.google.com/mail/u/0/#search/sublime+license/13a942d72a211e81)
 - [package control](https://packagecontrol.io/installation)
