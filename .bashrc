@@ -9,7 +9,6 @@
 # If running under guake, also run under tmux
 which tmux > /dev/null || return 0
 if [[ $PPID == $(pgrep -f guake) ]]; then
-  export TERM="xterm-256color" # tmux needs some guidance
   guakeIndex=$(guake -g)
   if tmux list-sessions | cut -d':' -f1 | grep -q "$guakeIndex"; then
     # use one of the preconfigured sessions
