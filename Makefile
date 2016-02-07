@@ -110,7 +110,11 @@ dconf: has_font
 	$(call green, "Importing main dconf settings")
 	@dconf load /org/ < org.dconf
 
-xdg:
+not_root:
+	$(call green, "Guarding on not root")
+	@test "$$EUID" -ne 0
+
+xdg: not_root
 	@sudo cp xdg/sshtorrent.desktop /usr/share/applications/
 	@cp xdg/magnet /home/clux/local/bin/magnet
 	@xdg-mime default sshtorrent.desktop x-scheme-handler/magnet
