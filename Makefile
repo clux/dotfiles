@@ -48,6 +48,12 @@ services:
 	@systemctl --user start mpd
 	@systemctl --user enable mpd
 
+docker:
+	$(call red," docker","activating docker")
+	@gpasswd -a $USER docker
+	@systemctl enable docker
+	@systemctl start docker
+
 directories:
 	@mkdir -p ~/.config/sublime-text-3/Packages
 	@mkdir -p ~/.config/autostart
