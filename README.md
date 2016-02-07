@@ -12,7 +12,9 @@ Separated from [installation scripts](https://github.com/clux/dotclux) because t
 - [z](https://github.com/rupa/z)
 - [xdg-open](https://wiki.archlinux.org/index.php/Xdg-open) click handlers for magnet links that defer to a private `ssh` server
 
-Plus a bunch of other small stuff. As usual, copy what you find interesting.
+Plus a bunch of other small stuff. As usual, copy what you find interesting. Here is a screenshot of the terminal showing `z`, git prompt, and `motd`.
+
+![terminal style!](https://github.com/clux/dotfiles/raw/master/imgs/terminal.png)
 
 ## Usage
 Clone and install:
