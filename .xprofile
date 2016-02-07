@@ -1,8 +1,4 @@
-
-if [ "$(hostname)" = "kjttks" ]; then
-  # Main screen refresh rate
-  xrandr --output DVI-I-1 --mode 1920x1080 --rate 144
-fi
+#!/bin/sh
 
 # Set keyboard layout
 setxkbmap -layout us,us \

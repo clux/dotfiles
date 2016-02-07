@@ -93,6 +93,16 @@ yaml() {
   fi
 }
 
+# force monitor refresh rate
+# hopefully find a better solution, but .xprofile currently doesnt work for this
+refresh-benq() {
+  if [ "$(hostname)" = "kjttks" ]; then
+    # Main screen refresh rate
+    xrandr --output DVI-I-1 --mode 1920x1080 --rate 144
+  fi
+  xrandr -q | egrep "144\.00\*"
+}
+
 # -----------------------------------------------------------------------------
 # system statistics/usage
 
