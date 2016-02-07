@@ -26,6 +26,7 @@ Clone and install:
 make config
 make ui
 sudo make etc
+make xdg
 ```
 
 The first symlinks all files herein to `$HOME` so they can be tracked. The second updates UI through `dconf` and `gconf`.

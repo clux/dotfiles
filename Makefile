@@ -119,4 +119,4 @@ xdg: not_root
 	@cp xdg/magnet /home/clux/local/bin/magnet
 	@xdg-mime default sshtorrent.desktop x-scheme-handler/magnet
 
-ui: gconf dconf xdg
+ui: gconf dconf
