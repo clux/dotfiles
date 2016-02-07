@@ -103,6 +103,12 @@ refresh-benq() {
   xrandr -q | egrep "144\.00\*"
 }
 
+# shellcheck disable=SC2046
+docker-purge() {
+  docker rm $(docker ps -a -q)
+  docker rmi $(docker images -q)
+}
+
 # -----------------------------------------------------------------------------
 # system statistics/usage
 
