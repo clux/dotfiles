@@ -1,18 +1,20 @@
 # dotfiles
 [![build status](https://secure.travis-ci.org/clux/dotfiles.svg)](http://travis-ci.org/clux/dotfiles)
 
-Separated from [installation scripts](https://github.com/clux/dotclux) because these are mostly install agnostic, and changes do not deserve full OS rebuilds to test. Packages may be necessary to replicate behaviour, but nothing you can't figure out from above repo.
+All custom configuration files for packages installed via my [installation scripts](https://github.com/clux/dotclux). For combined usage, see the scripts therein.
 
-## Features
+## Key Features
 
 - [custom bash prompt](https://github.com/clux/dotfiles/blob/master/.bash_prompt) with customized `git` and `hg` support
 - [tmux](https://wiki.archlinux.org/index.php/tmux) inside [guake](https://wiki.archlinux.org/index.php/Guake) inside [cinnamon](https://wiki.archlinux.org/index.php/cinnamon)
 - [URxvt](https://wiki.archlinux.org/index.php/rxvt-unicode) for persistent [TUIs](https://en.wikipedia.org/wiki/Text-based_user_interface)
 - [keychain](https://wiki.archlinux.org/index.php/SSH_keys#Keychain) loading specific ssh keys [depending on hostname](https://github.com/clux/dotfiles/blob/658ffb136167730ba272b03fd57c2be4a0bd2cc9/.bash_profile#L10-L16)
 - [rupa/z](https://github.com/rupa/z) for directory jumping
-- [xdg-open](https://wiki.archlinux.org/index.php/Xdg-open) click handlers for magnet links that defer to a private `ssh` server
+- [xdg-open](https://wiki.archlinux.org/index.php/Xdg-open) click handlers for magnet links that defer to a private `ssh` server + helpers to `rsync` from it
 
-Plus a bunch of other small stuff. As usual, copy what you find interesting. Here is a screenshot of the terminal showing `z`, git prompt, `motd`.
+Plus a bunch of other small stuff. As usual, copy what you find interesting.
+
+Here is a screenshot of the terminal showing `z`, git prompt, the large `motd`, as well as return code and host name handling in the prompt.
 
 ![terminal style!](https://github.com/clux/dotfiles/raw/master/terminal.png)
 
