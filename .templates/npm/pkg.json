@@ -10,8 +10,8 @@
   "keywords": [],
   "main": basename.replace(/\-/g, "_") + ".js",
   "scripts": {
-    "test": "bndg 'test/*.test.js'",
-    "precoverage": "istanbul cover bndg 'test/*.test.js'",
+    "test": "bndg test/*.test.js",
+    "precoverage": "istanbul cover bndg test/*.test.js",
     "coverage": "cat coverage/lcov.info && rm -rf coverage"
   },
   "dependencies": {},
