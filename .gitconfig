@@ -8,14 +8,20 @@
   stat = diff --stat
   cache = diff --cached
 
+  # identity helpers
+  ealbrigt ="!f() { git config --local user.name \"Eirik Albrigtsen\" && git config --local user.email \"ealbrigt@cisco.com\"; }; f"
+  clux ="!f() { git config --local user.name \"clux\" && git config --local user.email \"analsandblaster@gmail.com\"; }; f"
+  whoami = !bash -c 'echo \"$(git config --get user.name) <$(git config --get user.email)>\"'
+
   # Show verbose output about tags, branches or remotes
   tags = tag -l
   branches = branch -a
   remotes = remote -v
 
-  # shortcuts
-  github ="!f() { git clone git@github.com:$1.git; }; f"
-  bitbucket ="!f() { git clone git@bitbucket.org:$1.git; }; f"
+  # shortcuts (relies on .ssh/config having aliases gh, bb and sqbu)
+  github ="!f() { git clone gh:$1.git; }; f"
+  bitbucket ="!f() { git clone bb:$1.git; }; f"
+  sqbu = "!f() { git clone sqbu:$1.git; }; f"
   # multi-clone shortcuts
   hub ="!f() { for i in $@; do git github clux/$i; done; }; f"
   bb ="!f() { for i in $@; do git bitbucket clux/$i; done; }; f"
