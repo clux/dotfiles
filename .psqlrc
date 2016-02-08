@@ -1,3 +1,22 @@
-\set PROMPT1 '%033[1;36m%]%/ # %033[0m%]'
-\set PROMPT2 '%033[1;36m%]... %033[0m%]'
-\set PROMPT3 '%033[1;36m%]>> %033[0m%]'
+\set QUIET 1
+
+\set PROMPT1 '\n%[%033[1;31m%]➤ %[%033[2;37m%]%`\! date "+%F %H:%M"`%[%033[0m%] %[%033[1;36m%]%n%[%033[34m%]@%[%033[1;36m%]%M:%>%[%033[1;33m%]/%/ %[%033[1;31m%]%x %[%033[K%]%[%033[0m%]\n%[%033[1;33m%]%R%#%[%033[0m%] '
+\set PROMPT2 '%[%033[1;33m%]%R%#%[%033[0m%] '
+
+\set IGNOREEOF 2
+
+-- running queries
+\set queries  'select current_timestamp - query_start as runtime,pid,datname,usename,query from pg_stat_activity where query != \'<IDLE>\' order by 1 desc; '
+
+-- table size
+\set dbsize 'select nspname || \'.\' || relname AS \"relation\", pg_size_pretty(pg_relation_size(C.oid)) AS "size" from pg_class C left join pg_namespace N on (N.oid = C.relnamespace) where nspname not in (\'pg_catalog\', \'information_schema\') order by pg_relation_size(C.oid) desc limit 20;'
+
+-- database size
+\set tblsize 'SELECT d.datname AS Name, pg_catalog.pg_get_userbyid(d.datdba) AS Owner, CASE WHEN pg_catalog.has_database_privilege(d.datname, \'CONNECT\') THEN pg_catalog.pg_size_pretty(pg_catalog.pg_database_size(d.datname)) ELSE \'No Access\' END AS Size FROM pg_catalog.pg_database d ORDER BY CASE WHEN pg_catalog.has_database_privilege(d.datname, \'CONNECT\') THEN pg_catalog.pg_database_size(d.datname) ELSE NULL END DESC LIMIT 20;'
+
+
+\set QUIET 0
+\echo 'Custom queries:'
+\echo '  :dbsize'
+\echo '  :queries'
+\echo '  :tblsize'
