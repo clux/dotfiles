@@ -1,6 +1,6 @@
 [alias]
-  l = log --pretty=oneline --graph --abbrev-commit
-  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  # log with pretty format similar to --pretty=oneline, but adds user + relative date
+  lg = log --graph --pretty=format:'%Cred%h%Creset%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
   st = status -s
 
@@ -47,9 +47,6 @@
 [user]
   name = clux
   email = analsandblaster@gmail.com
-
-[github]
-  user = clux
 
 [push]
   default = simple
