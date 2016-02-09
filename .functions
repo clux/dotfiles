@@ -27,13 +27,8 @@ hs() { hf "$1" | xargs grep "$2" 2> /dev/null ;}
 srchcmake() { filefind . "CMakeLists.txt" | xargs grep "$1" 2> /dev/null ;}
 
 # -----------------------------------------------------------------------------
-# misc
+# package manager abstraction - mostly for my own memory
 
-# Create a new directory and enter it
-mkd() { mkdir -p "$@" && cd "$@" || return 1 ;}
-dl() { cd "$DOWNLOAD_DIR" || return 1 ;}
-
-# very common package/repo fetching shortcuts
 if lsb_release -ds | grep -qEi "debian|mint|buntu"; then
   pkgsrch() { apt-cache search "$1"; } # find package by name
   pkgfile() { dpkg -S "$1" ;}
@@ -60,8 +55,11 @@ elif hash yum 2> /dev/null; then
   rmpkg() { sudo yum remove "$1" ;}
 fi
 
-ghclone() { git clone git@github.com:clux/"$1".git ;}
-bbclone() { git clone git@bitbucket.org:clux/"$1".git ;}
+# -----------------------------------------------------------------------------
+# misc
+
+# Create a new directory and enter it
+mkd() { mkdir -p "$@" && cd "$@" || return 1 ;}
 
 kill-tabs() { pkill -u "$USER" -f "chrome.*renderer" ;}
 
@@ -241,6 +239,8 @@ ball () { tar czf "$1.tar" "${@:2}" ;}
 # -----------------------------------------------------------------------------
 # Broxy + brotorr integrations
 
+dl() { cd "$DOWNLOAD_DIR" || return 1 ;}
+
 movies-diff () {
   diff -u <(ls /media/clux/TOOL/MP4/Movies/) <(ls /media/clux/Zorn/NewMP4/BluRay/)
 }
@@ -336,7 +336,7 @@ remedit-sqbu() { remedit workstation:/home/clux/sqbu ;}
 remedit-b22() { remedit b22:/nu/ealbrigt/root ;}
 
 # -----------------------------------------------------------------------------
-# ssh agent laziness
+# ssh agent laziness (used in .bash_profile)
 
 key() {
   local keys=""
