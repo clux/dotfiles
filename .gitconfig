@@ -18,10 +18,10 @@
   branches = branch -a
   remotes = remote -v
 
-  # shortcuts (relies on .ssh/config having aliases gh, bb and sqbu)
-  github ="!f() { git clone gh:$1.git; }; f"
-  bitbucket ="!f() { git clone bb:$1.git; }; f"
-  sqbu = "!f() { git clone sqbu:$1.git; }; f"
+  # shortcuts
+  github ="!f() { git clone git@github.com:$1.git; }; f"
+  bitbucket ="!f() { git clone git@bitbucket.org:$1.git; }; f"
+  sqbu = "!f() { git clone git@sqbu-github.cisco.com:sqbu:$1.git; }; f"
   # multi-clone shortcuts
   hub ="!f() { for i in $@; do git github clux/$i; done; }; f"
   bb ="!f() { for i in $@; do git bitbucket clux/$i; done; }; f"
