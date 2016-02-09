@@ -8,23 +8,31 @@
   stat = diff --stat
   cache = diff --cached
 
-  # identity helpers
-  ealbrigt ="!f() { git config --local user.name \"Eirik Albrigtsen\" && git config --local user.email \"ealbrigt@cisco.com\"; }; f"
-  clux ="!f() { git config --local user.name \"clux\" && git config --local user.email \"analsandblaster@gmail.com\"; }; f"
-  whoami = !bash -c 'echo \"$(git config --get user.name) <$(git config --get user.email)>\"'
-
   # Show verbose output about tags, branches or remotes
   tags = tag -l
   branches = branch -a
   remotes = remote -v
 
-  # shortcuts
-  github ="!f() { git clone git@github.com:$1.git; }; f"
-  bitbucket ="!f() { git clone git@bitbucket.org:$1.git; }; f"
-  sqbu = "!f() { git clone git@sqbu-github.cisco.com:sqbu:$1.git; }; f"
+  # identity helpers
+  ealbrigt ="!f() { git config --local user.name \"Eirik Albrigtsen\" && git config --local user.email \"ealbrigt@cisco.com\"; }; f"
+  clux ="!f() { git config --local user.name \"clux\" && git config --local user.email \"analsandblaster@gmail.com\"; }; f"
+  whoami = !bash -c 'echo \"$(git config --get user.name) <$(git config --get user.email)>\"'
+  # set who i am on fresh clones
+  cluxclone ="!f() { cd $(echo $1 | cut -d"/" -f2) && git clux && cd -; }; f"
+  ealbrigtclone ="!f() { cd $(echo $1 | cut -d"/" -f2) && git ealbrigt && cd -; }; f"
+
+  # shortcuts for cloning and setting identities correctly
+  github ="!f() { git clone git@github.com:$1.git && git cluxclone $1; }; f"
+  bitbucket ="!f() { git clone git@bitbucket.org:$1.git && git cluxclone $1; }; f"
+  sqbu = "!f() { git clone git@sqbu-github.cisco.com:$1.git && git ealbrigtclone $1; }; f"
   # multi-clone shortcuts
   hub ="!f() { for i in $@; do git github clux/$i; done; }; f"
   bb ="!f() { for i in $@; do git bitbucket clux/$i; done; }; f"
+
+  # initializing and setting identities correctly
+  # usage: `git new ealbrigt` or `git new clux`
+  initial ="!f() { [ -z "$1" ] || (echo "initial" && git $1 && git commit --allow-empty -m 'init'); }; f"
+  new ="!f() { [ -d ".git" ] || (git init && git add . && git initial $1); }; f"
 
   pul = pull
   pulls = "!f() { git pull --recurse-submodules && git submodule update --init --recursive; }; f"
@@ -35,8 +43,6 @@
   uncommit = reset --soft HEAD^
   unstage = reset HEAD
   count = shortlog -sn
-
-  setup = "!f() { [ -d ".git" ] || (git init && git add . && git commit --allow-empty -m 'init'); }; f"
 
   # Find commits by source code
   fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
@@ -51,8 +57,8 @@
   yolo = !git add -A && git  commit --amend --no-edit && git push -f origin HEAD
 
 [user]
-  name = clux
-  email = analsandblaster@gmail.com
+  name = "Needs to be set with an identity helper"
+  email = (none)
 
 [push]
   default = simple
