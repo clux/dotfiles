@@ -50,10 +50,17 @@ services:
 	@systemctl --user enable mpd
 
 docker:
-	$(call red," docker","activating docker")
+	$(call red," docker","initializing and activating docker")
 	@gpasswd -a $USER docker
 	@systemctl enable docker
 	@systemctl start docker
+
+postgres:
+	$(call red," postgresql","initializing and activating postgresql")
+	@sudo su - postgres -c "initdb --locale en_US.UTF-8 -E UTF8 -D '/var/lib/postgres/data'"
+	@sudo systemctl start postgresql --now
+	@createuser --superuser $$USER -U postgres
+	$(call green," postgresql","setup complete - use createdb x and psql x from now on")
 
 directories:
 	@mkdir -p ~/.config/sublime-text-3/Packages
