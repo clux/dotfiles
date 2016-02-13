@@ -216,11 +216,8 @@
       // TODO: maybe last is not necessary
     }],
     "space-infix-ops": 0,
-    "spaced-comment": 2,
-    "newline-per-chained-call": [2, {
-        "ignoreChainWithDepth": 3
-    }],
-    "no-confusing-arrow": 2,
+    "spaced-comment": 1,
+    "no-confusing-arrow": 1,
     "no-extra-label": 2,
     "no-new-symbol": 2,
     "no-self-assign": 2,
