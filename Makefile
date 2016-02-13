@@ -44,10 +44,8 @@ etc:
 
 services:
 	$(call red," systemd","enabling user services")
-	@systemctl --user start redshift-gtk
-	@systemctl --user enable redshift-gtk
-	@systemctl --user start mpd
-	@systemctl --user enable mpd
+	@systemctl --user enable redshift-gtk --now
+	@systemctl --user enable mpd --now
 
 docker:
 	$(call red," docker","initializing and activating docker")
@@ -58,7 +56,7 @@ docker:
 postgres:
 	$(call red," postgresql","initializing and activating postgresql")
 	@sudo su - postgres -c "initdb --locale en_US.UTF-8 -E UTF8 -D '/var/lib/postgres/data'"
-	@sudo systemctl start postgresql --now
+	@sudo systemctl enable postgresql --now
 	@createuser --superuser $$USER -U postgres
 	$(call green," postgresql","setup complete - use createdb x and psql x from now on")
 
