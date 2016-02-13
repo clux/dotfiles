@@ -1,221 +1,235 @@
 {
-  "env": {                           // http://eslint.org/docs/user-guide/configuring.html#specifying-environments
-    "browser": true,                 // browser global variables
-    "node": true,                    // Node.js global variables and Node.js-specific rules
-    "es6": true                      // ES6 globals - Map/Set/Symbol/Promise
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
   },
 
-  parserOptions: {
-    ecmaVersion: 6
+  "parserOptions": {
+    "ecmaVersion": 6
   },
 
   "rules": {
-    "strict": [2, "never"],          // http://eslint.org/docs/rules/strict
+    "strict": [2, "never"],
 
     /**
      * ES6
      */
-    //"no-var": 2,                     // http://eslint.org/docs/rules/no-var
-    "prefer-const": 1,               // http://eslint.org/docs/rules/prefer-const
+    //"no-var": 2,
+    "prefer-const": 1,
 
     /**
      * Variables
      */
-    "no-shadow": 2,                  // http://eslint.org/docs/rules/no-shadow
-    "no-shadow-restricted-names": 2, // http://eslint.org/docs/rules/no-shadow-restricted-names
-    "no-unused-vars": [2, {          // http://eslint.org/docs/rules/no-unused-vars
+    "no-shadow": 2,
+    "no-shadow-restricted-names": 2,
+    "no-unused-vars": [2, {
       "vars": "local",
       "args": "after-used"
     }],
-    "no-use-before-define": 2,       // http://eslint.org/docs/rules/no-use-before-define
-    "no-cond-assign": [2, "always"], // http://eslint.org/docs/rules/no-cond-assign
+    "no-use-before-define": 2,
+    "no-cond-assign": [2, "always"],
 
     /**
      * Possible errors or bad practices
      */
     // disallow stuff that should not be left in production code
-    "no-process-exit": 0,            // http://eslint.org/docs/rules/no-process-exit
-    "no-console": 0,                 // http://eslint.org/docs/rules/no-console
-    "no-debugger": 1,                // http://eslint.org/docs/rules/no-debugger
-    "no-alert": 1,                   // http://eslint.org/docs/rules/no-alert
-    "no-constant-condition": 1,      // http://eslint.org/docs/rules/no-constant-condition
-    "no-empty": 2,                   // http://eslint.org/docs/rules/no-empty
+    "no-process-exit": 0,
+    "no-console": 0,
+    "no-debugger": 1,
+    "no-alert": 1,
+    "no-constant-condition": 1,
+    "no-empty": 2,
 
     // stuff that's likely copy paste errors or pointlessness
-    "no-dupe-keys": 2,               // http://eslint.org/docs/rules/no-dupe-keys
-    "no-duplicate-case": 2,          // http://eslint.org/docs/rules/no-duplicate-case
-    "no-sparse-arrays": 2,           // http://eslint.org/docs/rules/no-sparse-arrays
-    "no-extra-boolean-cast": 0,      // http://eslint.org/docs/rules/no-extra-boolean-cast
+    "no-dupe-keys": 2,
+    "no-duplicate-case": 2,
+    "no-sparse-arrays": 2,
+    "no-extra-boolean-cast": 0,
 
     // stuff that's pretty much just done in error
-    "no-ex-assign": 2,               // http://eslint.org/docs/rules/no-ex-assign
-    "no-extra-semi": 2,              // http://eslint.org/docs/rules/no-extra-semi
-    "no-func-assign": 2,             // http://eslint.org/docs/rules/no-func-assign
-    "no-obj-calls": 2,               // http://eslint.org/docs/rules/no-obj-calls
-    "no-inner-declarations": 2,      // http://eslint.org/docs/rules/no-inner-declarations
+    "no-ex-assign": 2,
+    "no-extra-semi": 2,
+    "no-func-assign": 2,
+    "no-obj-calls": 2,
+    "no-inner-declarations": 2,
     // this is ok if used on a true hash like Object.create(null) so ignored
-    //"guard-for-in": 2,               // http://eslint.org/docs/rules/guard-for-in
+    //"guard-for-in": 2,
 
     // only allow proper whitespace (not hidden unicode stuff)
-    "no-irregular-whitespace": 2,    // http://eslint.org/docs/rules/no-irregular-whitespace
-    "no-invalid-regexp": 2,          // http://eslint.org/docs/rules/no-invalid-regexp
+    "no-irregular-whitespace": 2,
+    "no-invalid-regexp": 2,
 
     // this doesn't enforce Number.isNaN over isNaN but it's a start:
-    "use-isnan": 2,                  // http://eslint.org/docs/rules/use-isnan
+    "use-isnan": 2,
 
-    "block-scoped-var": 2,           // http://eslint.org/docs/rules/block-scoped-var
+    "block-scoped-var": 2,
 
     /**
      * Best practices
      */
     // we allow == only against null and typeof (therefor do not enable no-eq-null)
-    "eqeqeq": [2, "smart" ],         // http://eslint.org/docs/rules/eqeqeq
+    "eqeqeq": [2, "smart" ],
 
     // no arguments.callee/caller
-    "no-caller": 2,                  // http://eslint.org/docs/rules/no-caller
+    "no-caller": 2,
     // no else after return in if
-    "no-else-return": 2,             // http://eslint.org/docs/rules/no-else-return
+    "no-else-return": 2,
 
     // no eval usage, implied eval usage (IE relic), or function constructors
-    "no-eval": 2,                    // http://eslint.org/docs/rules/no-eval
-    "no-implied-eval": 2,            // http://eslint.org/docs/rules/no-implied-eval
-    "no-new-func": 2,                // http://eslint.org/docs/rules/no-new-func
+    "no-eval": 2,
+    "no-implied-eval": 2,
+    "no-new-func": 2,
 
     // no new usage without saving return value
     // actually useful in tests that throw
-    //"no-new": 2,                     // http://eslint.org/docs/rules/no-new
+    //"no-new": 2,
     // no new on builtins that have literals
-    "no-new-wrappers": 2,            // http://eslint.org/docs/rules/no-new-wrappers
+    "no-new-wrappers": 2,
 
     // warn when using bind and it's not actually needed
-    "no-extra-bind": 2,              // http://eslint.org/docs/rules/no-extra-bind
+    "no-extra-bind": 2,
     // no switch fallthrough
-    "no-fallthrough": 2,             // http://eslint.org/docs/rules/no-fallthrough
+    "no-fallthrough": 2,
     // no labels outside switches
-    "no-labels": [2, {              // http://eslint.org/docs/rules/no-labels
+    "no-labels": [2, {
         "allowLoop": false,
         "allowSwitch": true
     }],
     // all decimal must be prefixed by a number (even if number is 0.XX)
-    "no-floating-decimal": 2,        // http://eslint.org/docs/rules/no-floating-decimal
+    "no-floating-decimal": 2,
 
     // dont use { as scope replacement } we have let now
-    "no-lone-blocks": 2,             // http://eslint.org/docs/rules/no-lone-blocks
+    "no-lone-blocks": 2,
     // no functions created in a native loop
-    "no-loop-func": 2,               // http://eslint.org/docs/rules/no-loop-func
+    "no-loop-func": 2,
     // no multiline string literals
-    "no-multi-str": 2,               // http://eslint.org/docs/rules/no-multi-str
+    "no-multi-str": 2,
 
     // no reassigning values of builtins and globals
-    "no-native-reassign": 2,         // http://eslint.org/docs/rules/no-native-reassign
-    "no-extend-native": 2,           // http://eslint.org/docs/rules/no-extend-native
+    "no-native-reassign": 2,
+    "no-extend-native": 2,
     // no reassigning parameter references
-    "no-param-reassign": 1,          // http://eslint.org/docs/rules/no-param-reassign
+    "no-param-reassign": 1,
 
     // no deprecated octals
-    "no-octal": 2,                   // http://eslint.org/docs/rules/no-octal
+    "no-octal": 2,
     // no deprecated string escapes that should be replaced by unicode escapes
-    "no-octal-escape": 2,            // http://eslint.org/docs/rules/no-octal-escape
+    "no-octal-escape": 2,
     // no __proto__ usage
-    "no-proto": 2,                   // http://eslint.org/docs/rules/no-proto
+    "no-proto": 2,
 
     // no double `var a`
-    "no-redeclare": 2,               // http://eslint.org/docs/rules/no-redeclare
+    "no-redeclare": 2,
     // no return foo = bar + 2 (kind of like cond-assign)
-    "no-return-assign": [2, "always"],  // http://eslint.org/docs/rules/no-return-assign
+    "no-return-assign": [2, "always"],
 
     // no eval style "javascript:code.." urls
-    "no-script-url": 2,              // http://eslint.org/docs/rules/no-script-url
+    "no-script-url": 2,
     // no pointless self-compare (only useful for isNaN, but we have Number.isNaN)
-    "no-self-compare": 2,            // http://eslint.org/docs/rules/no-self-compare
+    "no-self-compare": 2,
     // no weird usage of the comma operator
-    "no-sequences": 2,               // http://eslint.org/docs/rules/no-sequences
+    "no-sequences": 2,
     // pass on new Error objects instead of throwing
-    "no-throw-literal": 2,           // http://eslint.org/docs/rules/no-throw-literal
+    "no-throw-literal": 2,
     // no using the terrible with statement
-    "no-with": 2,                    // http://eslint.org/docs/rules/no-with
+    "no-with": 2,
     // no using parseInt without base/radix param
-    "radix": 2,                      // http://eslint.org/docs/rules/radix
+    "radix": 2,
     // ignore hoisting problems - will get warnings for use before declare anyway
-    //"vars-on-top": 2,                // http://eslint.org/docs/rules/vars-on-top
+    //"vars-on-top": 2,
 
     // encapsulate dog balls
-    "wrap-iife": [2, "any"],         // http://eslint.org/docs/rules/wrap-iife
+    "wrap-iife": [2, "any"],
 
     // no yoda conditions since we disallow cond-assign anyway so use case is gone
     "yoda": [1, "never", {
       "exceptRange": true // except when we test if 0 < a && a < 5
-    }],                              // http://eslint.org/docs/rules/yoda
+    }],
 
     /**
      * Style
      */
     // always return things of same type when returning in a function
     // ignoring for now - it seems to trigger on side-effecty functions and ctors..
-    //"consistent-return": 2,          // http://eslint.org/docs/rules/consistent-return
+    //"consistent-return": 2,
     // always enforce curly braces for constrol structures
-    "curly": [2, "all"],             // http://eslint.org/docs/rules/curly
+    "curly": [2, "all"],
     // always enforce default case in switch statements
-    "default-case": 2,               // http://eslint.org/docs/rules/default-case
+    "default-case": 2,
     // always use dot notation for key lookups when possible, even for keywords
-    "dot-notation": [2, {            // http://eslint.org/docs/rules/dot-notation
+    "dot-notation": [2, {
       "allowKeywords": true
     }],
 
     // more style stuff that abnb calls style
-    "indent": [2, 2],                // http://eslint.org/docs/rules/indent
-    "brace-style": [2,               // http://eslint.org/docs/rules/brace-style
+    "indent": [2, 2],
+    "brace-style": [2,
       "stroustrup", {
       "allowSingleLine": true
     }],
     "quotes": [
-      1, "single", "avoid-escape"    // http://eslint.org/docs/rules/quotes
+      1, "single", "avoid-escape"
     ],
     // TODO: do I care about these?
-    //"camelcase": [2, {               // http://eslint.org/docs/rules/camelcase
+    //"camelcase": [2, {
     //  "properties": "never"
     //}],
-    //"comma-spacing": [2, {           // http://eslint.org/docs/rules/comma-spacing
+    //"comma-spacing": [2, {
     //  "before": true,
     //  "after": false
     //}],
-    //"comma-style": [2, "first"],      // http://eslint.org/docs/rules/comma-style
-    "eol-last": 2,                   // http://eslint.org/docs/rules/eol-last
-    "func-names": 0,                 // http://eslint.org/docs/rules/func-names
-    "key-spacing": [1, {             // http://eslint.org/docs/rules/key-spacing
+    //"comma-style": [2, "first"],
+    "eol-last": 2,
+    "func-names": 0,
+    "key-spacing": [1, {
         "beforeColon": false,
         "afterColon": true
     }],
-    "new-cap": [1, {                 // http://eslint.org/docs/rules/new-cap
+    "new-cap": [1, {
       "newIsCap": true
     }],
-    "no-multiple-empty-lines": [2, { // http://eslint.org/docs/rules/no-multiple-empty-lines
+    "no-multiple-empty-lines": [2, {
       "max": 2
     }],
-    //"no-nested-ternary": 2,          // http://eslint.org/docs/rules/no-nested-ternary
-    "no-new-object": 2,              // http://eslint.org/docs/rules/no-new-object
-    "no-spaced-func": 2,             // http://eslint.org/docs/rules/no-spaced-func
-    "no-trailing-spaces": 2,         // http://eslint.org/docs/rules/no-trailing-spaces
-    "no-extra-parens": 0,            // http://eslint.org/docs/rules/no-extra-parens
-    "no-underscore-dangle": 0,       // http://eslint.org/docs/rules/no-underscore-dangle
-    //"one-var": [2, "never"],         // http://eslint.org/docs/rules/one-var
-    "padded-blocks": [2, "never"],   // http://eslint.org/docs/rules/padded-blocks
-    "semi": [2, "always"],           // http://eslint.org/docs/rules/semi
-    "semi-spacing": [2, {            // http://eslint.org/docs/rules/semi-spacing
+    //"no-nested-ternary": 2,
+    "no-new-object": 2,
+    "no-spaced-func": 2,
+    "no-trailing-spaces": 2,
+    "no-extra-parens": 0,
+    "no-underscore-dangle": 0,
+    //"one-var": [2, "never"],
+    "padded-blocks": [2, "never"],
+    "semi": [2, "always"],
+    "semi-spacing": [2, {
       "before": false,
       "after": true
     }],
-    "keyword-spacing": [2, {        // http://eslint.org/docs/rules/keyword-spacing
+    "keyword-spacing": [2, {
         "before": true,
         "after": true
     }],
-    "space-before-blocks": 2,        // http://eslint.org/docs/rules/space-before-blocks
+    "space-before-blocks": 2,
     "space-before-function-paren": [2, {
       "anonymous": "always",
       "named": "never" // stick to jshint rule that was commonly enforced
       // TODO: maybe last is not necessary
-    }],                              // http://eslint.org/docs/rules/space-before-function-paren
-    "space-infix-ops": 0,            // http://eslint.org/docs/rules/space-infix-ops
-    "spaced-comment": 2,             // http://eslint.org/docs/rules/spaced-comment
+    }],
+    "space-infix-ops": 0,
+    "spaced-comment": 2,
+    "newline-per-chained-call": [2, {
+        "ignoreChainWithDepth": 3
+    }],
+    "no-confusing-arrow": 2,
+    "no-extra-label": 2,
+    "no-new-symbol": 2,
+    "no-self-assign": 2,
+    "no-unmodified-loop-condition": 1,
+    "no-whitespace-before-property": 2,
+    "one-var-declaration-per-line": 1,
+    "prefer-rest-params": 2,
+    "sort-imports": 1,
+    "template-curly-spacing": [2, "never"],
+    "yield-star-spacing": [2, {"before": true, "after": false}],
   }
 }
