@@ -16,12 +16,11 @@ alias lsd="ls -l | grep --color=never '^d'"
 alias week='date +%V'
 alias damage='du -hs * | sort -n | tail'
 alias sshu="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
-alias dmesgtail="dmesg | tail -n 20 | ccze -A"
 alias recentclear="echo > ~/.local/share/recently-used.xbel"
 
-# copy helpers - may as well use the mac convention
-alias pbcopy='xclip -sel clip'
-alias pbpaste='xclip -sel clip -o'
+# copy helpers
+alias xclip='xclip -sel clip'
+alias xpaste='xclip -sel clip -o'
 alias cwd='pwd | tr -d "\r\n" | xclip -sel clip'
 
 # rsync

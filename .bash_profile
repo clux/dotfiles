@@ -24,6 +24,11 @@ shopt -s cdspell
 # Append to the Bash history file, rather than overwriting it
 shopt -s histappend
 
+# History
+export HISTCONTROL=ignoreboth:erasedupes
+export HISTSIZE=10000
+export HISTFILESIZE=2000
+
 # Set custom colours in folders and add defaults to common commands
 if [ -x /usr/bin/dircolors ]; then
   [ -r ~/.dircolors ] && eval "$(dircolors -b ~/.dircolors)"
