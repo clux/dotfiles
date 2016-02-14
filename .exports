@@ -21,7 +21,7 @@ export CTEST_OUTPUT_ON_FAILURE=1
 export GTEST_COLOR=1
 
 # use shellcheck for current file only
-export SHELLCHECK_OPTS="-e SC1091"
+export SHELLCHECK_OPTS="-e SC1091 -e SC1090"
 
 # brotorr uses this
 export DOWNLOAD_DIR=/mnt/zeus/DL/
