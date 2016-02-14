@@ -5,7 +5,9 @@ source ~/.exports
 source ~/.aliases
 
 # directory jumping shortcut
-source ~/local/z/z.sh
+source ~/local/fasd/fasd
+eval "$(fasd --init bash-ccomp bash-ccomp-install posix-alias)"
+
 # absorb keychain managed keys
 if [ "$(hostname)" = "ealbrigt-ws" ]; then
   key sqbu work
