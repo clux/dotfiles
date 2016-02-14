@@ -233,8 +233,10 @@ extract () {
       echo "$1 is not a valid file!"
   fi
 }
-# usage: ball output [inputs]
+# ball: output [inputs]
 ball () { tar czf "$1.tar" "${@:2}" ;}
+# 7zsplit output [inputs]
+7zsplit() { 7z a "$1.7z" -mx0 -V500M "${@:2}" ;}
 
 # -----------------------------------------------------------------------------
 # Broxy + brotorr integrations
