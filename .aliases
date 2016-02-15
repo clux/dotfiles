@@ -18,9 +18,14 @@ alias damage='du -hs * | sort -n | tail'
 alias sshu="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 alias recentclear="echo > ~/.local/share/recently-used.xbel"
 
-# copy helpers
-alias xclip='xclip -sel clip'
-alias xpaste='xclip -sel clip -o'
+alias A="awk"
+alias C="wc"
+alias G="grep"
+alias L="less"
+alias H="head -n $(($LINES-5))"
+alias T="tail -n $(($LINES-5))"
+alias XC="xclip -i -sel c"
+
 alias cwd='pwd | tr -d "\r\n" | xclip -sel clip'
 
 # rsync
