@@ -22,8 +22,8 @@ alias A="awk"
 alias C="wc"
 alias G="grep"
 alias L="less"
-alias H="head -n $(($LINES-5))"
-alias T="tail -n $(($LINES-5))"
+alias H='head -n "$(($LINES-5))"'
+alias T='tail -n "$(($LINES-5))'
 alias XC="xclip -i -sel c"
 
 alias cwd='pwd | tr -d "\r\n" | xclip -sel clip'
