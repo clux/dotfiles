@@ -5,8 +5,8 @@ source ~/.exports
 source ~/.aliases
 
 # directory jumping shortcut
-source ~/local/fasd/fasd
-eval "$(fasd --init posix-alias bash-{ccomp,ccomp-install})"
+source ~/local/bin/fasd
+eval "$(fasd --init posix-alias bash-ccomp{,-install})"
 
 # absorb keychain managed keys
 if [ "$(hostname)" = "ealbrigt-ws" ]; then
