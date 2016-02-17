@@ -43,7 +43,7 @@ elif lsb_release -ds | grep -qEi "Gentoo"; then
   rempkg() { sudo emerge -cav "$1" ;}
 elif hash pacman 2> /dev/null; then
   pkgsrch() { pacman -Ss "$1" ;} # -Qs for what you have installed
-  pkgfile() { pacman -Qo "$1" ;}
+  pkgfile() { pacman -Qo "$1" ;} # -Fs for arbitrary files in any package (-Fy first)
   qlist() { pacman -Ql "$1" ;}
   instpkg() { sudo pacman -S "$1" ;}
   rempkg() { sudo pacman -R "$1" ;}
