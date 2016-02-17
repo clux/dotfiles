@@ -16,7 +16,7 @@ endef
 
 # All targets herein are technically PHONY, but this rarely matters
 # We list a few of them that MIGHT cause the `'target' is up to date` failure.
-.PHONY: config ui etc sublime help font xdg guake docker gconf dconf
+.PHONY: config ui etc sublime help font xdg guake docker gconf dconf debian
 
 help:
 	@tput -T xterm bold
@@ -33,6 +33,10 @@ debkeyboard: has_etc_keyboard
 	$(call red," etc","Setting default keyboard")
 	@sed -i.bak 's/XKBVARIANT=.*/XKBVARIANT="colemak"/' /etc/default/keyboard
 	@diff /etc/default/keyboard.bak /etc/default/keyboard || true
+
+debian: debkeyboard
+	$(call red," etc","Tweaking debian")
+	@rm ~/.nanorc
 
 etc:
 	$(call red," etc","Updating motd")
