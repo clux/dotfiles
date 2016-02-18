@@ -184,6 +184,10 @@ node-deopts() {
   node --trace_opt --trace_deopt --allow-natives-syntax $@
 }
 
+node-deps() {
+  npm ls | grep -oE "[[:alnum:]\@\.]*" | sort -u
+}
+
 # -----------------------------------------------------------------------------
 # documentation generation for gh-pages
 
