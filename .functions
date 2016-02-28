@@ -63,21 +63,26 @@ mkd() { mkdir -p "$@" && cd "$@" || return 1 ;}
 
 kill-tabs() { pkill -u "$USER" -f "chrome.*renderer" ;}
 
-# gls => ls | git prompt
-gls() {
+glscommand() {
   local -r dirs=$(find . -maxdepth 1 -mindepth 1 -type d)
+  local -r command="$1"
   dir=$PWD
   for d in $dirs; do
     cd "$d" || false
     echo -en "$(tput setaf 33)${d:2} "
     if [[ -d .git ]]; then
-      echo -en "$(tput setaf 136)$(show_git_differences)$(tput sgr0)"
+      echo -en "$(tput setaf 136)$(${command})$(tput sgr0)"
     fi
     echo
     cd ..
   done
   cd "$dir" || true
 }
+
+# ls | git prompt
+gls() { glscommand "show_git_differences" ;}
+# ls | git whoami
+glsd() { glscommand "git whoami" ;}
 
 # convert yaml to json:
 # yaml file
