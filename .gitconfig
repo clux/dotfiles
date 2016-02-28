@@ -23,10 +23,12 @@
 
   # shortcuts for cloning and setting identities correctly
   github ="!f() { git clone git@github.com:$1.git && git cluxclone $1; }; f"
+  gitlab ="!f() { git clone git@gitlab.com:$1.git && git cluxclone $1; }; f"
   bitbucket ="!f() { git clone git@bitbucket.org:$1.git && git cluxclone $1; }; f"
   sqbu = "!f() { git clone git@sqbu-github.cisco.com:$1.git && git ealbrigtclone $1; }; f"
   # multi-clone shortcuts
   hub ="!f() { for i in $@; do git github clux/$i; done; }; f"
+  lab ="!f() { for i in $@; do git gitlab clux/$i; done; }; f"
   bb ="!f() { for i in $@; do git bitbucket clux/$i; done; }; f"
 
   # initializing and setting identities correctly
