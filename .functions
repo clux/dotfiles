@@ -191,6 +191,7 @@ node-deps() {
 # -----------------------------------------------------------------------------
 # documentation generation for gh-pages
 
+# Do this AFTER bumping version in Cargo.toml and cargo package && cargo publish
 rust-doc-update() {
   cargo doc
   local -r repo=$(basename "$PWD")
