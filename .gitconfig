@@ -26,6 +26,7 @@
   gitlab ="!f() { git clone git@gitlab.com:$1.git && git cluxclone $1; }; f"
   bitbucket ="!f() { git clone git@bitbucket.org:$1.git && git cluxclone $1; }; f"
   sqbu = "!f() { git clone git@sqbu-github.cisco.com:$1.git && git ealbrigtclone $1; }; f"
+  sqbustash = "!f() { git clone ssh://git@stash-eng-gpk1.cisco.com:7999/$1.git && git ealbrigtclone $1; }; f"
   # multi-clone shortcuts
   hub ="!f() { for i in $@; do git github clux/$i; done; }; f"
   lab ="!f() { for i in $@; do git gitlab clux/$i; done; }; f"
