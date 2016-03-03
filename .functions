@@ -116,8 +116,7 @@ docker-purge() {
 # system statistics/usage
 
 mem() {
-  free -t | grep Mem | awk '{ printf("%3.1f%%", $3*100/$2)}'
-  echo
+  free -t | grep Mem | awk '{ printf("%3.1f%%\n", $3*100/$2)}'
 }
 disk() {
   # Total usage of currently mounted logical drives
@@ -132,9 +131,8 @@ iface() {
   ip link show | grep "state UP" | awk '{print $2}' | cut -d':' -f1 | head -n 1
 }
 network() {
-  local -r iface="$(iface)"
   # transferred numbers are in first column, print everything with space separation
-  local -r netdata=$(ip -s link show "$iface" | awk -v ORS=" " '{ print $1 }')
+  local -r netdata=$(ip -s link show "$(iface)" | awk -v ORS=" " '{ print $1 }')
   # convert relevant numbers to gigabytes
   local -r RX=$(echo "$netdata" | cut -d" " -f4 | awk '{printf("%3.1fGB\n", $1/1073741824)}')
   local -r TX=$(echo "$netdata" | cut -d" " -f6 | awk '{printf("%3.1fGB\n", $1/1073741824)}')
@@ -142,8 +140,7 @@ network() {
 }
 
 localip() {
-  local -r iface="$(iface)"
-  ip addr show "$iface" | grep inet | awk '{ print $2 }'
+  ip addr show "$(iface)" | grep inet | awk '{ print $2 }'
 }
 
 # process tree
