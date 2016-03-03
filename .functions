@@ -30,29 +30,29 @@ srchcmake() { filefind . "CMakeLists.txt" | xargs grep "$1" 2> /dev/null ;}
 # package manager abstraction - mostly for my own memory
 
 if lsb_release -ds | grep -qEi "debian|mint|buntu"; then
-  pkgsrch() { apt-cache search "$1"; } # find package by name
-  pkgfile() { dpkg -S "$1" ;}
+  paks() { apt-cache search "$1"; } # find package by name
+  pakf() { dpkg -S "$1" ;}
   qlist() { dpkg-query -L "$1" ;}
-  instpkg() { sudo apt-get install "$1" ;}
-  rempkg() { sudo apt-get remove "$1" ;}
+  paki() { sudo apt-get install "$1" ;}
+  pakr() { sudo apt-get remove "$1" ;}
 elif lsb_release -ds | grep -qEi "Gentoo"; then
-  pkgsrch() { eix -c "$1" ;}
-  pkgfile() { equery belongs "$1" ;}
+  paks() { eix -c "$1" ;}
+  pakf() { equery belongs "$1" ;}
   # canonical qlist
-  instpkg() { sudo emerge "$1" ;}
-  rempkg() { sudo emerge -cav "$1" ;}
+  paki() { sudo emerge "$1" ;}
+  pakr() { sudo emerge -cav "$1" ;}
 elif hash pacman 2> /dev/null; then
-  pkgsrch() { pacman -Ss "$1" ;} # -Qs for what you have installed
-  pkgfile() { pacman -Qo "$1" ;} # -Fs for arbitrary files in any package (-Fy first)
+  paks() { pacman -Ss "$1" ;} # -Qs for what you have installed
+  pakf() { pacman -Qo "$1" ;} # -Fs for arbitrary files in any package (-Fy first)
   qlist() { pacman -Ql "$1" ;}
-  instpkg() { sudo pacman -S "$1" ;}
-  rempkg() { sudo pacman -R "$1" ;}
+  paki() { sudo pacman -S "$1" ;}
+  pakr() { sudo pacman -R "$1" ;}
 elif hash yum 2> /dev/null; then
-  pkgsrch() { yum search "$1" ;}
-  pkgfile() { yum whatprovides "$1" ;}
+  paks() { yum search "$1" ;}
+  pakf() { yum whatprovides "$1" ;}
   qlist() { repoquery --list "$1" ;} # from yum-utils
-  instpkg() { sudo yum install "$1" ;}
-  rmpkg() { sudo yum remove "$1" ;}
+  paki() { sudo yum install "$1" ;}
+  pakr() { sudo yum remove "$1" ;}
 fi
 
 # -----------------------------------------------------------------------------
