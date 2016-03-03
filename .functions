@@ -169,6 +169,18 @@ pstree() {
 }
 
 # -----------------------------------------------------------------------------
+# http helpers
+
+# http method url ['{json}']
+http() {
+  local -r method="${1^^}"
+  if [[ $method =~ POST|PUT ]]; then
+    jsondata=$(echo "-H Content-Type:application-json -d \"$3\"")
+  fi
+  echo curl -X "$method $2 ${jsondata}"
+}
+
+# -----------------------------------------------------------------------------
 # scaffolding from templates folder
 
 node-init() {
