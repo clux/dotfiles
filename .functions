@@ -214,6 +214,12 @@ rust-doc-update() {
   git push -qf "git@github.com:clux/$repo.git" gh-pages
 }
 
+rust-doc-view() {
+  cargo doc
+  local -r repo=$(basename "$PWD")
+  xdg-open "target/doc/$repo/index.html"
+}
+
 polymer-doc-update() {
   if [ ! -d demo ]; then
     echo "No demo directory found"
