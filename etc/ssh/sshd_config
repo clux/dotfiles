@@ -3,6 +3,7 @@ PasswordAuthentication no
 ChallengeResponseAuthentication no
 AuthenticationMethods publickey
 AuthorizedKeysFile .ssh/authorized_keys
+X11Forwarding no
 
 # Misc
 Port 8702
