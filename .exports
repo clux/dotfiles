@@ -20,6 +20,9 @@ fi
 export CTEST_OUTPUT_ON_FAILURE=1
 export GTEST_COLOR=1
 
+# When developing rust, always print backtraces
+export RUST_BACKTRACE=1
+
 # use shellcheck for current file only
 export SHELLCHECK_OPTS="-e SC1091 -e SC1090"
 
