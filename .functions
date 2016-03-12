@@ -112,6 +112,10 @@ docker-purge() {
   docker rmi $(docker images -q)
 }
 
+serve() {
+  python -m http.server 8000
+}
+
 # -----------------------------------------------------------------------------
 # system statistics/usage
 
