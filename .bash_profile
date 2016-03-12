@@ -3,6 +3,7 @@ source ~/.bash_prompt
 source ~/.functions
 source ~/.exports
 source ~/.aliases
+source ~/.path
 
 # directory jumping shortcut
 source ~/local/bin/fasd

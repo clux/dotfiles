@@ -1,6 +1,3 @@
-# Always have PATH fully set for non-interactive shells
-[ -f ~/.path ] && source ~/.path
-
 # If not running interactively, don't do anything
 [[ $- == *i* ]] || return 0
 
