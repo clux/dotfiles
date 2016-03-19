@@ -21,15 +21,13 @@ fi
 #shopt -s nocaseglob
 
 # Autocorrect typos in path names when using `cd`
-shopt -s cdspell
-
-# Append to the Bash history file, rather than overwriting it
-shopt -s histappend
+#shopt -s cdspell
 
 # History
 export HISTCONTROL=ignoreboth:erasedupes
-export HISTSIZE=10000
-export HISTFILESIZE=2000
+export HISTSIZE=5000 # number of entries in memory
+export HISTFILESIZE=5000 # number of lines in hist file
+shopt -s histappend # Append to history file, rather than overwriting it
 
 # Set custom colours in folders and add defaults to common commands
 if [ -x /usr/bin/dircolors ]; then
