@@ -53,9 +53,10 @@ services:
 
 docker:
 	$(call red," docker","initializing and activating docker")
-	@gpasswd -a $USER docker
-	@systemctl enable docker
-	@systemctl start docker
+	@sudo gpasswd -a $$USER docker
+	@newgrp docker
+	@sudo systemctl enable docker
+	@sudo systemctl start docker
 
 postgres:
 	$(call red," postgresql","initializing and activating postgresql")
