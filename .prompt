@@ -64,6 +64,11 @@ show_git_differences() {
       s+='!'
     fi;
 
+    # Check that identity helper is set up correctly
+    if git whoami | grep -q "Needs to be set"; then
+      s+='#'
+    fi
+
     # Check for untracked files.
     if [ -n "$(git ls-files --others --exclude-standard)" ]; then
       s+='?'
