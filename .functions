@@ -116,6 +116,15 @@ serve() {
   python -m http.server 8000
 }
 
+# upload a single file in PWD to transfer.sh
+transfer() {
+  curl --upload-file "$1" "https://transfer.sh/$1" | xclip -sel clip
+}
+ruby-env() {
+  local -r gemdir="$(ruby -e 'print Gem.user_dir')"
+  export PATH="${gemdir}/bin:$PATH"
+}
+
 # -----------------------------------------------------------------------------
 # system statistics/usage
 
