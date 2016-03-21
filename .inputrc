@@ -6,10 +6,9 @@ set bell-style none
 # These are tested in guake (w tmux given sibling .tmux.conf), urxvt, and gnome terminal
 
 # Various forms of up down history seach
+# works in tmux + gnome term + urxvt
 "\e[A": history-search-backward # Up key
 "\e[B": history-search-forward  # Down key.
-"\e\e[A": forward-word
-"\e\e[B": backward-word
 
 # home + end to move caret to start or end of the line
 "\e[1~": beginning-of-line      # Home Key
@@ -18,9 +17,6 @@ set bell-style none
 "\e[8~": end-of-line            # End Key
 
 # alt-left + alt-right to move between words in commands
-"\e[1;5C": forward-word
-"\e[1;5D": backward-word
-"\e[5C": forward-word
-"\e[5D": backward-word
+# tmux + urxvt, but not gnome term
 "\e\e[C": forward-word
 "\e\e[D": backward-word
