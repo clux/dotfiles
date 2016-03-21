@@ -206,6 +206,9 @@ node-init() {
   rm readme.md
 }
 
+# -----------------------------------------------------------------------------
+# misc node
+
 node-deopts() {
   # shellcheck disable=SC2068
   node --trace_opt --trace_deopt --allow-natives-syntax $@
@@ -233,22 +236,8 @@ rust-doc-view() {
   xdg-open "target/doc/$repo/index.html"
 }
 
-polymer-doc-update() {
-  if [ ! -d demo ]; then
-    echo "No demo directory found"
-    return
-  fi
-  local -r repo="$(basename "$PWD")"
-  mkdir "components/$repo" -p
-  cp demo/* "components/$repo"
-  find -maxdepth 1 -type f -exec cp {} "components/$repo/" \;
-  cp bower_components/* components/ -R
-  echo "<meta http-equiv=refresh content=0;url=$repo/index.html>" > components/index.html
-  ghp-import -n components
-  git push -qf "git@github.com:clux/${repo}.git" gh-pages
-}
-
 # -----------------------------------------------------------------------------
+# extraction shortcuts
 
 # insert xkcd tar joke here
 extract () {
@@ -330,21 +319,6 @@ broxy-grab() {
 }
 
 # -----------------------------------------------------------------------------
-# Get colors in manual pages
-
-man() {
-  env \
-    LESS_TERMCAP_mb="$(printf "\e[1;31m")" \
-    LESS_TERMCAP_md="$(printf "\e[1;31m")" \
-    LESS_TERMCAP_me="$(printf "\e[0m")" \
-    LESS_TERMCAP_se="$(printf "\e[0m")" \
-    LESS_TERMCAP_so="$(printf "\e[1;44;33m")" \
-    LESS_TERMCAP_ue="$(printf "\e[0m")" \
-    LESS_TERMCAP_us="$(printf "\e[1;32m")" \
-    man "$@"
-}
-
-# -----------------------------------------------------------------------------
 # Publishing helpers
 
 npm-patch() {
@@ -374,16 +348,3 @@ remclose() {
 remedit-cloud() { remedit workstation:/home/clux/repos/cloudroot ;}
 remedit-sqbu() { remedit workstation:/home/clux/sqbu ;}
 remedit-b22() { remedit b22:/nu/ealbrigt/root ;}
-
-# -----------------------------------------------------------------------------
-# ssh agent laziness (used in .bash_profile)
-
-key() {
-  local keys=""
-  for k in "$@"; do
-    keys="$keys $HOME/.ssh/${k}_id"
-  done
-  # shellcheck disable=SC2086
-  keychain --timeout $((8*60)) --quiet --host agent $keys
-  source ~/.keychain/agent-sh
-}
