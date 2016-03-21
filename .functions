@@ -58,13 +58,17 @@ fi
 # -----------------------------------------------------------------------------
 # misc
 
+# d part of fasd, print directory z would've taken you to
+# shellcheck disable=SC2068
+d() {  z -l $@ | tail -n 1 | awk '{print $2}' ;}
+
 # Create a new directory and enter it
 mkd() { mkdir -p "$@" && cd "$@" || return 1 ;}
 
 kill-tabs() { pkill -u "$USER" -f "chrome.*renderer" ;}
 
 glscommand() {
-  local -r dirs=$(find . -maxdepth 1 -mindepth 1 -type d)
+  local -r dirs=$(find . -maxdepth 1 -mindepth 1 -type "d")
   local -r command="$1"
   dir=$PWD
   for d in $dirs; do
@@ -197,7 +201,7 @@ http() {
 # scaffolding from templates folder
 
 node-init() {
-  find ~/.templates/npm/ -not -type d -not -iname pkg.json -exec cp {} "$PWD" \;
+  find ~/.templates/npm/ -not -type "d" -not -iname pkg.json -exec cp {} "$PWD" \;
   pkginit
   local -r dir="$(basename "$PWD")"
   echo "# $dir" > README.md
