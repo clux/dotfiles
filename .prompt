@@ -148,6 +148,10 @@ set_prompt() {
     PS1+="${dircol}\\w${reset}"
   fi
 
+  if [ -n "${VIRTUAL_ENV}" ]; then
+    PS1+=" (${bold}${purple}pyv${reset})"
+  fi
+
   if [ -d ".hg" ]; then
     PS1+="$(prompt_hg)" # mercurial repository basic details
   else
