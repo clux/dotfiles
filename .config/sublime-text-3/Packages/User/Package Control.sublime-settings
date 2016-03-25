@@ -9,6 +9,7 @@
 	],
 	"installed_packages":
 	[
+		"Ansible",
 		"Bats (Bash Automated Testing System)",
 		"BeautifyRust",
 		"Clang Format",
