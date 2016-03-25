@@ -1,5 +1,5 @@
 set show-all-if-ambiguous on
-set completion-ignore-case on
+set completion-ignore-case off
 set bell-style none
 
 # Following is a bunch of keybindings to get terminals I use kind of consistent
