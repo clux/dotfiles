@@ -210,6 +210,12 @@ node-init() {
   rm readme.md
 }
 
+cargo-init() {
+  find ~/.templates/cargo/ -not -type "d" -exec cp {} "$PWD" \;
+  # TODO: replace mycrate with basename
+  #local -r dir="$(basename "$PWD")"
+}
+
 # -----------------------------------------------------------------------------
 # misc node
 
