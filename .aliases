@@ -14,7 +14,7 @@ alias week='date +%V'
 alias damage='du -hs * | sort -n | tail'
 alias sshu="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 alias recentclear="echo > ~/.local/share/recently-used.xbel"
-#alias steam="__GLVND_DISALLOW_PATCHING=1 steam" # thanks nvidia
+alias steam="__GLVND_DISALLOW_PATCHING=1 steam" # thanks nvidia
 
 alias A="awk"
 alias C="wc"
