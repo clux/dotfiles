@@ -247,6 +247,14 @@ rust-doc-view() {
 }
 
 # -----------------------------------------------------------------------------
+# more rust
+
+rust-muslbuild() {
+  docker run -v "$PWD:/volume" -w /volume -t clux/muslrust cargo build --release
+  sudo chown "$USER" -R target
+}
+
+# -----------------------------------------------------------------------------
 # extraction shortcuts
 
 # insert xkcd tar joke here
