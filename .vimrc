@@ -13,7 +13,7 @@ set shiftwidth=2
 " Read when a file is changed outside
 set autoread
 
-" Height of the commad bar
+" Height of the command bar
 set cmdheight=1
 " And add a status line
 set laststatus=2
