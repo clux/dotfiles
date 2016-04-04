@@ -28,7 +28,7 @@ export SHELLCHECK_OPTS="-e SC1091 -e SC1090"
 
 # brotorr uses this
 export DOWNLOAD_DIR=/mnt/zeus/DL/
-if [[ $(hostname) == "broxy" ]]; then
+if [ "$(hostname)" = "broxy" ]; then
   export DOWNLOAD_DIR=/media/dumptruck/DL
 fi
 

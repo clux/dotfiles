@@ -11,7 +11,7 @@ setxkbmap -layout us,us \
 xrdb -merge ~/.Xresources
 # Consider running urxvtd here
 
-if [[ $(hostname) == "kjttks" ]]; then
+if [ "$(hostname)" = "kjttks" ]; then
   nvidia-settings -a [gpu:0]/GpuPowerMizerMode=1
 fi
 
