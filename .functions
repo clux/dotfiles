@@ -62,6 +62,18 @@ fi
 # shellcheck disable=SC2068
 d() {  z -l $@ | tail -n 1 | awk '{print $2}' ;}
 
+# shellcheck disable=SC2068
+zz() {
+  z $@
+  guake --rename-tab="${PWD##*/}" -i "$(guake -g)"
+}
+
+# shellcheck disable=SC2068
+zzh() {
+  guake --rename-tab="$1" -i "$(guake -g)"
+  ssh $@
+}
+
 # Create a new directory and enter it
 mkd() { mkdir -p "$@" && cd "$@" || return 1 ;}
 

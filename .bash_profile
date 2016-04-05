@@ -1,11 +1,11 @@
 #!/bin/bash
 # Modules
+source ~/local/z/z.sh
 source ~/.prompt
 source ~/.functions
 source ~/.exports
 source ~/.aliases
 source ~/.path
-source ~/local/z/z.sh
 
 # -----------------------------------------------------------------------------
 # Key management via keychain
