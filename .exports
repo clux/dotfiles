@@ -22,6 +22,7 @@ export GTEST_COLOR=1
 
 # When developing rust, always print backtraces
 export RUST_BACKTRACE=1
+export RUST_SRC_PATH=$HOME/.cargo/rust-1.7.0/src
 
 # use shellcheck for current file only
 export SHELLCHECK_OPTS="-e SC1091 -e SC1090"
