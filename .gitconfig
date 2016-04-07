@@ -14,26 +14,26 @@
   remotes = remote -v
 
   # identity helpers
-  ealbrigt ="!f() { git config --local user.name \"Eirik Albrigtsen\" && git config --local user.email \"ealbrigt@cisco.com\"; }; f"
+  ea ="!f() { git config --local user.name \"Eirik Albrigtsen\" && git config --local user.email \"ealbrigt@cisco.com\"; }; f"
   clux ="!f() { git config --local user.name \"clux\" && git config --local user.email \"analsandblaster@gmail.com\"; }; f"
   whoami = !bash -c 'echo \"$(git config --get user.name) <$(git config --get user.email)>\"'
   # set who i am on fresh clones
   cluxclone ="!f() { cd $(echo $1 | cut -d"/" -f2) && git clux && cd -; }; f"
-  ealbrigtclone ="!f() { cd $(echo $1 | cut -d"/" -f2) && git ealbrigt && cd -; }; f"
+  eaclone ="!f() { cd $(echo $1 | cut -d"/" -f2) && git ea && cd -; }; f"
 
   # shortcuts for cloning and setting identities correctly
   github ="!f() { git clone git@github.com:$1.git && git cluxclone $1; }; f"
   gitlab ="!f() { git clone git@gitlab.com:$1.git && git cluxclone $1; }; f"
   bitbucket ="!f() { git clone git@bitbucket.org:$1.git && git cluxclone $1; }; f"
-  sqbu = "!f() { git clone git@sqbu-github.cisco.com:$1.git && git ealbrigtclone $1; }; f"
-  sqbustash = "!f() { git clone ssh://git@stash-eng-gpk1.cisco.com:7999/$1.git && git ealbrigtclone $1; }; f"
+  sqbu = "!f() { git clone git@sqbu-github.cisco.com:$1.git && git eaclone $1; }; f"
+  sqbustash = "!f() { git clone ssh://git@stash-eng-gpk1.cisco.com:7999/$1.git && git eaclone $1; }; f"
   # multi-clone shortcuts
   hub ="!f() { for i in $@; do git github clux/$i; done; }; f"
   lab ="!f() { for i in $@; do git gitlab clux/$i; done; }; f"
   bb ="!f() { for i in $@; do git bitbucket clux/$i; done; }; f"
 
   # initializing and setting identities correctly
-  # usage: `git new ealbrigt` or `git new clux`
+  # usage: `git new ea` or `git new clux`
   initial ="!f() { [ -z "$1" ] || (echo "initial" && git $1 && git commit --allow-empty -m 'init'); }; f"
   new ="!f() { [ -d ".git" ] || (git init && git add . && git initial $1); }; f"
 
