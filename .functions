@@ -360,21 +360,3 @@ npm-minor() {
 npm-major() {
   npm version major && git push && git push --tags && npm publish
 }
-
-# -----------------------------------------------------------------------------
-# sshfs helper for quick sublime based editing
-
-remedit() {
-  mkdir -p ~/remote
-  sshfs "$1" ~/remote
-  subl ~/remote
-}
-remclose() {
-  fusermount -u ~/remote
-  rm -d ~/remote
-}
-
-# common mount points
-remedit-cloud() { remedit workstation:/home/clux/repos/cloudroot ;}
-remedit-sqbu() { remedit workstation:/home/clux/sqbu ;}
-remedit-b22() { remedit b22:/nu/ealbrigt/root ;}
