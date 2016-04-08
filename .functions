@@ -185,12 +185,12 @@ pstree() {
   fi
   local flags=""
   if [ -n "$full" ]; then
-    flags="-e -o cputime,pid,stat,user,args"
+    flags="-e -o cputime,pid,user,args"
   elif [ -n "$usr" ]; then
-    flags="U $usr -o cputime,pid,stat,args"
+    flags="U $usr -o cputime,pid,args"
   else
     # Simple multi-user, filtering away PPID 2
-    flags="--ppid 2 --deselect -o cputime,pid,stat,user,args"
+    flags="--ppid 2 --deselect -o cputime,pid,user,args"
   fi
   # shellcheck disable=SC2086
   ps $flags --forest --width $(($(tput cols)-1)) | ccze -A | less -RX
