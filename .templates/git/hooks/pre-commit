@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+FAIL=false
+
+check() {
+  FILES=$(git diff --cached --name-only --diff-filter=ACM | egrep "$1$")
+
+  [ -z "$FILES" ] && return 0;
+
+  if ! hash "$2" 2>/dev/null; then
+    echo -e "\e[1m$2\e[0m is not installed"
+    FAIL=true
+    return 1
+  fi
+
+  while read -r FILE; do
+    "${@:2}" "$FILE" >/dev/null 2>&1
+    if [ $? != 0 ]; then
+      echo -e "\e[1m$2\e[0m reported errors in \e[3;31m$FILE\e[0m"
+      FAIL=true
+    fi
+  done < <(echo "$FILES")
+}
+
+# Check if this is the initial commit
+if git rev-parse --verify HEAD >/dev/null 2>&1; then
+  against=HEAD
+else
+  against=4b825dc642cb6eb9a060e54bf8d69288fbee4904
+fi
+
+# run all staged files through git diff --check
+# catches whitespace errors and leftover conflict markers
+check "*" git diff --check --cached $against --
+
+# run all staged .json files through json --validate
+check "*.json" json -qnf
+
+# run all staged .sh files through shellcheck
+check "*.sh" shellcheck
+
+if $FAIL; then
+  echo "fix errors and try again or commit with --no-verify to ignore errors"
+  exit 1
+fi

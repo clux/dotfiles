@@ -41,7 +41,7 @@
   pulls = "!f() { git pull --recurse-submodules && git submodule update --init --recursive; }; f"
   ci = commit
   cia = commit -am
-  amend = commit --amend -m
+  amend = commit --amend
   ping = commit --allow-empty -m \"ping hooks\"
   uncommit = reset --soft HEAD^
   unstage = reset HEAD
@@ -76,3 +76,6 @@
   added = yellow
   changed = green
   untracked = cyan
+
+[init]
+  templatedir = ~/.templates/git
