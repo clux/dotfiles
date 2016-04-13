@@ -1,11 +1,15 @@
 #!/bin/bash
 # Modules
-source ~/local/z/z.sh
 source ~/.prompt
 source ~/.functions
 source ~/.exports
 source ~/.aliases
 source ~/.path
+
+# rupa/z + an extension
+source ~/local/z/z.sh
+# shellcheck disable=SC2068
+d() {  z -l $@ | tail -n 1 | awk '{print $2}' ;}
 
 # -----------------------------------------------------------------------------
 # Key management via keychain

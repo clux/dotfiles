@@ -58,19 +58,12 @@ fi
 # -----------------------------------------------------------------------------
 # misc
 
-# d part of fasd, print directory z would've taken you to
-# shellcheck disable=SC2068
-d() {  z -l $@ | tail -n 1 | awk '{print $2}' ;}
-
-# shellcheck disable=SC2068
 zz() {
-  z $@
   guake --rename-tab="${PWD##*/}" -i "$(guake -g)"
 }
-
-# shellcheck disable=SC2068
 zzh() {
   guake --rename-tab="$1" -i "$(guake -g)"
+  # shellcheck disable=SC2068
   ssh $@
 }
 
@@ -139,6 +132,12 @@ transfer() {
 ruby-env() {
   local -r gemdir="$(ruby -e 'print Gem.user_dir')"
   export PATH="${gemdir}/bin:$PATH"
+}
+
+steam-safe() {
+  sudo systemctl stop docker
+  pm2 kill
+  __GLVND_DISALLOW_PATCHING=1 steam
 }
 
 # -----------------------------------------------------------------------------
