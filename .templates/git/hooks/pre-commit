@@ -22,6 +22,24 @@ check() {
   done < <(echo "$FILES")
 }
 
+check_author() {
+  if [[ $(git remote get-url origin --push) == git@github.com:clux* ]]; then
+    if [[ $(git whoami) != clux* ]]; then
+      echo -e "You have not set your identity: use 'git clux'"
+      exit 1
+    fi
+  fi
+  if [[ $(git remote get-url origin --push) == git@sqbu-github.cisco.com:* ]]; then
+    if [[ $(git whoami) != Eirik* ]]; then
+      echo -e "You have not set your identity: use 'git ea'"
+      exit 1
+    fi
+  fi
+}
+
+# Ensure we don't commit with the wrong identity
+check_author
+
 # Check if this is the initial commit
 if git rev-parse --verify HEAD >/dev/null 2>&1; then
   against=HEAD
