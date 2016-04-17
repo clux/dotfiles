@@ -65,6 +65,7 @@ show_git_differences() {
     fi;
 
     # Check that identity helper is set up correctly
+    # This can be removed once the old global values fully disappears
     if git whoami | grep -q "Needs to be set"; then
       s+='#'
     fi

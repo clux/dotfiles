@@ -25,6 +25,12 @@ alias XC="xclip -i -sel c"
 
 alias cwd='pwd | tr -d "\r\n" | xclip -sel clip'
 
+# git
+alias gs="git status -s"
+alias gd="git diff"
+alias gdc="git diff --cached"
+alias gc="git commit"
+
 # rsync
 alias rsync-copy="rsync -avz --progress -h"
 alias rsync-move="rsync -avz --progress -h --remove-source-files"
