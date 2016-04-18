@@ -30,6 +30,7 @@ alias gs="git status -s"
 alias gd="git diff"
 alias gdc="git diff --cached"
 alias gc="git commit"
+alias ga="git add"
 
 # rsync
 alias rsync-copy="rsync -avz --progress -h"
