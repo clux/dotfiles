@@ -23,16 +23,18 @@ check() {
 }
 
 check_author() {
-  if [[ $(git remote get-url origin --push) == git@github.com:clux* ]]; then
-    if [[ $(git whoami) != clux* ]]; then
-      echo -e "You have not set your identity: use 'git clux'"
-      exit 1
+  if git remote -v | grep -q origin; then
+    if [[ $(git remote get-url origin --push) == git@github.com:clux* ]]; then
+      if [[ $(git whoami) != clux* ]]; then
+        echo -e "You have not set your identity: use 'git clux'"
+        exit 1
+      fi
     fi
-  fi
-  if [[ $(git remote get-url origin --push) == git@sqbu-github.cisco.com:* ]]; then
-    if [[ $(git whoami) != Eirik* ]]; then
-      echo -e "You have not set your identity: use 'git ea'"
-      exit 1
+    if [[ $(git remote get-url origin --push) == git@sqbu-github.cisco.com:* ]]; then
+      if [[ $(git whoami) != Eirik* ]]; then
+        echo -e "You have not set your identity: use 'git ea'"
+        exit 1
+      fi
     fi
   fi
 }
