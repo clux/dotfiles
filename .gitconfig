@@ -2,23 +2,32 @@
   # log with pretty format similar to --pretty=oneline, but adds user + relative date
   lg = log --graph --pretty=format:'%Cred%h%Creset%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
+  # one word ones
+  s = status -s
+  d = diff
+  dc = diff --cached
+  c = commit
+  a = add
+  p = pull
+
+  # old ones
   st = status -s
   stat = diff --stat
   cache = diff --cached
 
-  # Show verbose output about tags, branches or remotes
+  # Listers
   tags = tag -l
   branches = branch -a
   remotes = remote -v
 
   # identity helpers
-  ea = !git config --local user.name "Eirik Albrigtsen" && \
-        git config --local user.email "ealbrigt@cisco.com"
-  clux = !git config --local user.name "clux" && \
-          git config --local user.email "analsandblaster@gmail.com"
+  ea = !git config --local user.name \"Eirik Albrigtsen\" && \
+        git config --local user.email \"ealbrigt@cisco.com\"
+  clux = !git config --local user.name \"clux\" && \
+          git config --local user.email \"analsandblaster@gmail.com\"
   # set who i am on fresh clones (cd's into dirname and calls one of the above)
   idclone ="!f() { cd $(echo $2 | cut -d"/" -f2) && git $1 && cd -; }; f"
-  whoami = !bash -c 'echo \"$(git config --get user.name) <$(git config --get user.email)>\"'
+  whoami = !sh -c 'echo \"$(git config --get user.name) <$(git config --get user.email)>\"'
 
   # shortcuts for cloning and setting identities correctly
   github ="!f() { git clone git@github.com:$1.git && git idclone clux $1; }; f"
@@ -33,11 +42,11 @@
 
   # initializing and setting identities correctly
   # usage: `git new ea` or `git new clux`
-  initial ="!f() { [ -z "$1" ] || (echo "initial" && git $1 && git commit --allow-empty -m 'init'); }; f"
-  new ="!f() { [ -d ".git" ] || (git init && git add . && git initial $1); }; f"
+  initial ="!f() { [ -n "$1" ] && git $1 && git commit --allow-empty -m init; }; f"
+  new ="!f() { [ ! -d ".git" ] && git init && git add . && git initial $1; }; f"
 
   pul = pull
-  pulls = "!f() { git pull --recurse-submodules && git submodule update --init --recursive; }; f"
+  pulls = !git pull --recurse-submodules && git submodule update --init --recursive
   ci = commit
   amend = commit --amend
   ping = commit --allow-empty -m \"ping hooks\"

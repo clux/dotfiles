@@ -22,15 +22,21 @@ alias L="less"
 alias H='head -n "$(($LINES-5))"'
 alias T='tail -n "$(($LINES-5))'
 alias XC="xclip -i -sel c"
+alias v="vim"
 
 alias cwd='pwd | tr -d "\r\n" | xclip -sel clip'
+alias wget="curl -O"
 
 # git
-alias gs="git status -s"
-alias gd="git diff"
-alias gdc="git diff --cached"
-alias gc="git commit"
-alias ga="git add"
+alias g='git'
+alias gs="git s"
+alias gc="git c"
+alias gdc="git dc"
+alias gd="git d"
+alias ga="git a"
+alias gp="git p"
+alias gr='cd $(git rev-parse --show-toplevel)'
+alias master="git checkout master"
 
 # rsync
 alias rsync-copy="rsync -avz --progress -h"
