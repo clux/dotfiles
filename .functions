@@ -3,7 +3,7 @@
 # -----------------------------------------------------------------------------
 # helpers to search through specific file types
 ff() { find "$1" -type f -name "$2" 2> /dev/null ;}
-lstree() { tree -aC -I "node_modules|.git"  --dirsfirst "$@" | less -R ;}
+lstree() { tree -aC -I "node_modules|.git|bower_components|venv" --dirsfirst "$@" | less -R ;}
 
 # JS files
 jf() { ff "$@" "*.js" | grep -vE "node_modules|bower_components|\.min" ;}
