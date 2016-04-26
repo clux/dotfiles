@@ -29,14 +29,10 @@ has_etc_keyboard:
 	$(call green, "Guarding on debian /etc/default/keyboard")
 	[ -f /etc/default/keyboard ]
 
-debkeyboard: has_etc_keyboard
+debian: has_etc_keyboard
 	$(call red," etc","Setting default keyboard")
-	@sed -i.bak 's/XKBVARIANT=.*/XKBVARIANT="colemak"/' /etc/default/keyboard
+	@sudo sed -i.bak 's/XKBVARIANT=.*/XKBVARIANT="colemak"/' /etc/default/keyboard
 	@diff /etc/default/keyboard.bak /etc/default/keyboard || true
-
-debian: debkeyboard
-	$(call red," etc","Tweaking debian")
-	@rm ~/.nanorc
 
 etc:
 	$(call red," etc","Updating motd")
