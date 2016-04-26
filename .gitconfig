@@ -15,6 +15,11 @@
   stat = diff --stat
   cache = diff --cached
 
+  # add all untracked files to .gitignore
+  untracked = ls-files --others --exclude-standard
+  # ignore all untrackeds (if first time having gitignore, don't ignore that)
+  ignore = !git untracked | grep -v .gitignore >> .gitignore && git add .gitignore
+
   # Listers
   tags = tag -l
   branches = branch -a
