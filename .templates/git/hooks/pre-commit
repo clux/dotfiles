@@ -42,16 +42,9 @@ check_author() {
 # Ensure we don't commit with the wrong identity
 check_author
 
-# Check if this is the initial commit
-if git rev-parse --verify HEAD >/dev/null 2>&1; then
-  against=HEAD
-else
-  against=4b825dc642cb6eb9a060e54bf8d69288fbee4904
-fi
-
 # run all staged files through git diff --check
 # catches whitespace errors and leftover conflict markers
-check "*" git diff --check --cached $against --
+check "*" git diff --check --cached --
 
 # run all staged .json files through json --validate
 check "*.json" json -qnf

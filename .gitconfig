@@ -9,6 +9,7 @@
   c = commit
   a = add
   p = pull
+  chk = diff --cached --check
 
   # old ones
   st = status -s
