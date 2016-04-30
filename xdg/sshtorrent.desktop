@@ -1,6 +1,0 @@
-[Desktop Entry]
-Name=SshTorrent
-Exec=/home/clux/local/bin/magnet %u
-Terminal=true
-Type=Application
-MimeType=x-scheme-handler/magnet;
