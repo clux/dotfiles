@@ -14,10 +14,6 @@ All custom configuration files for packages installed via my [installation scrip
 
 Plus a bunch of other small stuff. As usual, copy what you find interesting.
 
-Here is a screenshot of the terminal showing `z`, git prompt, the large `motd`, as well as return code and host name handling in the prompt.
-
-![terminal style](https://github.com/clux/dotfiles/raw/master/terminal.png)
-
 ## Usage
 Clone and install:
 
