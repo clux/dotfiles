@@ -16,22 +16,13 @@ endef
 
 # All targets herein are technically PHONY, but this rarely matters
 # We list a few of them that MIGHT cause the `'target' is up to date` failure.
-.PHONY: config ui etc sublime help font xdg guake gconf dconf
+.PHONY: config ui sublime help font xdg guake gconf dconf
 
 help:
 	@tput -T xterm bold
 	$(call green,"Valid targets:")
 	$(call green," config", "symlink configuration files to ~/")
 	$(call green," ui", "set gconf and dconf settings")
-	$(call green," etc", "echo install /etc files")
-
-etc:
-	$(call red," etc","Updating motd")
-	@cp etc/profile.d/motd.sh /etc/profile.d/
-	$(call red," sshd","Updating sshd_config")
-	@diff /etc/ssh/sshd_config etc/ssh/sshd_config || true
-	@cp etc/ssh/sshd_config /etc/ssh/
-	@systemctl restart sshd
 
 services:
 	$(call red," systemd","enabling user services")

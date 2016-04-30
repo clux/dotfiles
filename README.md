@@ -25,7 +25,6 @@ Clone and install:
 ```sh
 make config
 make ui
-sudo make etc
 make xdg # asks for sudo
 ```
 
