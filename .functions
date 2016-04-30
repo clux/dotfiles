@@ -220,7 +220,7 @@ http() {
 # scaffolding from templates folder
 
 node-init() {
-  find ~/.templates/npm/ -not -type "d" -not -iname pkg.json -exec cp {} "$PWD" \;
+  find ~/.templates/npm/ -not -type "d" -exec cp {} "$PWD" \;
   pkginit
   local -r dir="$(basename "$PWD")"
   echo "# $dir" > README.md
