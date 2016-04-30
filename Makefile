@@ -16,7 +16,7 @@ endef
 
 # All targets herein are technically PHONY, but this rarely matters
 # We list a few of them that MIGHT cause the `'target' is up to date` failure.
-.PHONY: config ui etc sublime help font xdg guake docker gconf dconf debian
+.PHONY: config ui etc sublime help font xdg guake gconf dconf
 
 help:
 	@tput -T xterm bold
@@ -24,15 +24,6 @@ help:
 	$(call green," config", "symlink configuration files to ~/")
 	$(call green," ui", "set gconf and dconf settings")
 	$(call green," etc", "echo install /etc files")
-
-has_etc_keyboard:
-	$(call green, "Guarding on debian /etc/default/keyboard")
-	[ -f /etc/default/keyboard ]
-
-debian: has_etc_keyboard
-	$(call red," etc","Setting default keyboard")
-	@sudo sed -i.bak 's/XKBVARIANT=.*/XKBVARIANT="colemak"/' /etc/default/keyboard
-	@diff /etc/default/keyboard.bak /etc/default/keyboard || true
 
 etc:
 	$(call red," etc","Updating motd")
@@ -46,13 +37,6 @@ services:
 	$(call red," systemd","enabling user services")
 	@systemctl --user enable redshift-gtk --now
 	@systemctl --user enable mpd --now
-
-docker:
-	$(call red," docker","initializing and activating docker")
-	@sudo gpasswd -a $$USER docker
-	@newgrp docker
-	@sudo systemctl enable docker
-	@sudo systemctl start docker
 
 postgres:
 	$(call red," postgresql","initializing and activating postgresql")
