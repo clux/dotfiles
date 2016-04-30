@@ -16,7 +16,7 @@ endef
 
 # All targets herein are technically PHONY, but this rarely matters
 # We list a few of them that MIGHT cause the `'target' is up to date` failure.
-.PHONY: config ui sublime help font xdg guake gconf dconf
+.PHONY: config ui sublime help font guake gconf dconf
 
 help:
 	@tput -T xterm bold
@@ -83,14 +83,5 @@ has_font:
 dconf: has_font
 	$(call green, "Importing main dconf settings")
 	@dconf load /org/ < org.dconf
-
-not_root:
-	$(call green, "Guarding on not root")
-	@test "$$EUID" -ne 0
-
-xdg: not_root
-	@sudo cp xdg/sshtorrent.desktop /usr/share/applications/
-	@cp xdg/magnet /home/clux/local/bin/magnet
-	@xdg-mime default sshtorrent.desktop x-scheme-handler/magnet
 
 ui: gconf dconf
