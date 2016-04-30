@@ -2,6 +2,10 @@
 
 # -----------------------------------------------------------------------------
 # helpers to search through specific file types
+
+# find file under pwd - v `fs main.yml`
+fs() { find . -type f -name "$1" 2> /dev/null ;}
+# find file anywhere - v `ff roles main`
 ff() { find "$1" -type f -name "$2" 2> /dev/null ;}
 lstree() { tree -aC -I "node_modules|.git|bower_components|venv" --dirsfirst "$@" | less -R ;}
 
