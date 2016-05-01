@@ -24,19 +24,10 @@ help:
 	$(call green," config", "symlink configuration files to ~/")
 	$(call green," ui", "set gconf and dconf settings")
 
-services:
-	$(call red," systemd","enabling user services")
-	@systemctl --user enable redshift-gtk --now
-	@systemctl --user enable mpd --now
-
 directories:
-	@mkdir -p ~/.config/sublime-text-3/Packages
-	@mkdir -p ~/.config/autostart
-	@mkdir -p ~/.config/profanity
-	@mkdir -p ~/.templates/npm ~/.templates/cargo ~/.templates/git/hooks
-	@mkdir -p ~/.mpd/playlists
-	@mkdir -p ~/.ncmpcpp
-	@mkdir -p ~/Music # should symlink this elsewhere manually
+	@mkdir -p ~/.config/{autostart,profanity,sublime-text-3/Packages}
+	@mkdir -p ~/.templates/{npm,cargo,git/hooks}
+	@mkdir -p ~/{.mpd/playlists,.ncmpcpp,Music}
 
 sublime:
 	$(call red, "Linking User package in sublime-text-3")
