@@ -25,7 +25,6 @@ alias XC="xclip -i -sel c"
 alias v="vim"
 
 alias cwd='pwd | tr -d "\r\n" | xclip -sel clip'
-alias wget="curl -O"
 
 # git
 alias g='git'
