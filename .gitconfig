@@ -58,7 +58,7 @@
   ping = commit --allow-empty -m \"ping hooks\"
   uncommit = reset --soft HEAD^
   unstage = reset HEAD
-  count = shortlog -sn
+  count = shortlog --summary --numbered
 
   # Find commits by source code
   fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
@@ -72,8 +72,20 @@
   # PR branch help
   yolo = !git add -A && git  commit --amend --no-edit && git push -f origin HEAD
 
+  # Remove branches that have already been merged with master
+  # a.k.a. ‘delete merged’
+  dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+
+[user]
+  name = Eirik Albrigtsen
+  email = analsandblaster@gmail.com
+
 [push]
   default = simple
+
+[apply]
+  # Detect whitespace errors when applying a patch
+  whitespace = fix
 
 [color "diff"]
   meta = yellow bold
