@@ -35,6 +35,8 @@
   idclone ="!f() { cd $(echo $2 | cut -d"/" -f2) && git $1 && cd -; }; f"
   whoami = !sh -c 'echo \"$(git config --get user.name) <$(git config --get user.email)>\"'
 
+  reinit = !sh -c 'rm -rf .git/hooks/** && git init'
+
   # shortcuts for cloning and setting identities correctly
   github ="!f() { git clone git@github.com:$1.git && git idclone clux $1; }; f"
   gitlab ="!f() { git clone git@gitlab.com:$1.git && git idclone clux $1; }; f"
@@ -75,6 +77,9 @@
   # Remove branches that have already been merged with master
   # a.k.a. ‘delete merged’
   dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+
+  # Switch to a branch, creating it if necessary
+  go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
 
 [user]
   name = Eirik Albrigtsen
