@@ -103,35 +103,6 @@ prompt_git() {
   fi
 }
 
-# A very basic mercurial prompt status
-# A bit slow, because mercurial is slow, and not showing branch
-prompt_hg() {
-  local s='';
-  local -r status="$(hg status)"
-  # Check if the current directory is in a hg repository.
-  if [ "$?" -eq 0 ]; then
-
-    # Check for changes
-    if echo "$status" | egrep -q "^M|^A|^R"; then
-      s+='+'
-    fi
-
-    # Check for untracked files
-    if echo "$status" | egrep -q "^\?.*"; then
-      s+='?'
-    fi
-
-    # Check for active queues
-    if [ -n "$(hg qseries)" ]; then
-      s+='$'
-    fi
-
-    # ignore branch on hg - as hg is stupidly slow
-    [ -n "${s}" ] && s=" [${s}]"
-    echo -e "${orange}${s}"
-  fi;
-}
-
 set_prompt() {
   local -r rc=$? # Must save this
   # Return code when non-zero
@@ -153,11 +124,8 @@ set_prompt() {
     PS1+=" (${bold}${purple}pyv${reset})"
   fi
 
-  if [ -d ".hg" ]; then
-    PS1+="$(prompt_hg)" # mercurial repository basic details
-  else
-    PS1+="$(prompt_git)" # git repository (fast and detailed)
-  fi
+  PS1+="$(prompt_git)" # git repository (fast and detailed)
+
   PS1+=" ${bold}${white}\$${reset} " # yellow $
 }
 
