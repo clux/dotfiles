@@ -143,6 +143,7 @@ ruby-env() {
 
 steam-safe() {
   sudo systemctl stop docker
+  sudo systemctl stop postgresql
   pm2 kill
   __GLVND_DISALLOW_PATCHING=1 steam
 }
