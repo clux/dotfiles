@@ -34,8 +34,5 @@ if [ "$(hostname)" = "broxy" ]; then
   export DOWNLOAD_DIR=/media/dumptruck/DL
 fi
 
-# so we can run dotclux/tasks standalone
-export gh='git@github.com:'
-
 # disable cowsay in ansible even though we have it installed
 export ANSIBLE_NOCOWS=1
