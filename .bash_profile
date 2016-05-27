@@ -14,6 +14,7 @@ d() {  z -l $@ | tail -n 1 | awk '{print $2}' ;}
 # -----------------------------------------------------------------------------
 # Key management via keychain
 
+# NB: on debian we may need to run `keychain -k all` first
 key() {
   local keys=""
   for k in "$@"; do

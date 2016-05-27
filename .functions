@@ -22,7 +22,7 @@ rf() { ff "$@" "*.rs" ;}
 rs() { rf "$1" | xargs grep -s "$2" ;}
 
 # PY files
-pyf() { ff "$@" "*.py" | grep -vE "site-packages|node_modules|venv" ;}
+pyf() { ff "$@" "*.py" | grep -vE "site-packages|node_modules|venv|.eggs" ;}
 pys() { pyf "$1" | xargs grep -s "$2" ;}
 
 # C++ files
