@@ -84,6 +84,7 @@
 [user]
   name = Eirik Albrigtsen
   email = analsandblaster@gmail.com
+  signingkey = 0x0F272F45409086B6
 
 [push]
   default = simple
