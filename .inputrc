@@ -21,10 +21,11 @@ set bell-style none
 "\e[8~": end-of-line            # End Key
 
 # alt-left + alt-right to move between words in commands
-# tmux + urxvt, but not gnome term
+# tmux + urxvt, gnome term
 "\e\e[C": forward-word
 "\e\e[D": backward-word
-
+"\e[1;3C": forward-word
+"\e[1;3D": backward-word
 
 # Immediately add a trailing slash when autocompleting symlinks to directories
 set mark-symlinked-directories on
