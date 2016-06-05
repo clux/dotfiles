@@ -1,6 +1,7 @@
 {
 	"extensions":
 	[
-		"dconf"
+		"dconf",
+		"toml"
 	]
 }
