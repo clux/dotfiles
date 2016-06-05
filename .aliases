@@ -35,7 +35,7 @@ alias gd="git d"
 alias ga="git a"
 alias gp="git p"
 alias gr='cd $(git rev-parse --show-toplevel)'
-alias master="git checkout master"
+alias gm='git m'
 
 # rsync
 alias rsync-copy="rsync -avz --progress -h"
