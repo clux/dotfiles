@@ -61,6 +61,7 @@
   uncommit = reset --soft HEAD^
   unstage = reset HEAD
   count = shortlog --summary --numbered
+  m = checkout master
 
   # Find commits by source code
   fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
