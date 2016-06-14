@@ -24,10 +24,5 @@ make ui
 
 The first symlinks all files herein to `$HOME` so they can be tracked. The second updates UI through `dconf` and `gconf`.
 
-## Sublime
-Some manual steps required.
-
-- [license](https://mail.google.com/mail/u/0/#search/sublime+license/13a942d72a211e81)
-- [package control](https://packagecontrol.io/installation)
-
+## Sublime Note
 It is fine to `make config` before sublime is installed. If it is installed, and `subl` is opened, purge the user directory.
