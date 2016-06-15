@@ -48,7 +48,7 @@ gconf:
 	@gconftool-2 --set /apps/guake/style/background/transparency 20 --type int
 	@gconftool-2 --set /apps/guake/style/font/style "Monospace 16" --type string
 	@gconftool-2 --set /apps/guake/general/use_default_font false --type bool
-	@gconftool-2 --set /apps/guake/general/history_size 8000 --type int
+	@gconftool-2 --set /apps/guake/general/history_size 16000 --type int
 	@gconftool-2 --set /apps/guake/general/use_trayicon false --type bool
 	@gconftool-2 --set /apps/guake/general/use_popup false --type bool
 	@gconftool-2 --set /apps/guake/general/mouse_display false --type bool
