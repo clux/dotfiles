@@ -7,7 +7,7 @@ source ~/.aliases
 source ~/.path
 
 # rupa/z + an extension
-source ~/local/z/z.sh
+[ -f ~/local/z/z.sh ] && source ~/local/z/z.sh
 # shellcheck disable=SC2068
 d() {  z -l $@ | tail -n 1 | awk '{print $2}' ;}
 
