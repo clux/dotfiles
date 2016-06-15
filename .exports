@@ -35,4 +35,4 @@ if [ "$(hostname)" = "broxy" ]; then
 fi
 
 # disable cowsay in ansible even though we have it installed
-declare -xr ANSIBLE_NOCOWS=1
+export ANSIBLE_NOCOWS=1
