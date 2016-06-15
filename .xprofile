@@ -16,7 +16,7 @@ if [[ "$(hostname)" = kjttks ]]; then
 fi
 
 if [[ $(hostname) = cluxx1 ]]; then
-  xinput set-prop 11 Device Enabled 0
+  xinput set-prop 11 "Device Enabled" 0
 fi
 
 # tmux and guake
