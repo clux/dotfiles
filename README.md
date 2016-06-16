@@ -1,11 +1,11 @@
 # dotfiles
 [![build status](https://secure.travis-ci.org/clux/dotfiles.svg)](http://travis-ci.org/clux/dotfiles)
 
-All custom configuration files for packages installed via my [installation scripts](https://github.com/clux/dotclux).
+All custom configuration files for packages installed via my [provisioning scripts](https://github.com/clux/provision).
 
-## Key Features
+## Features
 
-- [custom bash prompt](https://github.com/clux/dotfiles/blob/master/.bash_prompt) with customized `git` and `hg` support
+- [bash prompt](https://github.com/clux/dotfiles/blob/master/.prompt) with customized `git` support
 - [tmux](https://wiki.archlinux.org/index.php/tmux) inside [guake](https://wiki.archlinux.org/index.php/Guake) inside [cinnamon](https://wiki.archlinux.org/index.php/cinnamon)
 - [URxvt](https://wiki.archlinux.org/index.php/rxvt-unicode) for persistent [TUIs](https://en.wikipedia.org/wiki/Text-based_user_interface)
 - [keychain](https://wiki.archlinux.org/index.php/SSH_keys#Keychain) loading specific ssh keys [depending on hostname](https://github.com/clux/dotfiles/blob/658ffb136167730ba272b03fd57c2be4a0bd2cc9/.bash_profile#L10-L16)
