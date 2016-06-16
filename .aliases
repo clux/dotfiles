@@ -18,6 +18,7 @@ alias recentclear="echo > ~/.local/share/recently-used.xbel"
 alias A="awk"
 alias C="wc"
 alias G="grep"
+alias XG="xargs grep"
 alias L="less"
 alias H='head -n "$(($LINES-5))"'
 alias T='tail -n "$(($LINES-5))"'
