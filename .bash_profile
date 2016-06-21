@@ -25,10 +25,12 @@ key() {
   source ~/.keychain/agent-sh
 }
 
-if [ "$(hostname)" = "ealbrigt-ws" ]; then
+if [[ $(hostname) = ealbrigt-ws ]]; then
   key sqbu work
-elif [ "$(hostname)" = "kjttks" ]; then
+elif [[ $(hostname) = kjttks ]]; then
   key github main
+elif [[ $(hostname) = cluxx1 ]]; then
+  key github sqbu work
 else
   [ -f ~/.keychain/agent-sh ] && source ~/.keychain/agent-sh
 fi
