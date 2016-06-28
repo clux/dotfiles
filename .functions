@@ -127,15 +127,18 @@ yaml() {
   fi
 }
 
-# force monitor refresh rate
-# hopefully find a better solution, but .xprofile currently doesnt work for this
-refresh-benq() {
-  if [ "$(hostname)" = "kjttks" ]; then
+# override monitor refresh rate
+# super meat boy: refresh-rate 60
+# everything else: refresh-rate 144
+refresh-rate() {
+  local -r rate="${1-144}"
+  if [[ $(hostname) = kjttks ]]; then
     # Main screen refresh rate
-    xrandr --output DVI-I-1 --mode 1920x1080 --rate 144
+    xrandr --output DVI-I-1 --mode 1920x1080 --rate "$rate"
+    xrandr -q | egrep "$rate\.00\*"
   fi
-  xrandr -q | egrep "144\.00\*"
 }
+
 
 docker-clean() {
   docker ps -aq | xargs -r docker rm -f
