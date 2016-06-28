@@ -20,10 +20,13 @@ fi
 export CTEST_OUTPUT_ON_FAILURE=1
 export GTEST_COLOR=1
 
-# When developing rust, always print backtraces
-export RUST_BACKTRACE=1
-# Separate source checkout for `racer`
-export RUST_SRC_PATH=$HOME/.cargo/rustc-1.8.0/src
+if hash rustc 2> /dev/null; then
+  # When developing rust, always print backtraces
+  export RUST_BACKTRACE=1
+  # Separate source checkout for `racer`
+  RUST_VER=$(rustc --version | awk '{print $2}')
+  export RUST_SRC_PATH=$HOME/.cargo/rustc-$RUST_VER/src
+fi
 
 # use shellcheck for current file only
 export SHELLCHECK_OPTS="-e SC1091 -e SC1090"
