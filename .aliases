@@ -23,7 +23,6 @@ alias L="less"
 alias H='head -n "$(($LINES-5))"'
 alias T='tail -n "$(($LINES-5))"'
 alias XC="xclip -i -sel c"
-alias v="vim"
 
 alias cwd='pwd | tr -d "\r\n" | xclip -sel clip'
 
