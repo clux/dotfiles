@@ -6,6 +6,6 @@
   // A list of search paths. This should generally just
   // be the path to the rust compiler src/ directory.
   "search_paths": [
-    "/home/clux/.cargo/rustc-1.8.0/src/"
+    "/home/clux/.cargo/rustc-stable/src/"
   ]
 }
