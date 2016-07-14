@@ -53,7 +53,7 @@ gconf:
 	@gconftool-2 --set /apps/guake/general/use_popup false --type bool
 	@gconftool-2 --set /apps/guake/general/mouse_display false --type bool
 	@gconftool-2 --set /apps/guake/general/prompt_on_quit false --type bool
-	@gconftool-2 --set /apps/guake/general/window_height_f 92 --type int
+	@gconftool-2 --set /apps/guake/general/window_height_f 92 --type float
 	@gconftool-2 --set /apps/guake/general/window_tabbar true --type bool
 	@gconftool-2 --set /apps/guake/general/window_ontop false --type bool
 	$(call green, "Setting guake keybindings")
