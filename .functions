@@ -213,17 +213,17 @@ ruby-env() {
   export PATH="${gemdir}/bin:$PATH"
 }
 
-steam-safe() {
+banish-daemons() {
   sudo systemctl stop docker
   sudo systemctl stop postgresql
   pm2 kill
+}
+
+steam-safe() {
   __GLVND_DISALLOW_PATCHING=1 steam
 }
 
 steam-safe-mesa() {
-  sudo systemctl stop docker
-  sudo systemctl stop postgresql
-  pm2 kill
   # shellcheck disable=SC2016
   LD_PRELOAD='/usr/$LIB/libstdc++.so.6 /usr/$LIB/libgcc_s.so.1 /usr/$LIB/libxcb.so.1 /usr/$LIB/libgpg-error.so' steam
 }
