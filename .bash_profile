@@ -6,6 +6,9 @@ source ~/.exports
 source ~/.aliases
 source ~/.path
 
+# work module
+[ -f ~/repos/cisco/bashrc ] && source ~/repos/cisco/bashrc
+
 # rupa/z + an extension
 [ -f ~/local/z/z.sh ] && source ~/local/z/z.sh
 # shellcheck disable=SC2068
