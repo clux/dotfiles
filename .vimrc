@@ -5,14 +5,6 @@ colorscheme desert
 set encoding=utf8
 set ffs=unix,dos,mac
 
-" Handle tmux $TERM quirks in vim
-if $TERM =~ '^screen-256color'
-    map <Esc>OH <Home>
-    map! <Esc>OH <Home>
-    map <Esc>OF <End>
-    map! <Esc>OF <End>
-endif
-
 " indentation
 set expandtab
 set tabstop=2
