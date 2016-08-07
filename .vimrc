@@ -1,11 +1,5 @@
-syntax enable
-colorscheme seti
-
-" unicode + unix
-set encoding=utf8
-set ffs=unix,dos,mac
-
 " BEGIN VUNDLE
+set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -15,6 +9,13 @@ Plugin 'moll/vim-node'
 call vundle#end()
 filetype plugin indent on
 " END VUNDLE
+
+syntax enable
+colorscheme seti
+
+" unicode + unix
+set encoding=utf8
+set ffs=unix,dos,mac
 
 " indentation
 set expandtab
