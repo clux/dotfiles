@@ -433,6 +433,7 @@ broxy-grab() {
     echo "Downloading $fldr"
     rsync -cahzP -e ssh "broxy:/home/bro/dumptruck/$fldr" .
   done
+  notify-send "completed download of $1"
 }
 
 # -----------------------------------------------------------------------------
