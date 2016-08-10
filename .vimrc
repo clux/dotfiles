@@ -1,14 +1,7 @@
-" BEGIN VUNDLE
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'rust-lang/rust.vim'
-Plugin 'moll/vim-node'
-call vundle#end()
-filetype plugin indent on
-" END VUNDLE
+call plug#begin('~/.vim/plugged')
+Plug 'rust-lang/rust.vim'
+Plug 'moll/vim-node'
+call plug#end()
 
 syntax enable
 colorscheme seti
