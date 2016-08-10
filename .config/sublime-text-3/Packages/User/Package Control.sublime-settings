@@ -30,6 +30,7 @@
 		"SublimeLinter-contrib-rustc",
 		"SublimeLinter-json",
 		"SublimeLinter-pylint",
-		"SublimeLinter-shellcheck"
+		"SublimeLinter-shellcheck",
+		"VimL"
 	]
 }
