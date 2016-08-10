@@ -58,7 +58,7 @@ monospace-font-name='Liberation Mono 11'
 
 [gnome/libgnomekbd/keyboard]
 layouts=['us\tcolemak', 'us\tintl']
-options=['grp\tgrp:alt_shift_toggle', 'caps\tcaps:backspace']
+options=['grp\tgrp:alt_shift_toggle', 'caps\tcaps:escape']
 
 [nemo/preferences]
 executable-text-activation='display'
