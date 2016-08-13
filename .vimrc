@@ -15,11 +15,13 @@ Plug 'racer-rust/vim-racer'
 " Searching using the_silver_searcher - use :Ag <src>
 Plug 'rking/ag.vim'
 
-" Nerdtree
+" Nerdtree + gutter
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-
 Plug 'airblade/vim-gitgutter'
+
+" Misc syntax highlighting
+Plug 'cespare/vim-toml'
 
 call plug#end()
 
@@ -64,10 +66,10 @@ nnoremap <leader>n :lnext<cr>
 nnoremap <leader>e :lprev<cr>
 
 " focus windows directionally
-nmap <silent> <A-Up> :wincmd k<CR>
-nmap <silent> <A-Down> :wincmd j<CR>
-nmap <silent> <A-Left> :wincmd h<CR>
-nmap <silent> <A-Right> :wincmd l<CR>
+noremap <silent> <A-Up> :wincmd k<CR>
+noremap <silent> <A-Down> :wincmd j<CR>
+noremap <silent> <A-Left> :wincmd h<CR>
+noremap <silent> <A-Right> :wincmd l<CR>
 
 " splits - \w and \h
 nnoremap <leader>w :vsplit<cr>
@@ -77,5 +79,5 @@ nnoremap <leader>h :split<cr>
 nnoremap <leader>nt :NERDTreeToggle<cr>
 
 " Surround word with quote
-map <leader>' ysiw'
-map <leader>" ysiw"
+noremap <leader>' ysiw'
+noremap <leader>" ysiw"
