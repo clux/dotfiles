@@ -1,6 +1,6 @@
 #!/bin/bash
+
 export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/local/bin:$PATH
-export PATH=/usr/local/node/bin:$PATH
 export PATH=/usr/lib/clang-analyzer/scan-build:$PATH
