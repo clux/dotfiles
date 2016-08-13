@@ -9,7 +9,7 @@ alias ll='ls -Alh --group-directories-first'
 alias la='ls -A --group-directories-first'
 alias l='ls -C --group-directories-first'
 
-# one character things
+# common pipe aliases
 alias A="awk"
 alias C="wc"
 alias G="grep"
@@ -18,11 +18,11 @@ alias L="less"
 alias H='head -n "$(($LINES-5))"'
 alias T='tail -n "$(($LINES-5))"'
 alias XC="xclip -i -sel c"
-alias SUM="awk '{ total += \$1; print }; END { print total }'"
 
 # misc
 alias cwd='pwd | tr -d "\r\n" | xclip -sel clip'
 alias week='date +%V'
+alias ymd='date +%Y-%m-%d'
 
 # git
 alias g='git'
