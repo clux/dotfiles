@@ -18,6 +18,7 @@ alias L="less"
 alias H='head -n "$(($LINES-5))"'
 alias T='tail -n "$(($LINES-5))"'
 alias XC="xclip -i -sel c"
+alias SUM="awk '{ total += \$1; print }; END { print total }'"
 
 # misc
 alias cwd='pwd | tr -d "\r\n" | xclip -sel clip'
