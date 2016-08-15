@@ -20,12 +20,16 @@ Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 
+" fuzzy file finder
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
 " Misc syntax highlighting
 Plug 'cespare/vim-toml'
 
-call plug#end()
+" Theme
+Plug 'trusktr/seti.vim'
 
-" NB: getting vim-ctrlp and vim-seti from pacman
+call plug#end()
 
 syntax enable
 colorscheme seti
@@ -77,6 +81,10 @@ nnoremap <leader>h :split<cr>
 
 " NERDTree
 nnoremap <leader>nt :NERDTreeToggle<cr>
+" NB: shift-i toggles hidden files
+
+" FZF
+nnoremap <C-p> :FZF<cr>
 
 " Surround word with quote
 noremap <leader>' ysiw'

@@ -36,3 +36,10 @@ fi
 
 # disable cowsay in ansible even though we have it installed
 export ANSIBLE_NOCOWS=1
+
+# fzf should ony show non-build files when browsing git repos
+# Verify with echo $FZF_DEFAULT_COMMAND) | sh | fzf
+export FZF_DEFAULT_COMMAND='
+  (git ls-tree -r --name-only HEAD ||
+   find . -path "*/\.*" -prune -o -type f -print -o -type l -print |
+      sed s/^..//) 2> /dev/null'
