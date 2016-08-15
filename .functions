@@ -43,7 +43,7 @@ srchcmake() { ff . "CMakeLists.txt" | xargs grep -s "$1" ;}
 # vim
 v() {
   if [ $# -eq 0 ]; then
-    vim .
+    vim $(fzf)
   else
     vim "$@"
   fi
