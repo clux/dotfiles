@@ -43,6 +43,11 @@ config: directories
 	done
 	@[ -d ~/.config/sublime-text-3/Packages/User ] || make sublime
 
+vim:
+	$(call green," installing vim plugins")
+	@[ -f ~/.vim/autoload/plug.vim ] && vim +PlugUpdate +qall
+	@vim +"AirlineTheme serene" +"PromptlineSnapshot! ~/.promptline airline" +qa
+
 gconf:
 	$(call green, "Setting guake style")
 	@gconftool-2 --set /apps/guake/style/background/transparency 20 --type int

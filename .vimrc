@@ -1,6 +1,8 @@
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-surround'
 
+Plug 'scrooloose/syntastic'
+
 " Sublime style multi carets: ctrl-n on word or \v selects - then v or c
 Plug 'terryma/vim-multiple-cursors'
 
@@ -28,6 +30,9 @@ Plug 'cespare/vim-toml'
 
 " Theme
 Plug 'trusktr/seti.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'edkolev/promptline.vim'
+Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
@@ -38,6 +43,9 @@ colorscheme seti
 set encoding=utf8
 set ffs=unix,dos,mac
 
+" wrapping
+set whichwrap=b,s,<,>,[,]
+
 " indentation
 set expandtab
 set tabstop=2
@@ -46,13 +54,35 @@ set shiftwidth=2
 " Read when a file is changed outside
 set autoread
 
+" Promptline
+let AirlineTheme = 'badwolf'
+let g:airline_theme = 'badwolf'
+let g:promptline_preset = {
+        \'b' : [ promptline#slices#host({ 'only_if_ssh': 1 }) ],
+        \'a' : [ promptline#slices#vcs_branch(), promptline#slices#git_status() ],
+        \'c' : [ promptline#slices#cwd({ 'dir_limit': 3 }) ],
+        \'warn' : [ promptline#slices#last_exit_code() ],
+        \'options': {
+          \'left_sections' : [ 'warn', 'b', 'c', 'a' ],
+          \'left_only_sections' : [ 'warn', 'b', 'c', 'a' ]}}
+
 " Height of the command bar
 set cmdheight=1
-" And add a status line
+" Always show the status line
 set laststatus=2
-set statusline=\ %F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ %l:%c
-" Line numbers next to git gutter - <n>G to goto line
+"" Format the status line
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
+
+" Line numbers next to git gutter - <number>gg to goto line
 set number
+
+" syntastic
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
 
 " Mouse - allows mouse select and copy to system clipboard
 " otherwise use normal y (yank) and p (paste) after doing \v selects

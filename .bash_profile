@@ -1,6 +1,8 @@
 #!/bin/bash
+export TERM=xterm-256color
+
 # Modules
-source ~/.prompt
+source ~/.promptline
 source ~/.functions
 source ~/.exports
 source ~/.aliases
