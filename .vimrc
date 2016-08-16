@@ -27,6 +27,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 " Misc syntax highlighting
 Plug 'cespare/vim-toml'
+Plug 'plasticboy/vim-markdown'
 
 " Theme
 Plug 'trusktr/seti.vim'
@@ -74,15 +75,21 @@ set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 
-" Line numbers next to git gutter - <number>gg to goto line
-set number
-
 " syntastic
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_sh_checkers = ['shellcheck']
+" NB: may have to :setf python if it fails to detect
+
+" misc syntax
+let g:vim_markdown_folding_disabled = 1
+
+" Line numbers next to git gutter - <number>gg to goto line
+set number
 
 " Mouse - allows mouse select and copy to system clipboard
 " otherwise use normal y (yank) and p (paste) after doing \v selects
