@@ -30,15 +30,17 @@ Plug 'cespare/vim-toml'
 Plug 'plasticboy/vim-markdown'
 
 " Theme
-Plug 'trusktr/seti.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'edkolev/promptline.vim'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'jpo/vim-railscasts-theme'
+
 
 call plug#end()
 
 syntax enable
-colorscheme seti
+colorscheme railscasts
+
 
 " unicode + unix
 set encoding=utf8
@@ -51,6 +53,10 @@ set whichwrap=b,s,<,>,[,]
 set expandtab
 set tabstop=2
 set shiftwidth=2
+set softtabstop=2
+autocmd FileType python set tabstop=4 softtabstop=4 shiftwidth=4
+autocmd FileType go set tabstop=4 softtabstop=4 shiftwidth=4
+
 
 " Read when a file is changed outside
 set autoread
