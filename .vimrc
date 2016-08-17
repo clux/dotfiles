@@ -98,15 +98,15 @@ set mouse-=a
 " Leader
 let mapleader = "\<Space>"
 
-" Code complete - mirror sublime racer key (NB: ctrl-o for going back)
+" Code complete - mirror sublime racer key (NB: ctrl-i/o for back/forwards)
 nmap <F2> gd <CR>
 
 " Search - \ag around word
 nnoremap <leader>ag :LAg <c-r>=expand("<cword>")<cr><cr>
 
-" next and prev results \n and \e (normal search is n and N)
-nnoremap <leader>n :lnext<cr>
-nnoremap <leader>e :lprev<cr>
+" next and prev results on F3 and F4 (normal search is n and N)
+nnoremap <F3> :lnext<cr>
+nnoremap <F4> :lprev<cr>
 
 " NERDTree
 nnoremap <leader>nt :NERDTreeToggle<cr>
