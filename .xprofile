@@ -17,6 +17,7 @@ fi
 if [[ $(hostname) = cluxx1 ]]; then
   xinput set-prop 11 "Device Enabled" 0
 fi
+xset m 0 0
 
 # tmux and guake
 tmux start-server
