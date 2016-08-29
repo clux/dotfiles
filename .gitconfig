@@ -36,7 +36,9 @@
   # Switch to a branch, creating it if necessary
   go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
   # Checkout a pull request from origin (of a github repository)
-  pr = !"pr() { git fetch origin pull/$1/head:pr-$1; git checkout pr-$1; }; pr"
+  pr = !"f() { git fetch origin pull/$1/head:pr-$1; git checkout pr-$1; }; f"
+  # Interactive rebase with the given number of latest commits
+  reb = "!f() { git rebase -i HEAD~$1; }; f"
 
   # MISC
   # add all untracked files to .gitignore
@@ -51,6 +53,10 @@
   fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
   # Find commits by commit message
   fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+  # Find tags containing commit
+  ft = "!f() { git describe --always --contains $1; }; f"
+  # Find branches containing commit
+  fb = "!f() { git branch -a --contains $1; }; f"
 
   # IDENTITY
   ea = !git config --local user.name \"Eirik Albrigtsen\" && \
