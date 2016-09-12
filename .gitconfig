@@ -10,7 +10,7 @@
 
   # OCCASIONAL
   amend = commit --amend
-  ping = commit --allow-empty -m \"ping hooks\"
+  ping = "!f() { git commit --allow-empty -m \"ping hooks - $(date +%Y-%m-%d)\"; }; f"
   uncommit = reset --soft HEAD^
   unstage = reset HEAD
   count = shortlog --summary --numbered
