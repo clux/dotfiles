@@ -2,5 +2,5 @@
 
 export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/.npm/bin:$PATH
 export PATH=$HOME/local/bin:$PATH
-export PATH=/usr/lib/clang-analyzer/scan-build:$PATH
