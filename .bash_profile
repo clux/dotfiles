@@ -29,6 +29,13 @@ key() {
   keychain --timeout $((8*60)) --quiet --host agent $keys
   source ~/.keychain/agent-sh
 }
+_key() {
+  local cur
+  _init_completion || return
+  local -r keys="$(find ~/.ssh -name "*_id" -printf "%f " | sed 's/_id//g')"
+  COMPREPLY=($(compgen -W "$keys" -- "$cur"))
+}
+complete -F _key key
 
 if [[ $(hostname) = ealbrigt-ws ]]; then
   key sqbu work
