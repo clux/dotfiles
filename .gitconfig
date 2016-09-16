@@ -47,8 +47,8 @@
   ignore = !git untracked | grep -v .gitignore >> .gitignore && git add .gitignore
   # open github/github enterprise changesets in the browser
   open = "!f() { xdg-open \"https://$(echo $(git config --get remote.origin.url) | sed 's|^http.://||' | sed 's|^git@||' | tr : '/' | sed 's|.git$||')/commit/$1\"; }; f"
-  # go $1 steps back in reflog
-  undo = "!f() { git reset --hard $(git rev-parse --abbrev-ref HEAD)@{${1-1}}; }; f"
+  # reset to blank state
+  wipe = "!f() { git reset --hard origin/master && git clean -fdX; }; f"
 
   # FINDERS
   # Find commits by source code
