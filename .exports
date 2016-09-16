@@ -42,5 +42,5 @@ export ANSIBLE_NOCOWS=1
 export FZF_DEFAULT_COMMAND='
   (git ls-tree -r --name-only HEAD ||
    find . -path "*/\.*" -prune -o -type f -print -o -type l -print |
-      grep -vE "/target/|node_modules" |
+      grep -vE "/target/|node_modules|bower_components" |
       sed s/^..//) 2> /dev/null'

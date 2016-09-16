@@ -9,7 +9,7 @@ fs() { find . -type f -name "$1" 2> /dev/null ;}
 ff() { find "$1" -type f -name "$2" 2> /dev/null ;}
 
 tre() {
-  tree -aC -I "node_modules|.git|bower_components|venv" --dirsfirst "$@" | less -FRX
+  tree -aC -I "node_modules|target|site-packages|.git|bower_components|venv" --dirsfirst "$@" | less -FRX
 }
 
 # JS files
