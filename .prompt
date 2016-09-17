@@ -152,4 +152,4 @@ set_prompt() {
   PS2="${bold}${yellow}⚡${reset} "
 }
 
-PROMPT_COMMAND='set_prompt'
+#PROMPT_COMMAND='set_prompt'
