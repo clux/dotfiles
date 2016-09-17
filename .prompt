@@ -1,85 +1,92 @@
-# Colors. Allow unused:
-# shellcheck disable=SC2034
+#!/bin/bash
+export TERM=xterm-256color
 
-if tput setaf 1 &> /dev/null; then
-  export TERM=xterm-256color
-  tput sgr0 # reset colors
-  # Solarized colors, taken from http://git.io/solarized-colors.
-  bold="\[$(tput bold)\]"
-  reset="\[$(tput sgr0)\]"
-  black="\[$(tput setaf 0)\]"
-  blue="\[$(tput setaf 33)\]"
-  cyan="\[$(tput setaf 37)\]"
-  green="\[$(tput setaf 64)\]"
-  orange="\[$(tput setaf 166)\]"
-  purple="\[$(tput setaf 125)\]"
-  red="\[$(tput setaf 124)\]"
-  violet="\[$(tput setaf 61)\]"
-  white="\[$(tput setaf 15)\]"
-  yellow="\[$(tput setaf 136)\]"
-  dircol="${bold}${white}"
-else
-  # non-256 color terminal - compat only
-  bold=''
-  reset='\[\e[00m\]'
-  #black="\e[1;30m"
-  black='\[\e[01;30m\]' # really bold black -> grey (01 is bold)
-  blue='\[\e[0;34m\]'
-  #cyan="\e[1;36m"
-  cyan='\[\e[0;36m\]'
-  cyan='\[\e[0;36m\]'
-  #green="\e[1;32m"
-  green='\[\e[0;32m\]'
-  orange='\[\e[0;33m\]'
-  purple='\[\e[0;35m\]'
-  red='\[\e[0;31m\]'
-  violet='\[\e[0;35m\]'
-  white='\[\e[0;37m\]'
-  yellow='\[\e[0;33m\]'
-  dircol="$black" # need to do bold inside the main color here - setaf can compose
-fi
+show_cwd() {
+  local dir_limit="3"
+  local truncation="⋯"
+  local first_char
+  local part_count=0
+  local formatted_cwd=""
+  local dir_sep="  "
+  local tilde="~"
 
-#flag='\342\232\221'
-#voltage='\342\232\241'
+  local cwd="${PWD/#$HOME/$tilde}"
+
+  # get first char of the path, i.e. tilde or slash
+  first_char=${cwd::1}
+
+  # remove leading tilde
+  cwd="${cwd#\~}"
+
+  while [[ "$cwd" == */* && "$cwd" != "/" ]]; do
+    # pop off last part of cwd
+    local part="${cwd##*/}"
+    cwd="${cwd%/*}"
+
+    formatted_cwd="$dir_sep$part$formatted_cwd"
+    part_count=$((part_count+1))
+
+    [[ $part_count -eq $dir_limit ]] && first_char="$truncation" && break
+  done
+
+  echo -e "$first_char$formatted_cwd"
+}
 
 show_git_differences() {
-  # check if the current directory is in .git before running git checks
-  if [ "$(git rev-parse --is-inside-git-dir 2> /dev/null)" == 'false' ]; then
+  [[ $(git rev-parse --is-inside-work-tree 2>/dev/null) == true ]] || return 1
 
-    # Ensure the index is up to date.
-    git update-index --really-refresh -q &>/dev/null
+  local added_symbol="●"
+  local unmerged_symbol="✗"
+  local modified_symbol="+"
+  local clean_symbol="✔"
+  local has_untracked_files_symbol="…"
+  local stash_symbol="⚑"
 
-    # Check for uncommitted changes in the index.
-    if ! git diff --quiet --ignore-submodules --cached; then
-      s+='+'
-    fi;
+  local ahead_symbol="↑"
+  local behind_symbol="↓"
 
-    # Check for ahead by commits
-    if git status | grep -q "branch is ahead"; then
-      s+='>'
-    fi
+  local unmerged_count=0 modified_count=0 has_untracked_files=0 added_count=0 is_clean=""
 
-    # Check for unstaged changes.
-    if ! git diff-files --quiet --ignore-submodules --; then
-      s+='!'
-    fi;
+  # shellcheck disable=SC2046
+  set -- $(git rev-list --left-right --count "@{upstream}...HEAD" 2>/dev/null)
+  local behind_count=$1
+  local ahead_count=$2
 
-    # Check that identity helper is set up correctly
-    # This can be removed once the old global values fully disappears
-    if git whoami | grep -q "Needs to be set"; then
-      s+='#'
-    fi
+  # Added (A), Copied (C), Deleted (D), Modified (M), Renamed (R), changed (T), Unmerged (U), Unknown (X), Broken (B)
+  while read -r line; do
+    case "$line" in
+      M*) modified_count=$(( $modified_count + 1 )) ;;
+      U*) unmerged_count=$(( $unmerged_count + 1 )) ;;
+    esac
+  done < <(git diff --name-status)
 
-    # Check for untracked files.
-    if [ -n "$(git ls-files --others --exclude-standard)" ]; then
-      s+='?'
-    fi;
+  while read -r line; do
+    case "$line" in
+      *) added_count=$(( $added_count + 1 )) ;;
+    esac
+  done < <(git diff --name-status --cached)
 
-    # Check for stashed files.
-    if git rev-parse --verify refs/stash &>/dev/null; then
-      s+='$'
-    fi
+  if [ -n "$(git ls-files --others --exclude-standard)" ]; then
+    has_untracked_files=1
   fi
+
+  local -r stash_count=$(( $(git rev-parse --verify refs/stash 2> /dev/null | wc -l) ));
+
+  if [ $(( unmerged_count + modified_count + has_untracked_files + added_count )) -eq 0 ]; then
+    is_clean=1
+  fi
+
+  local s=""
+  local xspace=""
+  [[ $ahead_count -gt 0 ]] && {  s+="$xspace$ahead_symbol$ahead_count"; xspace=" "; }
+  [[ $behind_count -gt 0 ]] && { s+="$xspace$behind_symbol$behind_count"; xspace=" "; }
+  [[ $modified_count -gt 0 ]] && { s+="$xspace$modified_symbol$modified_count"; xspace=" "; }
+  [[ $unmerged_count -gt 0 ]] && { s+="$xspace$unmerged_symbol$unmerged_count"; xspace=" "; }
+  [[ $added_count -gt 0 ]] && { s+="$xspace$added_symbol$added_count"; xspace=" "; }
+  [[ $has_untracked_files -gt 0 ]] && { s+="$xspace$has_untracked_files_symbol"; xspace=" "; }
+  [[ $stash_count -gt 0 ]] && { s+="$xspace$stash_symbol$stash_count"; xspace=" "; }
+  [[ $is_clean -gt 0 ]] && { s+="$xspace$clean_symbol"; xspace=" "; }
+
   echo -e "$s"
 }
 
@@ -98,13 +105,29 @@ prompt_git() {
       git rev-parse --short HEAD 2> /dev/null || \
       echo '(unknown)')"
 
-    [ -n "${s}" ] && s=" [${s}]"
-    echo -e " ${white}on ${green}${branchName}${orange}${s}"
+    echo -e " ${white} ${bold}${cyan}${branchName}  ${s}"
   fi
 }
 
 set_prompt() {
   local -r rc=$? # Must save this
+
+  #tput sgr0 # reset colors
+  # Solarized colors, taken from http://git.io/solarized-colors.
+  local -r bold="\[$(tput bold)\]"
+  local -r reset="\[$(tput sgr0)\]"
+  #local -r black="\[$(tput setaf 0)\]"
+  #local -r blue="\[$(tput setaf 33)\]"
+  local -r cyan="\[$(tput setaf 37)\]"
+  local -r green="\[$(tput setaf 64)\]"
+  #local -r orange="\[$(tput setaf 166)\]"
+  local -r purple="\[$(tput setaf 125)\]"
+  local -r red="\[$(tput setaf 124)\]"
+  #local -r violet="\[$(tput setaf 61)\]"
+  local -r white="\[$(tput setaf 15)\]"
+  local -r yellow="\[$(tput setaf 136)\]"
+  local -r dircol="${bold}${white}"
+
   # Return code when non-zero
   PS1=$([ "$rc" -ne 0 ] && echo -e "${red}[$rc]${reset}")
 
@@ -115,9 +138,9 @@ set_prompt() {
 
   # Make foldername red when root
   if [ $EUID -eq 0 ]; then
-    PS1+="${bold}${red}\\w${reset}"
+    PS1+="${bold}${red}$(show_cwd)${reset}"
   else
-    PS1+="${dircol}\\w${reset}"
+    PS1+="${dircol}$(show_cwd)${reset}"
   fi
 
   if [ -n "${VIRTUAL_ENV}" ]; then
@@ -125,9 +148,8 @@ set_prompt() {
   fi
 
   PS1+="$(prompt_git)" # git repository (fast and detailed)
-
-  PS1+=" ${bold}${white}\$${reset} " # yellow $
+  PS1+=" ${bold}${white}${reset} "
+  PS2="${bold}${yellow}⚡${reset} "
 }
 
 PROMPT_COMMAND='set_prompt'
-export PS2="${bold}${yellow}⚡${reset} "
