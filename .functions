@@ -76,7 +76,15 @@ openimage() {
 # -----------------------------------------------------------------------------
 # package manager abstraction - mostly for my own memory
 
-if lsb_release -ds | grep -qEi "debian|mint|buntu"; then
+# TODO: find what package a file belongs to
+if grep -q "Arch Linux" /etc/os-release; then
+  paks() { pacman -Ss "$1" ;} # -Qs for what you have installed
+  pakf() { pacman -Qo "$1" ;} # -Fs for arbitrary files in any package (-Fy first)
+  qlist() { pacman -Ql "$1" ;}
+  paki() { sudo pacman -S "$1" ;}
+  pakr() { sudo pacman -Rs "$1" ;}
+  pakupd() { checkupdates ;}
+elif lsb_release -ds | grep -qEi "debian|mint|buntu"; then
   paks() { apt-cache search "$1"; } # find package by name
   pakf() { dpkg -S "$1" ;}
   qlist() { dpkg-query -L "$1" ;}
@@ -88,12 +96,6 @@ elif lsb_release -ds | grep -qEi "Gentoo"; then
   # canonical qlist
   paki() { sudo emerge "$1" ;}
   pakr() { sudo emerge -cav "$1" ;}
-elif hash pacman 2> /dev/null; then
-  paks() { pacman -Ss "$1" ;} # -Qs for what you have installed
-  pakf() { pacman -Qo "$1" ;} # -Fs for arbitrary files in any package (-Fy first)
-  qlist() { pacman -Ql "$1" ;}
-  paki() { sudo pacman -S "$1" ;}
-  pakr() { sudo pacman -R "$1" ;}
 elif hash yum 2> /dev/null; then
   paks() { yum search "$1" ;}
   pakf() { yum whatprovides "$1" ;}
