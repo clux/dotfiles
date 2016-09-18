@@ -60,7 +60,7 @@ show_git_differences() {
     has_untracked=1
   fi
 
-  local -r stash_count=$(( $(git rev-parse --verify refs/stash 2> /dev/null | wc -l) ));
+  local -r stashed=$(( $(git rev-parse --verify refs/stash 2> /dev/null | wc -l) ));
 
   if [ $(( unmerged + modified + has_untracked + added )) -eq 0 ]; then
     is_clean=1
@@ -75,7 +75,7 @@ show_git_differences() {
   [[ $unmerged -gt 0 ]] && s+=" ✗$unmerged"
   [[ $added -gt 0 ]] && s+=" ●$added"
   [[ $has_untracked -gt 0 ]] && s+=" …"
-  [[ $stash_count -gt 0 ]] && s+=" ⚑$stash_count"
+  [[ $stashed -gt 0 ]] && s+=" ⚑$stashed"
   [[ $is_clean -gt 0 ]] && s+=" ✔"
 
   # remove leading space
@@ -97,7 +97,7 @@ prompt_git() {
       git rev-parse --short HEAD 2> /dev/null || \
       echo '(unknown)')"
 
-    echo -e " ${white} ${cyan}${branchName}  ${s}"
+    echo -e "  ${vcstxt}${branchName}  ${s}"
   fi
 }
 
@@ -109,7 +109,7 @@ set_prompt() {
   #local -r bold="\[$(tput bold)\]"
   local -r reset="\[$(tput sgr0)\]"
   local -r black="\[$(tput setaf 0)\]"
-  #local -r blue="\[$(tput setaf 33)\]"
+  local -r blue="\[$(tput setaf 33)\]"
   local -r cyan="\[$(tput setaf 38)\]"
   local -r green="\[$(tput setaf 64)\]"
   #local -r orange="\[$(tput setaf 166)\]"
@@ -120,35 +120,54 @@ set_prompt() {
   local -r yellow="\[$(tput setaf 136)\]"
   local -r dircol="${white}"
 
-  local -r bbg="\[$(tput setab 0)\]"
-  #local -r wbg="\[$(tput setab 15)\]"
+  local -r has_warn=$(( rc ))
+  local -r warntxt="${white}"
+  local -r warnfg="\[$(tput setaf 9)\]"
+  local -r warnbg="\[$(tput setab 9)\]"
 
-  local -r warnfg="\[$(tput setaf 124)\]"
-  local -r warnbg="\[$(tput setab 124)\]"
+  local -r has_host="${SSH_TTY}"
+  local -r hostbg="\[$(tput setab 235)\]"
+  local -r hostfg="\[$(tput setaf 235)\]"
+  local -r hosttxt="${white}"
+
+  local -r mainbg="\[$(tput setab 232)\]"
+  local -r mainfg="\[$(tput setaf 232)\]"
+  local -r maintxt="${white}"
+  local -r vcstxt="${cyan}"
+
 
   # Return code when non-zero
-  PS1=$([ "$rc" -ne 0 ] && echo -e "${warnbg} ${rc} ${bbg}${warnfg} ")
-  PS1+="${bbg}"
+  PS1="${mainbg}"
+  if [[ $has_warn -gt 0 ]]; then
+    PS1+="${warnbg}${warntxt} ${rc} ${warnfg}"
+    if [[ -n $has_host ]]; then # shade for hostname block if on ssh
+      PS1+="${hostbg}"
+    else
+      PS1+="${mainbg}"
+    fi
+  fi
 
   # Show the hostname when connected via SSH
-  if [ -n "${SSH_TTY}" ]; then
-    PS1+="${green}\\h${reset}:"
+  if [[ -n $has_host ]]; then
+    PS1+="${hostbg}${hosttxt} ${HOSTNAME} ${hostfg}"
+    PS1+="${mainbg}"
   fi
 
-  # Make foldername red when root
+  # Show CWD
+  PS1+="${maintxt} "
+  # Prepend (root) if root
   if [ $EUID -eq 0 ]; then
-    PS1+="${red}$(show_cwd)${reset}"
-  else
-    PS1+="${dircol}$(show_cwd)${reset}"
+    "(${red}root${maintxt}) "
   fi
-
+  PS1+="$(show_cwd)"
+  # Append (pyv) if in venv
   if [ -n "${VIRTUAL_ENV}" ]; then
-    PS1+=" (${purple}pyv${reset})"
+    PS1+=" (${purple}pyv${maintxt})"
   fi
 
-  PS1+="${bbg}"
-  PS1+="$(prompt_git)" # git repository (fast and detailed)
-  PS1+=" ${reset}${black}${reset} "
+  PS1+="${mainbg}"
+  PS1+="$(prompt_git) " # git repository (fast and detailed)
+  PS1+="${reset}${mainfg}${reset} "
   PS2="${yellow}⚡${reset} "
 }
 
