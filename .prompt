@@ -105,20 +105,20 @@ prompt_git() {
       git rev-parse --short HEAD 2> /dev/null || \
       echo '(unknown)')"
 
-    echo -e " ${white} ${bold}${cyan}${branchName}  ${s}"
+    echo -e " ${white} ${cyan}${branchName}  ${s}"
   fi
 }
 
 set_prompt() {
   local -r rc=$? # Must save this
 
-  #tput sgr0 # reset colors
+  tput sgr0 # reset colors
   # Solarized colors, taken from http://git.io/solarized-colors.
   local -r bold="\[$(tput bold)\]"
   local -r reset="\[$(tput sgr0)\]"
-  #local -r black="\[$(tput setaf 0)\]"
+  local -r black="\[$(tput setaf 0)\]"
   #local -r blue="\[$(tput setaf 33)\]"
-  local -r cyan="\[$(tput setaf 37)\]"
+  local -r cyan="\[$(tput setaf 38)\]"
   local -r green="\[$(tput setaf 64)\]"
   #local -r orange="\[$(tput setaf 166)\]"
   local -r purple="\[$(tput setaf 125)\]"
@@ -126,30 +126,38 @@ set_prompt() {
   #local -r violet="\[$(tput setaf 61)\]"
   local -r white="\[$(tput setaf 15)\]"
   local -r yellow="\[$(tput setaf 136)\]"
-  local -r dircol="${bold}${white}"
+  local -r dircol="${white}"
+
+  local -r bbg="\[$(tput setab 0)\]"
+  local -r wbg="\[$(tput setab 15)\]"
+
+  local -r warnfg="\[$(tput setaf 124)\]"
+  local -r warnbg="\[$(tput setab 124)\]"
 
   # Return code when non-zero
-  PS1=$([ "$rc" -ne 0 ] && echo -e "${red}[$rc]${reset}")
+  PS1=$([ "$rc" -ne 0 ] && echo -e "${warnbg} ${rc} ${bbg}${warnfg} ")
+  PS1+="${bbg}"
 
   # Show the hostname when connected via SSH
   if [ -n "${SSH_TTY}" ]; then
-    PS1+="${bold}${green}\\h${reset}:"
+    PS1+="${green}\\h${reset}:"
   fi
 
   # Make foldername red when root
   if [ $EUID -eq 0 ]; then
-    PS1+="${bold}${red}$(show_cwd)${reset}"
+    PS1+="${red}$(show_cwd)${reset}"
   else
     PS1+="${dircol}$(show_cwd)${reset}"
   fi
 
   if [ -n "${VIRTUAL_ENV}" ]; then
-    PS1+=" (${bold}${purple}pyv${reset})"
+    PS1+=" (${purple}pyv${reset})"
   fi
 
+  PS1+="${bbg}"
   PS1+="$(prompt_git)" # git repository (fast and detailed)
-  PS1+=" ${bold}${white}${reset} "
-  PS2="${bold}${yellow}⚡${reset} "
+  PS1+=" ${reset}${black}${reset} "
+  PS2="${yellow}⚡${reset} "
 }
 
-#PROMPT_COMMAND='set_prompt'
+PROMPT_COMMAND='set_prompt'
