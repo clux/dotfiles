@@ -10,13 +10,15 @@ setxkbmap -layout us,us \
 xrdb -merge ~/.Xresources
 # Consider running urxvtd here
 
-if [[ "$(hostname)" = kjttks ]]; then
+if [[ $HOSTNAME = kjttks ]]; then
   nvidia-settings -a [gpu:0]/GpuPowerMizerMode=1
 fi
 
-if [[ $(hostname) = cluxx1 ]]; then
+if [[ $HOSTNAME = cluxx1 ]]; then
   xinput set-prop 11 "Device Enabled" 0
 fi
+
+# Remove maccel
 xset m 0 0
 
 # tmux and guake

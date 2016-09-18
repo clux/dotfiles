@@ -16,7 +16,7 @@ endef
 
 # All targets herein are technically PHONY, but this rarely matters
 # We list a few of them that MIGHT cause the `'target' is up to date` failure.
-.PHONY: config ui sublime help font guake gconf dconf
+.PHONY: config ui sublime vim help guake gconf dconf
 
 help:
 	@tput -T xterm bold
@@ -51,7 +51,7 @@ config: directories
 gconf:
 	$(call green, "Setting guake style")
 	@gconftool-2 --set /apps/guake/style/background/transparency 20 --type int
-	@gconftool-2 --set /apps/guake/style/font/style "Monospace 16" --type string
+	@gconftool-2 --set /apps/guake/style/font/style "Roboto Mono for Powerline 18" --type string
 	@gconftool-2 --set /apps/guake/general/use_default_font false --type bool
 	@gconftool-2 --set /apps/guake/general/history_size 16000 --type int
 	@gconftool-2 --set /apps/guake/general/use_trayicon false --type bool
@@ -72,11 +72,12 @@ gconf:
 	@gconftool-2 --set /apps/guake/keybindings/local/clipboard_copy "<Control><Shift>"c --type string
 	@gconftool-2 --set /apps/guake/keybindings/local/clipboard_paste "<Control><Shift>v" --type string
 
-has_font:
-	$(call green, "Guarding on Liberations font presence")
+has_fonts:
+	$(call green, "Guarding on Liberations + powerline font presence")
 	@find /usr/share/fonts/ | grep -q Liberation
+	@find ~/.local/share/fonts/ | grep -q Powerline
 
-dconf: has_font
+dconf: has_fonts
 	$(call green, "Importing main dconf settings")
 	@dconf load /org/ < org.dconf
 
