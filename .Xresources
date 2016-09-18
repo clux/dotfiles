@@ -33,10 +33,10 @@ URxvt.matcher.button:       1
 ! -- Theme
 URxvt.internalBorder:       0
 URxvt.letterSpace:          -1
-URxvt.font:                 xft:DejaVu Sans Mono:size=14:Regular
-URxvt.boldFont:             xft:DejaVu Sans Mono:size=14:Bold
-URxvt.italicFont:           xft:DejaVu Sans Mono:size=14:Italic
-URxvt.boldItalicFont:       xft:DejaVu Sans Mono:size=14:Bold:Italic
+URxvt.font:                 xft:DejaVu Sans Mono for Powerline:size=32:Regular
+URxvt.boldFont:             xft:DejaVu Sans Mono for Powerline:size=32:Bold
+URxvt.italicFont:           xft:DejaVu Sans Mono for Powerline:size=32:Italic
+URxvt.boldItalicFont:       xft:DejaVu Sans Mono for Powerline:size=32:Bold:Italic
 
 ! -- Transparent background
 URxvt.foreground:           #FFFFFF
