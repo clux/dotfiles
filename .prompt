@@ -108,36 +108,48 @@ set_prompt() {
   # Solarized colors, taken from http://git.io/solarized-colors.
   #local -r bold="\[$(tput bold)\]"
   local -r reset="\[$(tput sgr0)\]"
-  local -r black="\[$(tput setaf 0)\]"
-  local -r blue="\[$(tput setaf 33)\]"
+  #local -r black="\[$(tput setaf 0)\]"
+  #local -r blue="\[$(tput setaf 33)\]"
   local -r cyan="\[$(tput setaf 38)\]"
-  local -r green="\[$(tput setaf 64)\]"
+  #local -r green="\[$(tput setaf 64)\]"
   #local -r orange="\[$(tput setaf 166)\]"
   local -r purple="\[$(tput setaf 125)\]"
   local -r red="\[$(tput setaf 124)\]"
   #local -r violet="\[$(tput setaf 61)\]"
   local -r white="\[$(tput setaf 15)\]"
   local -r yellow="\[$(tput setaf 136)\]"
-  local -r dircol="${white}"
 
+  # Short indication for when your inline shell script is incomplete
+  PS2="${yellow}⚡${reset} "
+
+  # color info
+  # - bg color is the background color for each of the up to three chunks
+  # - txt colors are the colors used inside the chunks
+  # - fg color is only used to replace background colors between chunks
+  # -  separator takes last bg color as new fg color for one character only
+  # - reset only used at the end for partially transparent end separator
+
+  # First (optional) chunk with return code (if != 0)
   local -r has_warn=$(( rc ))
-  local -r warntxt="${white}"
+  local -r warnbg="\[$(tput setab 9)\]" # red-ish
   local -r warnfg="\[$(tput setaf 9)\]"
-  local -r warnbg="\[$(tput setab 9)\]"
+  local -r warntxt="${white}"
 
+  # Second (optional) chunk with hostname (when connected via ssh)
   local -r has_host="${SSH_TTY}"
-  local -r hostbg="\[$(tput setab 235)\]"
+  local -r hostbg="\[$(tput setab 235)\]" # light-grey
   local -r hostfg="\[$(tput setaf 235)\]"
   local -r hosttxt="${white}"
 
-  local -r mainbg="\[$(tput setab 232)\]"
+  # Third (main mandatory) chunk with cwd and (optionally) git status
+  local -r mainbg="\[$(tput setab 232)\]" # dark-grey
   local -r mainfg="\[$(tput setaf 232)\]"
   local -r maintxt="${white}"
   local -r vcstxt="${cyan}"
 
 
   # Return code when non-zero
-  PS1="${mainbg}"
+  PS1="${mainbg}" # initialize bg for warn and no host blocks
   if [[ $has_warn -gt 0 ]]; then
     PS1+="${warnbg}${warntxt} ${rc} ${warnfg}"
     if [[ -n $has_host ]]; then # shade for hostname block if on ssh
@@ -164,11 +176,12 @@ set_prompt() {
   if [ -n "${VIRTUAL_ENV}" ]; then
     PS1+=" (${purple}pyv${maintxt})"
   fi
-
+  # Show git status
   PS1+="${mainbg}"
   PS1+="$(prompt_git) " # git repository (fast and detailed)
+
+  # Make last separator half-transparent
   PS1+="${reset}${mainfg}${reset} "
-  PS2="${yellow}⚡${reset} "
 }
 
 PROMPT_COMMAND='set_prompt'
