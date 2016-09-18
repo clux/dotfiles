@@ -33,6 +33,10 @@ sublime:
 	$(call red, "Linking User package in sublime-text-3")
 	@ln -s "$$PWD/.config/sublime-text-3/Packages/User" ~/.config/sublime-text-3/Packages/User
 
+vim:
+	$(call green," installing vim plugins")
+	@[ -f ~/.vim/autoload/plug.vim ] && vim +PlugUpdate +qall
+
 config: directories
 	$(call green," ln","configs in \$$HOME")
 	@find "$$PWD" -maxdepth 1 -name ".*" -not -name ".travis.yml" -type f -print -exec ln -sfn {} ~/ \;
@@ -42,11 +46,7 @@ config: directories
 		find "$$PWD/$$d" -maxdepth 1 -type f -print -exec ln -sfn {} ~/$$d \; ; \
 	done
 	@[ -d ~/.config/sublime-text-3/Packages/User ] || make sublime
-
-vim:
-	$(call green," installing vim plugins")
-	@[ -f ~/.vim/autoload/plug.vim ] && vim +PlugUpdate +qall
-	@vim +"AirlineTheme serene" +"PromptlineSnapshot! ~/.promptline airline" +qa
+	make vim
 
 gconf:
 	$(call green, "Setting guake style")

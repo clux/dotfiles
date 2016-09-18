@@ -35,17 +35,7 @@ show_cwd() {
 show_git_differences() {
   [[ $(git rev-parse --is-inside-work-tree 2>/dev/null) == true ]] || return 1
 
-  local added_symbol="●"
-  local unmerged_symbol="✗"
-  local modified_symbol="+"
-  local clean_symbol="✔"
-  local has_untracked_files_symbol="…"
-  local stash_symbol="⚑"
-
-  local ahead_symbol="↑"
-  local behind_symbol="↓"
-
-  local unmerged_count=0 modified_count=0 has_untracked_files=0 added_count=0 is_clean=""
+  local unmerged=0 modified=0 has_untracked=0 added=0 is_clean=""
 
   # shellcheck disable=SC2046
   set -- $(git rev-list --left-right --count "@{upstream}...HEAD" 2>/dev/null)
@@ -55,39 +45,41 @@ show_git_differences() {
   # Added (A), Copied (C), Deleted (D), Modified (M), Renamed (R), changed (T), Unmerged (U), Unknown (X), Broken (B)
   while read -r line; do
     case "$line" in
-      M*) modified_count=$(( $modified_count + 1 )) ;;
-      U*) unmerged_count=$(( $unmerged_count + 1 )) ;;
+      M*) modified=$(( modified + 1 )) ;;
+      U*) unmerged=$(( unmerged + 1 )) ;;
     esac
   done < <(git diff --name-status)
 
   while read -r line; do
     case "$line" in
-      *) added_count=$(( $added_count + 1 )) ;;
+      *) added=$(( added + 1 )) ;;
     esac
   done < <(git diff --name-status --cached)
 
   if [ -n "$(git ls-files --others --exclude-standard)" ]; then
-    has_untracked_files=1
+    has_untracked=1
   fi
 
   local -r stash_count=$(( $(git rev-parse --verify refs/stash 2> /dev/null | wc -l) ));
 
-  if [ $(( unmerged_count + modified_count + has_untracked_files + added_count )) -eq 0 ]; then
+  if [ $(( unmerged + modified + has_untracked + added )) -eq 0 ]; then
     is_clean=1
   fi
 
   local s=""
-  local xspace=""
-  [[ $ahead_count -gt 0 ]] && {  s+="$xspace$ahead_symbol$ahead_count"; xspace=" "; }
-  [[ $behind_count -gt 0 ]] && { s+="$xspace$behind_symbol$behind_count"; xspace=" "; }
-  [[ $modified_count -gt 0 ]] && { s+="$xspace$modified_symbol$modified_count"; xspace=" "; }
-  [[ $unmerged_count -gt 0 ]] && { s+="$xspace$unmerged_symbol$unmerged_count"; xspace=" "; }
-  [[ $added_count -gt 0 ]] && { s+="$xspace$added_symbol$added_count"; xspace=" "; }
-  [[ $has_untracked_files -gt 0 ]] && { s+="$xspace$has_untracked_files_symbol"; xspace=" "; }
-  [[ $stash_count -gt 0 ]] && { s+="$xspace$stash_symbol$stash_count"; xspace=" "; }
-  [[ $is_clean -gt 0 ]] && { s+="$xspace$clean_symbol"; xspace=" "; }
+  # We always print at least one of these due to definition of is_clean
+  # Thus `s` always begins with a leading space
+  [[ $ahead_count -gt 0 ]] && s+=" ↑$ahead_count"
+  [[ $behind_count -gt 0 ]] && s+=" ↓$behind_count"
+  [[ $modified -gt 0 ]] && s+=" +$modified"
+  [[ $unmerged -gt 0 ]] && s+=" ✗$unmerged"
+  [[ $added -gt 0 ]] && s+=" ●$added"
+  [[ $has_untracked -gt 0 ]] && s+=" …"
+  [[ $stash_count -gt 0 ]] && s+=" ⚑$stash_count"
+  [[ $is_clean -gt 0 ]] && s+=" ✔"
 
-  echo -e "$s"
+  # remove leading space
+  echo -e "$s" | sed 's/\s//'
 }
 
 prompt_git() {
@@ -114,7 +106,7 @@ set_prompt() {
 
   tput sgr0 # reset colors
   # Solarized colors, taken from http://git.io/solarized-colors.
-  local -r bold="\[$(tput bold)\]"
+  #local -r bold="\[$(tput bold)\]"
   local -r reset="\[$(tput sgr0)\]"
   local -r black="\[$(tput setaf 0)\]"
   #local -r blue="\[$(tput setaf 33)\]"
@@ -129,7 +121,7 @@ set_prompt() {
   local -r dircol="${white}"
 
   local -r bbg="\[$(tput setab 0)\]"
-  local -r wbg="\[$(tput setab 15)\]"
+  #local -r wbg="\[$(tput setab 15)\]"
 
   local -r warnfg="\[$(tput setaf 124)\]"
   local -r warnbg="\[$(tput setab 124)\]"

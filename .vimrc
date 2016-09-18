@@ -31,7 +31,6 @@ Plug 'plasticboy/vim-markdown'
 
 " Theme
 Plug 'vim-airline/vim-airline'
-Plug 'edkolev/promptline.vim'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'jpo/vim-railscasts-theme'
 
@@ -61,17 +60,8 @@ autocmd FileType go set tabstop=4 softtabstop=4 shiftwidth=4
 " Read when a file is changed outside
 set autoread
 
-" Promptline
-let AirlineTheme = 'badwolf'
+" Airline
 let g:airline_theme = 'badwolf'
-let g:promptline_preset = {
-        \'b' : [ promptline#slices#host({ 'only_if_ssh': 1 }) ],
-        \'a' : [ promptline#slices#vcs_branch(), promptline#slices#git_status() ],
-        \'c' : [ promptline#slices#cwd({ 'dir_limit': 3 }) ],
-        \'warn' : [ promptline#slices#last_exit_code() ],
-        \'options': {
-          \'left_sections' : [ 'warn', 'b', 'c', 'a' ],
-          \'left_only_sections' : [ 'warn', 'b', 'c', 'a' ]}}
 
 " Height of the command bar
 set cmdheight=1
