@@ -73,7 +73,7 @@ show_git_differences() {
   [[ $behind_count -gt 0 ]] && s+=" ↓$behind_count"
   [[ $modified -gt 0 ]] && s+=" +$modified"
   [[ $unmerged -gt 0 ]] && s+=" ✗$unmerged"
-  [[ $added -gt 0 ]] && s+=" ●$added"
+  [[ $added -gt 0 ]] && s+=" ●" #$added
   [[ $has_untracked -gt 0 ]] && s+=" …"
   [[ $stashed -gt 0 ]] && s+=" ⚑$stashed"
   [[ $is_clean -gt 0 ]] && s+=" ✔"

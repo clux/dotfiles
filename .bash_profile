@@ -2,7 +2,6 @@
 export TERM=xterm-256color
 
 # Modules
-source ~/.promptline
 source ~/.prompt
 source ~/.functions
 source ~/.exports
