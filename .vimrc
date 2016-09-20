@@ -32,13 +32,11 @@ Plug 'plasticboy/vim-markdown'
 " Theme
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'jpo/vim-railscasts-theme'
-
 
 call plug#end()
 
 syntax enable
-colorscheme railscasts
+colorscheme ron
 
 
 " unicode + unix
