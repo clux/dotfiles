@@ -75,7 +75,7 @@ show_git_differences() {
   [[ $unmerged -gt 0 ]] && s+=" ✗$unmerged"
   [[ $added -gt 0 ]] && s+=" ●" #$added
   [[ $has_untracked -gt 0 ]] && s+=" …"
-  [[ $stashed -gt 0 ]] && s+=" ⚑$stashed"
+  [[ $stashed -gt 0 ]] && s+=" ⚑" #$stashed
   [[ $is_clean -gt 0 ]] && s+=" ✔"
 
   # remove leading space
