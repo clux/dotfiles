@@ -83,7 +83,7 @@ if grep -q "Arch Linux" /etc/os-release; then
   qlist() { pacman -Ql "$1" ;}
   paki() { sudo pacman -S "$1" ;}
   pakr() { sudo pacman -Rs "$1" ;}
-  pakupd() { checkupdates ;}
+  # canonical checkupdates
 elif lsb_release -ds | grep -qEi "debian|mint|buntu"; then
   paks() { apt-cache search "$1"; } # find package by name
   pakf() { dpkg -S "$1" ;}
