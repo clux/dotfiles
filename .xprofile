@@ -15,7 +15,7 @@ if [[ $HOSTNAME = kjttks ]]; then
 fi
 
 if [[ $HOSTNAME = cluxx1 ]]; then
-  xinput set-prop 11 "Device Enabled" 0
+  xinput set-prop 10 "Device Enabled" 0
 fi
 
 # Remove maccel
