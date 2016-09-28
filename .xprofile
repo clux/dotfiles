@@ -15,7 +15,8 @@ if [[ $HOSTNAME = kjttks ]]; then
 fi
 
 if [[ $HOSTNAME = cluxx1 ]]; then
-  xinput set-prop 10 "Device Enabled" 0
+  padid=$(xinput | grep "Synaptics TouchPad" | egrep -o "id=.." | cut -d"=" -f2)
+  [ -n "$padid" ] && xinput set-prop "$padid" "Device Enabled" 0
 fi
 
 # Remove maccel
