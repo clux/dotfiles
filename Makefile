@@ -20,9 +20,10 @@ endef
 
 help:
 	@tput -T xterm bold
-	$(call green,"Valid targets:")
+	$(call green,"Main targets:")
 	$(call green," config", "symlink configuration files to ~/")
 	$(call green," ui", "set gconf and dconf settings")
+	$(call green," vim", "update vim plugins")
 
 directories:
 	@mkdir -p ~/.config/{autostart,profanity,sublime-text-3/Packages}
@@ -48,7 +49,7 @@ config: directories
 	@[ -d ~/.config/sublime-text-3/Packages/User ] || make sublime
 	make vim
 
-gconf:
+gconf: has_fonts
 	$(call green, "Setting guake style")
 	@gconftool-2 --set /apps/guake/style/background/transparency 20 --type int
 	@gconftool-2 --set /apps/guake/style/font/style "Roboto Mono for Powerline 18" --type string
