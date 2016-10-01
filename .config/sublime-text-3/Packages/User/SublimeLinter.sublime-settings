@@ -1,6 +1,6 @@
 {
     "user": {
-        "debug": true,
+        "debug": false,
         "delay": 0.25,
         "error_color": "D02000",
         "gutter_theme": "Packages/SublimeLinter/gutter-themes/Default/Default.gutter-theme",
@@ -8,25 +8,14 @@
         "lint_mode": "background",
         "linters": {
             "cppcheck": {
-                "@disable": true,
+                "@disable": false,
                 "args": [],
                 "enable": "style",
                 "excludes": [],
                 "std": []
             },
-            "cpplint": {
-                "@disable": false,
-                "args": [],
-                "excludes": [],
-                "filter": ""
-            },
             "eslint": {
                 "@disable": false,
-                "args": [],
-                "excludes": []
-            },
-            "jshint": {
-                "@disable": true,
                 "args": [],
                 "excludes": []
             },
@@ -35,14 +24,6 @@
                 "args": [],
                 "excludes": [],
                 "strict": true
-            },
-            "pep8": {
-                "@disable": false,
-                "args": [],
-                "excludes": [],
-                "ignore": "",
-                "max-line-length": null,
-                "select": ""
             },
             "pylint": {
                 "@disable": false,
@@ -67,9 +48,11 @@
                 "@disable": false,
                 "args": [
                     "-s",
-                    "bash"
+                    "bash",
+                    "-e",
+                    "SC1091,SC1090"
                 ],
-                "exclude": ["SC1091", "SC1090"],
+                "exclude": "",
                 "excludes": []
             }
         },
@@ -78,9 +61,8 @@
         "passive_warnings": false,
         "paths": {
             "linux": [
-                "~/.cabal/bin",
-                "~/local/node/bin",
-                "/home/clux/local/node/bin"
+                "~/.cargo/bin",
+                "~/.npm/bin"
             ],
             "osx": [],
             "windows": []
@@ -93,13 +75,16 @@
         "rc_search_limit": 3,
         "shell_timeout": 10,
         "show_errors_on_save": false,
-        "show_marks_in_minimap": false,
+        "show_marks_in_minimap": true,
         "syntax_map": {
             "html (django)": "html",
             "html (rails)": "html",
             "html 5": "html",
+            "javascript (babel)": "javascript",
+            "magicpython": "python",
             "php": "html",
-            "python django": "python"
+            "python django": "python",
+            "pythonimproved": "python"
         },
         "warning_color": "DDB700",
         "wrap_find": true

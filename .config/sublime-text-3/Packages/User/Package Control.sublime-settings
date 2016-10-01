@@ -1,9 +1,5 @@
 {
 	"bootstrapped": true,
-	"channels":
-	[
-		"https://packagecontrol.io/channel_v3.json"
-	],
 	"in_process_packages":
 	[
 	],
@@ -24,10 +20,10 @@
 		"RustAutoComplete",
 		"Search in Project",
 		"Seti_UX",
-		"Stylus",
 		"SublimeLinter",
 		"SublimeLinter-contrib-eslint",
 		"SublimeLinter-contrib-rustc",
+		"SublimeLinter-cppcheck",
 		"SublimeLinter-json",
 		"SublimeLinter-pylint",
 		"SublimeLinter-shellcheck",

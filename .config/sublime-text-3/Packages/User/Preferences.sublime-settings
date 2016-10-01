@@ -1,32 +1,47 @@
 {
-	"auto_complete_commit_on_tab": true,
-	"color_scheme": "Packages/Seti_UX/Seti.tmTheme",
-	"default_line_ending": "unix",
-	"drag_text": false,
-	"ensure_newline_at_eof_on_save": true,
-	"fold_buttons": false,
-	"font_size": 13,
-	"highlight_line": true,
-	"ignored_packages":
-	[
-		"Makefile",
-		"Markdown",
-		"Vintage"
-	],
-	"margin": 0,
-	"overlay_scroll_bars": "enabled",
-	"rulers":
-	[
-		85
-	],
-	"save_on_focus_lost": false,
-	"scroll_past_end": false,
-	"scroll_speed": 0,
-	"shift_tab_unindent": true,
-	"tab_completion": true,
-	"tab_size": 2,
-	"translate_tabs_to_spaces": true,
-	"tree_animation_enabled": false,
-	"trim_trailing_white_space_on_save": true,
-	"use_tab_stops": true
+  // enter as tab complete commit is weird..
+  "auto_complete_commit_on_tab": true,
+  // SETI_UX ftw
+  "color_scheme": "Packages/Seti_UX/Seti.tmTheme",
+  // never windows line endings
+  "default_line_ending": "unix",
+  "drag_text": false,
+  "ensure_newline_at_eof_on_save": true,
+  // no fold buttons in gutter
+  "fold_buttons": false,
+  // constant updates to this:
+  "font_size": 10,
+  // this is nice with Seti
+  "highlight_line": true,
+  "ignored_packages":
+  [
+    "Makefile",
+    "Vintage"
+  ],
+  // minimal:
+  "margin": 0,
+  // not sure this is working
+  "overlay_scroll_bars": "disabled",
+  // warning ruler at 85, as 100 usual hard limit
+  "rulers":
+  [
+    85
+  ],
+  // don't save unless we tell it to (locking down default)
+  "save_on_focus_lost": false,
+  // why would we want that..
+  "scroll_past_end": false,
+  // no smoothing..
+  "scroll_speed": 0,
+  // old habits:
+  "shift_tab_unindent": true,
+  "tab_completion": true,
+  // normally using 2 spaces
+  "tab_size": 2,
+  "translate_tabs_to_spaces": true,
+  // no effects
+  "tree_animation_enabled": false,
+  // sensible default on good codebases:
+  "trim_trailing_white_space_on_save": true,
+  "use_tab_stops": true
 }

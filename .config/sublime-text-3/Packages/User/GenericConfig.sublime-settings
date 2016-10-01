@@ -2,6 +2,8 @@
 	"extensions":
 	[
 		"dconf",
-		"toml"
+		"toml",
+		"lock",
+		".gitconfig"
 	]
 }
