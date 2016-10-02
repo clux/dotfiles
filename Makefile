@@ -23,7 +23,7 @@ help:
 	$(call green,"Main targets:")
 	$(call green," config", "symlink configuration files to ~/")
 	$(call green," ui", "set gconf and dconf settings")
-	$(call green," vim", "update vim plugins")
+	$(call green," editors", "configure sublime and vim")
 
 directories:
 	@mkdir -p ~/.config/{autostart,profanity,sublime-text-3/Packages}
@@ -33,6 +33,9 @@ directories:
 sublime:
 	$(call red, "Linking User package in sublime-text-3")
 	@ln -s "$$PWD/.config/sublime-text-3/Packages/User" ~/.config/sublime-text-3/Packages/User
+sublime_license:
+	$(call red, "Decrypting sublime license")
+	@pass sublime > ~/.config/sublime-text-3/Local/License.sublime_license
 
 vim:
 	$(call green," installing vim plugins")
@@ -46,8 +49,12 @@ config: directories
 		echo $$d; \
 		find "$$PWD/$$d" -maxdepth 1 -type f -print -exec ln -sfn {} ~/$$d \; ; \
 	done
+
+editors: directories
+	$(call green," configuring sublime and installing vim plugins")
 	@[ -d ~/.config/sublime-text-3/Packages/User ] || make sublime
-	make vim
+	@[ -f ~/.config/sublime-text-3/Local/License.sublime_license ] || make sublime_license
+	@[ -d ~/.vim/plugged ] || make vim
 
 gconf: has_fonts
 	$(call green, "Setting guake style")
