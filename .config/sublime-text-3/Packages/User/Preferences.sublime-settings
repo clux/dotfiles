@@ -2,6 +2,7 @@
 	"auto_complete_commit_on_tab": true,
 	"color_scheme": "Packages/Seti_UX/Seti.tmTheme",
 	"default_line_ending": "unix",
+	"show_definitions": false,
 	"drag_text": false,
 	"ensure_newline_at_eof_on_save": true,
 	"fold_buttons": false,
