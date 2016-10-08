@@ -42,7 +42,7 @@ if [[ $(hostname) = ealbrigt-ws ]]; then
 elif [[ $(hostname) = kjttks ]]; then
   key github main
 elif [[ $(hostname) = cluxx1 ]]; then
-  key github sqbu work
+  key github sqbu work main
 else
   [ -f ~/.keychain/agent-sh ] && source ~/.keychain/agent-sh
 fi

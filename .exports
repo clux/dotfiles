@@ -28,9 +28,11 @@ export RUST_SRC_PATH=$HOME/.cargo/rustc-stable/src
 # use shellcheck for current file only
 export SHELLCHECK_OPTS="-e SC1091 -e SC1090"
 
-# brotorr uses this
-export DOWNLOAD_DIR=/mnt/zeus/DL/
-if [ "$(hostname)" = "broxy" ]; then
+# Download dir for `dl` + brotorr
+export DOWNLOAD_DIR=~/Downloads
+if [[ $HOSTNAME = kjttks ]]; then
+  export DOWNLOAD_DIR=/mnt/zeus/DL/
+elif [[ $HOSTNAME = broxy ]]; then
   export DOWNLOAD_DIR=/media/dumptruck/DL
 fi
 
