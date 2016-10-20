@@ -30,12 +30,13 @@ directories:
 	@mkdir -p ~/.templates/{npm,cargo,git/hooks}
 	@mkdir -p ~/{.mpd/playlists,.ncmpcpp,Music}
 
-sublime:
+sublime_ln:
 	$(call red, "Linking User package in sublime-text-3")
 	@ln -s "$$PWD/.config/sublime-text-3/Packages/User" ~/.config/sublime-text-3/Packages/User
 sublime_license:
 	$(call red, "Decrypting sublime license")
 	@pass sublime > ~/.config/sublime-text-3/Local/License.sublime_license
+sublime: sublime_ln sublime_license
 
 vim:
 	$(call green," installing vim plugins")
