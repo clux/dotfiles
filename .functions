@@ -16,10 +16,6 @@ tre() {
 jf() { ff "$@" "*.js" | grep -vE "node_modules|bower_components|\.min" ;}
 js() { jf "$1" | xargs grep -s "$2" ;}
 
-# markdowns
-mf() { ff "$@" "*.md" | grep -vE "node_modules|bower_components" ;}
-ms() { mf "$1" | xargs grep -s "$2" ;}
-
 # RS files
 rf() { ff "$@" "*.rs" ;}
 rs() { rf "$1" | xargs grep -s "$2" ;}
