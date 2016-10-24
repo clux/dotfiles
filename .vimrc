@@ -22,9 +22,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 
-" fuzzy file finder
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-
 " Misc syntax highlighting
 Plug 'cespare/vim-toml'
 Plug 'plasticboy/vim-markdown'
