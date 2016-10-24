@@ -26,7 +26,7 @@ help:
 	$(call green," editors", "configure sublime and vim")
 
 directories:
-	@mkdir -p ~/.config/{autostart,profanity,sublime-text-3/Packages}
+	@mkdir -p ~/.config/{autostart,profanity,sublime-text-3/{Local,Packages}}
 	@mkdir -p ~/.templates/{npm,cargo,git/hooks}
 	@mkdir -p ~/{.mpd/playlists,.ncmpcpp,Music}
 
