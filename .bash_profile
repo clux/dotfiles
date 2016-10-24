@@ -13,6 +13,7 @@ source ~/.path
 
 # rupa/z + an extension
 [ -f ~/local/z/z.sh ] && source ~/local/z/z.sh
+
 # shellcheck disable=SC2068
 d() {  z -l $@ | tail -n 1 | awk '{print $2}' ;}
 
@@ -40,7 +41,7 @@ complete -F _key key
 if [[ $(hostname) = ealbrigt-ws ]]; then
   key sqbu work
 elif [[ $(hostname) = kjttks ]]; then
-  key github main
+  key github sqbu work main
 elif [[ $(hostname) = cluxx1 ]]; then
   key github sqbu work main
 else
