@@ -92,6 +92,7 @@ elif lsb_release -ds | grep -qEi "Gentoo"; then
   # canonical qlist
   paki() { sudo emerge "$1" ;}
   pakr() { sudo emerge -cav "$1" ;}
+  checkupdates() { eix -uc "$1" ;}
 elif hash yum 2> /dev/null; then
   paks() { yum search "$1" ;}
   pakf() { yum whatprovides "$1" ;}
