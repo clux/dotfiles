@@ -72,17 +72,29 @@ openimage() {
 # -----------------------------------------------------------------------------
 # package manager abstraction - mostly for my own memory
 
-# TODO: find what package a file belongs to
 if grep -q "Arch Linux" /etc/os-release; then
-  paks() { pacman -Ss "$1" ;} # -Qs for what you have installed
-  pakf() { pacman -Qo "$1" ;} # -Fs for arbitrary files in any package (-Fy first)
+  # list available packages:
+  paks() { pacman -Ss "$1" ;}
+  # list locally installed packages:
+  pakl() { pacman -Qs "$1" ;}
+  # what package owns local file:
+  pakf() { pacman -Qo "$1" ;}
+  # what package owns a file you don't have:
+  pakq() { pacman -Fs "$1"; } # may need a pacman -Fy first
+  # list files belonging to a package:
   qlist() { pacman -Ql "$1" ;}
+  # install a package:
   paki() { sudo pacman -S "$1" ;}
+  # remove a package and its dependencies recursively:
   pakr() { sudo pacman -Rs "$1" ;}
-  # canonical checkupdates
-elif lsb_release -ds | grep -qEi "debian|mint|buntu"; then
-  paks() { apt-cache search "$1"; } # find package by name
+  # list available updates to installed packages:
+  #canonical checkupdates
+elif grep -qE "Ubuntu|Mint" /etc/os-release; then
+  paks() { apt-cache search "$1"; }
+  # the easier ones for this all perform network queries..
+  pakl() { dpkg --get-selections | grep -v deinstall | awk '{ printf("%s\n", $1) }' | grep "$1" ;}
   pakf() { dpkg -S "$1" ;}
+  pakq() { echo "not implemented" ;}
   qlist() { dpkg-query -L "$1" ;}
   paki() { sudo apt-get install "$1" ;}
   pakr() { sudo apt-get remove "$1" ;}
