@@ -3,6 +3,8 @@ Plug 'tpope/vim-surround'
 
 Plug 'scrooloose/syntastic'
 
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
 " Sublime style multi carets: ctrl-n on word or \v selects - then v or c
 Plug 'terryma/vim-multiple-cursors'
 
