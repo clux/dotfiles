@@ -94,7 +94,7 @@ elif grep -qE "Ubuntu|Mint" /etc/os-release; then
   # the easier ones for this all perform network queries..
   pakl() { dpkg --get-selections | grep -v deinstall | awk '{ printf("%s\n", $1) }' | grep "$1" ;}
   pakf() { dpkg -S "$1" ;}
-  pakq() { echo "not implemented" ;}
+  pakq() { apt-file search "$1" ;} # needs apt-file installed + `apt-file update` called
   qlist() { dpkg-query -L "$1" ;}
   paki() { sudo apt-get install "$1" ;}
   pakr() { sudo apt-get remove "$1" ;}
