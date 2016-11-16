@@ -49,6 +49,8 @@
   open = "!f() { xdg-open \"https://$(echo $(git config --get remote.origin.url) | sed 's|^http.://||' | sed 's|^git@||' | tr : '/' | sed 's|.git$||')/commit/$1\"; }; f"
   # reset to blank state
   wipe = "!f() { git reset --hard origin/master && git clean -fdX; }; f"
+  # remove whitespace from your things
+  ws = "!git rebase --whitespace=fix --onto $(git merge-base HEAD @{u})"
 
   # FINDERS
   # Find commits by source code
@@ -117,3 +119,6 @@
 
 [init]
   templatedir = ~/.templates/git
+
+[core]
+	hooksPath = ~/.templates/git/hooks
