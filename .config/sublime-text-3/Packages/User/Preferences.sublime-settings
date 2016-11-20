@@ -10,6 +10,7 @@
 	"ignored_packages":
 	[
 		"Makefile",
+		"SublimeLinter-pylint",
 		"Vintage"
 	],
 	"margin": 0,
