@@ -3,6 +3,7 @@
   s = status -s
   d = diff
   dc = diff --cached
+  db = log -p master..HEAD
   c = commit --verbose
   a = add
   p = pull
@@ -21,8 +22,6 @@
   top = rev-parse --show-toplevel
   # re-apply tweaked hooks
   reinit = !sh -c 'rm -rf .git/hooks/** && git init'
-  # diff between the state $1 revisions ago and HEAD
-  di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
   # Listers
   tags = tag -l
   branches = branch -a
@@ -31,14 +30,12 @@
   # BRANCH HELPERS
   # push a small tweak to a PR
   yolo = !git add -u && git  commit --amend --no-edit && git push -f
-  # Delete merged branches
-  dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+  # Merged branch delete
+  md = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
   # Switch to a branch, creating it if necessary
   go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
   # Checkout a pull request from origin (of a github repository)
-  pr = !"f() { git fetch origin pull/$1/head:pr-$1; git checkout pr-$1; }; f"
-  # Interactive rebase with the given number of latest commits
-  reb = "!f() { git rebase -i HEAD~$1; }; f"
+  pr = "!f() { git fetch origin pull/$1/head:pr-$1; git checkout pr-$1; }; f"
 
   # MISC
   # add all untracked files to .gitignore
