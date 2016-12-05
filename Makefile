@@ -70,6 +70,7 @@ gconf: has_fonts
 	@gconftool-2 --set /apps/guake/general/window_height_f 92 --type float
 	@gconftool-2 --set /apps/guake/general/window_tabbar true --type bool
 	@gconftool-2 --set /apps/guake/general/window_ontop false --type bool
+	@gconftool-2 --set /apps/guake/general/use_vte_titles false --type bool
 	$(call green, "Setting guake keybindings")
 	@gconftool-2 --set /apps/guake/keybindings/global/show_hide "F1" --type string
 	@gconftool-2 --set /apps/guake/keybindings/local/toggle_fullscreen "F11" --type string
