@@ -51,8 +51,11 @@ ch() {
   cols=$(( COLUMNS / 3 ))
   sep='{::}'
 
-  #cp -f ~/.config/chromium/Default/History /tmp/h
-  cp -f ~/.config/google-chrome/Default/History /tmp/h
+  if hash google-chrome-stable 2> /dev/null; then
+    cp -f ~/.config/google-chrome/Default/History /tmp/h
+  else
+    cp -f ~/.config/chromium/Default/History /tmp/h
+  fi
 
   sqlite3 -separator $sep /tmp/h \
     "select substr(title, 1, $cols), url
