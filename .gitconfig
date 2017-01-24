@@ -8,6 +8,8 @@
   a = add
   p = pull
   m = checkout master
+  co = checkout
+  nu = checkout -b
 
   # OCCASIONAL
   amend = commit --amend
@@ -32,10 +34,6 @@
   yolo = !git add -u && git  commit --amend --no-edit && git push -f
   # Merged branch delete
   md = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
-  # Switch to a branch, creating it if necessary
-  go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
-  # Checkout a pull request from origin (of a github repository)
-  pr = "!f() { git fetch origin pull/$1/head:pr-$1; git checkout pr-$1; }; f"
 
   # MISC
   # add all untracked files to .gitignore
@@ -89,7 +87,7 @@
   signingkey = 0xA876A6CD26914D42
 
 [push]
-  default = simple
+  default = current
 
 [pager]
   diff = /usr/share/git/diff-highlight/diff-highlight | less
