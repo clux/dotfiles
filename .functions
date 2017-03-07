@@ -230,6 +230,13 @@ docker-clean() {
   docker images -q -f="dangling=true" | xargs -r docker rmi -f
 }
 
+musl-build() {
+  docker run \
+    -v cargo-cache:/root/.cargo \
+    -v "$PWD:/volume" -w /volume \
+    --rm -it clux/muslrust cargo build --release
+}
+
 serve() {
   python -m http.server 8000
 }
