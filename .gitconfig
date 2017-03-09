@@ -74,7 +74,7 @@
   gitlab ="!f() { git clone git@gitlab.com:$1.git && git idclone clux $1; }; f"
   bitbucket ="!f() { git clone git@bitbucket.org:$1.git && git idclone clux $1; }; f"
   sqbu = "!f() { git clone git@sqbu-github.cisco.com:$1.git && git idclone ea $1; }; f"
-  acano = "!f() { git clone git@bitbucket-eng-gpk1.cisco.com:/uxb/$1.git && git idclone ea $1; }; f"
+  acano = "!f() { git clone git@bitbucket-eng-gpk1.cisco.com:$1.git && git idclone ea $1; }; f"
 
   # multi-clone shortcuts
   hub ="!f() { for i in $@; do git github clux/$i; done; }; f"
