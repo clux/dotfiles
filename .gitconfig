@@ -46,6 +46,9 @@
   wipe = "!f() { git reset --hard origin/master && git clean -fdX; }; f"
   # remove whitespace from your things
   ws = "!git rebase --whitespace=fix --onto $(git merge-base HEAD @{u})"
+  # what are my aliases
+  aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
+
 
   # FINDERS
   # Find commits by source code
