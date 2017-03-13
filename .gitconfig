@@ -34,6 +34,7 @@
   yolo = !git add -u && git  commit --amend --no-edit && git push -f
   # Merged branch delete
   md = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+  prune = fetch --prune --all
 
   # MISC
   # add all untracked files to .gitignore
