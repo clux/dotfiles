@@ -12,7 +12,8 @@ source ~/.path
 [ -f ~/repos/cisco/bashrc ] && source ~/repos/cisco/bashrc
 
 # rupa/z + an extension
-[ -f ~/local/z/z.sh ] && source ~/local/z/z.sh
+[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
+
 
 # shellcheck disable=SC2068
 d() {  z -l $@ | tail -n 1 | awk '{print $2}' ;}
