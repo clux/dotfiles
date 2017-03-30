@@ -221,7 +221,7 @@ refresh-rate() {
   if [[ $(hostname) = kjttks ]]; then
     # Main screen refresh rate
     xrandr --output DVI-I-1 --mode 1920x1080 --rate "$rate"
-    xrandr -q | egrep "$rate\.00\*"
+    xrandr -q | grep -E "$rate\.00\*"
   fi
 }
 
