@@ -22,8 +22,7 @@
   stat = diff --stat
   rc = = clone --recursive
   top = rev-parse --show-toplevel
-  # re-apply tweaked hooks
-  reinit = !sh -c 'rm -rf .git/hooks/** && git init'
+
   # Listers
   tags = tag -l
   branches = branch -a
