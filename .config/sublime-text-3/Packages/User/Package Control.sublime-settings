@@ -6,6 +6,7 @@
 	"installed_packages":
 	[
 		"Ansible",
+		"Babel",
 		"Bats (Bash Automated Testing System)",
 		"Clang Format",
 		"CMake",
