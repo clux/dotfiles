@@ -44,6 +44,15 @@ v() {
     vim "$@"
   fi
 }
+# sublime
+sub() {
+  if [ $# -eq 0 ]; then
+    subl3 "$(fzf)"
+  else
+    subl3 "$@"
+  fi
+}
+
 
 # chrome history
 ch() {
