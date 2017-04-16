@@ -230,6 +230,9 @@ docker-clean() {
   docker images -q -f="dangling=true" | xargs -r docker rmi -f
 }
 
+musl-cross() {
+  cross build --target x86_64-unknown-linux-musl --release --verbose
+}
 musl-build() {
   docker run \
     -v cargo-cache:/root/.cargo \

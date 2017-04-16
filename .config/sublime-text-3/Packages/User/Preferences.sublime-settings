@@ -5,7 +5,7 @@
 	"drag_text": false,
 	"ensure_newline_at_eof_on_save": true,
 	"fold_buttons": false,
-	"font_size": 10,
+	"font_size": 11,
 	"highlight_line": true,
 	"ignored_packages":
 	[
@@ -29,5 +29,6 @@
 	"translate_tabs_to_spaces": true,
 	"tree_animation_enabled": false,
 	"trim_trailing_white_space_on_save": true,
+	"update_check": false,
 	"use_tab_stops": true
 }
