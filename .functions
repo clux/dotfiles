@@ -96,6 +96,14 @@ openimage() {
     --start-at "$file"
 }
 
+# veracrypt shortcuts
+vco() {
+  veracrypt --mount /dev/sdd1 --slot=1 --verbose -p "$(pass drives/turing)" --explore
+  notify-send "opened /dev/sdd1"
+}
+vcc() {
+  veracrypt --dismount /dev/sdd1
+}
 
 # -----------------------------------------------------------------------------
 # package manager abstraction - mostly for my own memory
