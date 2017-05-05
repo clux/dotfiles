@@ -101,6 +101,16 @@ prompt_git() {
   fi
 }
 
+prompt_lal() {
+  local branchName=''
+
+  local res
+  res=$(lal env 2> /dev/null)
+  if [[ $? == 0 ]]; then
+    echo -e " (${purple}${res}${maintxt})"
+  fi
+}
+
 set_prompt() {
   local -r rc=$? # Must save this
 
@@ -172,9 +182,12 @@ set_prompt() {
     "(${red}root${maintxt}) "
   fi
   PS1+="$(show_cwd)"
-  # Append (pyv) if in venv
   if [ -n "${VIRTUAL_ENV}" ]; then
+    # Append (pyv) if in venv
     PS1+=" (${purple}pyv${maintxt})"
+  elif [ -d .lal ]; then
+    # Append lal environment if inside a lal repo
+    PS1+="$(prompt_lal)"
   fi
   # Show git status
   PS1+="${mainbg}"
