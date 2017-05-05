@@ -106,7 +106,7 @@ prompt_lal() {
 
   local res
   if res=$(lal env 2> /dev/null); then
-    echo -e " (${purple}${res}${maintxt})"
+    echo -e " (${yellow}${res}${maintxt})"
   fi
 }
 
