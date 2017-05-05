@@ -105,8 +105,7 @@ prompt_lal() {
   local branchName=''
 
   local res
-  res=$(lal env 2> /dev/null)
-  if [[ $? == 0 ]]; then
+  if res=$(lal env 2> /dev/null); then
     echo -e " (${purple}${res}${maintxt})"
   fi
 }
