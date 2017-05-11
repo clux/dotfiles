@@ -23,7 +23,7 @@ alias XC="xclip -i -sel c"
 alias cwd='pwd | tr -d "\r\n" | xclip -sel clip'
 alias week='date +%V'
 alias ymd='date +%Y-%m-%d'
-alias clippy='rustup run nightly-2017-03-28 cargo clippy'
+alias clippy='rustup run nightly cargo clippy'
 
 # git
 alias g='git'
