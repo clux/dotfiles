@@ -98,8 +98,8 @@ openimage() {
 
 # veracrypt shortcuts
 vco() {
-  veracrypt --mount /dev/sdd1 --slot=1 --verbose -p "$(pass drives/turing)" --explore
-  notify-send "opened /dev/sdd1"
+  veracrypt --mount /dev/sdd1 --slot=1 --verbose -p "$(pass drives/turing)"
+  cd /media/veracrypt1
 }
 vcc() {
   veracrypt --dismount /dev/sdd1
