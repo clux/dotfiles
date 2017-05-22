@@ -293,7 +293,7 @@ q3() {
   sudo modprobe snd_pcm_oss
   sudo modprobe snd_mixer_oss
   # Find correct card by looking in /proc/asound/cards
-  # Mine jumps around, but it's identifier is STX (Asus Xonar STX) - map to number:
+  # Mine jumps around, but its identifier is STX (Asus Xonar STX) - map to number:
   local -r cardid=$(grep STX /proc/asound/cards | awk '{print $1}')
   # Give DMA Access
   # NB: If you screw with this badly and it doesn't work, boot.
