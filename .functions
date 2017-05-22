@@ -286,9 +286,9 @@ steam-safe-mesa() {
 }
 
 q3() {
-  # https://aur.archlinux.org/quake3-cpma.git
+  # Get most of quake3 from https://aur.archlinux.org/quake3-cpma.git (not pak0.pk3)
   export __GL_SYNC_TO_VBLANK=0
-  # Need alsa-oss
+  # Need alsa-oss package and need to enable oss kernel modules
   sudo modprobe snd_seq_oss
   sudo modprobe snd_pcm_oss
   sudo modprobe snd_mixer_oss
@@ -299,7 +299,7 @@ q3() {
   # NB: If you screw with this badly and it doesn't work, boot.
   echo "quake3.x86 0 0 direct" | sudo tee "/proc/asound/card${cardid}/pcm0p/oss"
   echo "quake3.x86 0 0 disable" | sudo tee "/proc/asound/card${cardid}/pcm0c/oss"
-  # Have "seta snddevice /dev/dsp" in your q3config.cfg
+  # Have "seta snddevice /dev/dsp${cardid}" in your q3config.cfg
   # Or use this start command twice (for some reason it doesn't take first start)
   aoss quake3-cpma +"seta snddevice /dev/dsp${cardid}"
 }
