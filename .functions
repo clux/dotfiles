@@ -277,15 +277,18 @@ banish-daemons() {
 }
 
 steam-safe() {
-  __GLVND_DISALLOW_PATCHING=1 steam
+  export __GL_SYNC_TO_VBLANK=0
+  export __GLVND_DISALLOW_PATCHING=1 # This was for TF2, may no longer be necessary
+  steam-native
 }
 
-steam-safe-mesa() {
+steam-mesa() {
   # shellcheck disable=SC2016
   LD_PRELOAD='/usr/$LIB/libstdc++.so.6 /usr/$LIB/libgcc_s.so.1 /usr/$LIB/libxcb.so.1 /usr/$LIB/libgpg-error.so' steam
 }
 
 q3() {
+  set -x
   # Get most of quake3 from https://aur.archlinux.org/quake3-cpma.git (not pak0.pk3)
   export __GL_SYNC_TO_VBLANK=0
   # Need alsa-oss package and need to enable oss kernel modules
@@ -302,6 +305,8 @@ q3() {
   # Have "seta snddevice /dev/dsp${cardid}" in your q3config.cfg
   # Or use this start command twice (for some reason it doesn't take first start)
   aoss quake3-cpma +"seta snddevice /dev/dsp${cardid}"
+  # Do not open chrome and start playing music in the background
+  # First sound you hear after boot should be quake
 }
 
 # -----------------------------------------------------------------------------
