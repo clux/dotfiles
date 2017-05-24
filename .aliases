@@ -29,6 +29,7 @@ alias clippy='rustup run nightly cargo clippy'
 alias g='git'
 alias gs="git s"
 alias gc="git c"
+alias gcs="git c -S"
 alias gdc="git dc"
 alias gd="git d"
 alias ga="git a"

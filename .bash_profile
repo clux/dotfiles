@@ -28,7 +28,11 @@ key() {
     keys="$keys $HOME/.ssh/${k}_id"
   done
   # shellcheck disable=SC2086
-  keychain --timeout $((8*60)) --quiet --host agent $keys
+  keychain --timeout $((8*60)) --quiet --host agent --agents ssh,gpg $keys
+  source ~/.keychain/agent-sh
+}
+key_gpg() {
+  keychain --timeout $((8*60)) --quiet --host agent --agents ssh,gpg "$1"
   source ~/.keychain/agent-sh
 }
 _key() {
@@ -41,6 +45,9 @@ complete -F _key key
 
 if [[ $(hostname) = ealbrigt-ws ]]; then
   key sqbu work
+  key_gpg ACD208D66222147293A6ACE4C08975E5433628DE # blackbox
+  key_gpg A876A6CD26914D42 # cert
+  key_gpg B71E94106D1B408B # enc
 elif [[ $(hostname) = kjttks ]]; then
   key github sqbu work main
 elif [[ $(hostname) = cluxx1 ]]; then
