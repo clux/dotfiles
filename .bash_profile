@@ -47,9 +47,9 @@ unlock_blackbox() {
   key_gpg ACD208D66222147293A6ACE4C08975E5433628DE
 }
 unlock_pass() {
-  key_gpg B71E94106D1B408B # encyption sub key
+  key_gpg B71E94106D1B408B # encryption sub key
 }
-allow_sign() {
+unlock_sign() {
   key_gpg 5D4B685DE5BEAE01 # signing sub key
 }
 
@@ -57,15 +57,15 @@ if [[ $(hostname) = ealbrigt-ws ]]; then
   key sqbu work
   unlock_blackbox
   unlock_pass
-  allow_sign
+  unlock_sign
 elif [[ $(hostname) = kjttks ]]; then
   key github sqbu work main
   unlock_blackbox
   unlock_pass
-  allow_sign
+  unlock_sign
 elif [[ $(hostname) = cluxx1 ]]; then
   key github sqbu work main
-  allow_sign
+  unlock_sign
   # Rest on demand
 else
   [ -f ~/.keychain/agent-sh ] && source ~/.keychain/agent-sh
