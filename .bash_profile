@@ -21,42 +21,36 @@ d() {  z -l $@ | tail -n 1 | awk '{print $2}' ;}
 # -----------------------------------------------------------------------------
 # Key management via keychain
 
-# NB: on debian we may need to run `keychain -k all` first
 key() {
   local keys=""
   for k in "$@"; do
-    if [[ $k =~ ^gpg\_ ]]; then
-      case ${k:4} in
-        blackbox) keys="$keys ACD208D66222147293A6ACE4C08975E5433628DE" ;;
-        pass) keys="$keys B71E94106D1B408B" ;;
-        sign) keys="$keys 5D4B685DE5BEAE01" ;;
-        *) echo "Invalid gpg key" ;;
-      esac
-    else # it's an ssh key
-      keys="$keys $k"
-    fi
+    case $k in
+      blackbox) keys="$keys ACD208D66222147293A6ACE4C08975E5433628DE" ;;
+      pass) keys="$keys B71E94106D1B408B" ;; # enc subkey
+      sign) keys="$keys 5D4B685DE5BEAE01" ;; # signing subkey
+      *) keys="$keys ${k}_id" ;; # assume ssh key
+    esac
   done
   # shellcheck disable=SC2086
-  echo "Absorbing $keys"
+  echo "Absorbing${keys}"
   keychain --nogui --timeout $((8*60)) --quiet --host agent --agents ssh,gpg $keys
-  source ~/.keychain/agent-sh
+  source ~/.keychain/agent-sh{,-gpg}
 }
 _key() {
   local cur
   _init_completion || return
   local -r keys="$(find ~/.ssh -name "*_id" -printf "%f " | sed 's/_id//g')"
-  local -r gpgs="gpg_{sign,pass,blackbox}"
+  local -r gpgs="sign,pass,blackbox}" # special case gpg keys
   COMPREPLY=($(compgen -W "$keys $gpgs" -- "$cur"))
 }
 complete -F _key key
 
-
 if [[ $(hostname) = ealbrigt-ws ]]; then
-  key sqbu work gpg_{sign,blackbox,pass}
+  key sqbu work sign pass blackbox
 elif [[ $(hostname) = kjttks ]]; then
-  key github sqbu work main gpg_{sign,blackbox,pass}
+  key github sqbu work main sign pass blackbox
 elif [[ $(hostname) = cluxx1 ]]; then
-  key github_id sqbu_id work_id main_id gpg_sign
+  key github sqbu work main sign pass blackbox
 else
   [ -f ~/.keychain/agent-sh ] && source ~/.keychain/agent-sh
 fi
