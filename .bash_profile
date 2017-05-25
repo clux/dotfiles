@@ -38,7 +38,7 @@ key() {
   done
   # shellcheck disable=SC2086
   echo "Absorbing $keys"
-  keychain --timeout $((8*60)) --quiet --host agent --agents ssh,gpg $keys
+  keychain --nogui --timeout $((8*60)) --quiet --host agent --agents ssh,gpg $keys
   source ~/.keychain/agent-sh
 }
 _key() {
