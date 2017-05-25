@@ -31,10 +31,11 @@ key() {
       *) keys="$keys ${k}_id" ;; # assume ssh key
     esac
   done
-  # shellcheck disable=SC2086
   echo "Absorbing${keys}"
+  # shellcheck disable=SC2086
   keychain --nogui --timeout $((8*60)) --quiet --host agent --agents ssh,gpg $keys
-  source ~/.keychain/agent-sh{,-gpg}
+  source ~/.keychain/agent-sh
+  source ~/.keychain/agent-sh-gpg
 }
 _key() {
   local cur
@@ -46,13 +47,14 @@ _key() {
 complete -F _key key
 
 if [[ $(hostname) = ealbrigt-ws ]]; then
-  key sqbu work pass blackbox
+  key github sqbu work
 elif [[ $(hostname) = kjttks ]]; then
-  key github sqbu work main pass
+  key github sqbu work main
 elif [[ $(hostname) = cluxx1 ]]; then
-  key github sqbu work main pass
+  key github sqbu work main
 else
   [ -f ~/.keychain/agent-sh ] && source ~/.keychain/agent-sh
+  [ -f ~/.keychain/agent-sh-gpg ] && source ~/.keychain/agent-sh-gpg
 fi
 
 # -----------------------------------------------------------------------------
