@@ -46,11 +46,11 @@ _key() {
 complete -F _key key
 
 if [[ $(hostname) = ealbrigt-ws ]]; then
-  key sqbu work sign pass blackbox
+  key sqbu work pass blackbox
 elif [[ $(hostname) = kjttks ]]; then
-  key github sqbu work main sign pass blackbox
+  key github sqbu work main pass
 elif [[ $(hostname) = cluxx1 ]]; then
-  key github sqbu work main sign pass blackbox
+  key github sqbu work main pass
 else
   [ -f ~/.keychain/agent-sh ] && source ~/.keychain/agent-sh
 fi
