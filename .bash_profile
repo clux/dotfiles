@@ -40,7 +40,7 @@ _key() {
   local cur
   _init_completion || return
   local -r keys="$(find ~/.ssh -name "*_id" -printf "%f " | sed 's/_id//g')"
-  local -r gpgs="sign,pass,blackbox}" # special case gpg keys
+  local -r gpgs="sign pass blackbox" # special case gpg keys
   COMPREPLY=($(compgen -W "$keys $gpgs" -- "$cur"))
 }
 complete -F _key key
