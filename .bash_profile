@@ -31,7 +31,6 @@ key() {
       *) keys="$keys ${k}_id" ;; # assume ssh key
     esac
   done
-  echo "Absorbing${keys}"
   # shellcheck disable=SC2086
   keychain --nogui --timeout $((8*60)) --quiet --host agent --agents ssh,gpg $keys
   source ~/.keychain/agent-sh

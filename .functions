@@ -153,14 +153,21 @@ fi
 # systemd
 
 follow() {
-  local -r service="$1"
-  journalctl -u "$service" -fl
+  local -r unit="$1"
+  journalctl -u "$unit" -fl | ccze
 }
+_follow() {
+  local cur
+  _init_completion || return
+  local -r units="$(systemctl list-units --no-pager --no-legend | awk '{ print $1 }')"
+  COMPREPLY=($(compgen -W "$units" -- "$cur"))
+}
+complete -F _follow follow
 
 reload() {
-  local -r service="$1"
+  local -r unit="$1"
   sudo systemctl daemon-reload
-  sudo systemctl restart "$service"
+  sudo systemctl restart "$unit"
 }
 
 # -----------------------------------------------------------------------------
