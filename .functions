@@ -100,11 +100,11 @@ openimage() {
 vco() {
   sudo echo "got sudo" # cache sudo first
   # For some reason the below cmd does not work without non-interactive in text mode
-  veracrypt -t --mount /dev/sdd1 --slot=1 --verbose -p "$(pass drives/turing)" --non-interactive
+  veracrypt -t --mount /dev/sdc1 --slot=1 --verbose -p "$(pass drives/turing)" --non-interactive
   cd /media/veracrypt1 || false
 }
 vcc() {
-  veracrypt --text --dismount /dev/sdd1
+  veracrypt --text --dismount /dev/sdc1
 }
 
 # -----------------------------------------------------------------------------
