@@ -9,13 +9,6 @@ export LC_ALL="en_GB.UTF-8"
 # Don’t clear the screen after quitting a manual page
 export MANPAGER="less -X";
 
-# By default compile everything with clang
-# Unless we are on a source based distro
-if lsb_release -d | grep -qvi "Gentoo"; then
-  export CC=clang
-  export CXX=clang++
-fi
-
 # want short ctest results without having to type --output-on-failure (or -V always)
 export CTEST_OUTPUT_ON_FAILURE=1
 export GTEST_COLOR=1
