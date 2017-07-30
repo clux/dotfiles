@@ -318,6 +318,17 @@ q3() {
   # First sound you hear after boot should be quake
 }
 
+
+hr() {
+  local -r COLS=$(tput cols)
+  local -r SEP="*"
+  local HR=''
+  while (( ${#HR} < COLS )); do
+      HR="$HR$SEP"
+  done
+  echo "$(tput setaf 33)${HR:0:$COLS}$(tput sgr0)"
+}
+
 # -----------------------------------------------------------------------------
 # system statistics/usage
 
