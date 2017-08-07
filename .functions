@@ -105,7 +105,7 @@ vco() {
   cd /media/veracrypt1 || false
 }
 vcc() {
-  cd
+  cd || true
   veracrypt --text --dismount /dev/sdc1 && exit
 }
 
