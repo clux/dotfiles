@@ -2,8 +2,7 @@
   "env": {
     "browser": true,
     "node": true,
-    "es6": true,
-    "jsx": true
+    "es6": true
   },
 
   "parserOptions": {
