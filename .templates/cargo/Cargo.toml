@@ -1,7 +1,7 @@
 [package]
 name = "mycrate"
 version = "0.1.0"
-authors = ["Eirik Albrigtsen <analsandblaster@gmail.com>"]
+authors = ["Eirik Albrigtsen <sszynrae@gmail.com>"]
 
 [lib]
 name = "mycrate"

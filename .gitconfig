@@ -64,7 +64,7 @@
   ea = !git config --local user.name \"Eirik Albrigtsen\" && \
         git config --local user.email \"ealbrigt@cisco.com\"
   clux = !git config --local user.name \"clux\" && \
-          git config --local user.email \"analsandblaster@gmail.com\"
+          git config --local user.email \"sszynrae@gmail.com\"
   # set who i am on fresh clones (cd's into dirname and calls one of the above)
   idclone ="!f() { cd $(echo $2 | cut -d"/" -f2) && git $1 && cd -; }; f"
   whoami = !sh -c 'echo \"$(git config --get user.name) <$(git config --get user.email)>\"'
