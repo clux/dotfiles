@@ -34,6 +34,7 @@
   # Merged branch delete
   md = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
   prune = fetch --prune --all
+  pr = !"pr() { git fetch origin pull/$1/head:pr-$1; git checkout pr-$1; }; pr"
 
   # MISC
   # add all untracked files to .gitignore
