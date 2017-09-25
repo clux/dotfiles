@@ -96,6 +96,13 @@ openimage() {
     --start-at "$file"
 }
 
+dslrdump() {
+  cd /media/gauss/IMG/ || return
+  mkd "$(date +%F)"
+  gphoto2 --get-all-files
+  #gphoto2 --delete-all-files doesn't work :( - pantheon-photos works though
+}
+
 # veracrypt shortcuts
 vco() {
   sudo echo "got sudo" # cache sudo first
