@@ -3,35 +3,12 @@
 # -----------------------------------------------------------------------------
 # helpers to search through specific file types
 
-# find file under pwd - v `fs main.yml`
-fs() { find . -type f -name "$1" 2> /dev/null ;}
-# find file anywhere - v `ff roles main`
-ff() { find "$1" -type f -name "$2" 2> /dev/null ;}
+# CMakeLists from PWD
+srchcmake() { ag "$1" **/CMakeLists.txt ;}
 
-tre() {
+t() {
   tree -aC -I "node_modules|target|site-packages|.git|bower_components|venv" --dirsfirst "$@" | less -FRX
 }
-
-# JS files
-jf() { ff "$@" "*.js" | grep -vE "node_modules|bower_components|\.min" ;}
-js() { jf "$1" | xargs grep -s "$2" ;}
-
-# RS files
-rf() { ff "$@" "*.rs" ;}
-rs() { rf "$1" | xargs grep -s "$2" ;}
-
-# PY files
-pyf() { ff "$@" "*.py" | grep -vE "site-packages|node_modules|venv|.eggs" ;}
-pys() { pyf "$1" | xargs grep -s "$2" ;}
-
-# C++ files
-cf() { find "$@" -type f -name "*.cpp" -o -name "*.h" -o -name "*.c" 2> /dev/null ;}
-cs() { cf "$1" | xargs grep -s "$2" ;}
-hf() { ff "$@" "*.h" ;}
-hs() { hf "$1" | xargs grep -s "$2" ;}
-
-# CMakeLists from PWD
-srchcmake() { ff . "CMakeLists.txt" | xargs grep -s "$1" ;}
 
 # -----------------------------------------------------------------------------
 # opening helpers

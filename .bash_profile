@@ -1,6 +1,9 @@
 #!/bin/bash
 export TERM=xterm-256color
 
+# Allow **/ recursive globbing
+shopt -s globstar
+
 # Modules
 source ~/.prompt
 source ~/.functions
