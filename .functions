@@ -1,16 +1,6 @@
 #!/bin/bash
 
 # -----------------------------------------------------------------------------
-# helpers to search through specific file types
-
-# CMakeLists from PWD
-srchcmake() { ag "$1" **/CMakeLists.txt ;}
-
-t() {
-  tree -aC -I "node_modules|target|site-packages|.git|bower_components|venv" --dirsfirst "$@" | less -FRX
-}
-
-# -----------------------------------------------------------------------------
 # opening helpers
 
 # vim
@@ -22,7 +12,7 @@ v() {
   fi
 }
 # sublime
-sub() {
+subl() {
   if [ $# -eq 0 ]; then
     subl3 "$(fzf)"
   else
@@ -44,18 +34,19 @@ ch() {
   fi
 
   sqlite3 -separator $sep /tmp/h \
-    "select substr(title, 1, $cols), url
-     from urls order by last_visit_time desc" |
-  awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' |
-  fzf --ansi --multi | sed 's#.*\(https*://\)#\1#' | xargs xdg-open
+      "select substr(title, 1, $cols), url
+      from urls order by last_visit_time desc" |
+    awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' |
+    fzf --ansi --multi | sed 's#.*\(https*://\)#\1#' | \
+    xargs xdg-open > /dev/null
 }
 
 # xdg-open
-o() {
+v() {
   if [ $# -eq 0 ]; then
-    xdg-open .  > /dev/null 2>&1
+    vlc "$(fzf)" > /dev/null 2>&1
   else
-    xdg-open "$@" > /dev/null 2>&1
+    vlc "$1" > /dev/null 2>&1
   fi
 }
 
@@ -185,20 +176,12 @@ glsd() { glscommand "git whoami" ;}
 # -----------------------------------------------------------------------------
 # misc
 
-# attach to fresh tmux session based on guake index
-guake-exec-tmux() {
-  which tmux > /dev/null || return 0
-  if [[ $PPID == $(pgrep -f guake) ]]; then
-    guakeIndex=$(guake -g)
-    if tmux list-sessions | cut -d':' -f1 | grep -q "$guakeIndex"; then
-      # use one of the preconfigured sessions
-      exec tmux attach-session -t "$guakeIndex"
-    else
-      exec tmux new-session
-    fi
-  fi
+# browse non-generated / build files in a simple unix tree
+t() {
+  tree -aC -I "node_modules|target|site-packages|.git|bower_components|venv" --dirsfirst "$@" | less -FRX
 }
 
+# guake helpers to rename the tab we don something
 zz() {
   guake --rename-tab="${PWD##*/}" -i "$(guake -g)"
 }

@@ -24,6 +24,11 @@ alias cwd='pwd | tr -d "\r\n" | xclip -sel clip'
 alias week='date +%V'
 alias ymd='date +%Y-%m-%d'
 alias clippy='rustup run nightly cargo clippy'
+alias s='subl'
+
+# search helpers
+alias agcmake="rg -t cmake"
+alias rg="rg --colors 'match:bg:yellow' --colors 'match:fg:black' --colors 'match:style:nobold' --colors 'line:style:bold' --colors 'path:fg:green'"
 
 # git
 alias g='git'
