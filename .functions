@@ -3,15 +3,22 @@
 # -----------------------------------------------------------------------------
 # opening helpers
 
-# vim
-v() {
+vim() {
   if [ $# -eq 0 ]; then
-    vim "$(fzf)"
+    $(which vim) "$(fzf)"
   else
-    vim "$@"
+    $(which vim) "$@"
   fi
 }
-# sublime
+
+vlc() {
+  if [ $# -eq 0 ]; then
+    $(which vlc) "$(fzf)" > /dev/null 2>&1
+  else
+    $(which vlc) "$1" > /dev/null 2>&1
+  fi
+}
+
 subl() {
   if [ $# -eq 0 ]; then
     subl3 "$(fzf)"
@@ -39,15 +46,6 @@ ch() {
     awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' |
     fzf --ansi --multi | sed 's#.*\(https*://\)#\1#' | \
     xargs xdg-open > /dev/null
-}
-
-# xdg-open
-v() {
-  if [ $# -eq 0 ]; then
-    vlc "$(fzf)" > /dev/null 2>&1
-  else
-    vlc "$1" > /dev/null 2>&1
-  fi
 }
 
 openimage() {
