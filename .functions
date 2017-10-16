@@ -130,8 +130,8 @@ elif grep -qE "Alpine Linux" /etc/os-release; then
   pakf() { apk info --who-owns "$1" ;}
   #pakq() {} # needs apk-file installed - go get github.com/jessfraz/apk-file outside
   qlist() { apk info -L "$1" ;}
-  paki() { apt add --no-cache "$1" ;}
-  pakr() { apt del "$1" ;}
+  paki() { apk add --no-cache "$1" ;}
+  pakr() { apk del "$1" ;}
 fi
 
 # -----------------------------------------------------------------------------
