@@ -124,6 +124,14 @@ elif hash yum 2> /dev/null; then
   qlist() { repoquery --list "$1" ;} # from yum-utils
   paki() { sudo yum install "$1" ;}
   pakr() { sudo yum remove "$1" ;}
+elif grep -qE "Alpine Linux" /etc/os-release; then
+  paks() { apk info -vv | grep "$1" ;}
+  pakl() { apk search  "$1" ;} # needs an apk update first
+  pakf() { apk info --who-owns "$1" ;}
+  #pakq() {} # needs apk-file installed - go get github.com/jessfraz/apk-file outside
+  qlist() { apk info -L "$1" ;}
+  paki() { apt add --no-cache "$1" ;}
+  pakr() { apt del "$1" ;}
 fi
 
 # -----------------------------------------------------------------------------
