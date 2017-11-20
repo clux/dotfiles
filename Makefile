@@ -50,6 +50,7 @@ config: directories
 		echo $$d; \
 		find "$$PWD/$$d" -maxdepth 1 -type f -print -exec ln -sfn {} ~/$$d \; ; \
 	done
+	@touch ~/.bash_completion
 
 editors: directories
 	$(call green," configuring sublime and installing vim plugins")
