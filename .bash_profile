@@ -11,9 +11,6 @@ source ~/.exports
 source ~/.aliases
 source ~/.path
 
-# work module
-[ -f ~/repos/cisco/bashrc ] && source ~/repos/cisco/bashrc
-
 # rupa/z + an extension
 [[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
 
