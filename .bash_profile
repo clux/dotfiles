@@ -45,12 +45,10 @@ _key() {
 }
 complete -F _key key
 
-if [[ $(hostname) = ealbrigt-ws ]]; then
-  key github sqbu work
-elif [[ $(hostname) = kjttks ]]; then
-  key github sqbu work main
-elif [[ $(hostname) = cluxx1 ]]; then
-  key github sqbu work main
+if [[ $(hostname) = kjttks ]]; then
+  key github sqbu main
+elif [[ $(hostname) = cluxxps ]]; then
+  key github baby main
 else
   [ -f ~/.keychain/agent-sh ] && source ~/.keychain/agent-sh
   [ -f ~/.keychain/agent-sh-gpg ] && source ~/.keychain/agent-sh-gpg
