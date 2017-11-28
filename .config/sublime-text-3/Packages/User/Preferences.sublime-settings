@@ -9,7 +9,9 @@
 	"highlight_line": true,
 	"ignored_packages":
 	[
+		"Jinja2",
 		"Makefile",
+		"Markdown",
 		"SublimeLinter-pylint",
 		"Vintage"
 	],
@@ -26,6 +28,7 @@
 	"show_definitions": false,
 	"tab_completion": true,
 	"tab_size": 2,
+	"theme": "Seti.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"tree_animation_enabled": false,
 	"trim_trailing_white_space_on_save": true,
