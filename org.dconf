@@ -2,6 +2,13 @@
 desktop-effects=false
 startup-animation=false
 
+[cinnamon/desktop/interface/]
+gtk-theme='Adwaita-dark'
+
+# needs carta installed
+#[cinnamon/theme]
+#name='Carta'
+
 [cinnamon/settings-daemon/peripherals/touchpad]
 scroll-method='two-finger-scrolling'
 tap-to-click=false
