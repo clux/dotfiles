@@ -2,12 +2,8 @@
 desktop-effects=false
 startup-animation=false
 
-[cinnamon/desktop/interface/]
+[cinnamon/desktop/interface]
 gtk-theme='Adwaita-dark'
-
-# needs carta installed
-#[cinnamon/theme]
-#name='Carta'
 
 [cinnamon/settings-daemon/peripherals/touchpad]
 scroll-method='two-finger-scrolling'
@@ -43,24 +39,26 @@ pause=@as []
 media=@as []
 
 [cinnamon/desktop/keybindings/wm]
-push-snap-left=@as []
-push-snap-down=@as []
-move-to-workspace-up=@as []
-push-tile-up=@as []
-switch-to-workspace-left=@as []
-switch-to-workspace-down=@as []
-move-to-workspace-right=@as []
-switch-to-workspace-right=@as []
-move-to-monitor-left=['<Super>Left']
-push-snap-up=@as []
-move-to-monitor-down=['<Super>Down']
-move-to-workspace-left=@as []
-push-snap-right=@as []
-move-to-monitor-right=['<Super>Right']
-move-to-workspace-down=@as []
-push-tile-left=@as []
-move-to-monitor-up=['<Super>Up']
 switch-to-workspace-up=@as []
+switch-to-workspace-left=@as []
+switch-to-workspace-right=@as []
+switch-to-workspace-down=@as []
+move-to-workspace-up=@as []
+move-to-workspace-left=@as []
+move-to-workspace-right=@as []
+move-to-workspace-down=@as []
+push-snap-up=@as []
+push-snap-left=@as []
+push-snap-right=@as []
+push-snap-down=@as []
+move-to-monitor-up=['<Super>Up']
+move-to-monitor-left=['<Super>Left']
+move-to-monitor-right=['<Super>Right']
+move-to-monitor-down=['<Super>Down']
+push-tile-up=@as []
+push-tile-left=@as []
+push-tile-right=@as []
+push-tile-down=@as []
 
 [cinnamon/desktop/media-handling]
 autorun-never=true
