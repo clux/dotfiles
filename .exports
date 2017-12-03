@@ -26,7 +26,7 @@ export SHELLCHECK_OPTS="-e SC1091 -e SC1090"
 # Download dir for `dl` + brotorr
 export DOWNLOAD_DIR=~/Downloads
 if [[ $HOSTNAME = kjttks ]]; then
-  export DOWNLOAD_DIR=/mnt/zeus/DL/
+  export DOWNLOAD_DIR=/media/gauss/DL
 elif [[ $HOSTNAME = broxy ]]; then
   export DOWNLOAD_DIR=/media/dumptruck/DL
 fi
