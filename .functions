@@ -392,7 +392,7 @@ cargo-init() {
 }
 
 # -----------------------------------------------------------------------------
-# misc node
+# misc node/py
 
 node-deopts() {
   # shellcheck disable=SC2068
@@ -401,6 +401,18 @@ node-deopts() {
 
 node-deps() {
   npm ls | grep -oE "[[:alnum:]\@\.]*" | sort -u
+}
+
+venv() {
+  if [ -d venv ]; then
+    source venv/bin/activate
+  elif [ -d .venv ]; then
+    source .venv/bin/activate
+  else
+    python3 -m venv venv
+    source venv/bin/activate
+    pip install -r requirements.txt
+  fi
 }
 
 # -----------------------------------------------------------------------------
