@@ -14,6 +14,8 @@ source ~/.path
 # rupa/z + an extension
 [[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
 
+# work module
+[ -f ~/repos/babylon/bashrc ] && source ~/repos/babylon/bashrc
 
 # shellcheck disable=SC2068
 d() {  z -l $@ | tail -n 1 | awk '{print $2}' ;}
