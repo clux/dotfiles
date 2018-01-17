@@ -121,4 +121,4 @@
   templatedir = ~/.templates/git
 
 [core]
-	hooksPath = ~/.templates/git/hooks
+  hooksPath = ~/.templates/git/hooks
