@@ -27,6 +27,18 @@ subl() {
   fi
 }
 
+# git diff : but filtering out moved lines
+diffminuslines() {
+  diff_lines="$(git diff | grep -v '^\(---\|+++\|@@ \)'| grep '^\([><] \)\|[+-]' | sed 's/^+/> /;s/^-/< /')"
+  while IFS= read -r line || [ -n "$line" ]; do
+    contents="${line:2}"
+    is_removed="$(grep -cFxe "< $contents" <<< "$diff_lines" || true)"
+    is_added="$(grep -cFxe "> $contents" <<< "$diff_lines" || true)"
+    if [[ "$is_removed" -ne "$is_added" ]]; then
+      echo "$line"
+    fi
+  done <<< "$diff_lines"
+}
 
 # chrome history
 ch() {
