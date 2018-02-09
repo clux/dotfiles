@@ -7,8 +7,7 @@ setxkbmap -layout us,us \
           -option grp:lalt_lshift_toggle
 
 # X and URxvt stuff
-xrdb -merge ~/.Xresources
-# Consider running urxvtd here
+#xrdb -merge ~/.Xresources
 
 if [[ $HOSTNAME = kjttks ]]; then
   nvidia-settings -a [gpu:0]/GpuPowerMizerMode=1
@@ -22,6 +21,5 @@ fi
 # Remove maccel
 xset m 0 0
 
-# tmux and guake
+# tmux
 tmux start-server
-/usr/bin/guake &
