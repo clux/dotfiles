@@ -1,6 +1,7 @@
 #!/bin/bash
 
 [ -f ~/baby/shipcat/shipcat.complete.sh ] && source ~/baby/shipcat/shipcat.complete.sh
+[ -f ~/babylon/shipcat/shipcat.complete.sh ] && source ~/babylon/shipcat/shipcat.complete.sh
 [ -f ~/repos/lalfork/lal/lal.complete.sh ] && source ~/repos/lalfork/lal/lal.complete.sh
 
 hash kubectl 2> /dev/null && source <(kubectl completion bash)
