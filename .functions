@@ -27,6 +27,7 @@ subl() {
   fi
 }
 
+
 # git diff : but filtering out moved lines
 diffminuslines() {
   diff_lines="$(git diff | grep -v '^\(---\|+++\|@@ \)'| grep '^\([><] \)\|[+-]' | sed 's/^+/> /;s/^-/< /')"
@@ -213,18 +214,6 @@ zzh() {
 mkd() { mkdir -p "$@" && cd "$@" || return 1 ;}
 
 kill-tabs() { pkill -u "$USER" -f "chrome.*renderer" ;}
-
-# convert yaml to json:
-# yaml file
-# yaml file [json key/args]
-yaml() {
-  if [ -n "$2" ]; then
-    # shellcheck disable=SC2068
-    js-yaml "$1" | json $@
-  else
-    js-yaml "$1"
-  fi
-}
 
 # override monitor refresh rate
 # super meat boy: refresh-rate 60
