@@ -169,6 +169,26 @@ reload() {
 }
 
 # -----------------------------------------------------------------------------
+# kubernetes
+
+# context switcher
+kc() {
+  local -r ctx="$1"
+  if [[ $ctx ]]; then
+    kubectl config use-context "$ctx"
+  else
+    kubectl config get-contexts
+  fi
+}
+_kc() {
+  local cur
+  _init_completion || return
+  local -r ctxs="$(kubectl config get-contexts -o name)"
+  COMPREPLY=($(compgen -W "$ctxs" -- "$cur"))
+}
+complete -F _kc kc
+
+# -----------------------------------------------------------------------------
 # git
 
 glscommand() {
