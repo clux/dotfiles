@@ -34,7 +34,7 @@ key() {
     esac
   done
   # shellcheck disable=SC2086
-  keychain --nogui --timeout $((8*60)) --quiet --host agent --agents ssh,gpg $keys
+  keychain --nogui --timeout $((9*60)) --quiet --host agent --agents ssh,gpg $keys
   source ~/.keychain/agent-sh
   source ~/.keychain/agent-sh-gpg
 }
@@ -50,7 +50,7 @@ complete -F _key key
 if [[ $(hostname) = kjttks ]]; then
   key github sqbu main
 elif [[ $(hostname) = cluxxps ]]; then
-  key github baby main
+  key github baby babyrsa main
 else
   [ -f ~/.keychain/agent-sh ] && source ~/.keychain/agent-sh
   [ -f ~/.keychain/agent-sh-gpg ] && source ~/.keychain/agent-sh-gpg
