@@ -27,6 +27,10 @@ subl() {
   fi
 }
 
+cs() {
+  # shellcheck disable=SC2068
+  cowsay -f flaming-sheep $@ | lolcat -S 60;
+}
 
 # git diff : but filtering out moved lines
 diffminuslines() {
