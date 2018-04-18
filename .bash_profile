@@ -56,6 +56,9 @@ else
   [ -f ~/.keychain/agent-sh-gpg ] && source ~/.keychain/agent-sh-gpg
 fi
 
+# default kube context
+kc staging-uk
+
 # -----------------------------------------------------------------------------
 # History
 
