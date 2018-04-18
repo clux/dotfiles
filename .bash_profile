@@ -57,7 +57,7 @@ else
 fi
 
 # default kube context
-kc staging-uk
+kc staging-uk > /dev/null
 
 # -----------------------------------------------------------------------------
 # History
