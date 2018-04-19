@@ -12,7 +12,6 @@
 		"Jinja2",
 		"Makefile",
 		"Markdown",
-		"SublimeLinter-pylint",
 		"Vintage"
 	],
 	"margin": 0,
