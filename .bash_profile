@@ -56,8 +56,8 @@ else
   [ -f ~/.keychain/agent-sh-gpg ] && source ~/.keychain/agent-sh-gpg
 fi
 
-# default kube context
-kc staging-uk > /dev/null
+# default helm context matches kube context
+export TILLER_NAMESPACE="$(kubectl config get-contexts | grep "*" |awk '{print $5}')"
 
 # -----------------------------------------------------------------------------
 # History
