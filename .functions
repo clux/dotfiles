@@ -180,7 +180,7 @@ kc() {
   local -r ctx="$1"
   if [[ $ctx ]]; then
     kubectl config use-context "$ctx"
-    export TILLER_NAMESPACE="$(kubectl config get-contexts | grep "*" |awk '{print $5}')"
+    export TILLER_NAMESPACE="$(kubectl config get-contexts | grep "\*" |awk '{print $5}')"
   else
     kubectl config get-contexts
   fi

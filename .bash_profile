@@ -48,7 +48,7 @@ _key() {
 complete -F _key key
 
 if [[ $(hostname) = kjttks ]]; then
-  key github sqbu main
+  key github baby babyrsa main
 elif [[ $(hostname) = cluxxps ]]; then
   key github baby babyrsa main
 else
@@ -57,7 +57,8 @@ else
 fi
 
 # default helm context matches kube context
-export TILLER_NAMESPACE="$(kubectl config get-contexts | grep "*" |awk '{print $5}')"
+TILLER_NAMESPACE="$(kubectl config get-contexts | grep "\*" |awk '{print $5}')"
+export TILLER_NAMESPACE
 
 # -----------------------------------------------------------------------------
 # History
