@@ -11,6 +11,11 @@ vim() {
   fi
 }
 
+:wq() {
+  echo "seek help"
+  return 2
+}
+
 vlc() {
   if [ $# -eq 0 ]; then
     $(which vlc) "$(fzf)" > /dev/null 2>&1
