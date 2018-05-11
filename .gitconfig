@@ -51,7 +51,6 @@
   # what are my aliases
   aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
 
-
   # FINDERS
   # Find commits by source code
   fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
@@ -107,11 +106,16 @@
   # Detect whitespace errors when applying a patch
   whitespace = fix
 
+[diff]
+  colorMoved = plain
+
 [color "diff"]
   meta = yellow bold
   frag = magenta bold # line info
   old = red # deletions
   new = green # additions
+  newMoved = "#b8f8b8"
+  oldMoved = "#f8b8b8"
 
 [color "status"]
   added = yellow
