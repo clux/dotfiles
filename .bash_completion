@@ -9,4 +9,5 @@ hash kubectl 2> /dev/null && source <(kubectl completion bash)
 if hash rustup 2> /dev/null; then
   source ~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/etc/bash_completion.d/cargo
   source <(rustup completions bash)
+  source <(helm completion bash)
 fi
