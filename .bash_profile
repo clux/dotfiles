@@ -57,8 +57,10 @@ else
 fi
 
 # default helm context matches kube context
-TILLER_NAMESPACE="$(kubectl config get-contexts | grep "\*" |awk '{print $5}')"
-export TILLER_NAMESPACE
+if hash kubectl 2> /dev/null; then
+  TILLER_NAMESPACE="$(kubectl config get-contexts | grep "\*" |awk '{print $5}')"
+  export TILLER_NAMESPACE
+fi
 
 # -----------------------------------------------------------------------------
 # History

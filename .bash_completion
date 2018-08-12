@@ -4,10 +4,12 @@
 [ -f ~/babylon/shipcat/shipcat.complete.sh ] && source ~/babylon/shipcat/shipcat.complete.sh
 [ -f ~/repos/lalfork/lal/lal.complete.sh ] && source ~/repos/lalfork/lal/lal.complete.sh
 
-hash kubectl 2> /dev/null && source <(kubectl completion bash)
+if hash kubectl 2> /dev/null; then
+  source <(kubectl completion bash)
+  source <(helm completion bash)
+fi
 
 if hash rustup 2> /dev/null; then
-  source ~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/etc/bash_completion.d/cargo
+  #source /usr/share/bash-completion/completions/rustup
   source <(rustup completions bash)
-  source <(helm completion bash)
 fi

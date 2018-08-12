@@ -192,7 +192,7 @@ set_prompt() {
   elif [ -d .lal ]; then
     # Append lal environment if inside a lal repo
     PS1+="$(prompt_lal)"
-  else
+  elif [ -d "$HOME/.kube" ]; then
     # Append kubernetes context generally
     PS1+="$(prompt_k8s)"
   fi
