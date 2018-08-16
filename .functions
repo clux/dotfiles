@@ -191,7 +191,7 @@ kc() {
     kubectl config use-context "$ctx"
     export TILLER_NAMESPACE="$(kubectl config get-contexts | grep "\*" |awk '{print $5}')"
   else
-    kubectl config get-contexts
+    kubectl config get-contexts | sort -d
   fi
 }
 _kc() {
