@@ -104,9 +104,8 @@ vcc() {
   veracrypt --text --dismount /dev/sdc1 && exit
 }
 
-# wifi stuff
-bcam2() {
-  create_ap wlp2s0 enp0s20f0u2 "Bathroom Cam 2" "$(pass ea-laptop)"
+wifihotspot() {
+  sudo create_ap wlp2s0 enp0s20f0u2 "Bathroom Cam 2" "$(pass ea-laptop)"
 }
 
 # -----------------------------------------------------------------------------

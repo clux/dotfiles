@@ -30,6 +30,7 @@ alias v='vim'
 # search helpers
 alias agcmake="rg -t cmake"
 alias rg="rg --colors 'match:bg:yellow' --colors 'match:fg:black' --colors 'match:style:nobold' --colors 'line:style:bold' --colors 'path:fg:green'"
+alias ag="rg"
 
 # git
 alias g='git'
@@ -46,6 +47,19 @@ alias gps="git ps"
 alias gt='cd $(git rev-parse --show-toplevel)'
 alias gm='git m'
 alias gw='git whoami'
+
+# kubectl
+alias k="kubectl"
+alias kl="kubectl logs"
+alias kgp="kubectl get pod"
+alias kgd="kubectl get deploy"
+alias kgrs="kubectl get rs"
+alias kgj="kubectl get job"
+alias kdp="kubectl describe pod"
+alias kdd="kubectl descripe deploy"
+alias kdrs="kubectl descripe rs"
+alias kdj="kubectl descripe job"
+
 
 # rsync
 alias rsync-copy="rsync -avz --progress -h"
