@@ -49,17 +49,20 @@ alias gm='git m'
 alias gw='git whoami'
 
 # kubectl
-alias k="kubectl"
 alias kl="kubectl logs"
+alias klf="kubectl logs -f"
 alias kgp="kubectl get pod"
+alias kgc="kubectl get cm"
 alias kgd="kubectl get deploy"
-alias kgrs="kubectl get rs"
+alias kgr="kubectl get rs"
 alias kgj="kubectl get job"
+alias kgs="kubectl get service"
 alias kdp="kubectl describe pod"
-alias kdd="kubectl descripe deploy"
-alias kdrs="kubectl descripe rs"
-alias kdj="kubectl descripe job"
-
+alias kdc="kubectl describe cm"
+alias kdd="kubectl describe deploy"
+alias kdr="kubectl describe rs"
+alias kdj="kubectl describe job"
+alias kds="kubectl describe service"
 
 # rsync
 alias rsync-copy="rsync -avz --progress -h"
