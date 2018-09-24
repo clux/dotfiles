@@ -51,6 +51,7 @@ alias gw='git whoami'
 # kubectl
 alias kl="kubectl logs"
 alias klf="kubectl logs -f"
+alias kfl="klf" # typo master
 alias kgp="kubectl get pod"
 alias kgc="kubectl get cm"
 alias kgd="kubectl get deploy"

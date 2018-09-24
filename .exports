@@ -18,8 +18,6 @@ export RUST_BACKTRACE=1
 # Separate source checkout for `racer`
 export RUST_SRC_PATH=$HOME/.cargo/rustc-stable/src
 
-export GOPATH=$HOME/.go
-
 # use shellcheck for current file only
 export SHELLCHECK_OPTS="-e SC1091 -e SC1090"
 
