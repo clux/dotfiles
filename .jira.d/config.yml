@@ -1,0 +1,24 @@
+---
+user: "eirik.albrigtsen"
+login: "eirik.albrigtsen@babylonhealth.com"
+password-source: pass
+endpoint: "https://babylonpartners.atlassian.net"
+
+custom-commands:
+  - name: devops_placeholder
+    help: Create a DEVOPS ticket placeholder and label with needs_definition
+    hidden: false
+    aliases:
+      - d
+    args:
+      - name: SUMMARY
+        required: true
+        repeat: true
+    script: >
+      {{ jira }} create
+      --project DEVOPS
+      --issuetype=Task
+      -o "summary={{range $summary := args.SUMMARY}}{{$summary}} {{end}}"
+      -o "description=placeholder"
+      --noedit
+      | awk '{system("jira labels add " $2 " needs_definition")}'

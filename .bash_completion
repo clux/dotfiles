@@ -13,3 +13,8 @@ if hash rustup 2> /dev/null; then
   #source /usr/share/bash-completion/completions/rustup
   source <(rustup completions bash)
 fi
+
+# NB: can't load paths before this annoyingly..
+if [ -x ~/.go/bin/jira ]; then
+  source <(~/.go/bin/jira --completion-script-bash)
+fi
