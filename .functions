@@ -3,7 +3,8 @@
 # -----------------------------------------------------------------------------
 # opening helpers
 
-vim() {
+# shellcheck disable=SC2230
+vim() { # ^ avoids recursion
   if [ $# -eq 0 ]; then
     $(which vim) "$(fzf)"
   else
@@ -16,6 +17,7 @@ vim() {
   return 2
 }
 
+# shellcheck disable=SC2230
 vlc() {
   if [ $# -eq 0 ]; then
     $(which vlc) "$(fzf)" > /dev/null 2>&1
@@ -171,6 +173,7 @@ _follow() {
   local cur
   _init_completion || return
   local -r units="$(systemctl list-units --no-pager --no-legend | awk '{ print $1 }')"
+  # shellcheck disable=SC2207
   COMPREPLY=($(compgen -W "$units" -- "$cur"))
 }
 complete -F _follow follow
@@ -199,6 +202,7 @@ _kc() {
   local cur
   _init_completion || return
   local -r ctxs="$(kubectl config get-contexts -o name)"
+  # shellcheck disable=SC2207
   COMPREPLY=($(compgen -W "$ctxs" -- "$cur"))
 }
 complete -F _kc kc

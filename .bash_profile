@@ -43,6 +43,7 @@ _key() {
   _init_completion || return
   local -r keys="$(find ~/.ssh -name "*_id" -printf "%f " | sed 's/_id//g')"
   local -r gpgs="sign pass blackbox" # special case gpg keys
+  # shellcheck disable=SC2207
   COMPREPLY=($(compgen -W "$keys $gpgs" -- "$cur"))
 }
 complete -F _key key
