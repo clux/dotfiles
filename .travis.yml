@@ -9,4 +9,4 @@ install:
 env:
   - 'SHELLCHECK_OPTS="-e SC1091 -e SC1090 -s bash"'
 script:
-  - 'shellcheck .aliases .exports .bash* .prompt .functions .xprofile'
+  - 'shellcheck .aliases .exports .bash* .path .prompt .functions .xprofile'
