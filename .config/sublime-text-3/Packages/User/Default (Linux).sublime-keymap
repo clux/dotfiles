@@ -3,5 +3,7 @@
   { "keys": ["alt+up"], "command": "select_lines", "args": {"forward": false} },
   { "keys": ["alt+down"], "command": "select_lines", "args": {"forward": true} },
   // less insane search shortcut
-  { "keys": ["super+f"], "command": "search_in_project" }
+  { "keys": ["super+f"], "command": "search_in_project" },
+  // goto def
+  { "keys": ["f2"], "command": "goto_definition" }
 ]

@@ -1,0 +1,9 @@
+{
+	"clients":
+	{
+		"rls":
+		{
+			"enabled": true
+		}
+	}
+}
