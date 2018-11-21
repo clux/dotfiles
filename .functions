@@ -207,6 +207,14 @@ _kc() {
 }
 complete -F _kc kc
 
+# cluster version checker
+kcver() {
+  for ctx in $(kc | grep -v "*" | awk '{print $1}' | tail -n +2); do
+    kc $ctx > /dev/null;
+    echo "${ctx}$(kubectl version --short | grep Server | grep -oE " v.*")";
+  done
+}
+
 # -----------------------------------------------------------------------------
 # git
 
