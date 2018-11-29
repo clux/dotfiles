@@ -18,3 +18,7 @@ fi
 if [ -x ~/.go/bin/jira ]; then
   source <(~/.go/bin/jira --completion-script-bash)
 fi
+
+if hash jenq 2> /dev/null; then
+    source <(jenq completions bash)
+fi
