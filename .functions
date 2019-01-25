@@ -94,16 +94,24 @@ dslrdump() {
 }
 
 # veracrypt shortcuts
-vco() {
+vc1() {
   sudo echo "got sudo" # cache sudo first
   # For some reason the below cmd does not work without non-interactive in text mode
   veracrypt -t --mount /dev/sdc1 --slot=1 --verbose -p "$(pass drives/turing)" --non-interactive
   export HISTFILE=/dev/null
   cd /media/veracrypt1 || false
 }
+vc2() {
+  sudo echo "got sudo" # cache sudo first
+  # For some reason the below cmd does not work without non-interactive in text mode
+  veracrypt -t --mount /dev/sde1 --slot=2 --verbose -p "$(pass drives/hilbert)" --non-interactive
+  export HISTFILE=/dev/null
+  cd /media/veracrypt2 || false
+}
 vcc() {
   cd || true
-  veracrypt --text --dismount /dev/sdc1 && exit
+  veracrypt --text --dismount /dev/sdc1 --dismount /dev/sde1
+  exit
 }
 
 wifihotspot() {
