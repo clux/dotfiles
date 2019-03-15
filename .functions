@@ -115,7 +115,7 @@ vcc() {
 }
 
 wifihotspot() {
-  sudo create_ap wlp2s0 enp0s20f0u2 "Bathroom Cam 2" "$(pass ea-laptop)"
+  sudo create_ap wlp2s0 enp0s20f0u1 "Bathroom Cam 2" "$(pass network/ea-laptop)"
 }
 
 # -----------------------------------------------------------------------------
@@ -221,6 +221,12 @@ kcver() {
     kc $ctx > /dev/null;
     echo "${ctx}$(kubectl version --short | grep Server | grep -oE " v.*")";
   done
+}
+
+kpods() {
+  local -r app="$1"
+  paste <(kubectl get pods -lapp=$1 --sort-by=.metadata.creationTimestamp) \
+        <(kubectl get pods -lapp=$1 -o=custom-columns=VERSION:"{spec.containers[*].env[?(@.name=='SERVICE_VERSION')].value}",ENV:metadata.namespace --sort-by=.metadata.creationTimestamp)
 }
 
 # -----------------------------------------------------------------------------

@@ -81,6 +81,10 @@ let g:syntastic_sh_checkers = ['shellcheck']
 " misc syntax
 let g:vim_markdown_folding_disabled = 1
 
+" infinite undo
+set undofile
+set undodir=~/.vim/undodir
+
 " Line numbers next to git gutter - <number>gg to goto line
 set number
 

@@ -101,13 +101,6 @@ prompt_git() {
   fi
 }
 
-prompt_lal() {
-  local res
-  if res=$(lal env 2> /dev/null); then
-    echo -e " (${yellow}${res}${maintxt})"
-  fi
-}
-
 prompt_k8s() {
   local res
   if res=$(kubectl config current-context 2> /dev/null); then
@@ -189,9 +182,6 @@ set_prompt() {
   if [ -n "${VIRTUAL_ENV}" ]; then
     # Append (pyv) if in venv
     PS1+=" (${purple}pyv${maintxt})"
-  elif [ -d .lal ]; then
-    # Append lal environment if inside a lal repo
-    PS1+="$(prompt_lal)"
   elif [ -d "$HOME/.kube" ]; then
     # Append kubernetes context generally
     PS1+="$(prompt_k8s)"
