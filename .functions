@@ -225,8 +225,8 @@ kcver() {
 
 kpods() {
   local -r app="$1"
-  paste <(kubectl get pods -lapp=$1 --sort-by=.metadata.creationTimestamp) \
-        <(kubectl get pods -lapp=$1 -o=custom-columns=VERSION:"{spec.containers[*].env[?(@.name=='SERVICE_VERSION')].value}",ENV:metadata.namespace --sort-by=.metadata.creationTimestamp)
+  paste <(kubectl get pods -lapp="${app}" --sort-by=.metadata.creationTimestamp) \
+        <(kubectl get pods -lapp="${app}" -o=custom-columns=VERSION:"{spec.containers[*].env[?(@.name=='SERVICE_VERSION')].value}",ENV:metadata.namespace --sort-by=.metadata.creationTimestamp)
 }
 
 # -----------------------------------------------------------------------------
