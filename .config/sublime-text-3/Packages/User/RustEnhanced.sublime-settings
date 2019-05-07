@@ -1,3 +1,4 @@
 {
-   "rust_env": {"PATH": "$PATH:$HOME/.cargo/bin"}
+   "rust_env": {"PATH": "$PATH:$HOME/.cargo/bin"},
+   "rust_syntax_checking": true
 }
