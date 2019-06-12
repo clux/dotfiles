@@ -49,7 +49,7 @@ alias gm='git m'
 alias gw='git whoami'
 
 # kubectl
-alias k="kubctl"
+alias k="kubectl"
 alias kg="kubectl get"
 alias kgy="kubectl get -oyaml"
 alias kd="kubectl describe"
