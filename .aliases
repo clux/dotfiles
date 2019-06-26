@@ -5,9 +5,12 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
-alias ll='ls -Alh --group-directories-first --ignore=lost+found'
-alias la='ls -A --group-directories-first --ignore=lost+found'
-alias l='ls -C --group-directories-first --ignore=lost+found'
+#alias ll='ls -Alh --group-directories-first --ignore=lost+found'
+alias ll='exa -l --group-directories-first --git-ignore --git'
+#alias la='ls -A --group-directories-first --ignore=lost+found'
+alias la='exa -a --group-directories-first'
+#alias l='ls -C --group-directories-first --ignore=lost+found'
+alias l='exa --group-directories-first'
 
 # common pipe aliases
 alias A="awk"
