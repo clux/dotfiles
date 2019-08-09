@@ -12,10 +12,7 @@ vim() { # ^ avoids recursion
   fi
 }
 
-:wq() {
-  echo "seek help"
-  return 2
-}
+:wq() { vim; }
 
 # shellcheck disable=SC2230
 vlc() {
