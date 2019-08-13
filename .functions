@@ -12,8 +12,6 @@ vim() { # ^ avoids recursion
   fi
 }
 
-:wq() { vim; }
-
 # shellcheck disable=SC2230
 v() {
   if [ $# -eq 0 ]; then
