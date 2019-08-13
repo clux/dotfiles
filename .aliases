@@ -14,7 +14,7 @@ alias l='exa --group-directories-first'
 
 # common pipe aliases
 alias A="awk"
-alias C="wc"
+alias WC="wc -l"
 alias G="grep"
 alias XG="xargs grep"
 alias L="less"
@@ -26,12 +26,11 @@ alias XC="xclip -i -sel c"
 alias cwd='pwd | tr -d "\r\n" | xclip -sel clip'
 alias week='date +%V'
 alias ymd='date +%Y-%m-%d'
-alias clippy='rustup run nightly cargo clippy'
 alias s='subl'
 alias v='vim'
+alias plz='sudo'
 
 # search helpers
-alias agcmake="rg -t cmake"
 alias rg="rg --colors 'match:bg:yellow' --colors 'match:fg:black' --colors 'match:style:nobold' --colors 'line:style:bold' --colors 'path:fg:green'"
 alias ag="rg"
 
