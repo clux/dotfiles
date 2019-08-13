@@ -5,12 +5,18 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
-#alias ll='ls -Alh --group-directories-first --ignore=lost+found'
-#alias la='ls -A --group-directories-first --ignore=lost+found'
-#alias l='ls -C --group-directories-first --ignore=lost+found'
+
+# ls -> exa
 alias ll='exa -l --group-directories-first --git-ignore --git'
 alias la='exa -a --group-directories-first'
 alias l='exa --group-directories-first'
+#alias ll='ls -Alh --group-directories-first --ignore=lost+found'
+#alias la='ls -A --group-directories-first --ignore=lost+found'
+#alias l='ls -C --group-directories-first --ignore=lost+found'
+
+# ag -> rg
+alias rg="rg --colors 'match:bg:yellow' --colors 'match:fg:black' --colors 'match:style:nobold' --colors 'line:style:bold' --colors 'path:fg:green'"
+alias ag="rg"
 
 # common pipe aliases
 alias A="awk"
@@ -26,13 +32,6 @@ alias XC="xclip -i -sel c"
 alias cwd='pwd | tr -d "\r\n" | xclip -sel clip'
 alias week='date +%V'
 alias ymd='date +%Y-%m-%d'
-alias s='subl'
-alias v='vim'
-alias plz='sudo'
-
-# search helpers
-alias rg="rg --colors 'match:bg:yellow' --colors 'match:fg:black' --colors 'match:style:nobold' --colors 'line:style:bold' --colors 'path:fg:green'"
-alias ag="rg"
 
 # git
 alias g='git'
