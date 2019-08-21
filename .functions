@@ -29,6 +29,15 @@ s() {
   fi
 }
 
+cbr() {
+  # shellcheck disable=SC2068
+  cargo build --release $@
+}
+cbrm() {
+  # shellcheck disable=SC2068
+  cargo build --release --target=x86_64-unknown-linux-musl $@
+}
+
 cs() {
   # shellcheck disable=SC2068
   cowsay -f flaming-sheep $@ | lolcat -S 60;
