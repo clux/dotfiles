@@ -14,7 +14,7 @@ alias l='exa --group-directories-first'
 #alias la='ls -A --group-directories-first --ignore=lost+found'
 #alias l='ls -C --group-directories-first --ignore=lost+found'
 
-# ag -> rg
+# ag muscle memory
 alias rg="rg --colors 'match:bg:yellow' --colors 'match:fg:black' --colors 'match:style:nobold' --colors 'line:style:bold' --colors 'path:fg:green'"
 alias ag="rg"
 
@@ -86,6 +86,10 @@ alias kdcj="kd cj"
 alias kds="kd service"
 alias kgf="kg foo" # test crd
 alias kgfy="kg foo -oyaml"
+
+# rustfmt
+# rustup component add rustfmt --toolchain nightly
+alias rfmt="cargo +nightly fmt"
 
 # rsync
 alias rsync-copy="rsync -avz --progress -h"
