@@ -620,3 +620,13 @@ npm-minor() {
 npm-major() {
   npm version major && git push && git push --tags && npm publish
 }
+
+cargo-tag() {
+  git diff --exit-code || return 1
+  git diff --cached --exit-code || return 1
+  local -r ver="$(grep version Cargo.toml | awk -F"\"" '{print $2}' | head -n 1)"
+  git tag -a "${ver}" -m "${ver}"
+  git push
+  git push --tags
+  cargo publish
+}
