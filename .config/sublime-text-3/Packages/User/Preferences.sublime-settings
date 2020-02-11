@@ -9,7 +9,6 @@
 	"highlight_line": true,
 	"ignored_packages":
 	[
-		"Jinja2",
 		"Makefile",
 		"Markdown",
 		"Vintage"
