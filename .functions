@@ -233,12 +233,12 @@ nmap-kube () {
 }
 
 nmap-kube-discover () {
-    local LOCAL_RANGE=$(ip a | awk '/eth0$/{print $2}' | sed 's,[0-9][0-9]*/.*,*,');
+    local -r LOCAL_RANGE="$(ip a | awk '/eth0$/{print $2}' | sed 's,[0-9][0-9]*/.*,*,')"
     local SERVER_RANGES=" ";
     SERVER_RANGES+="10.0.0.1 ";
     SERVER_RANGES+="10.0.1.* ";
     SERVER_RANGES+="10.*.0-1.* ";
-    nmap-kube ${SERVER_RANGES} "${LOCAL_RANGE}"
+    nmap-kube "${SERVER_RANGES}" "${LOCAL_RANGE}"
 }
 
 # stuff via bulletproof kubernetes hacking
