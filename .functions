@@ -400,6 +400,12 @@ disk() {
     | awk '{printf("%3.1f%%\n", $3*100/$2)}'
 }
 cpu() { awk '{printf("%3.1f%%\n", $1*100/'"$(nproc)"') }' < /proc/loadavg ;}
+# average cpu frequency based on current mean info across cores /proc/cpuinfo divided by max
+cpufreq() {
+  local -r maxkhz="$(cat /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq)"
+  local -r current_mhz="$(grep 'cpu MHz' /proc/cpuinfo | awk '{print $4}' | datamash mean 1)"
+  echo "scale=2; 100* $current_mhz * 1000 / $maxkhz" | bc -l | xargs printf "%s%%\n"
+}
 
 iface() {
   # first interface with state UP
