@@ -18,6 +18,9 @@ export RUST_BACKTRACE=1
 # Separate source checkout for `racer`
 export RUST_SRC_PATH=$HOME/.cargo/rustc-stable/src
 
+# kubernetes
+export CHANGE_MINIKUBE_NONE_USER=true
+
 export GOPATH=$HOME/.go
 
 # use shellcheck for current file only
