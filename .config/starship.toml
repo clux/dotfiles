@@ -1,0 +1,42 @@
+[character]
+symbol = ""
+# PROBLEM: cannot get a consistent bg color across separators
+
+[hostname]
+ssh_only = true
+
+[kubernetes]
+symbol = "☸ "
+style = "bg:black bold blue"
+disabled = false
+
+[directory]
+truncation_length = 3
+style = "bg:black fg:bold white"
+prefix = " "
+truncate_to_repo = "false"
+
+[git_branch]
+symbol = " "
+style = "bg:black bold purple"
+truncation_length = 8
+truncation_symbol = "."
+
+[git_status]
+conflicted = "🏳"
+ahead = "↑"
+behind = "↓"
+diverged = "⇕"
+untracked = "…"
+stashed = "⚑"
+modified = "+"
+# DIDNT FULLY TWEAK THIS
+staged.value = "++"
+staged.style = "green"
+staged_count.enabled = true
+staged_count.style = "green"
+renamed = "👅"
+deleted = "🗑"
+
+[line_break]
+disabled = true

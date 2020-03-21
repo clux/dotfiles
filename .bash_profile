@@ -95,3 +95,5 @@ if [ -x /usr/bin/dircolors ]; then
       man "$@"
   }
 fi
+
+#eval "$(starship init bash)"
