@@ -21,7 +21,9 @@ export RUST_SRC_PATH=$HOME/.cargo/rustc-stable/src
 # kubernetes
 export CHANGE_MINIKUBE_NONE_USER=true
 
+# go
 export GOPATH=$HOME/.go
+export GO111MODULE=on
 
 # use shellcheck for current file only
 export SHELLCHECK_OPTS="-e SC1091 -e SC1090"
