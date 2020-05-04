@@ -1,5 +1,7 @@
 #!/bin/bash
 
+alias please=sudo
+
 # navigation shortcuts
 alias ..="cd .."
 alias ...="cd ../.."
