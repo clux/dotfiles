@@ -1,9 +1,9 @@
 {
-	"clients":
-	{
-		"rls":
-		{
-			"enabled": true
-		}
-	}
+   "clients":
+   {
+       "rust-analyzer":
+       {
+         "enabled": true
+       }
+   }
 }
