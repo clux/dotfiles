@@ -57,12 +57,6 @@ else
   [ -f ~/.keychain/agent-sh-gpg ] && source ~/.keychain/agent-sh-gpg
 fi
 
-# default helm context matches kube context
-if hash kubectl 2> /dev/null; then
-  TILLER_NAMESPACE="$(kubectl config get-contexts | grep "\*" |awk '{print $5}')"
-  export TILLER_NAMESPACE
-fi
-
 # -----------------------------------------------------------------------------
 # History
 
