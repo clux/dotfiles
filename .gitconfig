@@ -94,6 +94,9 @@
   # Allow you to push with `git push -u` first time on a new branch
   default = current
 
+[pull]
+  ff = only
+
 [pager]
   diff = /usr/share/git/diff-highlight/diff-highlight | less
   show = /usr/share/git/diff-highlight/diff-highlight | less
@@ -108,6 +111,7 @@
 
 [diff]
   colorMoved = plain
+  noprefix = true
 
 [color "diff"]
   meta = yellow bold
