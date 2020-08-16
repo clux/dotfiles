@@ -528,6 +528,10 @@ rust-muslbuild() {
   sudo chown "$USER" -R target
 }
 
+rust-fund() {
+  cargo fund --github-api-token="$(pass github/cargo-fund-pat)"
+}
+
 # -----------------------------------------------------------------------------
 # extraction shortcuts
 
