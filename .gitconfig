@@ -34,8 +34,11 @@
   yolo = !git add -u && git  commit --amend --no-edit && git push -f
   # Merged branch delete
   md = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
-  prune = fetch --prune --all
+  pruneall = "!f() { git prunetags; git pruneremotes; }; f"
+  prunetags = fetch --prune --all
+  pruneremotes = remote prune origin
   pr = !"pr() { git fetch origin pull/$1/head:pr-$1; git checkout pr-$1; }; pr"
+  zzz = !"zzz() { git stash && git pull && git stash pop; }; zzz"
 
   # MISC
   # add all untracked files to .gitignore
