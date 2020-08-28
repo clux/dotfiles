@@ -56,6 +56,8 @@ alias gw='git whoami'
 
 # kubectl
 alias k="kubectl"
+alias ka="kubectl apply"
+alias kdel="kubectl delete"
 alias kg="kubectl get"
 alias kgy="kubectl get -oyaml"
 alias kd="kubectl describe"
@@ -104,7 +106,7 @@ alias drm="docker rm"
 alias drmi="docker rmi"
 alias db="docker build"
 alias de="docker exec"
-#alias d="docker" # TODO: fix z first
+alias d="docker"
 
 # rustfmt
 # rustup component add rustfmt --toolchain nightly
