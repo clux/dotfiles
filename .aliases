@@ -95,7 +95,7 @@ alias kgf="kg foo" # test crd
 alias kgfy="kg foo -oyaml"
 
 # docker
-#alias d="docker" # clashes wish z/zoxide
+alias d="docker"
 alias dps="docker ps"
 alias dpsa="docker ps -a"
 alias di="docker images"

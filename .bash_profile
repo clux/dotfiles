@@ -14,9 +14,6 @@ source ~/.path
 # rupa/z replacement
 eval "$(zoxide init bash)"
 
-# shellcheck disable=SC2068
-d() {  z -l $@ | tail -n 1 | awk '{print $2}' ;}
-
 # -----------------------------------------------------------------------------
 # Key management via keychain
 
