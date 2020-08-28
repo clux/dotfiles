@@ -11,8 +11,10 @@ source ~/.exports
 source ~/.aliases
 source ~/.path
 
+# rupa/z replacement
+eval "$(zoxide init bash)"
 # rupa/z + an extension
-[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
+#[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
 
 # work module
 babylon() {
