@@ -95,6 +95,7 @@ alias kgf="kg foo" # test crd
 alias kgfy="kg foo -oyaml"
 
 # docker
+#alias d="docker" # clashes wish z/zoxide
 alias dps="docker ps"
 alias dpsa="docker ps -a"
 alias di="docker images"
@@ -106,7 +107,6 @@ alias drm="docker rm"
 alias drmi="docker rmi"
 alias db="docker build"
 alias de="docker exec"
-alias d="docker"
 
 # rustfmt
 # rustup component add rustfmt --toolchain nightly

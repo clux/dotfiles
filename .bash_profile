@@ -13,13 +13,6 @@ source ~/.path
 
 # rupa/z replacement
 eval "$(zoxide init bash)"
-# rupa/z + an extension
-#[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
-
-# work module
-babylon() {
-  [ -f ~/repos/babylon/bashrc ] && source ~/repos/babylon/bashrc
-}
 
 # shellcheck disable=SC2068
 d() {  z -l $@ | tail -n 1 | awk '{print $2}' ;}
