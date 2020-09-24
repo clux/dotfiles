@@ -43,9 +43,7 @@ _key() {
 complete -F _key key
 
 if [[ $(hostname) = kjttks ]]; then
-  key github baby babyrsa main
-elif [[ $(hostname) = cluxxps ]]; then
-  key github baby babyrsa main
+  key github main
 else
   [ -f ~/.keychain/agent-sh ] && source ~/.keychain/agent-sh
   [ -f ~/.keychain/agent-sh-gpg ] && source ~/.keychain/agent-sh-gpg
