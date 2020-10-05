@@ -63,8 +63,8 @@
   fb = "!f() { git branch -a --contains $1; }; f"
 
   # IDENTITY
-  ea = !git config --local user.name \"Eirik Albrigtsen\" && \
-        git config --local user.email \"eirik.albrigtsen@babylonhealth.com\"
+  #ea = !git config --local user.name \"Eirik Albrigtsen\" && \
+  #      git config --local user.email \"eirik.albrigtsen@babylonhealth.com\"
   clux = !git config --local user.name \"clux\" && \
           git config --local user.email \"sszynrae@gmail.com\"
   # set who i am on fresh clones (cd's into dirname and calls one of the above)
@@ -75,7 +75,7 @@
   github ="!f() { git clone git@github.com:$1.git && git idclone clux $1; }; f"
   gitlab ="!f() { git clone git@gitlab.com:$1.git && git idclone clux $1; }; f"
   bitbucket ="!f() { git clone git@bitbucket.org:$1.git && git idclone clux $1; }; f"
-  baby = "!f() { git clone git@github.com:babylonhealth/$1.git && git idclone ea $1; }; f"
+  #baby = "!f() { git clone git@github.com:babylonhealth/$1.git && git idclone ea $1; }; f"
   aur = "!f() { git clone https://aur.archlinux.org/$1.git && git idclone clux $1; }; f"
 
   # multi-clone shortcuts
