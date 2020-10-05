@@ -8,7 +8,6 @@
   a = add
   p = pull
   f = push
-  m = checkout master
   co = checkout
   nu = checkout -b
 
@@ -36,6 +35,7 @@
   md = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
   prune = fetch --prune --all
   pr = !"pr() { git fetch origin pull/$1/head:pr-$1; git checkout pr-$1; }; pr"
+  m = !"m() { git checkout \"$(git symbolic-ref --short refs/remotes/origin/HEAD | sed 's@^origin/@@')\"; }; m"
 
   # MISC
   # add all untracked files to .gitignore
