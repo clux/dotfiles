@@ -3,7 +3,6 @@
   s = status -s
   d = diff
   dc = diff --cached
-  db = log -p master..HEAD
   c = commit --verbose
   a = add
   p = pull
@@ -35,7 +34,9 @@
   md = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
   prune = fetch --prune --all
   pr = !"pr() { git fetch origin pull/$1/head:pr-$1; git checkout pr-$1; }; pr"
-  m = !"m() { git checkout \"$(git symbolic-ref --short refs/remotes/origin/HEAD | sed 's@^origin/@@')\"; }; m"
+  m = !"m() { git checkout \"$(git mbranch)\"; }; m"
+  db = !"db() { git log -p $(git mbranch)..HEAD; }; db"
+  mbranch = !"mbranch() { git symbolic-ref --short refs/remotes/origin/HEAD | sed 's@^origin/@@'; }; mbranch"
 
   # MISC
   # add all untracked files to .gitignore
@@ -45,7 +46,7 @@
   # open github/github enterprise changesets in the browser
   open = "!f() { xdg-open \"https://$(echo $(git config --get remote.origin.url) | sed 's|^http.://||' | sed 's|^git@||' | tr : '/' | sed 's|.git$||')/commit/$1\"; }; f"
   # reset to blank state
-  wipe = "!f() { git reset --hard origin/master && git clean -fdX; }; f"
+  wipe = "!f() { git reset --hard origin/$(git mbranch) && git clean -fdX; }; f"
   # remove whitespace from your things
   ws = "!git rebase --whitespace=fix --onto $(git merge-base HEAD @{u})"
   # what are my aliases
