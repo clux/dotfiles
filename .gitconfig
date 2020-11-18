@@ -142,6 +142,7 @@
 
 [init]
   templatedir = ~/.templates/git
+  defaultBranch = master
 
 [core]
   hooksPath = ~/.templates/git/hooks
