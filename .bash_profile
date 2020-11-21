@@ -63,11 +63,6 @@ shopt -s histappend # Append to history file, rather than overwriting it
 # HSTR configuration (defaults that didn't match my existing ones)
 alias hh=hstr                    # hh to be alias for hstr
 export HSTR_CONFIG=hicolor       # get more colors
-# ensure synchronization between bash memory and history file
-# NB: My prompt command is set before, so this SHOULD be fine
-# Had to tweak its defaul to also add history -c, but this might prevent certain !23
-# see https://unix.stackexchange.com/questions/1288/preserve-bash-history-in-multiple-terminal-windows
-export PROMPT_COMMAND="history -a; history -c; history -r; ${PROMPT_COMMAND}"
 # if this is interactive shell, then bind hstr to Ctrl-r (for Vi mode check doc)
 if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hstr -- \C-j"'; fi
 # if this is interactive shell, then bind 'kill last command' to Ctrl-x k
