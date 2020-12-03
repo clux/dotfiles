@@ -12,7 +12,8 @@ alias .....="cd ../../../.."
 alias cat="bat --plain --theme=1337"
 
 # ls -> exa
-alias ll='exa -l --group-directories-first --git-ignore --git --sort ext --color=always | less -RX'
+alias ll='exa -l --group-directories-first --git-ignore --git --sort ext --color=always'
+alias lll='ll | less -RX'
 alias la='exa -a --group-directories-first'
 alias l='exa --group-directories-first'
 #alias ll='ls -Alh --group-directories-first --ignore=lost+found'
