@@ -303,7 +303,7 @@ refresh-rate() {
   local -r rate="${1-144}"
   if [[ $(hostname) = kjttks ]]; then
     # Main screen refresh rate
-    xrandr --output DVI-I-1 --mode 1920x1080 --rate "$rate"
+    xrandr --output HDMI-0 --mode 1920x1080 --rate "$rate"
     xrandr -q | grep -E "$rate\.00\*"
   fi
 }
@@ -342,13 +342,14 @@ banish-daemons() {
   pm2 kill
 }
 
-steam-safe() {
+steam-tf2() {
   export __GL_SYNC_TO_VBLANK=0
-  export __GLVND_DISALLOW_PATCHING=1 # This was for TF2, may no longer be necessary
-  steam-native
+  export __GLVND_DISALLOW_PATCHING=1 # helped tf2 in the past
+  steam
 }
 
-steam-mesa() {
+steam-mesa-old() {
+  # A helper wrapper that made an older mesa laptop work better
   # shellcheck disable=SC2016
   LD_PRELOAD='/usr/$LIB/libstdc++.so.6 /usr/$LIB/libgcc_s.so.1 /usr/$LIB/libxcb.so.1 /usr/$LIB/libgpg-error.so' steam
 }
