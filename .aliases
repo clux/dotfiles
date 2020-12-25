@@ -109,9 +109,13 @@ alias drmi="docker rmi"
 alias db="docker build"
 alias de="docker exec"
 
-# rustfmt
+# cargo
+alias c="cargo"
+alias cb="cargo build"
+alias ct="cargo test"
 # rustup component add rustfmt --toolchain nightly
-alias rfmt="cargo +nightly fmt"
+alias cfmt="cargo +nightly fmt"
+alias cdoc="cargo +nightly doc"
 
 # rsync
 alias rsync-copy="rsync -avz --progress -h"
