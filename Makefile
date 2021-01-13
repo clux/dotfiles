@@ -91,7 +91,8 @@ gconf: has_fonts
 has_fonts:
 	$(call green, "Guarding on Liberations + powerline font presence")
 	@find /usr/share/fonts/ | grep -q Liberation
-	@find ~/.local/share/fonts/ | grep -q Powerline
+	#@find ~/.local/share/fonts/ | grep -q Powerline
+	@find /usr/share/fonts/ | grep -q Powerline
 
 dconf: has_fonts
 	$(call green, "Importing main dconf settings")
