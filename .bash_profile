@@ -46,6 +46,8 @@ complete -F _key key
 
 if [[ ${HOSTNAME} = kjttks ]]; then
   key github main
+elif [[ ${HOSTNAME} == cluxxps ]]; then
+  key github work main
 else
   [ -f ~/.keychain/agent-sh ] && source ~/.keychain/agent-sh
   [ -f ~/.keychain/agent-sh-gpg ] && source ~/.keychain/agent-sh-gpg
