@@ -301,7 +301,7 @@ kill-tabs() { pkill -u "$USER" -f "chrome.*renderer" ;}
 # everything else: refresh-rate 144
 refresh-rate() {
   local -r rate="${1-144}"
-  if [[ $(hostname) = kjttks ]]; then
+  if [[ ${HOSTNAME} = kjttks ]]; then
     # Main screen refresh rate
     xrandr --output HDMI-0 --mode 1920x1080 --rate "$rate"
     xrandr -q | grep -E "$rate\.00\*"

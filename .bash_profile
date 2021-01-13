@@ -44,7 +44,7 @@ _key() {
 }
 complete -F _key key
 
-if [[ $(hostname) = kjttks ]]; then
+if [[ ${HOSTNAME} = kjttks ]]; then
   key github main
 else
   [ -f ~/.keychain/agent-sh ] && source ~/.keychain/agent-sh
