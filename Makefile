@@ -21,13 +21,13 @@ endef
 
 # All targets herein are technically PHONY, but this rarely matters
 # We list a few of them that MIGHT cause the `'target' is up to date` failure.
-.PHONY: config ui sublime vim help guake gconf dconf
+.PHONY: config ui sublime vim help guake dconf
 
 help:
 	@tput -T xterm bold
 	$(call green,"Main targets:")
 	$(call green," config", "symlink configuration files to ~/")
-	$(call green," ui", "set gconf and dconf settings")
+	$(call green," ui", "set dconf settings")
 	$(call green," editors", "configure sublime and vim")
 
 directories:
@@ -63,31 +63,6 @@ editors: directories
 	@[ -f ~/.config/sublime-text-3/Local/License.sublime_license ] || make sublime_license
 	@[ -d ~/.vim/plugged ] || make vim
 
-gconf: has_fonts
-	$(call green, "Setting guake style")
-	@gconftool-2 --set /apps/guake/style/background/transparency 20 --type int
-	@gconftool-2 --set /apps/guake/style/font/style "Roboto Mono for Powerline 14" --type string
-	@gconftool-2 --set /apps/guake/general/use_default_font false --type bool
-	@gconftool-2 --set /apps/guake/general/history_size 16000 --type int
-	@gconftool-2 --set /apps/guake/general/use_trayicon false --type bool
-	@gconftool-2 --set /apps/guake/general/use_popup false --type bool
-	@gconftool-2 --set /apps/guake/general/mouse_display false --type bool
-	@gconftool-2 --set /apps/guake/general/prompt_on_quit false --type bool
-	@gconftool-2 --set /apps/guake/general/window_height_f 92 --type float
-	@gconftool-2 --set /apps/guake/general/window_tabbar true --type bool
-	@gconftool-2 --set /apps/guake/general/window_ontop false --type bool
-	@gconftool-2 --set /apps/guake/general/use_vte_titles false --type bool
-	$(call green, "Setting guake keybindings")
-	@gconftool-2 --set /apps/guake/keybindings/global/show_hide "F1" --type string
-	@gconftool-2 --set /apps/guake/keybindings/local/toggle_fullscreen "F11" --type string
-	@gconftool-2 --set /apps/guake/keybindings/local/new_tab "<Primary>t" --type string
-	@gconftool-2 --set /apps/guake/keybindings/local/close_tab "<Primary>w" --type string
-	@gconftool-2 --set /apps/guake/keybindings/local/rename_current_tab "<Control>F2" --type string
-	@gconftool-2 --set /apps/guake/keybindings/local/previous_tab "<Primary>Left" --type string
-	@gconftool-2 --set /apps/guake/keybindings/local/next_tab "<Primary>Right" --type string
-	@gconftool-2 --set /apps/guake/keybindings/local/clipboard_copy "<Control><Shift>"c --type string
-	@gconftool-2 --set /apps/guake/keybindings/local/clipboard_paste "<Control><Shift>v" --type string
-
 has_fonts:
 	$(call green, "Guarding on Liberations + powerline font presence")
 	@find /usr/share/fonts/ | grep -q Liberation
@@ -95,10 +70,11 @@ has_fonts:
 	@find /usr/share/fonts/ | grep -q Powerline
 
 dconf: has_fonts
-	$(call green, "Importing main dconf settings")
+	$(call green, "Importing dconf settings")
 	@dconf load /org/ < org.dconf
+	@dconf load /apps/ < apps.dconf
 
-ui: gconf dconf
+ui: dconf
 
 lint:
 	docker run \

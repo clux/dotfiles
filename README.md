@@ -21,7 +21,7 @@ make config
 make ui
 ```
 
-The first symlinks all files herein to `$HOME` so they can be tracked, and updates editor configs. The second updates UI through `dconf` and `gconf`.
+The first symlinks all files herein to `$HOME` so they can be tracked, and updates editor configs. The second updates UI through `dconf`.
 
 ## Sublime Note
 It is fine to `make config` before sublime is installed. If it is installed, and `subl` is opened, purge the user directory.
