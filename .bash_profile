@@ -1,6 +1,7 @@
 #!/bin/bash
 export TERM=xterm-256color
-export LS_COLORS="$(vivid generate solarized-light)"
+export LS_COLORS
+LS_COLORS="$(vivid generate solarized-light)"
 # https://github.com/sharkdp/vivid/tree/master/themes
 
 # Allow ** recursive globbing
