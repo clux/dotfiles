@@ -21,5 +21,3 @@ fi
 # Remove maccel
 xset m 0 0
 
-# tmux
-tmux start-server
