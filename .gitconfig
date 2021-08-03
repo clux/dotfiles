@@ -3,7 +3,7 @@
   s = status -s
   d = diff
   dc = diff --cached
-  c = commit --verbose
+  c = commit --signoff --verbose
   a = add
   p = pull
   f = push
