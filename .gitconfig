@@ -102,23 +102,26 @@
   ff = only
 
 [pager]
-  diff = /usr/share/git/diff-highlight/diff-highlight | less
-  show = /usr/share/git/diff-highlight/diff-highlight | less
-  log = /usr/share/git/diff-highlight/diff-highlight | less
-  #diff = delta
-  #show = delta
-  #log = delta
+  #diff = /usr/share/git/diff-highlight/diff-highlight | less
+  #show = /usr/share/git/diff-highlight/diff-highlight | less
+  #log = /usr/share/git/diff-highlight/diff-highlight | less
+  diff = delta
+  show = delta
+  log = delta
 
 [interactive]
-  diffFilter = /usr/share/git/diff-highlight/diff-highlight
-  #diffFilter = delta --color-only
+  #diffFilter = /usr/share/git/diff-highlight/diff-highlight
+  diffFilter = delta --color-only
 
 [delta]
-  # NB: delta does not work well with colorMoved yet, therefore it is commented out for now
+  # NB: delta did not work well with colorMoved yet, therefore it is commented out for now
   # maybe in the next cargo install git-delta -f
-  features = decorations
+  features = unobtrusive-line-numbers decorations
   whitespace-error-style = 22 reverse
   syntax-theme = 1337
+  side-by-side = true
+  line-numbers-left-format = ""
+  line-numbers-right-format = "│ "
 
 [apply]
   # Detect whitespace errors when applying a patch
