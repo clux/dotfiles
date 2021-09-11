@@ -226,6 +226,13 @@ kcver() {
   done
 }
 
+k3dmake() {
+  k3d cluster create --servers 1 --agents 1 main \
+    --k3s-agent-arg '--kubelet-arg=eviction-hard=imagefs.available<1%,nodefs.available<1%' \
+    --k3s-agent-arg '--kubelet-arg=eviction-minimum-reclaim=imagefs.available=1%,nodefs.available=1%'
+  k3d kubeconfig get --all > ~/.kube/k3d
+}
+
 nmap-kube () {
     nmap --open -T4 -A -v -Pn -p 443,2379,4194,6782-6784,6443,8443,8080,9099,10250,10255,10256 "${@}"
 }
