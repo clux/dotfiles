@@ -52,3 +52,5 @@ export FZF_DEFAULT_COMMAND='
    find . -type f -print -o -type l -print |
       grep -vE "/target/|node_modules|bower_components|.git/" |
       sed s/^..//) 2> /dev/null'
+
+# NB: other fzf things we use: sysz (systemd fzf plugin)
