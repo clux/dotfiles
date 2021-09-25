@@ -2,9 +2,13 @@
 # Allow ** recursive globbing
 shopt -s globstar
 
-# Modules
+# Promt
+## Alternative 1: the 200 line bash script
 #source ~/.prompt
+## Alternative 2: the 20k line rust exe with a 100 line toml config
 eval "$(starship init bash)"
+
+# Modules
 source ~/.functions
 source ~/.exports
 source ~/.aliases

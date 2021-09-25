@@ -71,7 +71,7 @@ modified = '+$count '
 staged = "●"
 renamed = "👅"
 deleted = "🗑"
-up_to_date = "✔ "
+#up_to_date = "✔ "
 
 [line_break]
 disabled = true
