@@ -12,32 +12,31 @@ add_newline = false
 # right_prompt = true # TODO: requires fish/zsh
 
 [character]
-success_symbol = "[](fg:black black)"
-error_symbol = "[✗](bg:black bold red)[](fg:black black)"
-# NB: this is slightly awkward, maybe it's better to remove the bg in favour of the color change..
-format = "[ $symbol](bg:black bold) "
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+format = "[$symbol](bold) "
 disabled = false
 
 [username]
-style_root = 'bg:black bold red'
-style_user = 'bg:black yellow'
+style_root = 'bold red'
+style_user = 'yellow'
 format = '[$user]($style)'
 
 [hostname]
 ssh_only = true
-style = 'bg:black bold dimmed green'
+style = 'bold dimmed green'
 format = "[ $hostname ]($style)"
 
 [rust]
 disabled = false
-style = "bg:black 202"
+style = "202"
 format = "[ $symbol($version)]($style)"
 version_format = "${minor}"
 detect_extensions = []
 
 [directory]
 truncation_length = 3
-style = "bg:black white"
+style = "white"
 format = "[$path ]($style)"
 truncate_to_repo = "false"
 fish_style_pwd_dir_length = 5
@@ -47,30 +46,30 @@ fish_style_pwd_dir_length = 5
 
 [kubernetes]
 symbol = "☸ "
-style = "bg:black 27"
+style = "27"
 disabled = false
-format = '[$symbol]($style)[$context( \($namespace\))](bg:black white)'
+format = '[$symbol]($style)[$context( \($namespace\))](white)'
 
 [git_branch]
-style = "bg:black bold 38"
-format = "[ $symbol]($style)[$branch](bg:black 38)"
+style = "bold 38"
+format = "[ $symbol]($style)[$branch](38)"
 truncation_length = 24
 truncation_symbol = "."
 
 [git_status]
 disabled = false
 format = '[ $ahead_behind$modified$conflicted$stashed$deleted$renamed$staged$untracked]($style)'
-style = "bg:black 38"
-conflicted = "🏳"
+style = "38"
+conflicted = "🏳 "
 ahead = "↑$count "
 behind = "↓$count "
 diverged = "⇕ "
 untracked = "…"
 stashed = "⚑ "
 modified = '+$count '
-staged = "●"
-renamed = "👅"
-deleted = "🗑"
+staged = "● "
+renamed = "👅 "
+deleted = "🗑 "
 #up_to_date = "✔ "
 
 [line_break]
