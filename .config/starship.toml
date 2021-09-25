@@ -6,7 +6,6 @@ $directory\
 $kubernetes\
 $git_branch\
 $git_status\
-$rust\
 $character\
 """
 add_newline = false
@@ -34,7 +33,7 @@ style = 'bg:black bold dimmed green'
 format = "[ $hostname ]($style)"
 
 [rust]
-disabled = true
+disabled = true # MAYBE for later with a right_prompt
 style = "bg:black 202"
 format = "[ $symbol($version)]($style)"
 version_format = "${minor}"
