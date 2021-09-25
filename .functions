@@ -176,26 +176,28 @@ elif grep -qE "Alpine Linux" /etc/os-release; then
 fi
 
 # -----------------------------------------------------------------------------
-# systemd
+# systemd - general interface can use sysz
+# but have some things that here for quick convenience
 
-follow() {
+sysfollow() {
   local -r unit="$1"
   journalctl -u "$unit" -fl | ccze
 }
-_follow() {
+_syslistunits() {
   local cur
   _init_completion || return
   local -r units="$(systemctl list-units --no-pager --no-legend | awk '{ print $1 }')"
   # shellcheck disable=SC2207
   COMPREPLY=($(compgen -W "$units" -- "$cur"))
 }
-complete -F _follow follow
+complete -F _syslistunits sysfollow
 
-reload() {
+sysreload() {
   local -r unit="$1"
   sudo systemctl daemon-reload
   sudo systemctl restart "$unit"
 }
+complete -F _syslistunits sysreload
 
 # -----------------------------------------------------------------------------
 # kubernetes
@@ -431,30 +433,8 @@ localip() {
   ip addr show "$(iface)" | grep inet | awk '{ print $2 }'
 }
 
-# process tree
-#
-# pstree :: simple tree hiding kernel workers
-# pstree f :: full tree
-# pstree u [user] :: user tree for $USER or passed in user
-pstree() {
-  local -r full=$([ "$1" = "f" ] && echo "1")
-  local usr=""
-  if [ "$1" = "u" ]; then
-    usr=$([ -n "$2" ] && echo "$2" || echo "$USER")
-  fi
-  local flags=""
-  if [ -n "$full" ]; then
-    flags="-e -o cputime,pid,user,args"
-  elif [ -n "$usr" ]; then
-    flags="U $usr -o cputime,pid,args"
-  else
-    # Simple multi-user, filtering away PPID 2
-    flags="--ppid 2 --deselect -o cputime,pid,user,args"
-  fi
-  # shellcheck disable=SC2086
-  ps $flags --forest --width $(($(tput cols)-1)) | ccze -A | less -RX
-  # NB: the -1 is to compensate for what ccze puts in there
-}
+# legacy
+pstree() { echo "use procs"; }
 
 # -----------------------------------------------------------------------------
 # http helpers

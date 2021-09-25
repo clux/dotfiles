@@ -20,9 +20,8 @@ alias l='exa --group-directories-first'
 #alias la='ls -A --group-directories-first --ignore=lost+found'
 #alias l='ls -C --group-directories-first --ignore=lost+found'
 
-# ag muscle memory
+# make rg look like ag
 alias rg="rg --colors 'match:bg:yellow' --colors 'match:fg:black' --colors 'match:style:nobold' --colors 'line:style:bold' --colors 'path:fg:green'"
-alias ag="rg"
 
 # common pipe aliases
 alias A="awk"
