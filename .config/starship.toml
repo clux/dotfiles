@@ -1,4 +1,5 @@
 format = """\
+$status\
 $username\
 $hostname\
 $directory\
@@ -13,28 +14,35 @@ add_newline = false
 
 [character]
 format = "[$symbol](bold) "
+success_symbol = "[](fg:black black)"
+error_symbol = "[](fg:black black)"
 disabled = false
 
 [username]
-style_root = 'bold red'
-style_user = 'yellow'
+style_root = 'bg:black bold red'
+style_user = 'bg:black yellow'
 format = '[$user]($style)'
+
+[status]
+disabled = false
+style = "bg:black bold red"
+format = "[$symbol ]($style)"
 
 [hostname]
 ssh_only = true
-style = 'bold dimmed green'
+style = 'bg:black bold dimmed green'
 format = "[ $hostname ]($style)"
 
 [rust]
 disabled = false
-style = "202"
+style = "bg:black 202"
 format = "[ $symbol($version)]($style)"
 version_format = "${minor}"
 detect_extensions = []
 
 [directory]
 truncation_length = 3
-style = "white"
+style = "bg:black white"
 format = "[$path ]($style)"
 truncate_to_repo = "false"
 fish_style_pwd_dir_length = 5
@@ -44,20 +52,20 @@ fish_style_pwd_dir_length = 5
 
 [kubernetes]
 symbol = "☸ "
-style = "27"
+style = "bg:black 27"
 disabled = false
-format = '[$symbol]($style)[$context( \($namespace\))](white)'
+format = '[$symbol]($style)[$context( \($namespace\))](bg:black white)'
 
 [git_branch]
-style = "bold 38"
-format = "[ $symbol]($style)[$branch](38)"
+style = "bg:black bold 38"
+format = "[ $symbol]($style)[$branch](bg:black 38)"
 truncation_length = 24
 truncation_symbol = "."
 
 [git_status]
 disabled = false
 format = '[ $ahead_behind$modified$conflicted$stashed$deleted$renamed$staged$untracked]($style)'
-style = "38"
+style = "bg:black 38"
 conflicted = "🏳 "
 ahead = "↑$count "
 behind = "↓$count "
