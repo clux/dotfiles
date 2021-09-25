@@ -3,7 +3,8 @@
 shopt -s globstar
 
 # Modules
-source ~/.prompt
+#source ~/.prompt
+eval "$(starship init bash)"
 source ~/.functions
 source ~/.exports
 source ~/.aliases

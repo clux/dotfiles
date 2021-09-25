@@ -1,42 +1,77 @@
+format = """\
+$username\
+$hostname\
+$directory\
+$kubernetes\
+$git_branch\
+$git_status\
+$rust\
+$character\
+"""
+add_newline = false
+# right_prompt = true # TODO: requires fish/zsh
+
 [character]
-symbol = ""
-# PROBLEM: cannot get a consistent bg color across separators
+success_symbol = "[](fg:black black)"
+error_symbol = "[✗](bg:black bold red)[](fg:black black)"
+# NB: this is slightly awkward, maybe it's better to remove the bg in favour of the color change..
+format = "[ $symbol](bg:black bold) "
+disabled = false
+
+[username]
+style_root = 'bg:black bold red'
+style_user = 'bg:black yellow'
+format = '[$user]($style)'
 
 [hostname]
 ssh_only = true
+style = 'bg:black bold dimmed green'
+format = "[ $hostname ]($style)"
 
-[kubernetes]
-symbol = "☸ "
-style = "bg:black bold blue"
+[rust]
 disabled = false
+style = "bg:black 202"
+format = "[ $symbol($version)]($style)"
+version_format = "${minor}"
+detect_extensions = []
 
 [directory]
 truncation_length = 3
-style = "bg:black fg:bold white"
-prefix = " "
+style = "bg:black white"
+format = "[$path ]($style)"
 truncate_to_repo = "false"
+fish_style_pwd_dir_length = 5
+# MISSING: cannot change the separator between dirs (looks cluttered)
+# https://github.com/starship/starship/pull/1209 died
+#separator = ""
+
+[kubernetes]
+symbol = "☸ "
+style = "bg:black 27"
+disabled = false
+format = '[$symbol]($style)[$context( \($namespace\))](bg:black white)'
 
 [git_branch]
-symbol = " "
-style = "bg:black bold purple"
-truncation_length = 8
+style = "bg:black bold 38"
+format = "[ $symbol]($style)[$branch](bg:black 38)"
+truncation_length = 24
 truncation_symbol = "."
 
 [git_status]
+disabled = false
+format = '[ $ahead_behind$modified$conflicted$stashed$deleted$renamed$staged$untracked]($style)'
+style = "bg:black 38"
 conflicted = "🏳"
-ahead = "↑"
-behind = "↓"
-diverged = "⇕"
+ahead = "↑$count "
+behind = "↓$count "
+diverged = "⇕ "
 untracked = "…"
-stashed = "⚑"
-modified = "+"
-# DIDNT FULLY TWEAK THIS
-staged.value = "++"
-staged.style = "green"
-staged_count.enabled = true
-staged_count.style = "green"
+stashed = "⚑ "
+modified = '+$count '
+staged = "●"
 renamed = "👅"
 deleted = "🗑"
+up_to_date = "✔ "
 
 [line_break]
 disabled = true
