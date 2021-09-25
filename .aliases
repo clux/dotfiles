@@ -1,7 +1,5 @@
 #!/bin/bash
 
-alias please=sudo
-
 # navigation shortcuts
 alias ..="cd .."
 alias ...="cd ../.."
@@ -113,9 +111,6 @@ alias c="cargo"
 alias cb="cargo build"
 alias ct="cargo test"
 alias ccln="cargo clean" # avoid conflict with cc :)
-# rustup component add rustfmt --toolchain nightly
-alias cfmt="cargo +nightly fmt"
-alias cdc="cargo +nightly doc"
 
 # rsync
 alias rsync-copy="rsync -avz --progress -h"
