@@ -15,14 +15,6 @@ export GTEST_COLOR=1
 
 # Always print rust backtraces
 export RUST_BACKTRACE=1
-# Separate source checkout for `racer`
-export RUST_SRC_PATH=$HOME/.cargo/rustc-stable/src
-
-# hors search engine (seems fastest to go through)
-export HORS_ENGINE=bing
-
-# kubernetes
-export CHANGE_MINIKUBE_NONE_USER=true
 
 # go
 export GOPATH=$HOME/.go
