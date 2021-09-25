@@ -3,10 +3,10 @@
 shopt -s globstar
 
 # Promt
-## Alternative 1: the 200 line bash script
-#source ~/.prompt
-## Alternative 2: the 20k line rust exe with a 100 line toml config
-eval "$(starship init bash)"
+## Alternative 1: bash specific 200 line script
+source ~/.prompt
+## Alternative 2: shell agnostic 100 line toml cfg (from a20k line rust bin)
+#eval "$(starship init bash)"
 
 # Modules
 source ~/.functions

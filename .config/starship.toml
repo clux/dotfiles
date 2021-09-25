@@ -47,7 +47,7 @@ format = "[$path ]($style)"
 truncate_to_repo = "false"
 fish_style_pwd_dir_length = 5
 # MISSING: cannot change the separator between dirs (looks cluttered)
-# https://github.com/starship/starship/pull/1209 died
+# https://github.com/starship/starship/pull/1222
 #separator = ""
 
 [kubernetes]
