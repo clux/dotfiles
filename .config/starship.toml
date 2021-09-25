@@ -12,8 +12,6 @@ add_newline = false
 # right_prompt = true # TODO: requires fish/zsh
 
 [character]
-success_symbol = "[❯](bold green)"
-error_symbol = "[❯](bold red)"
 format = "[$symbol](bold) "
 disabled = false
 
