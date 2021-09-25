@@ -34,7 +34,7 @@ style = 'bg:black bold dimmed green'
 format = "[ $hostname ]($style)"
 
 [rust]
-disabled = false
+disabled = true
 style = "bg:black 202"
 format = "[ $symbol($version)]($style)"
 version_format = "${minor}"
