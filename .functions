@@ -449,19 +449,6 @@ http() {
 }
 
 # -----------------------------------------------------------------------------
-# scaffolding from templates folder
-
-node-init() {
-  find ~/.templates/npm/ -not -type "d" -exec cp {} "$PWD" \;
-  pkginit
-  local -r dir="$(basename "$PWD")"
-  echo "# $dir" > README.md
-  badgify >> README.md
-  sed "s/BASENAME/$dir/g" readme.md >> README.md
-  rm readme.md
-}
-
-# -----------------------------------------------------------------------------
 # misc node/py
 
 node-deopts() {
