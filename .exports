@@ -23,6 +23,9 @@ export GO111MODULE=auto
 # use shellcheck for current file only
 export SHELLCHECK_OPTS="-e SC1091 -e SC1090"
 
+# chrome with proxy-pac
+alias chrome='google-chrome-stable --proxy-pac-url="$(~/.ssh/genpac)"'
+
 # Download dir for `dl` + brotorr
 export DOWNLOAD_DIR=~/Downloads
 if [[ $HOSTNAME = kjttks ]]; then
