@@ -1,4 +1,11 @@
 #!/bin/bash
+
+# custom shell prompt that is VERY similar to the embedded starship config
+# the reason this is still here is a few missing features in starship
+# plus a dependency from .functions into show_git_differences
+# in the future maybe we will clean this up.
+# anway; if you're not using bash, pick up the starship config instead of this.
+
 export TERM=xterm-256color
 
 show_cwd() {
