@@ -32,7 +32,7 @@ help:
 
 directories:
 	@mkdir -p ~/.config/{autostart,profanity,sublime-text-3/{Local,Packages}}
-	@mkdir -p ~/.templates/{npm,cargo,git/hooks}
+	@mkdir -p ~/.templates/{git/hooks}
 	@mkdir -p ~/{.mpd/playlists,.ncmpcpp,.jira.d,Music}
 
 sublime_ln:
@@ -51,7 +51,7 @@ config: directories
 	$(call green," ln","configs in \$$HOME")
 	@find "$$PWD" -maxdepth 1 -name ".*" -not -name ".travis.yml" -type f -print -exec ln -sfn {} ~/ \;
 	$(call green," ln","configs subdirs in \$$HOME")
-	@for d in {.config{,/profanity,/alacritty},.templates/{npm,cargo,git/hooks},.ncmpcpp,.jira.d}; do\
+	@for d in {.config{,/profanity,/alacritty},.templates/git/hooks,.ncmpcpp,.jira.d}; do\
 		echo $$d; \
 		find "$$PWD/$$d" -maxdepth 1 -type f -print -exec ln -sfn {} ~/$$d \; ; \
 	done

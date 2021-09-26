@@ -2,13 +2,16 @@
   # COMMON
   s = status -s
   d = diff
+  ds = -c delta.side-by-side=true diff
   dc = diff --cached
+  dcs = -c delta.side-by-side=true  diff --cached
   c = commit --signoff --verbose
   a = add
   p = pull
-  f = push
+  f = fetch
+  u = push
   co = checkout
-  nu = checkout -b
+  nu = switch -c
 
   # OCCASIONAL
   amend = commit --amend
@@ -19,25 +22,32 @@
   ps = !git pull --recurse-submodules && git submodule update --init --recursive
   chk = diff --cached --check
   stat = diff --stat
-  rc = = clone --recursive
-  top = rev-parse --show-toplevel
+  root = rev-parse --show-toplevel
+  ws = rebase --whitespace=fix HEAD^
 
   # Listers
   tags = tag -l
   branches = branch -a
   remotes = remote -v
 
+  # log hook with fzf (see .functions)
+  l = "!f() { source ~/.githelpers && gitlog; }; f"
+
   # BRANCH HELPERS
   # since github started changing the default master branch:
-  master = !"master() { git symbolic-ref --short refs/remotes/origin/HEAD | sed 's@^origin/@@'; }; master"
-  m = !"m() { git checkout \"$(git master)\"; }; m"
+  master = !"master() { git remote show  origin | grep HEAD | choose 2; }; master"
+  m = !"m() { git switch \"$(git master)\"; }; m"
+  # diff with branch
   db = !"db() { git log -p $(git master)..HEAD; }; db"
-  # push a small tweak to a PR
-  yolo = !git add -u && git  commit --amend --no-edit && git push -f
-  # Merged branch delete
-  md = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
-  prune = fetch --prune --all
+  # checkout remote ref to a github pr
   pr = !"pr() { git fetch origin pull/$1/head:pr-$1; git checkout pr-$1; }; pr"
+  # push a small tweak to a PR aggressively
+  yolo = !git add -u && git commit --amend --no-edit && git push -f
+
+  # GC stuff
+  # Merged branch delete
+  prunebranch = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+
 
   # MISC
   # add all untracked files to .gitignore
@@ -101,31 +111,26 @@
 [pull]
   ff = only
 
-[pager]
-  #diff = /usr/share/git/diff-highlight/diff-highlight | less
-  #show = /usr/share/git/diff-highlight/diff-highlight | less
-  #log = /usr/share/git/diff-highlight/diff-highlight | less
-  diff = delta
-  show = delta
-  log = delta
-
-[interactive]
-  #diffFilter = /usr/share/git/diff-highlight/diff-highlight
-  diffFilter = delta --color-only
-
-[delta]
-  # NB: delta did not work well with colorMoved yet, therefore it is commented out for now
-  # maybe in the next cargo install git-delta -f
-  features = unobtrusive-line-numbers decorations
-  whitespace-error-style = 22 reverse
-  syntax-theme = 1337
-  side-by-side = true
-  line-numbers-left-format = ""
-  line-numbers-right-format = "│ "
-
 [apply]
   # Detect whitespace errors when applying a patch
   whitespace = fix
+
+[pager]
+  diff = delta
+  show = delta
+  log = delta
+  reflog = delta
+
+[interactive]
+  diffFilter = delta --color-only --features=interactive
+
+[delta]
+  features = unobtrusive-line-numbers decorations
+  whitespace-error-style = 22 reverse
+  # NB: no side-by-side, add an 's' to diff shortcuts to enable it
+  syntax-theme = 1337
+  line-numbers-left-format = ""
+  line-numbers-right-format = "│ "
 
 [diff]
   colorMoved = plain
