@@ -35,6 +35,9 @@ alias XC="xclip -i -sel c"
 alias cwd='pwd | tr -d "\r\n" | xclip -sel clip'
 alias week='date +%V'
 alias ymd='date +%Y-%m-%d'
+alias grep='grep --color=auto'
+alias pacman='pacman --color=auto'
+alias diff='diff -Naur --color=auto'
 
 # git
 alias g='git'

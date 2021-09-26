@@ -2,7 +2,7 @@
 # Allow ** recursive globbing
 shopt -s globstar
 
-# Promt
+# Prompt
 ## Alternative 1: bash specific 200 line script
 source ~/.prompt
 ## Alternative 2: shell agnostic 100 line toml cfg (from a 20k line rust bin)
@@ -16,12 +16,6 @@ source ~/.path
 
 # rupa/z replacement
 eval "$(zoxide init bash)"
-
-# dircolors
-export TERM=xterm-256color
-export LS_COLORS
-LS_COLORS="$(vivid generate solarized-light)"
-# https://github.com/sharkdp/vivid/tree/master/themes
 
 # -----------------------------------------------------------------------------
 # Key management via keychain
@@ -77,16 +71,17 @@ if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hstr -- \C-j"'; fi
 if [[ $- =~ .*i.* ]]; then bind '"\C-xk": "\C-a hstr -k \C-j"'; fi
 
 # -----------------------------------------------------------------------------
-# Colors
+# colors
 
 if [ -x /usr/bin/dircolors ]; then
-  [ -r ~/.dircolors ] && eval "$(dircolors -b ~/.dircolors)"
-  alias ls='ls --color=auto'
-  alias grep='grep --color=auto'
-  alias fgrep='fgrep --color=auto'
-  alias egrep='egrep --color=auto'
-  alias pacman='pacman --color=auto'
+  export TERM=xterm-256color
 
+  # generate dircolors via vivid
+  export LS_COLORS
+  LS_COLORS="$(vivid generate solarized-light)"
+  # https://github.com/sharkdp/vivid/tree/master/themes
+
+  # colored manpages
   man() {
     env \
       LESS_TERMCAP_mb="$(printf "\e[1;31m")" \
@@ -99,5 +94,3 @@ if [ -x /usr/bin/dircolors ]; then
       man "$@"
   }
 fi
-
-#eval "$(starship init bash)"
