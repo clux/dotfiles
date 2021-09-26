@@ -58,6 +58,7 @@ alias gps="git ps"
 alias gt='cd $(git rev-parse --show-toplevel)'
 alias gm='git m'
 alias gw='git whoami'
+alias gws'git ws'
 
 # kubectl
 alias k="kubectl"
