@@ -16,5 +16,6 @@ jobs:
     - uses: addnab/docker-run-action@v3
       with:
         image:  koalaman/shellcheck:stable
-        options: -v ${{ github.workspace }}:/work -w /work
-        run: SHELLCHECK_OPTS="-e SC1091 -e SC1090 -e SC1117 -s bash" shellcheck .aliases .exports .bashrc .bash_completion .bash_profile .path .prompt .functions .xprofile .githelpers
+        options: -v ${{ github.workspace }}:/work -w /work -e SHELLCHECK_OPTS="-e SC1091 -e SC1090 -e SC1117 -s bash"
+        shell: shellcheck
+        run: shellcheck .aliases .exports .bashrc .bash_completion .bash_profile .path .prompt .functions .xprofile .githelpers
