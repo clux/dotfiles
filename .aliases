@@ -62,6 +62,7 @@ alias gws='git ws'
 
 # kubectl
 alias k="kubectl"
+alias kpf="kubectl port-forward"
 alias ka="kubectl apply"
 alias kdel="kubectl delete"
 alias kg="kubectl get"
