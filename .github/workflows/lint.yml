@@ -8,14 +8,11 @@ on:
 jobs:
   shellcheck:
     runs-on: ubuntu-latest
+    container: koalaman/shellcheck:stable
+    env:
+      SHELLCHECK_OPTS: "-e SC1091 -e SC1090 -e SC1117 -s bash"
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
     - uses: actions/checkout@v2
-
-    - uses: addnab/docker-run-action@v3
-      with:
-        image:  koalaman/shellcheck:stable
-        options: -v ${{ github.workspace }}:/work -w /work -e SHELLCHECK_OPTS="-e SC1091 -e SC1090 -e SC1117 -s bash"
-        shell: shellcheck
-        run: shellcheck .aliases .exports .bashrc .bash_completion .bash_profile .path .prompt .functions .xprofile .githelpers
+    - run: shellcheck .aliases .exports .bashrc .bash_completion .bash_profile .path .prompt .functions .xprofile .githelpers
