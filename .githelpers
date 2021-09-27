@@ -1,4 +1,4 @@
-# shellcheck disable=SC2016
+# shellcheck disable=SC2016,SC2207
 
 # git commit browser using fzf
 # https://gist.github.com/junegunn/f4fca918e937e6bf5bad#gistcomment-1666125
