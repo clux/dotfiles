@@ -1,5 +1,5 @@
 # dotfiles
-[![ci status](https://github.com/clux/probes/actions/workflows/lint.yml/badge.svg)](https://github.com/clux/probes/actions/workflows/lint.yml)
+[![ci status](https://github.com/clux/dotfiles/actions/workflows/lint.yml/badge.svg)](https://github.com/clux/dotfiles/actions/workflows/lint.yml)
 
 Configuration files for packages from [provisioning scripts](https://github.com/clux/provision).
 

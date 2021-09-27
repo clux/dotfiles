@@ -3,7 +3,7 @@ name: lint
 on:
   push:
     branches:
-      - ansible
+      - master
 
 jobs:
   shellcheck:
@@ -12,8 +12,6 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
     - uses: actions/checkout@v2
-      with:
-        ref: ansible
 
     - uses: addnab/docker-run-action@v3
       with:
