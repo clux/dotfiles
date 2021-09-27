@@ -1,4 +1,4 @@
-name: ci
+name: lint
 
 on:
   push:
@@ -6,15 +6,19 @@ on:
       - ansible
 
 jobs:
-  deploy:
-    runs-on: ubuntu-20.04
+  shellcheck:
+    runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
     - uses: actions/checkout@v2
-    - uses: ludeeus/action-shellcheck@ansible
       with:
-       scandir: '.'
-       additional_files: '.aliases .exports .bashrc .bash_completion .bash_profile .path .prompt .functions .xprofile'
-      env:
-        SHELLCHECK_OPTS: "-e SC1091 -e SC1090 -e SC1117 -s bash"
+        ref: ansible
+
+    - uses: addnab/docker-run-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        image:  koalaman/shellcheck:stable
+        options: -v ${{ github.workspace }}:/work
+        run: make lint

@@ -76,9 +76,12 @@ dconf: has_fonts
 
 ui: dconf
 
-lint:
+lint-docker:
 	docker run \
-    -e SHELLCHECK_OPTS="-e SC1091 -e SC1090 -e SC1117 -s bash" \
-    -v $$PWD:/volume -w /volume \
-    -t koalaman/shellcheck:stable \
-      .aliases .exports .bashrc .bash_completion .bash_profile .path .prompt .functions .xprofile
+		-e SHELLCHECK_OPTS="-e SC1091 -e SC1090 -e SC1117 -s bash" \
+		-v $$PWD:/volume -w /volume \
+		-t koalaman/shellcheck:stable \
+		shellcheck .aliases .exports .bashrc .bash_completion .bash_profile .path .prompt .functions .xprofile .githelpers
+
+lint:
+	SHELLCHECK_OPTS="-e SC1091 -e SC1090 -e SC1117 -s bash" shellcheck .aliases .exports .bashrc .bash_completion .bash_profile .path .prompt .functions .xprofile .githelpers
