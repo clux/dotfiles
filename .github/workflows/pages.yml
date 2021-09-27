@@ -1,0 +1,20 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ludeeus/action-shellcheck@master
+      with:
+       scandir: '.'
+       additional_files: '.aliases .exports .bashrc .bash_completion .bash_profile .path .prompt .functions .xprofile'
+      env:
+        SHELLCHECK_OPTS: "-e SC1091 -e SC1090 -e SC1117 -s bash"

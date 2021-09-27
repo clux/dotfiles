@@ -1,3 +1,5 @@
+# shellcheck disable=SC2016
+
 # git commit browser using fzf
 # https://gist.github.com/junegunn/f4fca918e937e6bf5bad#gistcomment-1666125
 gitlog() {
@@ -26,8 +28,8 @@ gitstash() {
   k=${out[0]}
   reflog=${out[1]}
   [ -n "$reflog" ] && case "$k" in
-    ctrl-p) git stash pop $reflog ;;
-    ctrl-y) git stash apply $reflog ;;
-    ctrl-n) git stash drop $reflog ;;
+    ctrl-p) git stash pop "$reflog" ;;
+    ctrl-y) git stash apply "$reflog" ;;
+    ctrl-n) git stash drop "$reflog" ;;
   esac
 }

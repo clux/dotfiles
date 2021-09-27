@@ -1,9 +1,0 @@
-sudo: required
-services:
-  - docker
-notifications:
-  email:
-    on_success: change
-    on_failure: always
-script:
-  - make lint
