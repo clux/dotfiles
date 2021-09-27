@@ -14,4 +14,6 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
     - uses: actions/checkout@v2
+    - run: shellcheck --version
+    - run: env | grep SHELLCHECK
     - run: shellcheck .aliases .exports .bashrc .bash_completion .bash_profile .path .prompt .functions .xprofile .githelpers
