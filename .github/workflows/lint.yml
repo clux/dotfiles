@@ -15,8 +15,6 @@ jobs:
 
     - uses: addnab/docker-run-action@v3
       with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
         image:  koalaman/shellcheck:stable
-        options: -v ${{ github.workspace }}:/work
-        run: make lint
+        options: -v ${{ github.workspace }}:/work -w /work
+        run: SHELLCHECK_OPTS="-e SC1091 -e SC1090 -e SC1117 -s bash" shellcheck .aliases .exports .bashrc .bash_completion .bash_profile .path .prompt .functions .xprofile .githelpers
