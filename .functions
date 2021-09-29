@@ -283,6 +283,7 @@ glsd() { glscommand "git whoami" ;}
 
 # command line diff override
 diffd() {
+  # shellcheck disable=SC2068
   diff -Naur --color=auto $@ | delta
 }
 
