@@ -29,86 +29,6 @@ s() {
   fi
 }
 
-cbr() {
-  # shellcheck disable=SC2068
-  cargo build --release $@
-}
-cbrm() {
-  # shellcheck disable=SC2068
-  cargo build --release --target=x86_64-unknown-linux-musl $@
-}
-
-cs() {
-  # shellcheck disable=SC2068
-  cowsay -f flaming-sheep $@ | lolcat -S 60;
-}
-
-# chrome history
-ch() {
-  local cols sep
-  cols=$(( COLUMNS / 3 ))
-  sep='{::}'
-
-  if hash google-chrome-stable 2> /dev/null; then
-    cp -f ~/.config/google-chrome/Default/History /tmp/h
-  else
-    cp -f ~/.config/chromium/Default/History /tmp/h
-  fi
-
-  sqlite3 -separator $sep /tmp/h \
-      "select substr(title, 1, $cols), url
-      from urls order by last_visit_time desc" |
-    awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' |
-    fzf --ansi --multi | sed 's#.*\(https*://\)#\1#' | \
-    xargs xdg-open > /dev/null
-}
-
-openimage() {
-  local types='*.jpg *.JPG *.png *.PNG *.gif *.GIF *.jpeg *.JPEG'
-
-  cd "$(dirname "$1")" || true
-  local -r file=$(basename "$1")
-
-  # shellcheck disable=SC2086
-  feh -q $types --auto-zoom \
-    --sort filename --borderless \
-    --scale-down --draw-filename \
-    --image-bg black \
-    --start-at "$file"
-}
-
-dslrdump() {
-  cd /media/gauss/IMG/ || return
-  mkd "$(date +%F)"
-  gphoto2 --get-all-files
-  #gphoto2 --delete-all-files doesn't work :( - pantheon-photos works though
-}
-
-# veracrypt shortcuts
-vc1() {
-  sudo echo "got sudo" # cache sudo first
-  # For some reason the below cmd does not work without non-interactive in text mode
-  veracrypt -t --mount /dev/sdc1 --slot=1 --verbose -p "$(pass drives/turing)" --non-interactive
-  export HISTFILE=/dev/null
-  cd /media/veracrypt1 || false
-}
-vc2() {
-  sudo echo "got sudo" # cache sudo first
-  # For some reason the below cmd does not work without non-interactive in text mode
-  veracrypt -t --mount /dev/sde1 --slot=2 --verbose -p "$(pass drives/hilbert)" --non-interactive
-  export HISTFILE=/dev/null
-  cd /media/veracrypt2 || false
-}
-vcc() {
-  cd || true
-  veracrypt --text --dismount /dev/sdc1 --dismount /dev/sde1
-  exit
-}
-
-wifihotspot() {
-  sudo create_ap wlp2s0 enp0s20f0u1 "Bathroom Cam 2" "$(pass network/ea-laptop)"
-}
-
 # -----------------------------------------------------------------------------
 # package manager abstraction - mostly for my own memory
 
@@ -200,7 +120,7 @@ kc() {
 kns() {
   local -r ns="$(kg ns | choose 0 | tail -n +2 | fzf)"
   local -r ctx="$(kubectl config current-context)"
-  kubectl config set "contexts.$ctx.namespace" $ns
+  kubectl config set "contexts.$ctx.namespace" "$ns"
 }
 
 # cluster version checker
@@ -385,6 +305,77 @@ hr() {
   echo "$(tput setaf 33)${HR:0:$COLS}$(tput sgr0)"
 }
 
+cs() {
+  # shellcheck disable=SC2068
+  cowsay -f flaming-sheep $@ | lolcat -S 60;
+}
+
+# chrome history
+ch() {
+  local cols sep
+  cols=$(( COLUMNS / 3 ))
+  sep='{::}'
+
+  if hash google-chrome-stable 2> /dev/null; then
+    cp -f ~/.config/google-chrome/Default/History /tmp/h
+  else
+    cp -f ~/.config/chromium/Default/History /tmp/h
+  fi
+
+  sqlite3 -separator $sep /tmp/h \
+      "select substr(title, 1, $cols), url
+      from urls order by last_visit_time desc" |
+    awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' |
+    fzf --ansi --multi | sed 's#.*\(https*://\)#\1#' | \
+    xargs xdg-open > /dev/null
+}
+
+openimage() {
+  local types='*.jpg *.JPG *.png *.PNG *.gif *.GIF *.jpeg *.JPEG'
+
+  cd "$(dirname "$1")" || true
+  local -r file=$(basename "$1")
+
+  # shellcheck disable=SC2086
+  feh -q $types --auto-zoom \
+    --sort filename --borderless \
+    --scale-down --draw-filename \
+    --image-bg black \
+    --start-at "$file"
+}
+
+dslrdump() {
+  cd /media/gauss/IMG/ || return
+  mkd "$(date +%F)"
+  gphoto2 --get-all-files
+  #gphoto2 --delete-all-files doesn't work :( - pantheon-photos works though
+}
+
+# veracrypt shortcuts
+vc1() {
+  sudo echo "got sudo" # cache sudo first
+  # For some reason the below cmd does not work without non-interactive in text mode
+  veracrypt -t --mount /dev/sdc1 --slot=1 --verbose -p "$(pass drives/turing)" --non-interactive
+  export HISTFILE=/dev/null
+  cd /media/veracrypt1 || false
+}
+vc2() {
+  sudo echo "got sudo" # cache sudo first
+  # For some reason the below cmd does not work without non-interactive in text mode
+  veracrypt -t --mount /dev/sde1 --slot=2 --verbose -p "$(pass drives/hilbert)" --non-interactive
+  export HISTFILE=/dev/null
+  cd /media/veracrypt2 || false
+}
+vcc() {
+  cd || true
+  veracrypt --text --dismount /dev/sdc1 --dismount /dev/sde1
+  exit
+}
+
+wifihotspot() {
+  sudo create_ap wlp2s0 enp0s20f0u1 "Bathroom Cam 2" "$(pass network/ea-laptop)"
+}
+
 # -----------------------------------------------------------------------------
 # system statistics/usage
 
@@ -424,18 +415,6 @@ localip() {
 
 # legacy
 pstree() { echo "use procs"; }
-
-# -----------------------------------------------------------------------------
-# http helpers
-
-# http method url ['{json}']
-http() {
-  local -r method="${1^^}"
-  if [[ $method =~ POST|PUT ]]; then
-    jsondata=$(echo "-H Content-Type:application-json -d \"$3\"")
-  fi
-  echo curl -X "$method $2 ${jsondata}"
-}
 
 # -----------------------------------------------------------------------------
 # misc node/py
@@ -482,12 +461,21 @@ rust-doc-view() {
 # -----------------------------------------------------------------------------
 # more rust
 
+cbr() {
+  # shellcheck disable=SC2068
+  cargo build --release $@
+}
+cbrm() {
+  # shellcheck disable=SC2068
+  cargo build --release --target=x86_64-unknown-linux-musl $@
+}
+
 rust-muslbuild() {
   docker run -v "$PWD:/volume" -w /volume -t clux/muslrust cargo build --release
   sudo chown "$USER" -R target
 }
 
-rust-fund() {
+cargo-fund() {
   cargo fund --github-api-token="$(pass github/cargo-fund-pat)"
 }
 
@@ -588,6 +576,7 @@ npm-major() {
   npm version major && git push && git push --tags && npm publish
 }
 
+# rust bumping for small repos (otherwise use cargo-release)
 cargo-tag() {
   git diff --exit-code || return 1
   git diff --cached --exit-code || return 1
