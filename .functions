@@ -43,20 +43,6 @@ cs() {
   cowsay -f flaming-sheep $@ | lolcat -S 60;
 }
 
-# git diff : but filtering out moved lines
-# not super necessary anymore since diff coloring of moved lines is a thing
-diffminuslines() {
-  diff_lines="$(git diff | grep -v '^\(---\|+++\|@@ \)'| grep '^\([><] \)\|[+-]' | sed 's/^+/> /;s/^-/< /')"
-  while IFS= read -r line || [ -n "$line" ]; do
-    contents="${line:2}"
-    is_removed="$(grep -cFxe "< $contents" <<< "$diff_lines" || true)"
-    is_added="$(grep -cFxe "> $contents" <<< "$diff_lines" || true)"
-    if [[ "$is_removed" -ne "$is_added" ]]; then
-      echo "$line"
-    fi
-  done <<< "$diff_lines"
-}
-
 # chrome history
 ch() {
   local cols sep
@@ -216,7 +202,6 @@ kns() {
   local -r ctx="$(kubectl config current-context)"
   kubectl config set "contexts.$ctx.namespace" $ns
 }
-
 
 # cluster version checker
 kcver() {
