@@ -2,6 +2,7 @@ format = """\
 $status\
 $username\
 $hostname\
+$time\
 $directory\
 $kubernetes\
 $git_branch\
@@ -25,7 +26,9 @@ format = '[$user]($style)'
 
 [status]
 disabled = false
-style = "bg:black bold red"
+style = "bg:black red"
+symbol = ""
+recognize_signal_code = false
 format = "[$symbol ]($style)"
 
 [hostname]
@@ -50,16 +53,21 @@ fish_style_pwd_dir_length = 5
 # https://github.com/starship/starship/pull/1222
 #separator = ""
 
+[time]
+disabled = true
+style = "bg:black bold white"
+format = "[$time]($style) "
+
 [kubernetes]
 symbol = "☸ "
 style = "bg:black 27"
 disabled = false
-format = '[$symbol]($style)[$context( \($namespace\))](bg:black white)'
+format = '[$symbol]($style)[$context[∈](bg:black 27)$namespace](bg:black white)'
 
 [git_branch]
 style = "bg:black bold 38"
 format = "[ $symbol]($style)[$branch](bg:black 38)"
-truncation_length = 24
+truncation_length = 12
 truncation_symbol = "."
 
 [git_status]

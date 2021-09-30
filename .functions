@@ -111,7 +111,9 @@ complete -F _syslistunits sysreload
 # context switcher
 kc() {
   # We could also pick a KUBECONFIG file first
-  # But this is not necessary if user has put KUBECONFIG evar to be
+  # But this is not necessary if user has put KUBECONFIG evar to be colon delimited
+  # list of kubeconfig files
+  # Otherwise we could do an extra selection first ala:
   #export KUBECONFIG="$(cd ~/.kube && fd . --max-depth 1 --type f | fzf)"
   kubectl config use-context "$(kubectl config get-contexts -o name | grep -v fqdn | fzf)"
 }
