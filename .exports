@@ -23,6 +23,10 @@ export GO111MODULE=auto
 # use shellcheck for current file only
 export SHELLCHECK_OPTS="-e SC1091 -e SC1090"
 
+# kubernetes use all kubeconfig files
+export KUBECONFIG
+KUBECONFIG="$(fd . ~/.kube --max-depth 1 --type f | paste -s -d':')"
+
 # chrome with proxy-pac
 alias chrome='google-chrome-stable --proxy-pac-url="$(~/.ssh/genpac)"'
 

@@ -204,27 +204,25 @@ complete -F _syslistunits sysreload
 
 # context switcher
 kc() {
-  local -r ctx="$1"
-  if [[ $ctx ]]; then
-    kubectl config use-context "$ctx"
-  else
-    kubectl config get-contexts | sort -d
-  fi
+  # We could also pick a KUBECONFIG file first
+  # But this is not necessary if user has put KUBECONFIG evar to be
+  #export KUBECONFIG="$(cd ~/.kube && fd . --max-depth 1 --type f | fzf)"
+  kubectl config use-context "$(kubectl config get-contexts -o name | grep -v fqdn | fzf)"
 }
-_kc() {
-  local cur
-  _init_completion || return
-  local -r ctxs="$(kubectl config get-contexts -o name)"
-  # shellcheck disable=SC2207
-  COMPREPLY=($(compgen -W "$ctxs" -- "$cur"))
+
+# namespace switcher
+kns() {
+  local -r ns="$(kg ns | choose 0 | tail -n +2 | fzf)"
+  local -r ctx="$(kubectl config current-context)"
+  kubectl config set "contexts.$ctx.namespace" $ns
 }
-complete -F _kc kc
+
 
 # cluster version checker
 kcver() {
-  for ctx in $(kc | grep -v "\*" | awk '{print $1}' | tail -n +2); do
-    kc "${ctx}" > /dev/null;
-    echo "${ctx}$(kubectl version --short | grep Server | grep -oE " v.*")";
+  for ctx in $(kubectl config get-contexts -o name | grep -v fqdn); do
+    kubectl config use-context "${ctx}" > /dev/null
+    echo "${ctx}$(kubectl version --short | grep Server | grep -oE " v.*")"
   done
 }
 
