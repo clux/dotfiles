@@ -112,7 +112,7 @@ prompt_k8s() {
   local res
   if res=$(kubectl config current-context 2> /dev/null); then
     res="${res:0:8}"
-    ns=$(kubectl config get-contexts $res 2> /dev/null | choose 4 | tail -n 1)
+    ns=$(kubectl config get-contexts "$res" 2> /dev/null | choose 4 | tail -n 1)
     if [ -n "$ns" ]; then
       echo -e " ${blue}\u2388 ${white}${ns}${blue}∈${white}${res}${maintxt}"
     else
