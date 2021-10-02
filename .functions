@@ -232,6 +232,7 @@ docker-clean() {
   docker ps -aq | xargs -r docker rm -f
   docker images -q -f="dangling=true" | xargs -r docker rmi -f
   docker buildx prune
+  # check with docker buildx du --verbose
 }
 
 musl-cross() {
