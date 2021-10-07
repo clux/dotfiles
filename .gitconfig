@@ -4,12 +4,13 @@
   d = diff
   ds = -c delta.side-by-side=true diff
   dc = diff --cached
-  dcs = -c delta.side-by-side=true  diff --cached
+  dcs = -c delta.side-by-side=true diff --cached
   c = commit --signoff --verbose
   a = add
   p = pull
   f = fetch
   u = push
+  ut = push --tags
   co = checkout
   nu = switch -c
 
