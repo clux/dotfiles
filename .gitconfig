@@ -148,6 +148,9 @@
   changed = green
   untracked = cyan
 
+[checkout]
+  defaultRemote = "origin"
+
 [init]
   templatedir = ~/.templates/git
   defaultBranch = master
