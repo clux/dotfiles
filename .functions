@@ -128,15 +128,16 @@ kns() {
 # streamlined yaml viewer (tons of aliases for it in .aliases)
 ky() {
   local -r resource="${1:-$(kubectl api-resources --no-headers | choose 0 | fzf)}"
-  local -r name="${2:-$(kubectl get ${resource} --no-headers | choose 0 | fzf)}"
+  local -r name="${2:-$(kubectl get "${resource}" --no-headers | choose 0 | fzf)}"
   kubectl get "${resource}" "${name}" -oyaml \
     | yq 'del(.metadata.managedFields)' -y \
     | bat -l=yaml --plain --theme=DarkNeon
 }
+
 # same thing for describe
 kd() {
   local -r resource="${1:-$(kubectl api-resources --no-headers | choose 0 | fzf)}"
-  local -r name="${2:-$(kubectl get ${resource} --no-headers | choose 0 | fzf)}"
+  local -r name="${2:-$(kubectl get "${resource}" --no-headers | choose 0 | fzf)}"
   kubectl describe "${resource}" "${name}"
 }
 # note we don't want this for kubectl get (because it's just for a quick lister)
