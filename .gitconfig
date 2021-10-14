@@ -103,8 +103,7 @@
   signingkey = 0xA876A6CD26914D42
 
 [push]
-  # Allow you to push with `git push -u` first time on a new branch
-  default = current
+  default = matching
 
 [pull]
   ff = only
