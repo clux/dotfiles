@@ -145,8 +145,13 @@ kl() {
   if [[ "$resource" = "pod" ]]; then
     jqpth=".spec.containers"
   elif [[ "$resource" =~ service|svc ]]; then
-    # TODO: need to determine workload...
-    resource="deploy"
+    if kubectl get deploy "${name}" > /dev/null 2>&1; then
+      resource="deploy"
+    elif kubectl get sts "${name}" > /dev/null 2>&1; then
+      resource="sts"
+    elif kubectl get ds "${name}" > /dev/null 2>&1; then
+      resource="ds"
+    fi
     jqpth=".spec.template.spec.containers" # workload path
   else
     jqpth=".spec.template.spec.containers" # workload path
