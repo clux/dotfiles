@@ -103,7 +103,7 @@
   signingkey = 0xA876A6CD26914D42
 
 [push]
-  default = matching
+  default = current
 
 [pull]
   ff = only
