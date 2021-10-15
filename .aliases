@@ -69,8 +69,12 @@ alias ka="kubectl apply"
 alias kdel="kubectl delete"
 alias kg="kubectl get"
 alias kgy="kubectl get -oyaml"
-alias kl="kubectl logs"
-alias klf="kubectl logs -f"
+# kl - fzf kubectl logs
+alias kld="kl deploy"
+alias kls="kl service"
+alias klsts="kl sts"
+alias klds="kl ds"
+alias klf="kl"
 # kubectl get
 alias kga="kg all"
 alias kgp="kg pod"
@@ -96,7 +100,7 @@ alias kds="kd service"
 alias kdsm="kd servicemonitor"
 alias kgf="kg foo" # test crd
 alias kgfy="kg foo -oyaml"
-# ky - fzf kubectl yaml simplifier
+# ky - fzf kubectl yaml prettifier
 alias kyp="ky pod"
 alias kyc="ky cm"
 alias kysec="ky secret"

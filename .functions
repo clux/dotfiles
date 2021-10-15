@@ -129,9 +129,7 @@ kns() {
 ky() {
   local -r resource="${1:-$(kubectl api-resources --no-headers | choose 0 | fzf)}"
   local -r name="${2:-$(kubectl get "${resource}" --no-headers | choose 0 | fzf)}"
-  kubectl get "${resource}" "${name}" -oyaml \
-    | yq 'del(.metadata.managedFields)' -y \
-    | bat -l=yaml --plain --theme=DarkNeon
+  kubectl get "${resource}" "${name}" -oyaml | bat -l=yaml --plain --theme=DarkNeon
 }
 
 # same thing for describe
@@ -140,7 +138,35 @@ kd() {
   local -r name="${2:-$(kubectl get "${resource}" --no-headers | choose 0 | fzf)}"
   kubectl describe "${resource}" "${name}"
 }
+# same for logs
+kl() {
+  resource="${1:-pod}"
+  local -r name="${2:-$(kubectl get "${resource}" --no-headers | choose 0 | fzf)}"
+  if [[ "$resource" = "pod" ]]; then
+    jqpth=".spec.containers"
+  elif [[ "$resource" =~ service|svc ]]; then
+    # TODO: need to determine workload...
+    resource="deploy"
+    jqpth=".spec.template.spec.containers" # workload path
+  else
+    jqpth=".spec.template.spec.containers" # workload path
+  fi
+  local -r data="$(kubectl get "${resource}/${name}" -ojson)"
+  if [[ "$(echo "${data}" | jq "$jqpth | length")" = 1 ]]; then
+    container="$(echo "${data}" | jq "$jqpth[].name" -r)" # use first container
+  else
+    container="$(echo "${data}" | jq "$jqpth[].name" -r | fzf)" # user choice
+  fi
+  kubectl logs -f "${resource}/${name}" "${container}"
+}
+
 # note we don't want this for kubectl get (because it's just for a quick lister)
+
+kevict() {
+  # want to do status.reason=Evicted but that's not an allowed field selector..
+  # so can either pipe through a pipeline or do an approximation if we use it carefully
+  kubectl delete pod --field-selector 'status.phase=Failed'
+}
 
 # cluster version checker
 kcver() {
