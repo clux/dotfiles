@@ -152,10 +152,10 @@ kl() {
     jqpth=".spec.template.spec.containers" # workload path
   fi
   local -r data="$(kubectl get "${resource}/${name}" -ojson)"
-  if [[ "$(echo "${data}" | jq "$jqpth | length")" = 1 ]]; then
-    container="$(echo "${data}" | jq "$jqpth[].name" -r)" # use first container
+  if [[ "$(echo "${data}" | jq "${jqpth} | length")" = 1 ]]; then
+    container="$(echo "${data}" | jq "${jqpth}[].name" -r)" # use first container
   else
-    container="$(echo "${data}" | jq "$jqpth[].name" -r | fzf)" # user choice
+    container="$(echo "${data}" | jq "${jqpth}[].name" -r | fzf)" # user choice
   fi
   kubectl logs -f "${resource}/${name}" "${container}"
 }
