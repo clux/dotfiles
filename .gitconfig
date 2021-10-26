@@ -157,3 +157,5 @@
 
 [core]
   hooksPath = ~/.templates/git/hooks
+[credential]
+	helper = store
