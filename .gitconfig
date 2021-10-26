@@ -25,6 +25,7 @@
   stat = diff --stat
   root = rev-parse --show-toplevel
   ws = !"ws() { git commit --no-verify -m temp && git rebase --whitespace=fix HEAD^ && git uncommit; }; ws"
+  pu = !"pu() { git branch --set-upstream-to=origin/$(git branch --show-current); }; pu"
 
   # Listers
   tags = tag -l

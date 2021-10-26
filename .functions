@@ -138,7 +138,7 @@ kd() {
   local -r name="${2:-$(kubectl get "${resource}" --no-headers | choose 0 | fzf)}"
   kubectl describe "${resource}" "${name}"
 }
-# same for logs
+# log helper that lets you complete container name (if more than one)
 kl() {
   resource="${1:-pod}"
   local -r name="${2:-$(kubectl get "${resource}" --no-headers | choose 0 | fzf)}"
