@@ -30,3 +30,7 @@ fi
 if command -v kopium &> /dev/null; then
   source <(kopium completions bash)
 fi
+
+if command -v k3d &> /dev/null; then
+  source <(k3d completion bash)
+fi
