@@ -20,5 +20,13 @@ if [ -x ~/.go/bin/jira ]; then
 fi
 
 if hash jenq 2> /dev/null; then
-    source <(jenq completions bash)
+  source <(jenq completions bash)
+fi
+
+if command -v just &> /dev/null; then
+  source <(just --completions bash)
+fi
+
+if command -v kopium &> /dev/null; then
+  source <(kopium completions bash)
 fi
