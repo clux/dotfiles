@@ -2,6 +2,7 @@
   # COMMON
   s = status -s
   d = diff
+  dn = "!f() { git --no-pager diff; }; f"
   ds = -c delta.side-by-side=true diff
   dc = diff --cached
   dcs = -c delta.side-by-side=true diff --cached
@@ -42,6 +43,7 @@
   # diff with branch
   db = !"db() { git log -p $(git master)..HEAD; }; db"
   # checkout remote ref to a github pr
+  # https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/checking-out-pull-requests-locally
   pr = !"pr() { git fetch origin pull/$1/head:pr-$1; git checkout pr-$1; }; pr"
   # push a small tweak to a PR aggressively
   yolo = !git add -u && git commit --amend --no-edit && git push -f

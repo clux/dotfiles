@@ -76,6 +76,7 @@ alias kls="kl service"
 alias klsts="kl sts"
 alias klds="kl ds"
 alias klf="kl"
+alias klp="kl pod"
 # kubectl get
 alias kga="kg all"
 alias kgp="kg pod"
