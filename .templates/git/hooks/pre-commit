@@ -46,8 +46,8 @@ check_author
 # catches whitespace errors and leftover conflict markers
 check "*" git diff --check --cached --
 
-# run all staged .json files through json --validate
-check "*.json" json -qnf
+# run all staged .json files through jq -e .
+check "*.json" jq -e .
 
 # run all staged .sh files through shellcheck
 check "*.sh" shellcheck
