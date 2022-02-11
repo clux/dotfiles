@@ -19,7 +19,7 @@ alias l='exa --group-directories-first'
 #alias l='ls -C --group-directories-first --ignore=lost+found'
 
 # make rg look like ag
-alias rg="rg --colors 'match:bg:yellow' --colors 'match:fg:black' --colors 'match:style:nobold' --colors 'line:style:bold' --colors 'path:fg:green'"
+alias rg="rg --colors 'match:bg:yellow' --colors 'match:fg:black' --colors 'match:style:nobold' --colors 'line:style:bold' --colors 'path:fg:green' --glob=!.git/"
 
 # common pipe aliases
 alias A="awk"

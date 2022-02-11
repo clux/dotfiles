@@ -49,7 +49,7 @@ vim:
 
 config: directories
 	$(call green," ln","configs in \$$HOME")
-	@find "$$PWD" -maxdepth 1 -name ".*" -not -name ".travis.yml" -type f -print -exec ln -sfn {} ~/ \;
+	@find "$$PWD" -maxdepth 1 -name ".*" -type f -print -exec ln -sfn {} ~/ \;
 	$(call green," ln","configs subdirs in \$$HOME")
 	@for d in {.config{,/profanity,/alacritty},.templates/git/hooks,.ncmpcpp,.jira.d}; do\
 		echo $$d; \
