@@ -1,25 +1,20 @@
 #!/bin/bash
 
-[ -f ~/baby/shipcat/shipcat.complete.sh ] && source ~/baby/shipcat/shipcat.complete.sh
-[ -f ~/babylon/shipcat/shipcat_cli/shipcat.complete.sh ] && source ~/babylon/shipcat/shipcat_cli/shipcat.complete.sh
-[ -f ~/repos/lalfork/lal/lal.complete.sh ] && source ~/repos/lalfork/lal/lal.complete.sh
+#[ -f ~/repos/shipcat/shipcat_cli/shipcat.complete.sh ] && source ~/repos/shipcat/shipcat_cli/shipcat.complete.sh
+#[ -f ~/repos/lalfork/lal/lal.complete.sh ] && source ~/repos/lalfork/lal/lal.complete.sh
 
-if hash kubectl 2> /dev/null; then
+# TODO: allow kg to autocomplete from the kubectl completion
+if command -v kubectl &> /dev/null; then
   source <(kubectl completion bash)
   source <(helm completion bash)
 fi
 
-if hash rustup 2> /dev/null; then
+if command -v rustup &> /dev/null; then
   #source /usr/share/bash-completion/completions/rustup
   source <(rustup completions bash)
 fi
 
-# NB: can't load paths before this annoyingly..
-if [ -x ~/.go/bin/jira ]; then
-  source <(~/.go/bin/jira --completion-script-bash)
-fi
-
-if hash jenq 2> /dev/null; then
+if command -v jenq &> /dev/null; then
   source <(jenq completions bash)
 fi
 

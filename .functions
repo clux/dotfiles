@@ -165,14 +165,6 @@ kl() {
   kubectl logs -f "${resource}/${name}" "${container}"
 }
 
-# note we don't want this for kubectl get (because it's just for a quick lister)
-
-kevict() {
-  # want to do status.reason=Evicted but that's not an allowed field selector..
-  # so can either pipe through a pipeline or do an approximation if we use it carefully
-  kubectl delete pod --field-selector 'status.phase=Failed'
-}
-
 # cluster version checker
 kcver() {
   for ctx in $(kubectl config get-contexts -o name | grep -v fqdn); do
@@ -183,10 +175,23 @@ kcver() {
 
 k3dmake() {
   k3d cluster create main --servers 1 --agents 1 --registry-create main \
-    --k3s-arg "--no-deploy=traefik@server:*" \
+    --no-lb \
+    --k3s-arg "--no-deploy=traefik,servicelb,metrics-server@server:*" \
     --k3s-arg '--kubelet-arg=eviction-hard=imagefs.available<1%,nodefs.available<1%@agent:*' \
     --k3s-arg '--kubelet-arg=eviction-minimum-reclaim=imagefs.available=1%,nodefs.available=1%@agent:*'
   k3d kubeconfig get --all > ~/.kube/k3d
+}
+
+# misc kube helpers
+khevict() {
+  # want to do status.reason=Evicted but that's not an allowed field selector..
+  # so can either pipe through a pipeline or do an approximation if we use it carefully
+  #kubectl delete pod --field-selector 'status.phase=Failed'
+  kubectl get pods | awk '/Evicted/ {print $1}' | xargs kubectl delete pod
+}
+khleftovers() {
+  kubectl api-resources --verbs=list --namespaced -o name \
+  | xargs -n 1 kubectl get --show-kind --ignore-not-found
 }
 
 nmap-kube () {
