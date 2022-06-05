@@ -174,12 +174,26 @@ kcver() {
 }
 
 k3dmake() {
-  k3d cluster create main --servers 1 --agents 1 --registry-create main \
+  k3d cluster create main --servers 1 --registry-create main $1 \
+    --host-alias 0.0.0.0:k3d.local \
     --no-lb \
     --k3s-arg "--no-deploy=traefik,servicelb,metrics-server@server:*" \
     --k3s-arg '--kubelet-arg=eviction-hard=imagefs.available<1%,nodefs.available<1%@agent:*' \
     --k3s-arg '--kubelet-arg=eviction-minimum-reclaim=imagefs.available=1%,nodefs.available=1%@agent:*'
   k3d kubeconfig get --all > ~/.kube/k3d
+  # rustls workaround
+  sd "0.0.0.0" "k3d.local" ~/.kube/k3d
+  if ! grep "k3d.local" -q /etc/hosts; then
+    echo "127.0.0.1 k3d.local" | sudo tee -a /etc/hosts
+  fi
+}
+
+k3dmake23() {
+  # could implement versions via
+  # https://github.com/nolar/setup-k3d-k3s/blob/v1/action.sh
+  # but ideally rancher/k3s should have better tags
+  # pick one from https://hub.docker.com/r/rancher/k3s
+  k3dmake "--image=rancher/k3s:v1.23.6-k3s1-amd64"
 }
 
 # misc kube helpers
