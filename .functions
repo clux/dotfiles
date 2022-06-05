@@ -176,7 +176,6 @@ kcver() {
 k3dmake() {
   # shellcheck disable=SC2068
   k3d cluster create main --servers 1 --registry-create main $@ \
-    --host-alias 0.0.0.0:k3d.local \
     --no-lb \
     --k3s-arg "--no-deploy=traefik,servicelb,metrics-server@server:*" \
     --k3s-arg '--kubelet-arg=eviction-hard=imagefs.available<1%,nodefs.available<1%@agent:*' \
