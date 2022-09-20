@@ -200,7 +200,7 @@ k3dmake24() {
   k3dmake $1 "--image=rancher/k3s:v1.24.1-k3s1-amd64"
 }
 k3dmake25() {
-  # shellcheck disable=SC2068v1.25.0-k3s1-amd64
+  # shellcheck disable=SC2068
   k3dmake $1 "--image=rancher/k3s:v1.25.0-k3s1-amd64"
 }
 
