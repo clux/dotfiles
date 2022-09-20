@@ -192,16 +192,14 @@ k3dmake23() {
   # https://github.com/nolar/setup-k3d-k3s/blob/v1/action.sh
   # but ideally rancher/k3s should have better tags
   # pick one from https://hub.docker.com/r/rancher/k3s
-  k3dmake $1 "--image=rancher/k3s:v1.23.6-k3s1-amd64"
+  k3dmake "$1" "--image=rancher/k3s:v1.23.6-k3s1-amd64"
 }
 
 k3dmake24() {
-  # shellcheck disable=SC2068
-  k3dmake $1 "--image=rancher/k3s:v1.24.1-k3s1-amd64"
+  k3dmake "$1" "--image=rancher/k3s:v1.24.1-k3s1-amd64"
 }
 k3dmake25() {
-  # shellcheck disable=SC2068
-  k3dmake $1 "--image=rancher/k3s:v1.25.0-k3s1-amd64"
+  k3dmake "$1" "--image=rancher/k3s:v1.25.0-k3s1-amd64"
 }
 
 # misc kube helpers
