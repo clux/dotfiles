@@ -3,7 +3,7 @@
 FAIL=false
 
 check() {
-  FILES=$(git diff --cached --name-only --diff-filter=ACM | egrep "$1$")
+  FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E "$1$")
 
   [ -z "$FILES" ] && return 0;
 
