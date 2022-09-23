@@ -17,7 +17,3 @@ if [[ $HOSTNAME = cluxx1 ]]; then
   padid=$(xinput | grep "Synaptics TouchPad" | grep -oE "id=.." | cut -d"=" -f2)
   [ -n "$padid" ] && xinput set-prop "$padid" "Device Enabled" 0
 fi
-
-# Remove maccel
-xset m 0 0
-

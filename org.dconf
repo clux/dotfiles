@@ -5,6 +5,9 @@ startup-animation=false
 [cinnamon/desktop/interface]
 gtk-theme='Adwaita-dark'
 
+[cinnamon/desktop/peripherals/mouse]
+accel-profile='flat'
+
 [cinnamon/settings-daemon/peripherals/touchpad]
 scroll-method='two-finger-scrolling'
 tap-to-click=false
