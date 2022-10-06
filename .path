@@ -19,4 +19,5 @@ if [[ "${OSTYPE}" =~ "darwin" ]] ; then
   alias ps=procs
 
   export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+  source "$HOME/.cargo/env"
 fi
