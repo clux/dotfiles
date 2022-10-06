@@ -32,7 +32,14 @@ s() {
 # -----------------------------------------------------------------------------
 # package manager abstraction - mostly for my own memory
 
-if grep -q "Arch Linux" /etc/os-release; then
+if [[ "${OSTYPE}" =~ "darwin" ]]; then
+  qlist() { brew list "$1" ;}
+  pakl() { brew leaves ;}
+  # no pakf (cannot search registry for files)
+  # no pakl (look at what symlinks point to instead)
+  paki() { brew install "$1" ;}
+  pakr() { brew rm "$1" ;}
+elif grep -q "Arch Linux" /etc/os-release; then
   # list available packages:
   paks() { pacman -Ss "$1" ;}
   # list locally installed packages:
