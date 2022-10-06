@@ -5,3 +5,18 @@ export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.node_modules/bin:$PATH
 export PATH=$GOPATH/bin:$PATH
 export PATH=$HOME/local/bin:$PATH
+
+if [[ "${OSTYPE}" =~ "darwin" ]] ; then
+  # binutils, make, findutils, gnu-sed, gnu-tar, grep
+  export PATH="/opt/homebrew/opt/make/libexec/gnubin:$PATH"
+  export PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH"
+  export PATH="/opt/homebrew/opt/gnu-tar/libexec/gnubin:$PATH"
+  export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
+  export PATH="/opt/homebrew/opt/binutils/bin:$PATH"
+  export PATH="/opt/homebrew/opt/findutils/libexec/gnubin:$PATH"
+  # extra coreutils pkgs wo/evars: watch, diffutils
+  # others: rsync, bash, vim, gpatch, less, zsh
+  alias ps=procs
+
+  export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+fi
