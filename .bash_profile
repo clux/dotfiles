@@ -9,10 +9,10 @@ source ~/.prompt
 #eval "$(starship init bash)"
 
 # Modules
+source ~/.path
 source ~/.functions
 source ~/.exports
 source ~/.aliases
-source ~/.path
 
 # rupa/z replacement
 eval "$(zoxide init bash)"
