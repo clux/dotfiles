@@ -208,6 +208,13 @@ k3dmake24() {
 k3dmake25() {
   k3dmake "$1" "--image=rancher/k3s:v1.25.0-k3s1-amd64"
 }
+k3dmakearm24() {
+  k3dmake "$1" "--image=rancher/k3s:v1.24.1-k3s1-arm64"
+}
+k3dmakearm25() {
+  k3dmake "$1" "--image=rancher/k3s:v1.25.0-k3s1-arm64"
+}
+
 
 # misc kube helpers
 khevict() {
