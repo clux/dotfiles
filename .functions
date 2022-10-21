@@ -194,25 +194,26 @@ k3dmake() {
   sd "0.0.0.0" "localhost" ~/.kube/k3d
 }
 
+if [[ ! "${OSTYPE}" =~ "darwin" ]]; then
+  # main machines are amd64, rely on arch bin on mac
+  arch() {
+    "amd64"
+  }
+fi
+
 k3dmake23() {
   # could implement versions via
   # https://github.com/nolar/setup-k3d-k3s/blob/v1/action.sh
   # but ideally rancher/k3s should have better tags
   # pick one from https://hub.docker.com/r/rancher/k3s
-  k3dmake "$1" "--image=rancher/k3s:v1.23.6-k3s1-amd64"
+  k3dmake "$1" "--image=rancher/k3s:v1.23.6-k3s1-$(arch)"
 }
 
 k3dmake24() {
-  k3dmake "$1" "--image=rancher/k3s:v1.24.1-k3s1-amd64"
+  k3dmake "$1" "--image=rancher/k3s:v1.24.1-k3s1-$(arch)"
 }
 k3dmake25() {
-  k3dmake "$1" "--image=rancher/k3s:v1.25.0-k3s1-amd64"
-}
-k3dmakearm24() {
-  k3dmake "$1" "--image=rancher/k3s:v1.24.1-k3s1-arm64"
-}
-k3dmakearm25() {
-  k3dmake "$1" "--image=rancher/k3s:v1.25.0-k3s1-arm64"
+  k3dmake "$1" "--image=rancher/k3s:v1.25.0-k3s1-$(arch)"
 }
 
 
