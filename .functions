@@ -197,7 +197,7 @@ k3dmake() {
 if [[ ! "${OSTYPE}" =~ "darwin" ]]; then
   # main machines are amd64, rely on arch bin on mac
   arch() {
-    "amd64"
+    echo "amd64"
   }
 fi
 
