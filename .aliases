@@ -29,7 +29,12 @@ alias XG="xargs grep"
 alias L="less"
 alias H='head -n "$(($LINES-5))"'
 alias T='tail -n "$(($LINES-5))"'
-alias XC="xclip -i -sel c"
+
+if [[ "${OSTYPE}" =~ "darwin" ]]; then
+    alias XC="pbcopy"
+else
+    alias XC="xclip -i -sel c"
+fi
 
 # misc
 alias cwd='pwd | tr -d "\r\n" | xclip -sel clip'

@@ -46,7 +46,7 @@
   # https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/checking-out-pull-requests-locally
   pr = !"pr() { git fetch origin pull/$1/head:pr-$1; git checkout pr-$1; }; pr"
   # push a small tweak to a PR aggressively
-  yolo = !git add -u && git commit --amend --no-edit && git push -f
+  yolo = !git add -u && git commit --amend --no-edit && git push --force-with-lease
 
   # GC stuff
   # Merged branch delete
@@ -74,7 +74,7 @@
   # Find branches containing commit
   fb = "!f() { git branch -a --contains $1; }; f"
 
-  # IDENTITY
+  # IDENTITY HELPERS
   ea = !git config --local user.name \"Eirik Albrigtsen\" && \
         git config --local user.email \"eirik.albrigtsen@truelayer.com\"
   clux = !git config --local user.name \"clux\" && \
@@ -84,7 +84,7 @@
   whoami = !sh -c 'echo \"$(git config --get user.name) <$(git config --get user.email)>\"'
 
 
-  # shortcuts for cloning and setting identities correctly
+  # shortcuts for cloning and setting identities correctly (overrides includeIf identities)
   github ="!f() { git clone git@github.com:$1.git && git idclone clux $1; }; f"
   gitlab ="!f() { git clone git@gitlab.com:$1.git && git idclone clux $1; }; f"
   bitbucket ="!f() { git clone git@bitbucket.org:$1.git && git idclone clux $1; }; f"
