@@ -82,13 +82,13 @@
   # set who i am on fresh clones (cd's into dirname and calls one of the above)
   idclone ="!f() { cd $(echo $2 | cut -d"/" -f2) && git $1 && cd -; }; f"
   whoami = !sh -c 'echo \"$(git config --get user.name) <$(git config --get user.email)>\"'
-  cluxremote = "!f() { git remotes set-url origin $(git remotes get-url origin | sed -e s/github.com:/github.com-clux:/); }; f"
+
 
   # shortcuts for cloning and setting identities correctly
-  github ="!f() { git clone git@github.com-clux:$1.git && git idclone clux $1; }; f"
+  github ="!f() { git clone git@github.com:$1.git && git idclone clux $1; }; f"
   gitlab ="!f() { git clone git@gitlab.com:$1.git && git idclone clux $1; }; f"
   bitbucket ="!f() { git clone git@bitbucket.org:$1.git && git idclone clux $1; }; f"
-  work = "!f() { git clone git@github.com-work:$1.git && git idclone ea $1; }; f"
+  work = "!f() { git clone git@github.com:$1.git && git idclone ea $1; }; f"
   aur = "!f() { git clone https://aur.archlinux.org/$1.git && git idclone clux $1; }; f"
 
   # multi-clone shortcuts
@@ -102,8 +102,15 @@
   initial ="!f() { [ -n "$1" ] && git $1 && git commit --allow-empty -m init; }; f"
   new ="!f() { [ ! -d ".git" ] && git init && git add . && git initial $1; }; f"
 
-[user]
-  signingkey = 0xA876A6CD26914D42
+
+; include for all repositories inside ~truelayer
+[includeIf "gitdir:~/truelayer/"]
+	path = ~/.gitconfig-tl.inc
+; include for all repositories inside ~/repos and ~/kube
+[includeIf "gitdir:~/repos/"]
+	path = ~/.gitconfig-clux.inc
+[includeIf "gitdir:~/kube/"]
+	path = ~/.gitconfig-clux.inc
 
 [push]
   default = current
