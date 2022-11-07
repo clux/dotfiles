@@ -41,6 +41,34 @@ sublime_user:
 vim:
   [ -f ~/.vim/autoload/plug.vim ] && vim +PlugUpdate +qall
 
+# install vs code plugins
+vscode:
+  #!/bin/bash
+  declare -a exts=(
+    4ops.terraform
+    ban.spellright
+    eamodio.gitlens
+    esbenp.prettier-vscode
+    foam.foam-vscode
+    johnpapa.winteriscoming
+    kokakiwi.vscode-just
+    kortina.vscode-markdown-notes
+    matklad.rust-analyzer
+    miqh.vscode-language-rust
+    ms-kubernetes-tools.vscode-kubernetes-tools
+    mushan.vscode-paste-image
+    NeelyInnovations.note-macros
+    philipbe.theme-gray-matter
+    redhat.vscode-yaml
+    skellock.just
+    tchayen.markdown-links
+    tnaseem.theme-seti
+    yzhang.markdown-all-in-one
+  )
+  for ext in "${exts[@]}"; do
+    code --install-extension $ext
+  done
+
 # font guard (linux only)
 has_fonts:
   echo "Guarding on Liberations + powerline font presence"
