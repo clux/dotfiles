@@ -13,6 +13,9 @@ source ~/.path
 source ~/.functions
 source ~/.exports
 source ~/.aliases
+if [[ "${OSTYPE}" =~ "darwin" ]]; then # auto-sourced on linux
+  source ~/.bash_completion
+fi
 
 # rupa/z replacement
 eval "$(zoxide init bash)"
