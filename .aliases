@@ -32,6 +32,7 @@ alias T='tail -n "$(($LINES-5))"'
 
 if [[ "${OSTYPE}" =~ "darwin" ]]; then
     alias XC="pbcopy"
+    alias xdg-open="open"
 else
     alias XC="xclip -i -sel c"
 fi
