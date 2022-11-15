@@ -2,20 +2,22 @@
 # Allow ** recursive globbing
 shopt -s globstar
 
+# Main modules
+source ~/.path
+
+if [[ "${OSTYPE}" =~ "darwin" ]]; then # auto-sourced on linux
+  source ~/.bash_completion
+fi
+
 # Prompt
 ## Alternative 1: bash specific 200 line script
 source ~/.prompt
 ## Alternative 2: shell agnostic 100 line toml cfg (from a 20k line rust bin)
 #eval "$(starship init bash)"
 
-# Modules
-source ~/.path
 source ~/.functions
 source ~/.exports
 source ~/.aliases
-if [[ "${OSTYPE}" =~ "darwin" ]]; then # auto-sourced on linux
-  source ~/.bash_completion
-fi
 
 # rupa/z replacement
 eval "$(zoxide init bash)"
