@@ -189,7 +189,7 @@ set_prompt() {
   PS1+="${maintxt} "
   # Prepend (root) if root
   if [ $EUID -eq 0 ]; then
-    "(${red}root${maintxt}) "
+    PS1+="(${red}root${maintxt}) "
   fi
   PS1+="$(show_cwd)"
   if [ -n "${VIRTUAL_ENV}" ]; then
