@@ -46,8 +46,6 @@ Does not use the builtin sync.
 Installs plugins based on a hardcoded list (populated via `code --list-extensions` periodically).
 User config is not synced atm due to cross-platform concerns (and lack of significant default deviation).
 
-### Vim
+### Helix
 
-Not super well used. Tried to get used to it and spent a week setting it up, and then went back to using wysiwyg editors :|
-
-Installs plugins via [plug](https://github.com/junegunn/vim-plug) non-interactively.
+For TUI like interactions as the `EDITOR`. Experimenting with this for now, as I never got into `vim` properly.

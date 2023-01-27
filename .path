@@ -22,7 +22,7 @@ if [[ "${OSTYPE}" =~ "darwin" ]] ; then
   export PATH="/opt/homebrew/opt/binutils/bin:$PATH"
   export PATH="/opt/homebrew/opt/findutils/libexec/gnubin:$PATH"
   # extra coreutils pkgs wo/evars: watch, diffutils
-  # others: rsync, bash, vim, gpatch, less, zsh
+  # others: rsync, bash, gpatch, less, zsh
   alias ps=procs
 
   export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"

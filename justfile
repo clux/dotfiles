@@ -24,11 +24,10 @@ config: directories
 
 # configure code editors
 editors: directories
-  echo "configuring sublime and installing vim plugins"
+  echo "configuring sublime and installing vs code plugins"
   @[ -d ~/.config/sublime-text-3/Packages/User ] || make sublime_user
   @[ -f ~/.config/sublime-text-3/Local/License.sublime_license ] || make sublime_license
-  @[ -d ~/.vim/plugged ] || make vim
-
+  just vscode
 
 # link sublime 3 license
 sublime_license:
@@ -36,10 +35,6 @@ sublime_license:
 # link sublime 3 user config
 sublime_user:
   ln -s "$PWD/.config/sublime-text-3/Packages/User" ~/.config/sublime-text-3/Packages/User  
-
-# install vim plugins
-vim:
-  [ -f ~/.vim/autoload/plug.vim ] && vim +PlugUpdate +qall
 
 # install vs code plugins
 vscode:

@@ -3,31 +3,10 @@
 # -----------------------------------------------------------------------------
 # opening helpers
 
-# shellcheck disable=SC2230
-vim() { # ^ avoids recursion
-  if [ $# -eq 0 ]; then
-    $(which vim) "$(fzf)"
-  else
-    $(which vim) "$@"
-  fi
-}
 
-# shellcheck disable=SC2230
-v() {
-  if [ $# -eq 0 ]; then
-    $(which vlc) "$(fzf)" > /dev/null 2>&1
-  else
-    $(which vlc) "$1" > /dev/null 2>&1
-  fi
-}
-
-s() {
-  if [ $# -eq 0 ]; then
-    subl3 "$(fzf)"
-  else
-    subl3 "$@"
-  fi
-}
+vf() { $(which vlc) "$(fzf)" > /dev/null 2>&1 ;}
+hf() { hx "$(fzf)" ;}
+h.() { hx . ;}
 
 # -----------------------------------------------------------------------------
 # package manager abstraction - mostly for my own memory
