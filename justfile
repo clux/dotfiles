@@ -47,7 +47,6 @@ vscode:
     foam.foam-vscode
     johnpapa.winteriscoming
     kokakiwi.vscode-just
-    kortina.vscode-markdown-notes
     matklad.rust-analyzer
     miqh.vscode-language-rust
     ms-kubernetes-tools.vscode-kubernetes-tools
