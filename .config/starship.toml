@@ -1,14 +1,14 @@
 format = """\
-$status\
-$username\
-$hostname\
-$time\
-$directory\
-$kubernetes\
-$git_branch\
-$git_status\
-$rust\
-$character\
+${status}\
+${username}\
+${hostname}\
+${time}\
+${directory}\
+${kubernetes}\
+${git_branch}\
+${git_status}\
+${rust}\
+${character}\
 """
 add_newline = false
 # right_prompt = true # TODO: requires fish/zsh
@@ -47,11 +47,11 @@ detect_extensions = []
 truncation_length = 3
 style = "bg:black white"
 format = "[$path ]($style)"
-truncate_to_repo = "false"
+truncate_to_repo = true
 fish_style_pwd_dir_length = 5
 # MISSING: cannot change the separator between dirs (looks cluttered)
 # https://github.com/starship/starship/pull/1222
-#separator = ""
+truncation_symbol = ""
 
 [time]
 disabled = true
@@ -66,7 +66,10 @@ format = '[$symbol]($style)[$context[∈](bg:black 27)$namespace](bg:black white
 
 [git_branch]
 style = "bg:black bold 38"
-format = "[ $symbol]($style)[$branch](bg:black 38)"
+# symbol doesn't work without a better font so turning it off
+format = "($style)[$branch](bg:black 38)"
+#symbol = ' '
+#format = "[ $symbol]($style)[$branch](bg:black 38)"
 truncation_length = 12
 truncation_symbol = "."
 
