@@ -5,7 +5,7 @@
 
 vf() { $(which vlc) "$(fzf)" > /dev/null 2>&1 ;}
 hf() { hx "$(fzf)" ;}
-h.() { hx . ;}
+h() { hx . ;}
 
 # -----------------------------------------------------------------------------
 # package manager abstraction - mostly for my own memory

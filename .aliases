@@ -76,6 +76,7 @@ alias ka="kubectl apply"
 alias kdel="kubectl delete"
 alias kg="kubectl get"
 alias kgy="kubectl get -oyaml"
+alias kshell="kubectl run -it --image alpine --restart Never --rm sh"
 # kl - fzf kubectl logs
 alias kld="kl deploy"
 alias kls="kl service"
