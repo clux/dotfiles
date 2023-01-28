@@ -18,6 +18,7 @@ if [[ "${OSTYPE}" =~ "darwin" ]] ; then
   alias grep=ggrep
   alias sed=gsed
   alias make=gmake
+  alias date=gdate
   # binutils, findutils (more than one binary, so taking the whole thing)
   export PATH="/opt/homebrew/opt/binutils/bin:$PATH"
   export PATH="/opt/homebrew/opt/findutils/libexec/gnubin:$PATH"

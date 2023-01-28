@@ -17,7 +17,7 @@ Works everywhere:
 - [alacritty](https://github.com/alacritty/alacritty/) using zellij?
 - customized [shell prompt](https://github.com/clux/dotfiles/blob/master/.prompt) heavily inspired by powerline (with [starship variant](https://github.com/clux/dotfiles/issues/32))
 - color themes from [vivid](https://github.com/sharkdp/vivid)
-- [gitconfig](https://github.com/clux/dotfiles/blob/master/.gitconfig) with [fzf](https://github.com/junegunn/fzf) based [githelpers](https://github.com/clux/dotfiles/blob/master/.githelpers) and diff via [delta](https://github.com/dandavison/delta)
+- [gitconfig](https://github.com/clux/dotfiles/blob/master/.gitconfig) with [fzf](https://github.com/junegunn/fzf) based [githelpers](https://github.com/clux/dotfiles/blob/master/.githelpers), diff via [delta](https://github.com/dandavison/delta), and account switching by `includeIf` dirs
 - [aliases](https://github.com/clux/dotfiles/blob/master/.aliases) to gracefully move from `ls`->`exa`, `ag`->`rg`, `cat`->`bat`, plus a bunch of `git`, `kubectl` shortcuts
 
 Lots of misc [.functions](https://github.com/clux/dotfiles/blob/master/.functions). As usual, copy what you find interesting.
