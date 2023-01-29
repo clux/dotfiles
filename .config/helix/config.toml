@@ -1,0 +1,10 @@
+theme = "hex_toxic"
+#theme = "catppuccin_mocha"
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
