@@ -95,11 +95,8 @@ complete -F _syslistunits sysreload
 
 # context switcher
 kc() {
-  # We could also pick a KUBECONFIG file first
-  # But this is not necessary if user has put KUBECONFIG evar to be colon delimited
-  # list of kubeconfig files
-  # Otherwise we could do an extra selection first ala:
-  #export KUBECONFIG="$(cd ~/.kube && fd . --max-depth 1 --type f | fzf)"
+  # Relies on KUBECONFIG set to colon delimeted list of all kubeconfigs:
+  #export KUBECONFIG="$(fd . ~/.kube --max-depth 1 --type f | tr '\n' ':')"
   kubectl config use-context "$(kubectl config get-contexts -o name | grep -v fqdn | fzf)"
 }
 
@@ -184,21 +181,21 @@ k3dmake23() {
   # https://github.com/nolar/setup-k3d-k3s/blob/v1/action.sh
   # but ideally rancher/k3s should have better tags
   # pick one from https://hub.docker.com/r/rancher/k3s
-  k3dmake "$1" "--image=rancher/k3s:v1.23.6-k3s1-$(arch)"
+  k3dmake "$1" "--image=rancher/k3s:v1.23.14-k3s1-$(arch)"
 }
 
 k3dmake24() {
-  k3dmake "$1" "--image=rancher/k3s:v1.24.1-k3s1-$(arch)"
+  k3dmake "$1" "--image=rancher/k3s:v1.24.8-k3s1-$(arch)"
 }
 k3dmake25() {
-  k3dmake "$1" "--image=rancher/k3s:v1.25.0-k3s1-$(arch)"
+  k3dmake "$1" "--image=rancher/k3s:v1.25.4-k3s1-$(arch)"
 }
 
 
 # misc kube helpers
 khevict() {
-  # want to do status.reason=Evicted but that's not an allowed field selector..
-  # so can either pipe through a pipeline or do an approximation if we use it carefully
+  # NB: status.reason=Evicted is not an allowed field selector..
+  # => have to either pipe through a filter, or use Failed as an approximation:
   #kubectl delete pod --field-selector 'status.phase=Failed'
   kubectl get pods | awk '/Evicted/ {print $1}' | xargs kubectl delete pod
 }
@@ -267,15 +264,17 @@ t() {
   tree -aC -I "node_modules|target|site-packages|.git|bower_components|venv" --dirsfirst "$@" | less -FRX
 }
 
-# guake helpers to rename the tab we don something
-zz() {
-  guake --rename-tab="${PWD##*/}" -i "$(guake -g)"
-}
-zzh() {
-  guake --rename-tab="$1" -i "$(guake -g)"
-  # shellcheck disable=SC2068
-  ssh $@
-}
+if [[ ! "${OSTYPE}" =~ "darwin" ]]; then
+  # guake helpers to rename the tab we don something
+  zz() {
+    guake --rename-tab="${PWD##*/}" -i "$(guake -g)"
+  }
+  zzh() {
+    guake --rename-tab="$1" -i "$(guake -g)"
+    # shellcheck disable=SC2068
+    ssh $@
+  }
+fi
 
 # Create a new directory and enter it
 mkd() { mkdir -p "$@" && cd "$@" || return 1 ;}
