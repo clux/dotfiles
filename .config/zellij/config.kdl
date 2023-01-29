@@ -1,2 +1,3 @@
 copy_on_select true
 pane_frames false
+// TODO: fix keybinds so pane switches don't interfere with word move
