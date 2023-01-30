@@ -6,6 +6,10 @@
 vf() { $(which vlc) "$(fzf)" > /dev/null 2>&1 ;}
 hf() { hx "$(fzf)" ;}
 h() { hx . ;}
+# shellcheck disable=SC2068
+rc() { zellij run -- $@ ;}
+# shellcheck disable=SC2068
+ra() { zellij run -- $(which bash) -ic $@ ;}
 
 # -----------------------------------------------------------------------------
 # package manager abstraction - mostly for my own memory
@@ -264,17 +268,24 @@ t() {
   tree -aC -I "node_modules|target|site-packages|.git|bower_components|venv" --dirsfirst "$@" | less -FRX
 }
 
-if [[ ! "${OSTYPE}" =~ "darwin" ]]; then
-  # guake helpers to rename the tab we don something
-  zz() {
+# terminal mux helpers to rename the tab we do something
+zz() {
+  if [[ ! "${OSTYPE}" =~ "darwin" ]]; then
     guake --rename-tab="${PWD##*/}" -i "$(guake -g)"
-  }
-  zzh() {
+  else
+    zellij action rename-pane "${PWD##*/}"
+  fi
+}
+zzh() {
+  if [[ ! "${OSTYPE}" =~ "darwin" ]]; then
     guake --rename-tab="$1" -i "$(guake -g)"
-    # shellcheck disable=SC2068
-    ssh $@
-  }
-fi
+  else
+    zellij action rename-pane "$1"
+  fi
+  # shellcheck disable=SC2068
+  ssh $@
+}
+
 
 # Create a new directory and enter it
 mkd() { mkdir -p "$@" && cd "$@" || return 1 ;}

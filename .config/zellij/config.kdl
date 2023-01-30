@@ -1,3 +1,5 @@
 copy_on_select true
-pane_frames false
+// minimal look, but uglier and unnamed
+//pane_frames false
 // TODO: fix keybinds so pane switches don't interfere with word move
+theme "nord"
