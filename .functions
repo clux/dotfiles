@@ -273,14 +273,14 @@ zz() {
   if [[ ! "${OSTYPE}" =~ "darwin" ]]; then
     guake --rename-tab="${PWD##*/}" -i "$(guake -g)"
   else
-    zellij action rename-pane "${PWD##*/}"
+    zellij action rename-tab "${PWD##*/}"
   fi
 }
 zzh() {
   if [[ ! "${OSTYPE}" =~ "darwin" ]]; then
     guake --rename-tab="$1" -i "$(guake -g)"
   else
-    zellij action rename-pane "$1"
+    zellij action rename-tab "$1"
   fi
   # shellcheck disable=SC2068
   ssh $@

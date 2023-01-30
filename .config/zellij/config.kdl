@@ -1,5 +1,47 @@
 copy_on_select true
 // minimal look, but uglier and unnamed
-//pane_frames false
+pane_frames false
 // TODO: fix keybinds so pane switches don't interfere with word move
-theme "nord"
+theme "catppuccin-mocha"
+themes {
+  tokyo-night-storm {
+    fg 169 177 214
+    bg 36 40 59
+    black 56 62 90
+    red 249 51 87
+    green 158 206 106
+    yellow 224 175 104
+    blue 122 162 247
+    magenta 187 154 247
+    cyan 42 195 222
+    white 192 202 245
+    orange 255 158 100
+  }
+  catppuccin-macchiato {
+    bg "#5b6078" // Surface2
+    fg "#cad3f5"
+    red "#ed8796"
+    green "#a6da95"
+    blue "#8aadf4"
+    yellow "#eed49f"
+    magenta "#f5bde6" // Pink
+    orange "#f5a97f" // Peach
+    cyan "#91d7e3" // Sky
+    black "#1e2030" // Mantle
+    white "#cad3f5"
+  }
+
+  catppuccin-mocha {
+    bg "#585b70" // Surface2
+    fg "#cdd6f4"
+    red "#f38ba8"
+    green "#a6e3a1"
+    blue "#89b4fa"
+    yellow "#f9e2af"
+    magenta "#f5c2e7" // Pink
+    orange "#fab387" // Peach
+    cyan "#89dceb" // Sky
+    black "#181825" // Mantle
+    white "#cdd6f4"
+  }
+}
