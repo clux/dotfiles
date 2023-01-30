@@ -9,7 +9,7 @@ h() { hx . ;}
 # shellcheck disable=SC2068
 rc() { zellij run -- $@ ;}
 # shellcheck disable=SC2068
-ra() { zellij run -- $(which bash) -ic $@ ;}
+ra() { zellij run -- "$(which bash)" -ic $@ ;}
 
 # -----------------------------------------------------------------------------
 # package manager abstraction - mostly for my own memory
