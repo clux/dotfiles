@@ -1,0 +1,13 @@
+layout {
+    tab name="watch-split" {
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        pane size="20%" name="watch" focus=true
+        pane name="bash"
+        // NB: size=1 status-bar fixed in next release via https://github.com/zellij-org/zellij/pull/2091
+        pane size=1 borderless=true {
+          plugin location="zellij:status-bar"
+        }
+    }
+}
