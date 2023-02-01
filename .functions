@@ -11,6 +11,13 @@ rc() { zellij run -- $@ ;}
 # shellcheck disable=SC2068
 ra() { zellij run -- "$(which bash)" -ic $@ ;}
 
+# zellij tab from layout
+zl() {
+  local -r name="${PWD##*/}"
+  local -r layout="$(cd ~/.config/zellij/layouts && fd . | fzf)"
+  zellij action new-tab --layout "$HOME/.config/zellij/layouts/${layout}" --name="${name}"
+}
+
 # -----------------------------------------------------------------------------
 # package manager abstraction - mostly for my own memory
 

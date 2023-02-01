@@ -6,7 +6,7 @@ default:
 
 # create all home subdirectories before symlinking into them
 directories:
-  mkdir -p ~/.config/{autostart,helix,zellij,sublime-text-3/{Local,Packages}}
+  mkdir -p ~/.config/{autostart,helix,sublime-text-3/{Local,Packages}}
   mkdir -p ~/.templates/{git/hooks}
   mkdir -p ~/Music
 
@@ -16,10 +16,11 @@ config: directories
   echo "linking configs in $HOME"
   find "$PWD" -maxdepth 1 -name ".*" -type f -print -exec ln -sfn {} ~/ \;
   echo "Linking config subdirectories of $HOME"
-  for d in {.config{,/helix,/alacritty,/zellij,/karabiner},.templates/git/hooks}; do\
+  for d in {.config{,/helix,/alacritty,/karabiner},.templates/git/hooks}; do\
     echo $d
     find "$PWD/$d" -maxdepth 1 -type f -print -exec ln -sfn {} ~/$d \;
   done
+  ln -sfn $PWD/.config/zellij ~/.config/
   touch ~/.bash_completion
 
 # configure code editors
