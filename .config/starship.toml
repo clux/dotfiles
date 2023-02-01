@@ -8,6 +8,7 @@ ${kubernetes}\
 ${git_branch}\
 ${git_status}\
 ${rust}\
+${python}\
 ${character}\
 """
 add_newline = false
@@ -88,6 +89,14 @@ staged = "● "
 renamed = "👅 "
 deleted = "🗑 "
 #up_to_date = "✔ "
+
+[python]
+#symbol = '🐍'
+symbol = ''
+pyenv_version_name = true
+pyenv_prefix = ''
+style = "purple bold"
+format = ' [${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
 
 [line_break]
 disabled = true
