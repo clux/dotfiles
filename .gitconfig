@@ -6,6 +6,7 @@
   ds = -c delta.side-by-side=true diff
   dc = diff --cached
   dcs = -c delta.side-by-side=true diff --cached
+  dm = !"db() { git log -p $(git master)..HEAD; }; db"
   c = commit --signoff --verbose
   a = add
   p = pull
@@ -14,13 +15,14 @@
   ut = push --tags
   co = checkout
   nu = switch -c
+  m = !"m() { git switch \"$(git master)\"; }; m"
 
   # OCCASIONAL
   amend = commit --amend
   ping = "!f() { git commit --signoff --allow-empty -m \"ping hooks - $(date +%Y-%m-%d)\"; }; f"
   uncommit = reset --soft HEAD^
   unstage = reset HEAD
-  count = shortlog --summary --numbered
+  count = shortlog --summary --numbered --no-merges
   ps = !git pull --recurse-submodules && git submodule update --init --recursive
   chk = diff --cached --check
   stat = diff --stat
@@ -39,9 +41,6 @@
   # BRANCH HELPERS
   # since github started changing the default master branch:
   master = !"master() { git remote show  origin | grep HEAD | choose 2; }; master"
-  m = !"m() { git switch \"$(git master)\"; }; m"
-  # diff with branch
-  db = !"db() { git log -p $(git master)..HEAD; }; db"
   # checkout remote ref to a github pr
   # https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/checking-out-pull-requests-locally
   pr = !"pr() { git fetch origin pull/$1/head:pr-$1; git checkout pr-$1; }; pr"
@@ -61,6 +60,8 @@
   open = "!f() { xdg-open \"https://$(echo $(git config --get remote.origin.url) | sed 's|^http.://||' | sed 's|^git@||' | tr : '/' | sed 's|.git$||')/commit/$1\"; }; f"
   # reset to blank state
   wipe = "!f() { git reset --hard origin/$(git master) && git clean -fdX; }; f"
+  # show orphaned commits
+  orphans = !git log --all --max-parents=0
   # what are my aliases
   aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
 
@@ -83,25 +84,28 @@
   idclone ="!f() { cd $(echo $2 | cut -d"/" -f2) && git $1 && cd -; }; f"
   whoami = !sh -c 'echo \"$(git config --get user.name) <$(git config --get user.email)>\"'
 
-
-  # shortcuts for cloning and setting identities correctly (overrides includeIf identities)
+  # cloning and setting identities correctly (overrides includeIf defaults)
   github ="!f() { git clone git@github.com:$1.git && git idclone clux $1; }; f"
   gitlab ="!f() { git clone git@gitlab.com:$1.git && git idclone clux $1; }; f"
   bitbucket ="!f() { git clone git@bitbucket.org:$1.git && git idclone clux $1; }; f"
   work = "!f() { git clone git@github.com:$1.git && git idclone ea $1; }; f"
   aur = "!f() { git clone https://aur.archlinux.org/$1.git && git idclone clux $1; }; f"
 
-  # multi-clone shortcuts
-  hub ="!f() { for i in $@; do git github clux/$i; done; }; f"
-  lab ="!f() { for i in $@; do git gitlab clux/$i; done; }; f"
-  bb ="!f() { for i in $@; do git bitbucket clux/$i; done; }; f"
-  tl ="!f() { for i in $@; do git work truelayer/$i; done; }; f"
+  # clone from main account/org using personal identity (overrides includeIf defaults)
+  hub ="!f() { git github clux/$i; }; f"
+  lab ="!f() { git gitlab clux/$i; }; f"
+  bb ="!f() { git bitbucket clux/$i; }; f"
+  tl ="!f() { git work truelayer/$i; }; f"
 
   # initializing and setting identities correctly
   # usage: `git new ea` or `git new clux`
   initial ="!f() { [ -n "$1" ] && git $1 && git commit --allow-empty -m init; }; f"
   new ="!f() { [ ! -d ".git" ] && git init && git add . && git initial $1; }; f"
 
+
+[user]
+  # Ensure user info is set before committing
+  useConfigOnly = true
 
 ; include for all repositories inside ~truelayer
 [includeIf "gitdir:~/truelayer/"]

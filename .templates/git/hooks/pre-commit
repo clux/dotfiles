@@ -24,7 +24,7 @@ check() {
 
 check_author() {
   if git remote -v | grep -q origin; then
-    if [[ $(git remote get-url origin --push) == git@github.com-work:* ]]; then
+    if [[ $(git remote get-url origin --push) == git@github.com:/truelayer* ]]; then
       if [[ $(git whoami) != Eirik* ]]; then
         echo -e "You have not set your identity: use 'git ea'"
         exit 1
@@ -53,6 +53,6 @@ check ".*\.json" jq -e .
 check ".*\.sh" shellcheck
 
 if $FAIL; then
-  echo "fix errors and try again or commit with --no-verify to ignore errors"
+  echo "fix errors and try again or commit with -n (--no-verify) to ignore errors"
   exit 1
 fi

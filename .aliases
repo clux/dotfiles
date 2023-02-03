@@ -55,6 +55,7 @@ alias gdc="git dc"
 alias gdcs="git dcs"
 alias gd="git d"
 alias gds="git ds"
+alias gdm='git dm'
 alias ga="git a"
 alias gf="git f"
 alias gu="git u"
