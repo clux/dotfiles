@@ -61,7 +61,7 @@ elif lsb_release -ds | grep -qEi "Gentoo"; then
   paki() { sudo emerge "$1" ;}
   pakr() { sudo emerge -cav "$1" ;}
   checkupdates() { eix -uc "$1" ;}
-elif hash yum 2> /dev/null; then
+elif command -v yum &> /dev/null; then
   paks() { yum search "$1" ;}
   pakf() { yum whatprovides "$1" ;}
   qlist() { repoquery --list "$1" ;} # from yum-utils
@@ -404,7 +404,7 @@ ch() {
   cols=$(( COLUMNS / 3 ))
   sep='{::}'
 
-  if hash google-chrome-stable 2> /dev/null; then
+  if command -v google-chrome-stable &> /dev/null; then
     cp -f ~/.config/google-chrome/Default/History /tmp/h
   else
     cp -f ~/.config/chromium/Default/History /tmp/h

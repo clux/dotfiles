@@ -7,7 +7,7 @@ check() {
 
   [ -z "$FILES" ] && return 0;
 
-  if ! hash "$2" 2>/dev/null; then
+  if command -v "$2" &> /dev/null; the
     echo -e "\e[1m$2\e[0m is not installed"
     FAIL=true
     return 1
