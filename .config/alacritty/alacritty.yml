@@ -2,11 +2,11 @@ font:
   size: 16
 
 shell:
-  program: /opt/homebrew/bin/bash
+  program: bash
   # start zellij with a small sleep to ensure it gets right dimensions
   args:
-   - -c
-   - sleep 0.2 && /opt/homebrew/bin/zellij
+   - -ic
+   - sleep 0.1 && zellij
 
 window:
   startup_mode: Maximized

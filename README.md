@@ -2,7 +2,7 @@
 
 [![ci status](https://github.com/clux/dotfiles/actions/workflows/lint.yml/badge.svg)](https://github.com/clux/dotfiles/actions/workflows/lint.yml)
 
-Configuration files for packages from [provisioning scripts](https://github.com/clux/provision).
+Personal dotfiles, and configuration for [provisioned setup](https://github.com/clux/provision).
 Designed for a minimal Arch Linux installation, but retrofitted to support MacOS under duress.
 
 ## Core Configs
