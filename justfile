@@ -1,5 +1,6 @@
 # See https://just.systems/man/
 SHELLCHECK_OPTS := "-e SC1091 -e SC1090 -e SC1117 -s bash"
+SHELLCHECKED_FILES := ".aliases .exports .bashrc .bash_completion .bash_profile .path .prompt .functions .xprofile .git-helpers .k8s-helpers"
 
 default:
   @just --list --unsorted --color=always | rg -v "    default"
@@ -83,7 +84,7 @@ ui: dconf
 # run local shellcheck lint
 lint:
   #!/bin/bash
-  SHELLCHECK_OPTS="{{SHELLCHECK_OPTS}}" shellcheck .aliases .exports .bashrc .bash_completion .bash_profile .path .prompt .functions .xprofile .githelpers .k8s-helpers
+  SHELLCHECK_OPTS="{{SHELLCHECK_OPTS}}" shellcheck {{SHELLCHECKED_FILES}}
 
 # run shellcheck lint via docker
 lint-docker:
@@ -91,4 +92,4 @@ lint-docker:
     -e SHELLCHECK_OPTS="{{SHELLCHECK_OPTS}}" \
     -v $$PWD:/volume -w /volume \
     -t koalaman/shellcheck:stable \
-    shellcheck .aliases .exports .bashrc .bash_completion .bash_profile .path .prompt .functions .xprofile .githelpers
+    shellcheck {{SHELLCHECKED_FILES}}

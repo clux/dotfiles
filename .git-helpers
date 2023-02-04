@@ -1,8 +1,40 @@
-# shellcheck disable=SC2016,SC2207
+#!/bin/bash
 
-# git commit browser using fzf
+# -----------------------------------------------------------------------------
+# aliases to avoid the space in gitconfig
+
+alias g='git'
+alias gl="git l"
+alias gst="git st"
+alias gs="git s"
+alias gc="git c"
+alias gcs="git c -S"
+alias gdc="git dc"
+alias gdcs="git dcs"
+alias gd="git d"
+alias gds="git ds"
+alias gdm='git dm'
+alias ga="git a"
+alias gf="git f"
+alias gu="git u"
+alias gut="git ut"
+alias gp="git p"
+alias gpu="git pu"
+alias gpr="git p --rebase"
+alias gps="git ps"
+alias gt='cd $(git rev-parse --show-toplevel)'
+alias gm='git m'
+alias gw='git whoami'
+alias gws='git ws'
+
+# -----------------------------------------------------------------------------
+# fuzzy helpers for aliases
+
+# git commit browser
 # based on https://gist.github.com/junegunn/f4fca918e937e6bf5bad#gistcomment-1666125
-# can also open commit in browser
+# F1 -> opens commit in browser (relies on "git open $changeset" alias)
+# ENTER -> opens commit with "git show" (q to return)
+# ESC in main to exit
 gitlog() {
   git log --graph --color=always --no-merges \
       --format="%C(auto)%h%d %s <%C(blue)%an%Creset> %C(black)%C(bold)%cr" "$@" |
@@ -22,9 +54,10 @@ FZF-EOF"
 
 # git stash browser using fzf
 # https://gist.github.com/junegunn/a563d9e3e07fd721d618562762ec619d
-# kind of broken in zellij atm
+# kind of broken in zellij because it absorbs ctrl keys, should work elsewhere
 gitstash() {
   local out k reflog
+  # shellcheck disable=SC2207,SC2016
   out=(
     $(git stash list --pretty='%C(yellow)%gd %>(14)%Cgreen%cr %C(blue)%gs' |
       fzf --ansi --no-sort --header='enter:show, ctrl-d:diff, ctrl-p:pop, ctrl-y:apply, ctrl-n:drop' \

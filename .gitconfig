@@ -18,7 +18,7 @@
   m = !"m() { git switch \"$(git master)\"; }; m"
 
   # fuzzy interactive helpers
-  # NB: interactive shell sources .githelpers for these
+  # NB: interactive shell sources .git-helpers for these
   l = !bash -ic 'gitlog' x
   st = !bash -ic 'gitstash' x
 
@@ -40,10 +40,9 @@
   branches = branch -a
   remotes = remote -v
 
-
   # BRANCH HELPERS
   # since github started changing the default master branch:
-  master = !"master() { git remote show  origin | grep HEAD | choose 2; }; master"
+  master = !git rev-parse --abbrev-ref origin/HEAD | cut -c8-
   # checkout remote ref to a github pr
   # https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/checking-out-pull-requests-locally
   pr = !"pr() { git fetch origin pull/$1/head:pr-$1; git checkout pr-$1; }; pr"
@@ -69,16 +68,6 @@
   orphans = !git log --all --max-parents=0
   # what are my aliases
   aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
-
-  # FINDERS
-  # Find commits by source code
-  fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
-  # Find commits by commit message
-  fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
-  # Find tags containing commit
-  ft = "!f() { git describe --always --contains $1; }; f"
-  # Find branches containing commit
-  fb = "!f() { git branch -a --contains $1; }; f"
 
   # IDENTITY HELPERS
   ea = !git config --local user.name \"Eirik Albrigtsen\" && \
