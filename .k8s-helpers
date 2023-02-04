@@ -1,11 +1,31 @@
 #!/bin/bash
 
 # -----------------------------------------------------------------------------
+# kubeconfigs and context
+
+# Allow kubectl/kube-rs to use contexts from all kubeconfig files in ~/.kube/
+export KUBECONFIG
+KUBECONFIG="$(fd . ~/.kube --max-depth 1 --type f | tr '\n' ':')"
+
+# context switcher
+kc() {
+  # Relies on KUBECONFIG set to colon delimeted list of all kubeconfigs ^
+  # Exclude fqdn contexts (rancher-ism).
+  kubectl config use-context "$(kubectl config get-contexts -o name | grep -v fqdn | fzf)"
+}
+
+# namespace switcher
+kns() {
+  local -r ns="$(kubectl get ns --no-headers | choose 0 | fzf)"
+  local -r ctx="$(kubectl config current-context)"
+  kubectl config set "contexts.${ctx}.namespace" "${ns}"
+}
+
+# -----------------------------------------------------------------------------
 # kubernetes aliases
 
 # kubectl
 alias k="kubectl"
-alias kpf="kubectl port-forward"
 alias kar="kubectl api-resources"
 alias ka="kubectl apply"
 alias kdel="kubectl delete"
@@ -55,23 +75,8 @@ alias kys="ky service"
 alias kysa="ky sa"
 alias kyn="ky node"
 alias kyh="ky hpa"
-
-# -----------------------------------------------------------------------------
-# kubernetes switchers
-
-# context switcher
-kc() {
-  # Relies on KUBECONFIG set to colon delimeted list of all kubeconfigs:
-  #export KUBECONFIG="$(fd . ~/.kube --max-depth 1 --type f | tr '\n' ':')"
-  kubectl config use-context "$(kubectl config get-contexts -o name | grep -v fqdn | fzf)"
-}
-
-# namespace switcher
-kns() {
-  local -r ns="$(kg ns | choose 0 | tail -n +2 | fzf)"
-  local -r ctx="$(kubectl config current-context)"
-  kubectl config set "contexts.$ctx.namespace" "$ns"
-}
+# kpf - fzf port-forward (see below)
+alias kpf="kpfs"
 
 # -----------------------------------------------------------------------------
 # kubernetes interactive helpers using fzf
@@ -115,6 +120,24 @@ kl() {
     container="$(echo "${data}" | jq "${jqpth}[].name" -r | fzf)" # user choice
   fi
   kubectl logs -f "${resource}/${name}" "${container}"
+}
+
+# port-forward to a service by selecting a ports json entry
+kpfs() {
+  service="${1:-$(kubectl get service --no-headers | choose 0 | fzf)}"
+  portjson="$(kubectl get service ${service} -ojson | jq ".spec.ports[]" -Mc | fzf)"
+  port="$(echo ${portjson} | jq ".targetPort" -r)"
+  echo "Forwarding to svc/${service}:${port} via local 8000"
+  kubectl port-forward "svc/${service}" "8000:${port}"
+}
+# port-forward to a pod by selecting a ports entry from a ports entry from the first container
+kpfp() {
+  pod="${1:-$(kubectl get pod --no-headers | choose 0 | fzf)}"
+  # TODO: respect default container annotation if set
+  portjson="$(kubectl get pod ${pod} -ojson | jq ".spec.containers[0].ports[]" -Mc | fzf)"
+  port="$(echo ${portjson} | jq ".containerPort" -r)"
+  echo "Forwarding to pod/${pod}:${port} via local 8000"
+  kubectl port-forward "${pod}" "8000:${port}"
 }
 
 # -----------------------------------------------------------------------------
@@ -174,7 +197,6 @@ kleftovers() {
 
 # check versions in all contexts
 kcver() {
-  # NB: filter out fqdn strings (rancher-ism)
   for ctx in $(kubectl config get-contexts -o name | grep -v fqdn); do
     kubectl config use-context "${ctx}" > /dev/null
     echo "${ctx}$(kubectl version --short | grep Server | grep -oE " v.*")"

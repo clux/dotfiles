@@ -15,10 +15,11 @@ Works everywhere:
 - [keychain](https://wiki.archlinux.org/index.php/SSH_keys#Keychain) loading specific ssh keys [by host](https://github.com/clux/dotfiles/blob/658ffb136167730ba272b03fd57c2be4a0bd2cc9/.bash_profile#L10-L16)
 - [zoxide](https://github.com/ajeetdsouza/zoxide) for directory jumping
 - [alacritty](https://github.com/alacritty/alacritty/) using zellij
-- customized [shell prompt](https://github.com/clux/dotfiles/blob/master/.prompt) heavily inspired by powerline (with [starship variant](https://github.com/clux/dotfiles/issues/32))
+- customized [bash prompt](https://github.com/clux/dotfiles/blob/master/.prompt) heavily inspired by powerline (with [starship variant](https://github.com/clux/dotfiles/blob/master/.config/starship.toml) - [#32](https://github.com/clux/dotfiles/issues/32))
 - color themes from [vivid](https://github.com/sharkdp/vivid)
 - [gitconfig](https://github.com/clux/dotfiles/blob/master/.gitconfig) with [fzf](https://github.com/junegunn/fzf) based [githelpers](https://github.com/clux/dotfiles/blob/master/.githelpers), diff via [delta](https://github.com/dandavison/delta), and account switching by `includeIf` dirs
-- [aliases](https://github.com/clux/dotfiles/blob/master/.aliases) to gracefully move from `ls`->`exa`, `ag`->`rg`, `cat`->`bat`, plus a bunch of `git`, `kubectl` shortcuts
+- [kubernetes](https://github.com/clux/dotfiles/blob/master/.k8s-helpers) short aliases, ns/ctx switchers, interactive lookup fns using `fzf`
+- [aliases](https://github.com/clux/dotfiles/blob/master/.aliases) to gracefully move from `ls`->`exa`, `ag`->`rg`, `cat`->`bat`, plus a bunch of `git` shortcuts
 
 Lots of misc [.functions](https://github.com/clux/dotfiles/blob/master/.functions). As usual, copy what you find interesting.
 
