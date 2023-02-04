@@ -151,16 +151,6 @@ docker-clean() {
   # check with docker buildx du --verbose
 }
 
-musl-cross() {
-  cross build --target x86_64-unknown-linux-musl --release --verbose
-}
-musl-build() {
-  docker run \
-    -v cargo-cache:/root/.cargo \
-    -v "$PWD:/volume" -w /volume \
-    --rm -it clux/muslrust cargo build --release
-}
-
 serve() {
   python -m http.server 8000
 }
@@ -366,42 +356,20 @@ venv() {
 }
 
 # -----------------------------------------------------------------------------
-# documentation generation for gh-pages
-
-# Do this AFTER bumping version in Cargo.toml and cargo package && cargo publish
-rust-doc-update() {
-  cargo doc
-  local -r repo=$(basename "$PWD")
-  echo "<meta http-equiv=refresh content=0;url=$repo/index.html>" > target/doc/index.html
-  ghp-import -n target/doc
-  git push -qf "git@github.com:clux/$repo.git" gh-pages
-}
-
-rust-doc-view() {
-  cargo doc
-  local -r repo=$(basename "$PWD")
-  xdg-open "target/doc/$repo/index.html"
-}
-
-# -----------------------------------------------------------------------------
-# more rust
-
-cbr() {
-  # shellcheck disable=SC2068
-  cargo build --release $@
-}
-cbrm() {
-  # shellcheck disable=SC2068
-  cargo build --release --target=x86_64-unknown-linux-musl $@
-}
-
-rust-muslbuild() {
-  docker run -v "$PWD:/volume" -w /volume -t clux/muslrust cargo build --release
-  sudo chown "$USER" -R target
-}
+# rust misc
 
 cargo-fund() {
   cargo fund --github-api-token="$(pass github/cargo-fund-pat)"
+}
+
+musl-cross() {
+  cross build --target x86_64-unknown-linux-musl --release --verbose
+}
+musl-build() {
+  docker run \
+    -v cargo-cache:/root/.cargo \
+    -v "$PWD:/volume" -w /volume \
+    --rm -it clux/muslrust cargo build --release
 }
 
 # -----------------------------------------------------------------------------

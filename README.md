@@ -19,7 +19,7 @@ Works everywhere:
 - terminal themes via [vivid](https://github.com/sharkdp/vivid/tree/master/themes) / [bat](https://github.com/sharkdp/bat/tree/master/assets/themes) / [hx](https://github.com/helix-editor/helix/tree/master/runtime/themes) / [zellij](https://github.com/zellij-org/zellij/tree/main/example/themes) / [delta](https://dandavison.github.io/delta/supported-languages-and-themes.html#supported-languages-and-themes)[*](https://dandavison.github.io/delta/custom-themes.html?highlight=theme#custom-themes) -> see [invocations](https://github.com/clux/dotfiles/search?q=theme+-sublime+-Seti+-gtk+-Markdown+-rust_message_theme)
 - [kubernetes](https://github.com/clux/dotfiles/blob/master/.k8s-helpers) short aliases, ns/ctx switchers, interactive lookup fns using `fzf`
 - [gitconfig](https://github.com/clux/dotfiles/blob/master/.gitconfig) with [fzf](https://github.com/junegunn/fzf) based [git helpers](https://github.com/clux/dotfiles/blob/master/.git-helpers), diff via [delta](https://github.com/dandavison/delta), and account switching by `includeIf` dirs
-- [aliases](https://github.com/clux/dotfiles/blob/master/.aliases) to gracefully move from `ls`->`exa`, `ag`->`rg`, `cat`->`bat`, plus a bunch of `git` shortcuts
+- [aliases](https://github.com/clux/dotfiles/blob/master/.aliases) to gracefully move from `ls`->`exa`, `ag`->`rg`, `cat`->`bat`
 
 Plus lots of misc [.functions](https://github.com/clux/dotfiles/blob/master/.functions). As usual, copy what you find interesting.
 
