@@ -7,15 +7,15 @@ Designed for a minimal Arch Linux installation, but retrofitted to support MacOS
 
 ## Core Configs
 
-- **Linux**: [cinnamon](https://wiki.archlinux.org/index.php/cinnamon) running [guake](https://wiki.archlinux.org/index.php/Guake) configured by `.dconf` files
-- **Mac**: mostly manual ui configuration, except alacritty / [karabiner](https://karabiner-elements.pqrs.org/docs/)
+- **Linux**: [cinnamon](https://wiki.archlinux.org/index.php/cinnamon) + [guake](https://wiki.archlinux.org/index.php/Guake) configured by `.dconf` files
+- **Mac**: mostly manual ui configuration except [karabiner](https://karabiner-elements.pqrs.org/docs/)
 
 Works everywhere:
 
-- [keychain](https://wiki.archlinux.org/index.php/SSH_keys#Keychain) loading specific ssh keys [by host](https://github.com/clux/dotfiles/blob/658ffb136167730ba272b03fd57c2be4a0bd2cc9/.bash_profile#L10-L16)
+- [zellij](https://zellij.dev/) in [alacritty](https://github.com/alacritty/alacritty/)
 - [zoxide](https://github.com/ajeetdsouza/zoxide) for directory jumping
-- [alacritty](https://github.com/alacritty/alacritty/) using zellij
-- customized [bash prompt](https://github.com/clux/dotfiles/blob/master/.prompt) heavily inspired by powerline (with [starship variant](https://github.com/clux/dotfiles/blob/master/.config/starship.toml) - [#32](https://github.com/clux/dotfiles/issues/32))
+- powerline style [custom bash prompt](https://github.com/clux/dotfiles/blob/master/.prompt) / [starship variant](https://github.com/clux/dotfiles/blob/master/.config/starship.toml) (needs nerd fonts / powerline fonts)
+- [keychain](https://wiki.archlinux.org/index.php/SSH_keys#Keychain) loading specific ssh keys [by host](https://github.com/clux/dotfiles/blob/658ffb136167730ba272b03fd57c2be4a0bd2cc9/.bash_profile#L10-L16)
 - color themes from [vivid](https://github.com/sharkdp/vivid)
 - [gitconfig](https://github.com/clux/dotfiles/blob/master/.gitconfig) with [fzf](https://github.com/junegunn/fzf) based [githelpers](https://github.com/clux/dotfiles/blob/master/.githelpers), diff via [delta](https://github.com/dandavison/delta), and account switching by `includeIf` dirs
 - [kubernetes](https://github.com/clux/dotfiles/blob/master/.k8s-helpers) short aliases, ns/ctx switchers, interactive lookup fns using `fzf`

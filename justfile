@@ -83,7 +83,7 @@ ui: dconf
 # run local shellcheck lint
 lint:
   #!/bin/bash
-  SHELLCHECK_OPTS="{{SHELLCHECK_OPTS}}" shellcheck .aliases .exports .bashrc .bash_completion .bash_profile .path .prompt .functions .xprofile .githelpers
+  SHELLCHECK_OPTS="{{SHELLCHECK_OPTS}}" shellcheck .aliases .exports .bashrc .bash_completion .bash_profile .path .prompt .functions .xprofile .githelpers .k8s-helpers
 
 # run shellcheck lint via docker
 lint-docker:
