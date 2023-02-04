@@ -7,15 +7,14 @@ check() {
 
   [ -z "$FILES" ] && return 0;
 
-  if command -v "$2" &> /dev/null; the
+  if ! command -v "$2" &> /dev/null; then
     echo -e "\e[1m$2\e[0m is not installed"
     FAIL=true
     return 1
   fi
 
   while read -r FILE; do
-    "${@:2}" "$FILE" >/dev/null 2>&1
-    if [ $? != 0 ]; then
+    if ! "${@:2}" "$FILE" >/dev/null 2>&1; then
       echo -e "\e[1m$2\e[0m reported errors in \e[3;31m$FILE\e[0m"
       FAIL=true
     fi

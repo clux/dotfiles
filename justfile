@@ -1,6 +1,6 @@
 # See https://just.systems/man/
 SHELLCHECK_OPTS := "-e SC1091 -e SC1090 -e SC1117 -s bash"
-SHELLCHECKED_FILES := ".aliases .exports .bashrc .bash_completion .bash_profile .path .prompt .functions .xprofile .git-helpers .k8s-helpers"
+SHELLCHECKED_FILES := ".aliases .exports .bashrc .bash_completion .bash_profile .path .prompt .functions .xprofile .git-helpers .k8s-helpers .templates/git/hooks/*"
 
 default:
   @just --list --unsorted --color=always | rg -v "    default"
@@ -8,7 +8,7 @@ default:
 # create all home subdirectories before symlinking into them
 directories:
   mkdir -p ~/.config/{autostart,helix,sublime-text-3/{Local,Packages}}
-  mkdir -p ~/.templates/{git/hooks}
+  mkdir -p ~/.templates/git/hooks
   mkdir -p ~/Music
 
 # create directories and create symlinks pointing to this repo checkout
