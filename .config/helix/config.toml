@@ -1,5 +1,5 @@
-theme = "hex_toxic"
-#theme = "catppuccin_mocha"
+#theme = "hex_toxic"
+theme = "catppuccin_mocha"
 
 [editor.cursor-shape]
 insert = "bar"

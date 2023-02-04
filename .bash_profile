@@ -10,10 +10,11 @@ if [[ "${OSTYPE}" =~ "darwin" ]]; then # auto-sourced on linux
 fi
 
 # Prompt
+
 ## Alternative 1: bash specific 200 line script
-source ~/.prompt
+#source ~/.prompt
 ## Alternative 2: shell agnostic 100 line toml cfg (from a 20k line rust bin)
-#eval "$(starship init bash)"
+eval "$(starship init bash)"
 
 source ~/.functions
 source ~/.exports
@@ -79,24 +80,15 @@ if [[ $- =~ .*i.* ]]; then bind '"\C-xk": "\C-a hstr -k \C-j"'; fi
 # -----------------------------------------------------------------------------
 # colors
 
-if [ -x /usr/bin/dircolors ]; then
-  export TERM=xterm-256color
+if [ -x /usr/bin/dircolors ] || [[ "${OSTYPE}" =~ "darwin" ]]; then
+  export TERM="xterm-256color"
 
   # generate dircolors via vivid
   export LS_COLORS
-  LS_COLORS="$(vivid generate solarized-light)"
+  LS_COLORS="$(vivid generate catppuccin-mocha)"
   # https://github.com/sharkdp/vivid/tree/master/themes
 
   # colored manpages
-  man() {
-    env \
-      LESS_TERMCAP_mb="$(printf "\e[1;31m")" \
-      LESS_TERMCAP_md="$(printf "\e[1;31m")" \
-      LESS_TERMCAP_me="$(printf "\e[0m")" \
-      LESS_TERMCAP_se="$(printf "\e[0m")" \
-      LESS_TERMCAP_so="$(printf "\e[1;44;33m")" \
-      LESS_TERMCAP_ue="$(printf "\e[0m")" \
-      LESS_TERMCAP_us="$(printf "\e[1;32m")" \
-      man "$@"
-  }
+  # https://github.com/sharkdp/bat/tree/master/assets/themes
+  export MANPAGER="sh -c 'col -bx | bat -l man --theme Dracula -p'"
 fi
