@@ -18,6 +18,7 @@ source ~/.prompt
 source ~/.functions
 source ~/.exports
 source ~/.aliases
+source ~/.k8s-helpers
 
 # rupa/z replacement
 eval "$(zoxide init bash)"

