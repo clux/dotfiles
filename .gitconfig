@@ -18,7 +18,9 @@
   m = !"m() { git switch \"$(git master)\"; }; m"
 
   # fuzzy interactive helpers
-  l = "!f() { source ~/.githelpers && gitlog; }; f"
+  # NB: interactive shell sources .githelpers for these
+  l = !bash -ic 'gitlog' x
+  st = !bash -ic 'gitstash' x
 
   # OCCASIONAL
   amend = commit --amend

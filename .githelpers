@@ -22,6 +22,7 @@ FZF-EOF"
 
 # git stash browser using fzf
 # https://gist.github.com/junegunn/a563d9e3e07fd721d618562762ec619d
+# kind of broken in zellij atm
 gitstash() {
   local out k reflog
   out=(

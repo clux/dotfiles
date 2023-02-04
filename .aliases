@@ -48,6 +48,7 @@ alias diff='diff -Naur --color=auto'
 # git
 alias g='git'
 alias gl="git l"
+alias gst="git st"
 alias gs="git s"
 alias gc="git c"
 alias gcs="git c -S"

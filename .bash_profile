@@ -19,6 +19,7 @@ eval "$(starship init bash)"
 source ~/.functions
 source ~/.exports
 source ~/.aliases
+source ~/.githelpers
 source ~/.k8s-helpers
 
 # rupa/z replacement
