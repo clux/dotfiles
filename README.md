@@ -16,7 +16,7 @@ Works everywhere:
 - [zoxide](https://github.com/ajeetdsouza/zoxide) for directory jumping
 - powerline style [custom bash prompt](https://github.com/clux/dotfiles/blob/master/.prompt) / [starship variant](https://github.com/clux/dotfiles/blob/master/.config/starship.toml) (needs nerd fonts / powerline fonts)
 - [keychain](https://wiki.archlinux.org/index.php/SSH_keys#Keychain) loading specific ssh keys [by host](https://github.com/clux/dotfiles/blob/658ffb136167730ba272b03fd57c2be4a0bd2cc9/.bash_profile#L10-L16)
-- color themes from [vivid](https://github.com/sharkdp/vivid)
+- terminal themes via [vivid](https://github.com/sharkdp/vivid/tree/master/themes) / [bat](https://github.com/sharkdp/bat/tree/master/assets/themes) / [hx](https://github.com/helix-editor/helix/tree/master/runtime/themes) / [zellij](https://github.com/zellij-org/zellij/tree/main/example/themes) / [delta](https://dandavison.github.io/delta/supported-languages-and-themes.html#supported-languages-and-themes)[*](https://dandavison.github.io/delta/custom-themes.html?highlight=theme#custom-themes) (see [invocations](https://github.com/clux/dotfiles/search?q=theme))
 - [gitconfig](https://github.com/clux/dotfiles/blob/master/.gitconfig) with [fzf](https://github.com/junegunn/fzf) based [githelpers](https://github.com/clux/dotfiles/blob/master/.githelpers), diff via [delta](https://github.com/dandavison/delta), and account switching by `includeIf` dirs
 - [kubernetes](https://github.com/clux/dotfiles/blob/master/.k8s-helpers) short aliases, ns/ctx switchers, interactive lookup fns using `fzf`
 - [aliases](https://github.com/clux/dotfiles/blob/master/.aliases) to gracefully move from `ls`->`exa`, `ag`->`rg`, `cat`->`bat`, plus a bunch of `git` shortcuts
