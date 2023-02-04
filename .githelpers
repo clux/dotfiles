@@ -1,17 +1,24 @@
 # shellcheck disable=SC2016,SC2207
 
 # git commit browser using fzf
-# https://gist.github.com/junegunn/f4fca918e937e6bf5bad#gistcomment-1666125
+# based on https://gist.github.com/junegunn/f4fca918e937e6bf5bad#gistcomment-1666125
+# can also open commit in browser
 gitlog() {
   git log --graph --color=always --no-merges \
       --format="%C(auto)%h%d %s <%C(blue)%an%Creset> %C(black)%C(bold)%cr" "$@" |
   fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+      --bind "f1:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git open %') << 'FZF-EOF'
+                {}
+FZF-EOF" \
       --bind "ctrl-m:execute:
                 (grep -o '[a-f0-9]\{7\}' | head -1 |
                 xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
                 {}
 FZF-EOF"
 }
+
 
 # git stash browser using fzf
 # https://gist.github.com/junegunn/a563d9e3e07fd721d618562762ec619d

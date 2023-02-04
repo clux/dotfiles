@@ -17,6 +17,9 @@
   nu = switch -c
   m = !"m() { git switch \"$(git master)\"; }; m"
 
+  # fuzzy interactive helpers
+  l = "!f() { source ~/.githelpers && gitlog; }; f"
+
   # OCCASIONAL
   amend = commit --amend
   ping = "!f() { git commit --signoff --allow-empty -m \"ping hooks - $(date +%Y-%m-%d)\"; }; f"
@@ -35,8 +38,6 @@
   branches = branch -a
   remotes = remote -v
 
-  # log hook with fzf (see .functions)
-  l = "!f() { source ~/.githelpers && gitlog; }; f"
 
   # BRANCH HELPERS
   # since github started changing the default master branch:
@@ -57,8 +58,10 @@
   # ignore all untrackeds (if first time having gitignore, don't ignore that)
   ignore = !git untracked | grep -v .gitignore >> .gitignore && git add .gitignore
   # open github/github enterprise changesets in the browser
-  open = "!f() { xdg-open \"https://$(echo $(git config --get remote.origin.url) | sed 's|^http.://||' | sed 's|^git@||' | tr : '/' | sed 's|.git$||')/commit/$1\"; }; f"
+  open = "!f() { open \"https://$(echo $(git config --get remote.origin.url) | sed 's|^http.://||' | sed 's|^git@||' | tr : '/' | sed 's|.git$||')/commit/$1\"; }; f"
+  # NB: ^ git remote get-url origin | sed 's/^git@\(.*\):\/*\(.*\).git/https:\/\/\1\/\2/' is easier but cannot get it to work inside gitconfig
   # reset to blank state
+  
   wipe = "!f() { git reset --hard origin/$(git master) && git clean -fdX; }; f"
   # show orphaned commits
   orphans = !git log --all --max-parents=0
@@ -132,43 +135,32 @@
   log = delta
   reflog = delta
 
+[include]
+  path = ~/repos/dotfiles/themes.git
+
 [interactive]
-  diffFilter = delta --color-only --features=interactive
+  diffFilter = delta --color-only --features=interactive --hyperlinks
 
 [delta]
-  features = unobtrusive-line-numbers decorations
-  whitespace-error-style = 22 reverse
-  # NB: no side-by-side, add an 's' to diff shortcuts to enable it
-  syntax-theme = 1337
-  line-numbers-left-format = ""
-  line-numbers-right-format = "│ "
-
-[diff]
-  colorMoved = plain
-  noprefix = true
-
-[color "diff"]
-  # NB: These interplay with delta, remove first 4 when testing delta
-  meta = yellow bold
-  frag = magenta bold # line info
-  old = red # deletions
-  new = green # additions
-  newMoved = "#b8f8b8"
-  oldMoved = "#f8b8b8"
+  features = clux
 
 [color "status"]
   added = yellow
   changed = green
   untracked = cyan
 
+[diff]
+  colorMoved = default
+
 [checkout]
   defaultRemote = "origin"
 
 [init]
   templatedir = ~/.templates/git
-  defaultBranch = master
+  defaultBranch = main
 
 [core]
   hooksPath = ~/.templates/git/hooks
+
 [credential]
 	helper = store
