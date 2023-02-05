@@ -120,11 +120,9 @@
   # Detect whitespace errors when applying a patch
   whitespace = fix
 
-[pager]
-  diff = delta
-  show = delta
-  log = delta
-  reflog = delta
+[core]
+  hooksPath = ~/.templates/git/hooks
+  pager = delta
 
 [delta "clux-dark"]
   dark = true
@@ -144,6 +142,11 @@
   minus-style = normal "#330011"
   plus-emph-style = syntax "#003300"
   plus-style = syntax "#001a00"
+
+  # trying blame
+  blame-code-style = syntax
+  blame-format = "{author:<18} ({commit:>9}) {timestamp:^16}"
+  blame-palette = "#2E3440" "#3B4252" "#434C5E" "#4C566A"
 
   # Box with Nord filename:linenum before diff
   hunk-header-decoration-style = "#434c5e" box ul
@@ -188,9 +191,6 @@
 [init]
   templatedir = ~/.templates/git
   defaultBranch = main
-
-[core]
-  hooksPath = ~/.templates/git/hooks
 
 [credential]
 	helper = store
