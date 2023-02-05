@@ -8,6 +8,10 @@ shell:
    - -ic
    - sleep 0.1 && zellij
 
+import:
+- ~/.config/alacritty/rose-pine.yaml
+# NB: decent themes: nord, challenger_deep, wombat
+
 window:
   startup_mode: Maximized
   decorations: buttonless

@@ -126,28 +126,26 @@
   log = delta
   reflog = delta
 
-
 [delta "clux-dark"]
   dark = true
   # Want a soft syntax theme to not overly interfere with the greens + reds of diff
   syntax-theme = Nord
   # customized reds (little yellowy)
   whitespace-error-style = reverse "#b81a00"
-  minus-emph-style = syntax bold "#b81a00"
-  minus-style = syntax "#5f1a00"
+  minus-emph-style = normal "#a03a2f"
+  minus-style = normal "#5f1a2a "
   # customized greens (bits of blue and red)
-  plus-emph-style = syntax bold "#006500"
-  plus-style = syntax "#11311f"
+  plus-emph-style = normal "#1a6622 "
+  plus-style = normal "#11311f"
   # Box with Nord filename:linenum before diff
   hunk-header-decoration-style = "#434c5e" box ul
   hunk-header-file-style = bold italic "#81a1c1"
   hunk-header-line-number-style = bold "#88c0d0"
-  # moved lines via zebra-dark
-  # NB: purple == src highlight, cyan = dest.. not sure about yellow/blue
+  # colorMoved: purple == src highlight, cyan = dest.. not sure about yellow/blue
   map-styles = \
       bold purple => syntax "#330f29", \
       bold blue => syntax "#271344", \
-      bold cyan => syntax "#0d3531", \
+      bold cyan => syntax "#0d3541", \
       bold yellow => syntax "#222f14"
 
 [delta "clux-layout"]

@@ -86,7 +86,8 @@ if [ -x /usr/bin/dircolors ] || [[ "${OSTYPE}" =~ "darwin" ]]; then
 
   # generate dircolors via vivid
   export LS_COLORS
-  LS_COLORS="$(vivid generate catppuccin-mocha)"
+  # Nord meshes well with rose-pine alacritty theme
+  LS_COLORS="$(vivid generate nord)"
   # https://github.com/sharkdp/vivid/tree/master/themes
 
   # colored manpages
