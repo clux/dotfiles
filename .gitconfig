@@ -126,14 +126,47 @@
   log = delta
   reflog = delta
 
-[include]
-  path = ~/repos/dotfiles/themes.git
+
+[delta "clux-dark"]
+  dark = true
+  # Want a soft syntax theme to not overly interfere with the greens + reds of diff
+  syntax-theme = Nord
+  # customized reds (little yellowy)
+  whitespace-error-style = reverse "#b81a00"
+  minus-emph-style = syntax bold "#b81a00"
+  minus-style = syntax "#5f1a00"
+  # customized greens (bits of blue and red)
+  plus-emph-style = syntax bold "#006500"
+  plus-style = syntax "#11311f"
+  # Box with Nord filename:linenum before diff
+  hunk-header-decoration-style = "#434c5e" box ul
+  hunk-header-file-style = bold italic "#81a1c1"
+  hunk-header-line-number-style = bold "#88c0d0"
+  # moved lines via zebra-dark
+  # NB: purple == src highlight, cyan = dest.. not sure about yellow/blue
+  map-styles = \
+      bold purple => syntax "#330f29", \
+      bold blue => syntax "#271344", \
+      bold cyan => syntax "#0d3531", \
+      bold yellow => syntax "#222f14"
+
+[delta "clux-layout"]
+  side-by-side = false
+  navigate = true
+  keep-plus-minus-markers = true
+  hyperlinks = true
+  file-style = omit
+  line-numbers = false
+  commit-style = none
+  zero-style = syntax
+  hunk-header-style = file line-number syntax
+  zero-style = dim syntax
 
 [interactive]
-  diffFilter = delta --color-only --features=interactive --hyperlinks
+  diffFilter = delta --color-only --features=interactive
 
 [delta]
-  features = clux
+  features = clux-layout clux-dark
 
 [color "status"]
   added = yellow
