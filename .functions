@@ -160,6 +160,17 @@ transfer() {
   curl --upload-file "$1" "https://transfer.sh/$1" | xclip -sel clip
 }
 
+# pass clipboard through fzf lookup
+passf() {
+  local -r secret="$(cd ~/.password-store && fd .gpg | fzf --layout=reverse-list)"
+  pass "${secret/%.gpg}" -c
+}
+# pass show everything after first line through fzf (first line is pw)
+passt() {
+  local -r secret="$(cd ~/.password-store && fd .gpg | fzf --layout=reverse-list)"
+  pass "${secret/%.gpg}" | tail -n +2 | less
+}
+
 # -----------------------------------------------------------------------------
 # games
 
