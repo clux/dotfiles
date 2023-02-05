@@ -227,14 +227,16 @@ cs() {
 
 # chrome history
 ch() {
-  local cols sep
+  local cols sep open
   cols=$(( COLUMNS / 3 ))
   sep='{::}'
+  open='xdg-open'
 
-  if command -v google-chrome-stable &> /dev/null; then
-    cp -f ~/.config/google-chrome/Default/History /tmp/h
+  if [[ "${OSTYPE}" =~ "darwin" ]]; then
+    open="open"
+    cp -f ~/Library/Application\ Support/Google/Chrome/Default/History /tmp/h
   else
-    cp -f ~/.config/chromium/Default/History /tmp/h
+    cp -f ~/.config/google-chrome/Default/History /tmp/h
   fi
 
   sqlite3 -separator $sep /tmp/h \
@@ -242,7 +244,7 @@ ch() {
       from urls order by last_visit_time desc" |
     awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' |
     fzf --ansi --multi | sed 's#.*\(https*://\)#\1#' | \
-    xargs xdg-open > /dev/null
+    xargs "${open}" > /dev/null
 }
 
 openimage() {
