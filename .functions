@@ -41,6 +41,42 @@ zzh() {
 }
 
 # -----------------------------------------------------------------------------
+# fzf interfaces
+
+# pass clipboard through fzf lookup
+passf() {
+  local -r secret="$(cd ~/.password-store && fd .gpg | fzf --layout=reverse-list)"
+  pass "${secret/%.gpg}" -c
+}
+# pass show everything after first line through fzf (first line is pw)
+passt() {
+  local -r secret="$(cd ~/.password-store && fd .gpg | fzf --layout=reverse-list)"
+  pass "${secret/%.gpg}" | tail -n +2 | less
+}
+
+# chrome history
+ch() {
+  local cols sep open
+  cols=$(( COLUMNS / 3 ))
+  sep='{::}'
+  open='xdg-open'
+
+  if [[ "${OSTYPE}" =~ "darwin" ]]; then
+    open="open"
+    cp -f ~/Library/Application\ Support/Google/Chrome/Default/History /tmp/h
+  else
+    cp -f ~/.config/google-chrome/Default/History /tmp/h
+  fi
+
+  sqlite3 -separator $sep /tmp/h \
+      "select substr(title, 1, $cols), url
+      from urls order by last_visit_time desc" |
+    awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' |
+    fzf --ansi --multi | sed 's#.*\(https*://\)#\1#' | \
+    xargs "${open}" > /dev/null
+}
+
+# -----------------------------------------------------------------------------
 # package manager abstraction - mostly for my own memory
 
 if [[ "${OSTYPE}" =~ "darwin" ]]; then
@@ -160,17 +196,6 @@ transfer() {
   curl --upload-file "$1" "https://transfer.sh/$1" | xclip -sel clip
 }
 
-# pass clipboard through fzf lookup
-passf() {
-  local -r secret="$(cd ~/.password-store && fd .gpg | fzf --layout=reverse-list)"
-  pass "${secret/%.gpg}" -c
-}
-# pass show everything after first line through fzf (first line is pw)
-passt() {
-  local -r secret="$(cd ~/.password-store && fd .gpg | fzf --layout=reverse-list)"
-  pass "${secret/%.gpg}" | tail -n +2 | less
-}
-
 # -----------------------------------------------------------------------------
 # games
 
@@ -234,28 +259,6 @@ hr() {
 cs() {
   # shellcheck disable=SC2068
   cowsay -f flaming-sheep $@ | lolcat -S 60;
-}
-
-# chrome history
-ch() {
-  local cols sep open
-  cols=$(( COLUMNS / 3 ))
-  sep='{::}'
-  open='xdg-open'
-
-  if [[ "${OSTYPE}" =~ "darwin" ]]; then
-    open="open"
-    cp -f ~/Library/Application\ Support/Google/Chrome/Default/History /tmp/h
-  else
-    cp -f ~/.config/google-chrome/Default/History /tmp/h
-  fi
-
-  sqlite3 -separator $sep /tmp/h \
-      "select substr(title, 1, $cols), url
-      from urls order by last_visit_time desc" |
-    awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' |
-    fzf --ansi --multi | sed 's#.*\(https*://\)#\1#' | \
-    xargs "${open}" > /dev/null
 }
 
 openimage() {
