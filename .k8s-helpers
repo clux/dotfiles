@@ -100,7 +100,7 @@ kd() {
 
 # log helper that lets you complete container name (if more than one)
 kl() {
-  resource="${1:-pod}"
+  local -r resource="${1:-pod}"
   local name="${2:-$(kubectl get "${resource}" --no-headers | choose 0 | fzf)}"
   if [[ "$resource" = "pod" ]]; then
     jqpth=".spec.containers"
@@ -120,7 +120,7 @@ kl() {
   fi
   local -r data="$(kubectl get "${resource}/${name}" -ojson)"
   if [[ "$(echo "${data}" | jq "${jqpth} | length")" = 1 ]]; then
-    container="$(echo "${data}" | jq "${jqpth}[].name" -r)" # use first container
+    container="$(echo "${data}" | jq "${jqpth}[0].name" -r)" # use first container
   else
     container="$(echo "${data}" | jq "${jqpth}[].name" -r | fzf)" # user choice
   fi
@@ -129,14 +129,14 @@ kl() {
 
 # port-forward to a service by selecting a ports json entry
 kpfs() {
-  service="${1:-$(kubectl get service --no-headers | choose 0 | fzf)}"
+  local -r service="${1:-$(kubectl get service --no-headers | choose 0 | fzf)}"
   local -r spec="$(kubectl get service "${service}" -ojson | jq ".spec")"
   if [ "$(echo "${spec}" | jq ".ports[]" -Mc | wc -l)" -gt 1 ]; then
     portjson="$(echo "${spec}" | jq ".ports[]" -Mc | fzf --header='pick a port object')"
   else
     portjson="$(echo "${spec}" | jq ".ports[0]" -Mc)"
   fi
-  port="$(echo "${portjson}" | jq ".targetPort" -r)"
+  local -r port="$(echo "${portjson}" | jq ".targetPort" -r)"
   echo "Forwarding to svc/${service}:${port} via local 8000"
   kubectl port-forward "svc/${service}" "8000:${port}"
 }
@@ -144,7 +144,7 @@ kpfs() {
 # port-forward to a pod by selecting a ports entry from a ports entry
 # will pick ports from the only container, or let you pick container by name
 kpfp() {
-  pod="${1:-$(kubectl get pod --no-headers | choose 0 | fzf)}"
+  local -r pod="${1:-$(kubectl get pod --no-headers | choose 0 | fzf)}"
   local -r data="$(kubectl get pod "${pod}" -ojson)"
   if [[ "$(echo "${data}" | jq '.spec.containers | length')" = 1 ]]; then
     container="$(echo "${data}" | jq ".spec.containers[0].name" -r)"
@@ -165,6 +165,20 @@ kpfp() {
   port="$(echo "${portjson}" | jq ".containerPort" -r)"
   echo "Forwarding to pod/${pod}:${port} via local 8000"
   kubectl port-forward "${pod}" "8000:${port}"
+}
+
+# kubectl exec
+ke() {
+  local -r pod="${1:-$(kubectl get pod --no-headers | choose 0 | fzf)}"
+  local -r data="$(kubectl get pod "${pod}" -ojson)"
+  if [[ "$(echo "${data}" | jq ".spec.containers | length")" = 1 ]]; then
+    container="$(echo "${data}" | jq ".spec.containers[0].name" -r)" # use first container
+  else
+    container="$(echo "${data}" | jq ".spec.containers[].name" -r | fzf)" # user choice
+  fi
+  if [[ $(kubectl exec "${pod}" -itc "${container}" -- bash 2>&1) =~ "executable file not found" ]]; then
+    kubectl exec "${pod}" -itc "${container}" -- sh
+  fi
 }
 
 # -----------------------------------------------------------------------------
