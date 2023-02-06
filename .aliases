@@ -6,8 +6,8 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
-# cat -> bat
-alias cat="bat --plain --theme=Catppuccin-mocha"
+# cat -> bat (syntax maps in ~/.config/bat/config)
+alias cat="bat"
 
 # ls -> exa
 alias ll='exa -l --group-directories-first --git-ignore --git --sort ext --color=always'

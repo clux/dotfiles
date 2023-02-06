@@ -1,0 +1,8 @@
+
+--theme="Catppuccin-mocha"
+--plain
+
+# Syntax mappings: map a certain filename pattern to a language.
+# See https://github.com/sharkdp/bat/tree/master/assets/syntaxes
+--map-syntax "*justfile:Makefile"
+--map-syntax ".yamllint:YAML"
