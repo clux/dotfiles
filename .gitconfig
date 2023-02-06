@@ -21,6 +21,7 @@
   # NB: interactive shell sources .git-helpers for these
   l = !bash -ic 'gitlog' x
   st = !bash -ic 'gitstash' x
+  blam = !bash -ic 'gitblame $@' x
 
   # OCCASIONAL
   amend = commit --amend
@@ -145,7 +146,7 @@
 
   # trying blame
   blame-code-style = syntax
-  blame-format = "{author:<18} ({commit:>9}) {timestamp:^16}"
+  blame-format = "{author:<15.12} {commit:<8} {timestamp:<17.14}"
   blame-palette = "#2E3440" "#3B4252" "#434C5E" "#4C566A"
 
   # Box with Nord filename:linenum before diff
