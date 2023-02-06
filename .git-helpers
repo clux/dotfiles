@@ -103,6 +103,11 @@ glscommand() {
 }
 
 # ls | git prompt
-gls() { glscommand "show_git_differences" ;}
+if [[ -z "${STARSHIP_SESSION_KEY}" ]]; then
+  # re-uses a thing from the non-starship prompt
+  # TODO: maybe import this fn here? it's style free.
+  gls() { glscommand "show_git_differences" ;}
+fi # awkward else case on mac; gls is gnu ls
+
 # ls | git whoami
 glsd() { glscommand "git whoami" ;}

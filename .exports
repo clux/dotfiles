@@ -45,7 +45,11 @@ export PASSWORD_STORE_GPG_OPTS='--no-throw-keyids'
 export FZF_DEFAULT_COMMAND='
   (git ls-tree -r --name-only HEAD ||
    find . -type f -print -o -type l -print |
-      grep -vE "/target/|node_modules|bower_components|.git/" |
+      grep -vE "/target/|node_modules|bower_components|venv\/|.git/" |
       sed s/^..//) 2> /dev/null'
-
-# NB: other fzf things we use: sysz (systemd fzf plugin)
+_FZF_LAYOUT='--height 50% --layout=reverse'
+# fzf theme; catppuccin mocha: https://github.com/catppuccin/fzf but no bg
+export FZF_DEFAULT_OPTS="${_FZF_LAYOUT} \
+--color=spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+--color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
