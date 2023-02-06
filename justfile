@@ -22,7 +22,14 @@ config: directories
     find "$PWD/$d" -maxdepth 1 -type f -print -exec ln -sfn {} ~/$d \;
   done
   ln -sfn $PWD/.config/zellij ~/.config/
+  ln -sfn $PWD/.config/bat ~/.config/
   touch ~/.bash_completion
+  just reload-configs
+
+# reload configs and themes in tools that have a command for it
+reload-configs:
+  bat cache --build
+  zellij setup --check
 
 # configure code editors
 editors: directories
@@ -44,22 +51,23 @@ vscode:
   declare -a exts=(
     4ops.terraform
     ban.spellright
+    bierner.markdown-footnotes
     eamodio.gitlens
     esbenp.prettier-vscode
     foam.foam-vscode
-    johnpapa.winteriscoming
-    kokakiwi.vscode-just
-    matklad.rust-analyzer
     miqh.vscode-language-rust
-    ms-kubernetes-tools.vscode-kubernetes-tools
     mushan.vscode-paste-image
-    NeelyInnovations.note-macros
-    philipbe.theme-gray-matter
     redhat.vscode-yaml
+    rust-lang.rust-analyzer
     skellock.just
     tchayen.markdown-links
-    tnaseem.theme-seti
     yzhang.markdown-all-in-one
+  )
+  declare -a themes=(
+    arcticicestudio.nord-visual-studio-code
+    Catppuccin.catppuccin-vsc
+    johnpapa.winteriscoming
+    tnaseem.theme-seti
   )
   for ext in "${exts[@]}"; do
     code --install-extension $ext

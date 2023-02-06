@@ -7,7 +7,7 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
 # cat -> bat
-alias cat="bat --plain --theme=1337"
+alias cat="bat --plain --theme=Catppuccin-mocha"
 
 # ls -> exa
 alias ll='exa -l --group-directories-first --git-ignore --git --sort ext --color=always'
