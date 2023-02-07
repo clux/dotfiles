@@ -16,3 +16,6 @@ window:
   startup_mode: Maximized
   decorations: buttonless
   opacity: 0.8
+
+key_bindings:
+  - { key: F1, action: ToggleSimpleFullscreen } # NB: mac only

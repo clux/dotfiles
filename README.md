@@ -8,7 +8,7 @@ Designed for a minimal Arch Linux installation, but retrofitted to support MacOS
 ## Core Configs
 
 - **Linux**: [cinnamon](https://wiki.archlinux.org/index.php/cinnamon) + [guake](https://wiki.archlinux.org/index.php/Guake) configured by `.dconf` files
-- **Mac**: mostly manual ui configuration except [karabiner](https://karabiner-elements.pqrs.org/docs/)
+- **Mac**: mostly manual configuration except [karabiner](https://karabiner-elements.pqrs.org/docs/) / [hammerspoon](https://github.com/Hammerspoon/hammerspoon)
 
 Works everywhere:
 

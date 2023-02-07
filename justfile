@@ -24,11 +24,14 @@ config: directories
   echo "Linking .config/{subdirs}"
   ln -sfn $PWD/.config/zellij ~/.config/
   ln -sfn $PWD/.config/bat ~/.config/
-  touch ~/.bash_completion
+  echo "Linking {subdirs} that don't respect .config"
+  ln -sfn $PWD/.hammerspoon ~/
+  echo "Refresh"
   just reload-configs
 
 # reload configs and themes in tools that have a command for it
 reload-configs:
+  touch ~/.bash_completion
   bat cache --build
   zellij setup --check
 
