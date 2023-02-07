@@ -11,11 +11,14 @@ local function toggleApp(name)
   end
 end
 
-hs.hotkey.bind(mash, "b", function() toggleApp("Visual Studio Code") end)
-hs.hotkey.bind(mash, "f", function() toggleApp("Finder") end)
+-- Global terminal toggle
+hs.hotkey.bind({}, "F2", function() toggleApp("alacritty") end)
+
+-- Misc app shortcuts
+hs.hotkey.bind(mash, "v", function() toggleApp("Visual Studio Code") end)
 hs.hotkey.bind(mash, "p", function() toggleApp("System Preferences") end)
-hs.hotkey.bind(mash, "t", function() toggleApp("Slack") end)
-hs.hotkey.bind(mash, "l", function() toggleApp("alacritty") end)
+hs.hotkey.bind(mash, "s", function() toggleApp("Slack") end)
+hs.hotkey.bind(mash, "d", function() toggleApp("Discord") end)
 
 hs.hotkey.bind(mash, "r", function() hs.reload(); end)
 hs.alert("HS config loaded")
