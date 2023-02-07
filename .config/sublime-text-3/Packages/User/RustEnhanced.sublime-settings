@@ -1,6 +1,0 @@
-{
-   "rust_env": {"PATH": "$PATH:$HOME/.cargo/bin"},
-   "rust_syntax_checking": true,
-   "rust_message_theme": "solid",
-   "rust_message_status_bar": false
-}

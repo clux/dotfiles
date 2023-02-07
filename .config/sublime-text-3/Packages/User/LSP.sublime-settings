@@ -1,9 +1,0 @@
-{
-   "clients":
-   {
-       "rust-analyzer":
-       {
-         "enabled": true
-       }
-   }
-}

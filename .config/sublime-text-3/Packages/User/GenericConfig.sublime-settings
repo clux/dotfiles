@@ -1,9 +1,0 @@
-{
-	"extensions":
-	[
-		"dconf",
-		"toml",
-		"lock",
-		".gitconfig"
-	]
-}

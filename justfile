@@ -7,20 +7,21 @@ default:
 
 # create all home subdirectories before symlinking into them
 directories:
-  mkdir -p ~/.config/{autostart,helix,sublime-text-3/{Local,Packages}}
+  mkdir -p ~/.config/{autostart,helix}
   mkdir -p ~/.templates/git/hooks
   mkdir -p ~/Music
 
 # create directories and create symlinks pointing to this repo checkout
 config: directories
   #!/bin/bash
-  echo "linking configs in $HOME"
+  echo "linking configs into $HOME"
   find "$PWD" -maxdepth 1 -name ".*" -type f -print -exec ln -sfn {} ~/ \;
-  echo "Linking config subdirectories of $HOME"
+  echo "Linking .config/{subdir}/files*"
   for d in {.config{,/helix,/alacritty,/karabiner},.templates/git/hooks}; do\
     echo $d
     find "$PWD/$d" -maxdepth 1 -type f -print -exec ln -sfn {} ~/$d \;
   done
+  echo "Linking .config/{subdirs}"
   ln -sfn $PWD/.config/zellij ~/.config/
   ln -sfn $PWD/.config/bat ~/.config/
   touch ~/.bash_completion
@@ -33,17 +34,8 @@ reload-configs:
 
 # configure code editors
 editors: directories
-  echo "configuring sublime and installing vs code plugins"
-  @[ -d ~/.config/sublime-text-3/Packages/User ] || make sublime_user
-  @[ -f ~/.config/sublime-text-3/Local/License.sublime_license ] || make sublime_license
+  echo "configuring editors"
   just vscode
-
-# link sublime 3 license
-sublime_license:
-  pass sublime > ~/.config/sublime-text-3/Local/License.sublime_license
-# link sublime 3 user config
-sublime_user:
-  ln -s "$PWD/.config/sublime-text-3/Packages/User" ~/.config/sublime-text-3/Packages/User  
 
 # install vs code plugins
 vscode:
