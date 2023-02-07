@@ -1,6 +1,7 @@
 # See https://just.systems/man/
 SHELLCHECK_OPTS := "-e SC1091 -e SC1090 -e SC1117 -s bash"
 SHELLCHECKED_FILES := ".aliases .exports .bashrc .bash_completion .bash_profile .path .prompt .functions .xprofile .git-helpers .k8s-helpers .templates/git/hooks/*"
+VSCODE_PATH := if os() == "macos" { "~/Library/Application\\ Support" } else { "~/.config" }
 
 default:
   @just --list --unsorted --color=always | rg -v "    default"
@@ -24,7 +25,7 @@ config: directories
   echo "Linking .config/{subdirs}"
   ln -sfn $PWD/.config/zellij ~/.config/
   ln -sfn $PWD/.config/bat ~/.config/
-  echo "Linking {subdirs} that don't respect .config"
+  echo "Linking special cases"
   ln -sfn $PWD/.hammerspoon ~/
   echo "Refresh"
   just reload-configs
@@ -35,38 +36,12 @@ reload-configs:
   bat cache --build
   zellij setup --check
 
-# configure code editors
-editors: directories
-  echo "configuring editors"
-  just vscode
-
 # install vs code plugins
 vscode:
   #!/bin/bash
-  declare -a exts=(
-    4ops.terraform
-    ban.spellright
-    bierner.markdown-footnotes
-    eamodio.gitlens
-    esbenp.prettier-vscode
-    foam.foam-vscode
-    miqh.vscode-language-rust
-    mushan.vscode-paste-image
-    redhat.vscode-yaml
-    rust-lang.rust-analyzer
-    skellock.just
-    tchayen.markdown-links
-    yzhang.markdown-all-in-one
-  )
-  declare -a themes=(
-    arcticicestudio.nord-visual-studio-code
-    Catppuccin.catppuccin-vsc
-    johnpapa.winteriscoming
-    tnaseem.theme-seti
-  )
-  for ext in "${exts[@]}"; do
-    code --install-extension $ext
-  done
+  ln -sfn $PWD/vscode/settings.json {{VSCODE_PATH}}/Code/User/settings.json
+  cat vscode/extensions | xargs -n 1 code --install-extension
+  cat vscode/themes | xargs -n 1 code --install-extension
 
 # font guard (linux only)
 has_fonts:
@@ -82,7 +57,7 @@ dconf: has_fonts
   dconf load /apps/ < apps.dconf
 
 # restore config managed gui profiles
-ui: dconf
+ui: dconf vscode
 
 # run local shellcheck lint
 lint:

@@ -34,12 +34,9 @@ just ui # linux
 The first symlinks all files herein to `$HOME` so they can be tracked, and updates editor configs. The second updates UI through `dconf`.
 
 ## Editors
-There are helpers that install and configures a bunch of code editors non-interactively (except for potential password prompts for licenses).
 
 ### VS Code
-Does not use the builtin sync.
-Installs plugins based on a hardcoded list (populated via `code --list-extensions` periodically).
-User config is not synced atm due to cross-platform concerns (and lack of significant default deviation).
+Manual `just vscode` step to symlink [settings.json](https://github.com/clux/dotfiles/blob/master/vscode/settings.json) and install a [snapshot of extensions](https://github.com/clux/dotfiles/blob/master/vscode/extensions) and themes via `code --list-extensions`. This avoids the builtin cloud sync.
 
 ### Helix
-Easy terminal `EDITOR` with tiny [config](https://github.com/clux/dotfiles/blob/master/.config/helix/config.toml). Replacement for the modal `vim` style of editor I never got into.
+Automatic install via `just config` relying on `EDITOR`. Tiny [config](https://github.com/clux/dotfiles/blob/master/.config/helix/config.toml) linked.

@@ -1,0 +1,20 @@
+{
+    "security.workspace.trust.untrustedFiles": "open",
+    "editor.accessibilitySupport": "off",
+    "redhat.telemetry.enabled": false,
+    "files.insertFinalNewline": true,
+    "vs-kubernetes": {
+        "vs-kubernetes.crd-code-completion": "disabled"
+    },
+    "editor.minimap.enabled": false,
+    "editor.inlayHints.enabled": "offUnlessPressed",
+    "gitlens.plusFeatures.enabled": false,
+    "gitlens.showWelcomeOnInstall": false,
+    "gitlens.virtualRepositories.enabled": false,
+    "gitlens.currentLine.enabled": false,
+    "gitlens.currentLine.pullRequests.enabled": false,
+    "gitlens.currentLine.scrollable": false,
+    "editor.acceptSuggestionOnEnter": "off",
+    "editor.acceptSuggestionOnCommitCharacter": false,
+    "workbench.colorTheme": "Catppuccin Mocha"
+}
