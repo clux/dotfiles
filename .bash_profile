@@ -32,7 +32,7 @@ key() {
   local keys=""
   for k in "$@"; do
     case $k in
-      blackbox) keys="$keys ACD208D66222147293A6ACE4C08975E5433628DE" ;;
+      tl) keys="$keys 2D67048E41E0AA6C" ;;
       pass) keys="$keys B71E94106D1B408B" ;; # enc subkey
       sign) keys="$keys 5D4B685DE5BEAE01" ;; # signing subkey
       *) keys="$keys ${k}_id" ;; # assume ssh key

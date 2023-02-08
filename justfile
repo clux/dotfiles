@@ -71,3 +71,7 @@ lint-docker:
     -v $$PWD:/volume -w /volume \
     -t koalaman/shellcheck:stable \
     shellcheck {{SHELLCHECKED_FILES}}
+
+# mode: makefile
+# End:
+# vim: set ft=make :

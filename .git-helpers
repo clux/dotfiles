@@ -33,21 +33,22 @@ alias gblam='git blam'
 
 # git commit browser
 # based on https://gist.github.com/junegunn/f4fca918e937e6bf5bad#gistcomment-1666125
-# F1 -> opens commit in browser (relies on "git open $changeset" alias)
+# F3 -> opens commit in browser (relies on "git open $changeset" alias)
 # ENTER -> opens commit with "git show" (q to return)
 # ESC in main to exit
+# NB: relies on pager being set in .gitconfig!
 gitlog() {
   git log --graph --color=always --no-merges \
       --format="%C(auto)%h%d %s <%C(blue)%an%Creset> %C(black)%C(bold)%cr" "$@" |
   fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
-      --bind "f1:execute:
+      --bind "f3:execute:
                 (grep -o '[a-f0-9]\{7\}' | head -1 |
                 xargs -I % sh -c 'git open %') << 'FZF-EOF'
                 {}
 FZF-EOF" \
       --bind "ctrl-m:execute:
                 (grep -o '[a-f0-9]\{7\}' | head -1 |
-                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+                xargs -I % sh -c 'git show --color=always %') << 'FZF-EOF'
                 {}
 FZF-EOF"
 }
@@ -61,18 +62,18 @@ gitstash() {
   # shellcheck disable=SC2207,SC2016
   out=(
     $(git stash list --pretty='%C(yellow)%gd %>(14)%Cgreen%cr %C(blue)%gs' |
-      fzf --ansi --no-sort --header='enter:show, ctrl-d:diff, ctrl-p:pop, ctrl-y:apply, ctrl-n:drop' \
+      fzf --ansi --no-sort --header='enter:show, F3:diff, F4:pop, F5:apply, F6:drop' \
           --preview='git stash show --color=always -p $(cut -d" " -f1 <<< {}) | head -'$LINES \
           --preview-window=down:50% --reverse \
-          --bind='enter:execute(git stash show --color=always -p $(cut -d" " -f1 <<< {}) | less -r > /dev/tty)' \
-          --bind='ctrl-d:execute(git diff --color=always $(cut -d" " -f1 <<< {}) | less -r > /dev/tty)' \
-          --expect=ctrl-p,ctrl-y,ctrl-n))
+          --bind='enter:execute(git stash show --color=always -p $(cut -d" " -f1 <<< {}) > /dev/tty)' \
+          --bind='F3:execute(git diff --color=always $(cut -d" " -f1 <<< {}) > /dev/tty)' \
+          --expect=F4,F5,F6))
   k=${out[0]}
   reflog=${out[1]}
   [ -n "$reflog" ] && case "$k" in
-    ctrl-p) git stash pop "$reflog" ;;
-    ctrl-y) git stash apply "$reflog" ;;
-    ctrl-n) git stash drop "$reflog" ;;
+    F4) git stash pop "$reflog" ;;
+    F5) git stash apply "$reflog" ;;
+    F6) git stash drop "$reflog" ;;
   esac
 }
 
