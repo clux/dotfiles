@@ -80,7 +80,7 @@ conflicted = "🏳 "
 ahead = "↑$count "
 behind = "↓$count "
 diverged = "⇕ "
-untracked = "?$count" #…
+untracked = "?" #…
 stashed = "⚑ "
 modified = '+$count '
 staged = "● "
@@ -89,8 +89,7 @@ deleted = "🗑 "
 #up_to_date = "✔ "
 
 [python]
-#symbol = '🐍'
-symbol = ''
+symbol = '' #🐍
 pyenv_version_name = true
 pyenv_prefix = ''
 style = "purple bold"
