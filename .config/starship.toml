@@ -63,14 +63,12 @@ format = "[$time]($style) "
 symbol = "☸ "
 style = "bg:black 27"
 disabled = false
-format = '[$symbol]($style)[$context[∈](bg:black 27)$namespace](bg:black white)'
+format = '[$symbol]($style)[$context[󰛢](bg:black 27)$namespace](bg:black white)'
 
 [git_branch]
 style = "bg:black bold 38"
-# symbol doesn't work without a better font so turning it off
-format = "($style)[$branch](bg:black 38)"
-#symbol = ' '
-#format = "[ $symbol]($style)[$branch](bg:black 38)"
+symbol = ' '
+format = "[ $symbol]($style)[$branch](bg:black 38)"
 truncation_length = 12
 truncation_symbol = "."
 
@@ -82,7 +80,7 @@ conflicted = "🏳 "
 ahead = "↑$count "
 behind = "↓$count "
 diverged = "⇕ "
-untracked = "…"
+untracked = "?$count" #…
 stashed = "⚑ "
 modified = '+$count '
 staged = "● "

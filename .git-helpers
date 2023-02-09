@@ -56,7 +56,6 @@ FZF-EOF"
 
 # git stash browser using fzf
 # https://gist.github.com/junegunn/a563d9e3e07fd721d618562762ec619d
-# kind of broken in zellij because it absorbs ctrl keys, should work elsewhere
 gitstash() {
   local out k reflog
   # shellcheck disable=SC2207,SC2016

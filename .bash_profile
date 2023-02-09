@@ -92,5 +92,5 @@ if [ -x /usr/bin/dircolors ] || [[ "${OSTYPE}" =~ "darwin" ]]; then
 
   # colored manpage theme through bat
   # https://github.com/sharkdp/bat/tree/master/assets/themes
-  export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+  export MANPAGER="sh -c 'col -bx | bat -l man'"
 fi
