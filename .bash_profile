@@ -53,8 +53,10 @@ _key() {
 }
 complete -F _key key
 
-if [[ ${HOSTNAME} = kjttks ]]; then
+if [[ ${HOSTNAME} = "kjttks" ]]; then
   key github work main
+elif [[ ${HOSTNAME} = "cluxm1.local" ]]; then
+  key github work tl
 else
   [ -f ~/.keychain/agent-sh ] && source ~/.keychain/agent-sh
   [ -f ~/.keychain/agent-sh-gpg ] && source ~/.keychain/agent-sh-gpg
