@@ -3,27 +3,22 @@ SHELLCHECK_OPTS := "-e SC1091 -e SC1090 -e SC1117 -s bash"
 SHELLCHECKED_FILES := ".aliases .exports .bashrc .bash_completion .bash_profile .path .prompt .functions .xprofile .git-helpers .k8s-helpers .templates/git/hooks/*"
 VSCODE_PATH := if os() == "macos" { "~/Library/Application\\ Support" } else { "~/.config" }
 
+[private]
 default:
-  @just --list --unsorted --color=always | rg -v "    default"
+  @just --list --unsorted
 
-# create all home subdirectories before symlinking into them
-directories:
-  mkdir -p ~/.config/{autostart,helix}
-  mkdir -p ~/.templates/git/hooks
-  mkdir -p ~/Music
-
-# create directories and create symlinks pointing to this repo checkout
-config: directories has_fonts
+# create symlinks pointing to this repo checkout
+config: fontguard
   #!/bin/bash
   echo "linking dot prefixed config files into $HOME"
   fd -g '.*' -H --max-depth 1 --type f -a -x ln -sfn {} ~/
   echo "Linking any immediate child dir/file of .config into $HOME/.config/"
   fd --base-directory .config/ --max-depth 1 -a -x ln -sfn {} ~/.config/
-  just reload-configs
+  just reload
 
-# reload configs and themes in tools that have a command for it
-reload-configs:
-  echo "Refreshing dependencies"
+# reload configs and themes via trigger commands
+reload:
+  echo "Refreshing dependencies that need to be told about changes"
   touch ~/.bash_completion
   bat cache --build
   zellij setup --check
@@ -35,35 +30,35 @@ vscode:
   cat vscode/extensions | xargs -n 1 code --install-extension
   cat vscode/themes | xargs -n 1 code --install-extension
 
-# font guard (linux)
+# font guard helper (linux)
 [linux]
-has_fonts:
+fontguard:
   echo "Guarding on Linux font setup: Liberation + Inconsolata"
   fd . /usr/share/fonts/ -e ttf | rg -q Liberation
   fd . /usr/share/fonts/ -e ttf | rg -q Powerline
-  fd . /usr/share/fonts/  -e ttf | rg -q "Inconsolata.*Mono"
+  fd . /usr/share/fonts/ -e ttf | rg -q "Inconsolata.*Mono"
 
-# font guard (mac)
+# font guard helper (mac)
 [macos]
-has_fonts:
+fontguard:
   echo "Guarding on Mac font setup: Inconsolata Mono"
   fd . ~/Library/Fonts/ -e ttf | rg -q "Inconsolata.*Mono"
 
 # configure dconf on linux
 [linux]
-dconf: has_fonts
+dconf: fontguard
   echo "Importing dconf settings"
   dconf load /org/ < org.dconf
   dconf load /apps/ < apps.dconf
 
-# restore config managed gui profiles
+# apply config managed gui profiles
 [linux]
 ui: dconf vscode
 
-# restore config managed gui profiles (mac)
+# apply config managed gui profiles (mac)
 [macos]
 ui: vscode
-  ln -sfn $PWD/.hammerspoon ~/
+  ln -sfn $PWD/.hammerspoon ~/ # special case link straight into home..
 
 # run local shellcheck lint
 lint:

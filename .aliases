@@ -10,16 +10,18 @@ alias .....="cd ../../../.."
 alias cat="bat"
 
 # ls -> exa
-alias ll='exa -l --group-directories-first --git-ignore --git --sort ext --color=always'
-alias lll='ll | less -RX'
+alias ll='exa -la --group-directories-first --git-ignore --git --sort ext --color=always'
+alias ll='exa -l  --group-directories-first --git-ignore --git --sort ext --color=always'
 alias la='exa -a --group-directories-first'
-alias l='exa --group-directories-first'
-#alias ll='ls -Alh --group-directories-first --ignore=lost+found'
-#alias la='ls -A --group-directories-first --ignore=lost+found'
-#alias l='ls -C --group-directories-first --ignore=lost+found'
+alias ls='exa --group-directories-first'
 
 # make rg look like ag
 alias rg="rg --colors 'match:bg:yellow' --colors 'match:fg:black' --colors 'match:style:nobold' --colors 'line:style:bold' --colors 'path:fg:green' --glob=!.git/"
+
+# misc color defaults
+alias grep='grep --color=auto'
+alias pacman='pacman --color=auto'
+alias diff='diff -Naur --color=auto'
 
 # common pipe aliases
 alias A="awk"
@@ -38,12 +40,9 @@ else
 fi
 
 # misc
-alias cwd='pwd | tr -d "\r\n" | xclip -sel clip'
+alias cwd='pwd | tr -d "\r\n" | XC'
 alias week='date +%V'
 alias ymd='date +%Y-%m-%d'
-alias grep='grep --color=auto'
-alias pacman='pacman --color=auto'
-alias diff='diff -Naur --color=auto'
 
 # docker
 alias d="docker"
