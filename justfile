@@ -13,25 +13,17 @@ directories:
   mkdir -p ~/Music
 
 # create directories and create symlinks pointing to this repo checkout
-config: directories
+config: directories has_fonts
   #!/bin/bash
-  echo "linking configs into $HOME"
-  find "$PWD" -maxdepth 1 -name ".*" -type f -print -exec ln -sfn {} ~/ \;
-  echo "Linking .config/{subdir}/files*"
-  for d in {.config{,/helix,/alacritty,/karabiner},.templates/git/hooks}; do\
-    echo $d
-    find "$PWD/$d" -maxdepth 1 -type f -print -exec ln -sfn {} ~/$d \;
-  done
-  echo "Linking .config/{subdirs}"
-  ln -sfn $PWD/.config/zellij ~/.config/
-  ln -sfn $PWD/.config/bat ~/.config/
-  echo "Linking special cases"
-  ln -sfn $PWD/.hammerspoon ~/
-  echo "Refresh"
+  echo "linking dot prefixed config files into $HOME"
+  fd -g '.*' -H --max-depth 1 --type f -a -x ln -sfn {} ~/
+  echo "Linking any immediate child dir/file of .config into $HOME/.config/"
+  fd --base-directory .config/ --max-depth 1 -a -x ln -sfn {} ~/.config/
   just reload-configs
 
 # reload configs and themes in tools that have a command for it
 reload-configs:
+  echo "Refreshing dependencies"
   touch ~/.bash_completion
   bat cache --build
   zellij setup --check
@@ -43,21 +35,35 @@ vscode:
   cat vscode/extensions | xargs -n 1 code --install-extension
   cat vscode/themes | xargs -n 1 code --install-extension
 
-# font guard (linux only)
+# font guard (linux)
+[linux]
 has_fonts:
-  echo "Guarding on Liberations + powerline font presence"
-  @find /usr/share/fonts/ | grep -q Liberation
-  #@find ~/.local/share/fonts/ | grep -q Powerline
-  @find /usr/share/fonts/ | grep -q Powerline
+  echo "Guarding on Linux font setup: Liberation + Inconsolata"
+  fd . /usr/share/fonts/ -e ttf | rg -q Liberation
+  fd . /usr/share/fonts/ -e ttf | rg -q Powerline
+  fd . /usr/share/fonts/  -e ttf | rg -q "Inconsolata.*Mono"
+
+# font guard (mac)
+[macos]
+has_fonts:
+  echo "Guarding on Mac font setup: Inconsolata Mono"
+  fd . ~/Library/Fonts/ -e ttf | rg -q "Inconsolata.*Mono"
 
 # configure dconf on linux
+[linux]
 dconf: has_fonts
   echo "Importing dconf settings"
   dconf load /org/ < org.dconf
   dconf load /apps/ < apps.dconf
 
 # restore config managed gui profiles
+[linux]
 ui: dconf vscode
+
+# restore config managed gui profiles (mac)
+[macos]
+ui: vscode
+  ln -sfn $PWD/.hammerspoon ~/
 
 # run local shellcheck lint
 lint:

@@ -24,14 +24,14 @@ Designed for a minimal Arch Linux installation, but retrofitted to support MacOS
 Plus lots of misc [.functions](https://github.com/clux/dotfiles/blob/master/.functions). As usual, copy what you find interesting.
 
 ## Usage
-Clone and install:
+Clone and overwrite:
 
 ```sh
 just config
-just ui # linux
+just ui
 ```
 
-The first symlinks all files herein to `$HOME` so they can be tracked, and updates editor configs. The second updates UI through `dconf`.
+The first symlinks all files herein to `$HOME` so they can be tracked, and updates editor configs. The second updates UI through `dconf`. All `just` recipes are idempotent.
 
 ## Editors
 
