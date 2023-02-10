@@ -81,11 +81,11 @@ ahead = "↑$count "
 behind = "↓$count "
 diverged = "⇕ "
 untracked = "?" #…
-stashed = "⚑ "
+stashed = "≡ "
 modified = '+$count '
 staged = "● "
-renamed = "👅 "
-deleted = "🗑 "
+renamed = "󱞸 "#
+deleted = "󱡂 " #⚑
 #up_to_date = "✔ "
 
 [python]

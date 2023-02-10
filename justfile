@@ -58,7 +58,7 @@ ui: dconf vscode
 # apply config managed gui profiles (mac)
 [macos]
 ui: vscode
-  ln -sfn $PWD/.hammerspoon ~/ # special case link straight into home..
+  defaults write org.hammerspoon.Hammerspoon MJConfigFile ~/.config/hammerspoon/init.lua
 
 # run local shellcheck lint
 lint:
