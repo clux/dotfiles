@@ -16,7 +16,7 @@ kc() {
 
 # namespace switcher
 kns() {
-  local -r ns="$(kubectl get ns --no-headers | choose 0 | fzf)"
+  local -r ns="${1:-$(kubectl get ns --no-headers | choose 0 | fzf)}"
   local -r ctx="$(kubectl config current-context)"
   kubectl config set "contexts.${ctx}.namespace" "${ns}"
 }
