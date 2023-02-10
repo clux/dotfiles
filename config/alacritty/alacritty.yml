@@ -3,7 +3,10 @@ shell:
   # start zellij with a small sleep to ensure it gets right dimensions
   args:
    - -ic
-   - sleep 0.1 && zellij
+   - sleep 0.2 && zellij
+
+env:
+  RUST_BACKTRACE: "full"
 
 import:
 - ~/.config/alacritty/rose-pine.yaml

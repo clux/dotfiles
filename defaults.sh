@@ -6,8 +6,27 @@ if [[ ! "${OSTYPE}" =~ "darwin" ]]; then
   exit 1
 fi
 
+
 ###############################################################################
-# Apps                                                                      #
+# Dock                                                                        #
+###############################################################################
+
+# disable hot corners
+defaults write com.apple.dock wvous-bl-corner -int 1
+defaults write com.apple.dock wvous-br-corner -int 1
+defaults write com.apple.dock wvous-tl-corner -int 1
+defaults write com.apple.dock wvous-tr-corner -int 1
+
+# Automatically hide and show the Dock
+defaults write com.apple.dock autohide -bool true
+
+# Remove the auto-hiding Dock delay
+defaults write com.apple.dock autohide-delay -float 0
+# Remove the animation when hiding/showing the Dock
+defaults write com.apple.dock autohide-time-modifier -float 0
+
+###############################################################################
+# Apps                                                                       #
 ###############################################################################
 
 # put hammerspoon config dir under ~/.config
@@ -63,3 +82,5 @@ defaults write com.apple.finder "AppleShowAllFiles" -bool "true"
 
 # Show the ~/Library folder
 chflags nohidden ~/Library
+
+###############################################################################
