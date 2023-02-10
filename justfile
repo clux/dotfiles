@@ -1,6 +1,6 @@
 # See https://just.systems/man/
 SHELLCHECK_OPTS := "-e SC1091 -e SC1090 -e SC1117 -s bash"
-SHELLCHECKED_FILES := ".aliases .exports .bashrc .bash_completion .bash_profile .path .prompt .functions .xprofile .git-helpers .k8s-helpers git/hooks/*"
+SHELLCHECKED_FILES := ".aliases .exports .bashrc .bash_completion .bash_profile .path .prompt .functions .xprofile .git-helpers .k8s-helpers git/hooks/* defaults.sh"
 VSCODE_PATH := if os() == "macos" { "~/Library/Application\\ Support" } else { "~/.config" }
 
 [private]
@@ -44,21 +44,17 @@ fontguard:
   echo "Guarding on Mac font setup: Inconsolata Mono"
   fd . ~/Library/Fonts/ -e ttf | rg -q "Inconsolata.*Mono"
 
-# configure dconf on linux
+# configure system properties (linux)
 [linux]
-dconf: fontguard
+system: fontguard vscode
   echo "Importing dconf settings"
   dconf load /org/ < org.dconf
   dconf load /apps/ < apps.dconf
 
-# apply config managed gui profiles
-[linux]
-ui: dconf vscode
-
-# apply config managed gui profiles (mac)
+# configure system properties (mac)
 [macos]
-ui: vscode
-  defaults write org.hammerspoon.Hammerspoon MJConfigFile ~/.config/hammerspoon/init.lua
+system: vscode
+  ./defaults.sh
 
 # run local shellcheck lint
 lint:
