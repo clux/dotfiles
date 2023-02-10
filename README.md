@@ -14,7 +14,7 @@ Designed for a minimal Arch Linux installation, but retrofitted to support MacOS
 
 - [zellij](https://zellij.dev/) in [alacritty](https://github.com/alacritty/alacritty/)
 - [zoxide](https://github.com/ajeetdsouza/zoxide) for directory jumping
-- [powerline](https://github.com/b-ryan/powerline-shell) style [custom bash prompt](https://github.com/clux/dotfiles/blob/master/.prompt) / [starship variant](https://github.com/clux/dotfiles/blob/master/.config/starship.toml) (needs nerd fonts / powerline fonts)
+- [powerline](https://github.com/b-ryan/powerline-shell) style [custom bash prompt](https://github.com/clux/dotfiles/blob/master/.prompt) / [starship variant](https://github.com/clux/dotfiles/blob/master/config/starship.toml) (needs nerd fonts / powerline fonts)
 - [terminal styling](https://hachyderm.io/@clux/109815971667731738) through: [alacritty](https://github.com/alacritty/alacritty-theme#color-schemes) / [vivid](https://github.com/sharkdp/vivid/tree/master/themes) / [bat](https://github.com/sharkdp/bat/tree/master/assets/themes)[*](https://github.com/catppuccin/bat) / [hx](https://github.com/helix-editor/helix/tree/master/runtime/themes) / [zellij](https://github.com/zellij-org/zellij/tree/main/example/themes) / [delta](https://dandavison.github.io/delta/supported-languages-and-themes.html#supported-languages-and-themes)[*](https://dandavison.github.io/delta/custom-themes.html?highlight=theme#custom-themes) / [starship](https://starship.rs/advanced-config/#style-strings) / [ripgrep](https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file) / [fzf](https://github.com/catppuccin/fzf) -> see [invocations](https://github.com/clux/dotfiles/search?o=desc&q=theme&s=indexed)
 - [kubernetes helpers](https://github.com/clux/dotfiles/blob/master/.k8s-helpers) with abbrev aliases, ns/ctx switchers, interactive lookup fns using `fzf`
 - [gitconfig](https://github.com/clux/dotfiles/blob/master/.gitconfig) with [fzf](https://github.com/junegunn/fzf) based [git helpers](https://github.com/clux/dotfiles/blob/master/.git-helpers), diff via [delta](https://github.com/dandavison/delta), and account switching by `includeIf` dirs
@@ -39,4 +39,4 @@ The first symlinks all files herein to `$HOME` so they can be tracked, and updat
 Manual `just vscode` step to symlink [settings.json](https://github.com/clux/dotfiles/blob/master/vscode/settings.json) and install a [snapshot of extensions](https://github.com/clux/dotfiles/blob/master/vscode/extensions) and themes via `code --list-extensions`. This avoids the builtin cloud sync.
 
 ### Helix
-Automatic install via `just config` relying on `EDITOR`. Tiny [config](https://github.com/clux/dotfiles/blob/master/.config/helix/config.toml) linked.
+Automatic install via `just config` relying on `EDITOR`. Tiny [config](https://github.com/clux/dotfiles/blob/master/config/helix/config.toml) linked.

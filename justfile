@@ -12,8 +12,8 @@ config: fontguard
   #!/bin/bash
   echo "linking dot prefixed config files into $HOME"
   fd -g '.*' -H --max-depth 1 --type f -a -x ln -sfn {} ~/
-  echo "Linking any immediate child dir/file of .config into $HOME/.config/"
-  fd --base-directory .config/ --max-depth 1 -a -x ln -sfn {} ~/.config/
+  echo "Linking any immediate child dir/file of config into $HOME/.config/"
+  fd --base-directory config/ --max-depth 1 -a -x ln -sfn {} ~/.config/
   just reload
 
 # reload configs and themes via trigger commands
