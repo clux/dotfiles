@@ -26,6 +26,15 @@ defaults write com.apple.dock autohide-delay -float 0
 defaults write com.apple.dock autohide-time-modifier -float 0
 
 ###############################################################################
+# locale                                                                      #
+###############################################################################
+
+defaults write NSGlobalDomain AppleLanguages -array "en-GB"
+defaults write NSGlobalDomain AppleLocale -string "en_GB"
+defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
+defaults write NSGlobalDomain AppleMetricUnits -bool true
+
+###############################################################################
 # Apps                                                                       #
 ###############################################################################
 
