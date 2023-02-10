@@ -16,5 +16,7 @@
     "gitlens.currentLine.scrollable": false,
     "editor.acceptSuggestionOnEnter": "off",
     "editor.acceptSuggestionOnCommitCharacter": false,
-    "workbench.colorTheme": "Catppuccin Mocha"
+    "workbench.colorTheme": "Catppuccin Mocha",
+    "rust-analyzer.checkOnSave": false,
+    "rust-analyzer.diagnostics.enable": false
 }
