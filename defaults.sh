@@ -6,6 +6,7 @@ if [[ ! "${OSTYPE}" =~ "darwin" ]]; then
   exit 1
 fi
 
+osascript -e 'tell application "System Preferences" to quit'
 
 ###############################################################################
 # Dock                                                                        #
@@ -24,6 +25,18 @@ defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock autohide-delay -float 0
 # Remove the animation when hiding/showing the Dock
 defaults write com.apple.dock autohide-time-modifier -float 0
+
+# less offensive minimisation effect than genie
+defaults write com.apple.dock mineffect -string "scale"
+
+# don’t automatically rearrange Spaces based on most recent use
+defaults write com.apple.dock mru-spaces -bool false
+
+# don’t show recent applications in Dock
+defaults write com.apple.dock show-recents -bool false
+
+# show only open applications in the Dock
+defaults write com.apple.dock static-only -bool true
 
 ###############################################################################
 # locale                                                                      #
@@ -76,9 +89,6 @@ defaults write com.apple.finder ShowPathbar -bool true
 # Disable the warning when changing a file extension
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
-# Avoid creating .DS_Store files on network volumes
-defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
-
 # Use list view in all Finder windows by default
 # Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
@@ -88,6 +98,9 @@ defaults write com.apple.finder FXPreferredGroupBy -string "None"
 
 # Show hidden files
 defaults write com.apple.finder "AppleShowAllFiles" -bool "true"
+
+# Avoid creating .DS_Store files on network volumes
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
 # Show the ~/Library folder
 chflags nohidden ~/Library
