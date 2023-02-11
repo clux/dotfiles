@@ -102,3 +102,6 @@ fi
 
 # disable cowsay in ansible even though we have it installed
 export ANSIBLE_NOCOWS=1
+
+# disable analytics sending to homebrew
+export HOMEBREW_NO_ANALYTICS=1

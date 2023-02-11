@@ -15,6 +15,14 @@ source ~/.git-helpers
 source ~/.k8s-helpers
 [ -f ~/repos/bashlayer/bashrc ] && source ~/repos/bashlayer/bashrc
 
+if [[ "${OSTYPE}" =~ "darwin" ]]; then
+  source /opt/homebrew/opt/zinit/zinit.zsh
+else
+  echo "TODO: install zinit"
+fi
+zinit light zsh-users/zsh-autosuggestions
+zinit light zdharma-continuum/fast-syntax-highlighting
+
 # -----------------------------------------------------------------------------
 # completions
 
