@@ -4,15 +4,18 @@ ${username}\
 ${hostname}\
 ${time}\
 ${directory}\
-${kubernetes}\
 ${git_branch}\
 ${git_status}\
 ${rust}\
 ${python}\
 ${character}\
 """
+
 add_newline = false
-# right_prompt = true # TODO: requires fish/zsh
+right_format = """\
+[\ue0b2](fg:black black)\
+${kubernetes}
+"""
 
 [character]
 format = "[$symbol](bold) "
@@ -68,7 +71,7 @@ format = '[$symbol]($style)[$context[󰛢](bg:black 27)$namespace](bg:black whit
 [git_branch]
 style = "bg:black bold 38"
 symbol = ' '
-format = "[ $symbol]($style)[$branch](bg:black 38)"
+format = "[$symbol]($style)[$branch](bg:black 38)"
 truncation_length = 12
 truncation_symbol = "."
 

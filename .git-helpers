@@ -87,14 +87,13 @@ gitblame() {
 # usage glscommand "some command"
 # glscommand "git master" -> shows default branches
 glscommand() {
-  local -r dirs=$(find . -maxdepth 1 -mindepth 1 -type "d")
   local -r command="$1"
   dir=$PWD
-  for d in $dirs; do
+  for d in $(fd . --max-depth 1 --type d); do
     cd "$d" || false
     echo -en "$(tput setaf 33)${d:2} "
     if [[ -d .git ]]; then
-      echo -en "$(tput setaf 136)$(${command})$(tput sgr0)"
+      echo -en "$(tput setaf 136)$(zsh -ic "${command}")$(tput sgr0)"
     fi
     echo
     cd ..
@@ -103,11 +102,61 @@ glscommand() {
 }
 
 # ls | git prompt
-if [[ -z "${STARSHIP_SESSION_KEY}" ]]; then
-  # re-uses a thing from the non-starship prompt
-  # TODO: maybe import this fn here? it's style free.
-  gls() { glscommand "show_git_differences" ;}
-fi # awkward else case on mac; gls is gnu ls
+# re-uses a thing from the non-starship prompt
+gls() { glscommand "show_git_differences" ;}
 
 # ls | git whoami
 glsd() { glscommand "git whoami" ;}
+
+# -----------------------------------------------------------------------------
+# helper that was part of old powerline prompt - now used by gls
+
+show_git_differences() {
+  [[ $(git rev-parse --is-inside-work-tree 2>/dev/null) == true ]] || return 1
+
+  local unmerged=0 modified=0 has_untracked=0 added=0 is_clean=""
+
+  # shellcheck disable=SC2046
+  set -- $(git rev-list --left-right --count "@{upstream}...HEAD" 2>/dev/null)
+  local behind_count=$1
+  local ahead_count=$2
+
+  # Added (A), Copied (C), Deleted (D), Modified (M), Renamed (R), changed (T), Unmerged (U), Unknown (X), Broken (B)
+  while read -r line; do
+    case "$line" in
+      M*) modified=$(( modified + 1 )) ;;
+      U*) unmerged=$(( unmerged + 1 )) ;;
+    esac
+  done < <(git diff --name-status)
+
+  while read -r line; do
+    case "$line" in
+      *) added=$(( added + 1 )) ;;
+    esac
+  done < <(git diff --name-status --cached)
+
+  if [ -n "$(git ls-files --others --exclude-standard)" ]; then
+    has_untracked=1
+  fi
+
+  local -r stashed=$(( $(git rev-parse --verify refs/stash 2> /dev/null | wc -l) ));
+
+  if [ $(( unmerged + modified + has_untracked + added )) -eq 0 ]; then
+    is_clean=1
+  fi
+
+  local s=""
+  # We always print at least one of these due to definition of is_clean
+  # Thus `s` always begins with a leading space
+  [[ $ahead_count -gt 0 ]] && s+=" ↑$ahead_count"
+  [[ $behind_count -gt 0 ]] && s+=" ↓$behind_count"
+  [[ $modified -gt 0 ]] && s+=" +$modified"
+  [[ $unmerged -gt 0 ]] && s+=" ✗$unmerged"
+  [[ $added -gt 0 ]] && s+=" ●" #$added
+  [[ $has_untracked -gt 0 ]] && s+=" …"
+  [[ $stashed -gt 0 ]] && s+=" ⚑" #$stashed
+  [[ $is_clean -gt 0 ]] && s+=" ✔"
+
+  # remove leading space
+  echo -e "$s" | sed 's/\s//'
+}

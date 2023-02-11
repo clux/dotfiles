@@ -13,7 +13,7 @@ h() { hx . ;}
 # shellcheck disable=SC2068
 rc() { zellij run -- $@ ;}
 # shellcheck disable=SC2068
-ra() { zellij run -- bash -ic $@ ;}
+ra() { zellij run -- zsh -ic $@ ;}
 
 # zellij tab from layout
 zl() {

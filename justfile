@@ -1,6 +1,6 @@
 # See https://just.systems/man/
 SHELLCHECK_OPTS := "-e SC1091 -e SC1090 -e SC1117 -s bash"
-SHELLCHECKED_FILES := ".aliases .exports .bashrc .bash_completion .bash_profile .path .prompt .functions .xprofile .git-helpers .k8s-helpers git/hooks/* defaults.sh"
+SHELLCHECKED_FILES := ".aliases .exports .path .functions .xprofile .git-helpers .k8s-helpers git/hooks/* defaults.sh"
 VSCODE_PATH := if os() == "macos" { "~/Library/Application\\ Support" } else { "~/.config" }
 
 [private]

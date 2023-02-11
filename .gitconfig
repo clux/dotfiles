@@ -19,9 +19,9 @@
 
   # fuzzy interactive helpers
   # NB: interactive shell sources .git-helpers for these
-  l = !bash -ic 'gitlog' x
-  st = !bash -ic 'gitstash' x
-  blam = !bash -ic 'gitblame $@' x
+  l = !zsh -ic 'gitlog' x
+  st = !zsh -ic 'gitstash' x
+  blam = !zsh -ic 'gitblame $@' x
 
   # OCCASIONAL
   amend = commit --amend

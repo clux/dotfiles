@@ -12,13 +12,13 @@ Designed for a minimal Arch Linux installation, but retrofitted to support MacOS
 
 ## Terminal Setup
 
-- [zellij](https://zellij.dev/) in [alacritty](https://github.com/alacritty/alacritty/)
+- [zellij](https://zellij.dev/) in [alacritty](https://github.com/alacritty/alacritty/) using `zsh`
 - [zoxide](https://github.com/ajeetdsouza/zoxide) for directory jumping
-- [powerline](https://github.com/b-ryan/powerline-shell) style [custom bash prompt](https://github.com/clux/dotfiles/blob/main/.prompt) / [starship variant](https://github.com/clux/dotfiles/blob/main/config/starship.toml) (needs nerd fonts / powerline fonts)
+- [powerline](https://github.com/b-ryan/powerline-shell) style [starship prompt](https://github.com/clux/dotfiles/blob/main/config/starship.toml)
 - [terminal styling](https://hachyderm.io/@clux/109815971667731738) through: [alacritty](https://github.com/alacritty/alacritty-theme#color-schemes) / [vivid](https://github.com/sharkdp/vivid/tree/master/themes) / [bat](https://github.com/sharkdp/bat/tree/master/assets/themes)[*](https://github.com/catppuccin/bat) / [hx](https://github.com/helix-editor/helix/tree/master/runtime/themes) / [zellij](https://github.com/zellij-org/zellij/tree/main/example/themes) / [delta](https://dandavison.github.io/delta/supported-languages-and-themes.html#supported-languages-and-themes)[*](https://dandavison.github.io/delta/custom-themes.html?highlight=theme#custom-themes) / [starship](https://starship.rs/advanced-config/#style-strings) / [ripgrep](https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file) / [fzf](https://github.com/catppuccin/fzf) -> see [invocations](https://github.com/clux/dotfiles/search?o=desc&q=theme&s=indexed)
 - [kubernetes helpers](https://github.com/clux/dotfiles/blob/main/.k8s-helpers) with abbrev aliases, ns/ctx switchers, interactive lookup fns using `fzf`
 - [gitconfig](https://github.com/clux/dotfiles/blob/main/.gitconfig) with [fzf](https://github.com/junegunn/fzf) based [git helpers](https://github.com/clux/dotfiles/blob/main/.git-helpers), diff via [delta](https://github.com/dandavison/delta), and account switching by `includeIf` dirs
-- [keychain](https://wiki.archlinux.org/index.php/SSH_keys#Keychain) loading specific ssh keys [by host](https://github.com/clux/dotfiles/blob/658ffb136167730ba272b03fd57c2be4a0bd2cc9/.bash_profile#L10-L16)
+- [keychain](https://wiki.archlinux.org/index.php/SSH_keys#Keychain) loading specific ssh keys by host
 - [aliases](https://github.com/clux/dotfiles/blob/main/.aliases) to gracefully move from `ls`->`exa`, `ag`->`rg`, `cat`->`bat`
 
 Plus lots of misc [.functions](https://github.com/clux/dotfiles/blob/main/.functions). As usual, copy what you find interesting.
