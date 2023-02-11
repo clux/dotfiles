@@ -103,11 +103,11 @@ kd() {
 
 # log helper that lets you complete container name (if more than one)
 kl() {
-  local -r resource="${1:-pod}"
+  local resource="${1:-pod}"
   local name="${2:-$(kubectl get "${resource}" --no-headers | choose 0 | fzf)}"
   if [[ "$resource" = "pod" ]]; then
     jqpth=".spec.containers"
-  elif [[ "$resource" =~ service|svc ]]; then
+  elif [[ "$resource" =~ (service|svc) ]]; then
     # If we are getting logs from a service we find a pod matching selectors
     local -r selectorlabels="$(kubectl get svc "${name}" -ojson | \
       jq '.spec.selector | to_entries | .[] | join("=")' -r | \

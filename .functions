@@ -41,6 +41,31 @@ zzh() {
 }
 
 # -----------------------------------------------------------------------------
+# Key management via keychain
+
+key() {
+  local keys=""
+  for k in "$@"; do
+    case $k in
+      tl) keys="$keys 2D67048E41E0AA6C" ;;
+      pass) keys="$keys B71E94106D1B408B" ;; # enc subkey
+      sign) keys="$keys 5D4B685DE5BEAE01" ;; # signing subkey
+      *) keys="$keys ${k}_id" ;; # assume ssh key
+    esac
+  done
+  # shellcheck disable=SC2086
+  keychain --nogui --timeout $((16*60)) --quiet --host agent --agents ssh,gpg $keys
+  source ~/.keychain/agent-sh
+  source ~/.keychain/agent-sh-gpg
+}
+keys() {
+  # join static list of gpg keys with dynamic list of ssh keys
+  local -r keys="$( ( (fd --max-depth 1 -u --type f -g '*_id' ~/.ssh | cut -d'/' -f5 | sed 's/_id//g'); echo -e "tl\npass\nsign") | fzf )"
+  # shellcheck disable=SC2086
+  key $keys
+}
+
+# -----------------------------------------------------------------------------
 # fzf interfaces
 
 # pass clipboard through fzf lookup
@@ -140,25 +165,15 @@ fi
 # but have some things that here for quick convenience
 
 sysfollow() {
-  local -r unit="$1"
-  journalctl -u "$unit" -fl | ccze
+  local -r unit="${1:-$(systemctl list-units --no-pager --no-legend | awk '{ print $1 }')}"
+  journalctl -u "$unit" -fl
 }
-_syslistunits() {
-  local cur
-  _init_completion || return
-  local -r units="$(systemctl list-units --no-pager --no-legend | awk '{ print $1 }')"
-  # shellcheck disable=SC2207
-  COMPREPLY=($(compgen -W "$units" -- "$cur"))
-}
-complete -F _syslistunits sysfollow
 
 sysreload() {
-  local -r unit="$1"
+  local -r unit="${1:-$(systemctl list-units --no-pager --no-legend | awk '{ print $1 }')}"
   sudo systemctl daemon-reload
   sudo systemctl restart "$unit"
 }
-complete -F _syslistunits sysreload
-
 
 # -----------------------------------------------------------------------------
 # misc

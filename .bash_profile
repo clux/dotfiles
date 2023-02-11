@@ -28,31 +28,6 @@ eval "$(zoxide init bash)"
 # -----------------------------------------------------------------------------
 # Key management via keychain
 
-key() {
-  local keys=""
-  for k in "$@"; do
-    case $k in
-      tl) keys="$keys 2D67048E41E0AA6C" ;;
-      pass) keys="$keys B71E94106D1B408B" ;; # enc subkey
-      sign) keys="$keys 5D4B685DE5BEAE01" ;; # signing subkey
-      *) keys="$keys ${k}_id" ;; # assume ssh key
-    esac
-  done
-  # shellcheck disable=SC2086
-  keychain --nogui --timeout $((16*60)) --quiet --host agent --agents ssh,gpg $keys
-  source ~/.keychain/agent-sh
-  source ~/.keychain/agent-sh-gpg
-}
-_key() {
-  local cur
-  _init_completion || return
-  local -r keys="$(find ~/.ssh -name "*_id" -printf "%f " | sed 's/_id//g')"
-  local -r gpgs="sign pass blackbox" # special case gpg keys
-  # shellcheck disable=SC2207
-  COMPREPLY=($(compgen -W "$keys $gpgs" -- "$cur"))
-}
-complete -F _key key
-
 if [[ ${HOSTNAME} = "kjttks" ]]; then
   key github work main
 elif [[ ${HOSTNAME} = "cluxm1.local" ]]; then
