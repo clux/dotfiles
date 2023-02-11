@@ -13,9 +13,12 @@ ${character}\
 
 add_newline = false
 right_format = """\
-[\ue0b2](fg:black black)\
+[\ue0b6](fg:black black)\
 ${kubernetes}
 """
+
+# This setup generally uses characters from powerline
+# see https://github.com/ryanoasis/powerline-extra-symbols for codes
 
 [character]
 format = "[$symbol](bold) "

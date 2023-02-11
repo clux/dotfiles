@@ -44,6 +44,9 @@ alias cwd='pwd | tr -d "\r\n" | XC'
 alias week='date +%V'
 alias ymd='date +%Y-%m-%d'
 
+# chrome with proxy-pac
+alias chrome='google-chrome-stable --proxy-pac-url="$(~/.ssh/genpac)"'
+
 # docker
 alias d="docker"
 alias dps="docker ps"
@@ -57,6 +60,17 @@ alias drm="docker rm"
 alias drmi="docker rmi"
 alias db="docker build"
 alias de="docker exec"
+
+# darwin coreutils/gnu
+if [[ "${OSTYPE}" =~ "darwin" ]] ; then
+  alias sed=gsed
+  alias grep=ggrep
+  alias sed=gsed
+  alias make=gmake
+  alias date=gdate
+  alias rm=grm
+  alias ps=procs
+fi
 
 # cargo
 alias c="cargo"

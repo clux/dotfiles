@@ -8,7 +8,6 @@
 
 eval "$(starship init zsh)" # prompt
 eval "$(zoxide init zsh)" # directory jumping
-source ~/.path
 source ~/.functions
 source ~/.exports
 source ~/.aliases
@@ -20,23 +19,23 @@ source ~/.k8s-helpers
 # completions
 
 # generate comp file via exe ..varargs in ~/.zfunc/_exename
-_gen_completion() {
+_gencmp() {
     local -r exe="$1"
     if [ ! -e ~/.zfunc/_${exe} -a $commands[${exe}] ]; then
         mkdir -p ~/.zfunc
         ${exe} ${@:2} > ~/.zfunc/_${exe}
     fi
 }
-_gen_completion rustup completions zsh
-_gen_completion kubectl completion zsh
-_gen_completion helm completion zsh
-_gen_completion just --completions zsh
-_gen_completion k3d completion zsh
-_gen_completion kopium completions zsh
-#_gen_completion lal completions zsh
-#_gen_completion shipcat completions zsh
-_gen_completion procs --completion-out zsh
-_gen_completion fd --gen-completions zsh
+_gencmp rustup completions zsh
+_gencmp kubectl completion zsh
+_gencmp helm completion zsh
+_gencmp just --completions zsh
+_gencmp k3d completion zsh
+_gencmp procs --completion-out zsh
+_gencmp fd --gen-completions zsh
+_gencmp kopium completions zsh
+#_gencmp lal completions zsh
+#_gencmp shipcat completions zsh
 
 fpath+=~/.zfunc
 
@@ -86,20 +85,3 @@ bindkey -e
 bindkey "^[[1;5C" forward-word  # CTRL right_arrow to move a word forward
 bindkey "^[[1;5D" backward-word # CTRL left_arrow to move a word backward
 bindkey '\e[3~'   delete-char
-
-# -----------------------------------------------------------------------------
-# colors
-
-if [ -x /usr/bin/dircolors ] || [[ "${OSTYPE}" =~ "darwin" ]]; then
-  export TERM="xterm-256color"
-
-  # generate dircolors via vivid
-  export LS_COLORS
-  # Nord meshes well with rose-pine alacritty theme
-  LS_COLORS="$(vivid generate nord)" # vivid theme
-  # https://github.com/sharkdp/vivid/tree/master/themes
-
-  # colored manpage theme through bat
-  # https://github.com/sharkdp/bat/tree/master/assets/themes
-  export MANPAGER="sh -c 'col -bx | bat -l man'"
-fi

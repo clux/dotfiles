@@ -47,14 +47,13 @@ key() {
   local keys=""
   for k in "$@"; do
     case $k in
-      tl) keys="$keys 2D67048E41E0AA6C" ;;
-      pass) keys="$keys B71E94106D1B408B" ;; # enc subkey
-      sign) keys="$keys 5D4B685DE5BEAE01" ;; # signing subkey
-      *) keys="$keys ${k}_id" ;; # assume ssh key
+      tl) keys="2D67048E41E0AA6C $keys" ;;
+      pass) keys="B71E94106D1B408B $keys" ;; # enc subkey
+      sign) keys="5D4B685DE5BEAE01 $keys" ;; # signing subkey
+      *) keys="${k}_id $keys" ;; # assume ssh key
     esac
   done
-  # shellcheck disable=SC2086
-  keychain --nogui --timeout $((16*60)) --quiet --host agent --agents ssh,gpg $keys
+  echo "keychain --nogui --timeout $((16*60)) --quiet --host agent --agents ssh,gpg $keys" | sh
   source ~/.keychain/agent-sh
   source ~/.keychain/agent-sh-gpg
 }
