@@ -14,7 +14,8 @@ ${character}\
 add_newline = false
 right_format = """\
 [\ue0b6](fg:black black)\
-${kubernetes}
+${cmd_duration}\
+${kubernetes}\
 """
 
 # This setup generally uses characters from powerline
@@ -103,3 +104,10 @@ format = '[${symbol}${pyenv_prefix}(${version} )($virtualenv )]($style)'
 
 [line_break]
 disabled = true
+
+[cmd_duration]
+min_time = 2_000
+format = '[took $duration ]($style)'
+style = 'bg:black bold yellow'
+show_notifications = true
+min_time_to_notify = 60_000
