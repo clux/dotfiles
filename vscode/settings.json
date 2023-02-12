@@ -18,5 +18,8 @@
     "editor.acceptSuggestionOnCommitCharacter": false,
     "workbench.colorTheme": "Catppuccin Mocha",
     "rust-analyzer.checkOnSave": false,
-    "rust-analyzer.diagnostics.enable": false
+    "rust-analyzer.diagnostics.enable": false,
+    "rust-analyzer.cachePriming.numThreads": 2,
+    "rust-analyzer.check.allTargets": false,
+    "rust-analyzer.hover.actions.run.enable": false
 }
