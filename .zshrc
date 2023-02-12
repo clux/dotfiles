@@ -41,6 +41,7 @@ _gencmp fd fd --gen-completions zsh
 _gencmp kopium kopium completions zsh
 _gencmp rustup rustup completions zsh
 _gencmp cargo rustup completions zsh cargo
+_gencmp zellij zellij setup --generate-completion zsh
 #_gencmp lal completions zsh
 #_gencmp shipcat completions zsh
 # NB: kill ~/.zcompdump if something is not working

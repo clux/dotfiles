@@ -12,7 +12,7 @@ Designed for a minimal Arch Linux installation, but retrofitted to support MacOS
 
 ## Terminal Setup
 
-- [zellij](https://zellij.dev/) in [alacritty](https://github.com/alacritty/alacritty/) using `zsh`
+- [zellij](https://zellij.dev/) in [alacritty](https://github.com/alacritty/alacritty/) using [zsh](https://github.com/clux/dotfiles/blob/main/.zshrc)
 - [zoxide](https://github.com/ajeetdsouza/zoxide) for directory jumping
 - [powerline](https://github.com/b-ryan/powerline-shell) style [starship prompt](https://github.com/clux/dotfiles/blob/main/config/starship.toml)
 - [terminal styling](https://hachyderm.io/@clux/109815971667731738) through: [alacritty](https://github.com/alacritty/alacritty-theme#color-schemes) / [vivid](https://github.com/sharkdp/vivid/tree/master/themes) / [bat](https://github.com/sharkdp/bat/tree/master/assets/themes)[*](https://github.com/catppuccin/bat) / [hx](https://github.com/helix-editor/helix/tree/master/runtime/themes) / [zellij](https://github.com/zellij-org/zellij/tree/main/example/themes) / [delta](https://dandavison.github.io/delta/supported-languages-and-themes.html#supported-languages-and-themes)[*](https://dandavison.github.io/delta/custom-themes.html?highlight=theme#custom-themes) / [starship](https://starship.rs/advanced-config/#style-strings) / [ripgrep](https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file) / [fzf](https://github.com/catppuccin/fzf) -> see [invocations](https://github.com/clux/dotfiles/search?o=desc&q=theme&s=indexed)

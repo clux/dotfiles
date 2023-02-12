@@ -1,7 +1,5 @@
 copy_on_select true
-// minimal look, but uglier and unnamed
 pane_frames false
-// TODO: fix keybinds so pane switches don't interfere with word move
 theme "catppuccin-mocha"
 themes {
   tokyo-night-storm {
