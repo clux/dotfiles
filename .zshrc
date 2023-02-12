@@ -15,8 +15,7 @@ source ~/.git-helpers
 source ~/.k8s-helpers
 [ -f ~/repos/bashlayer/bashrc ] && source ~/repos/bashlayer/bashrc
 if [[ "${OSTYPE}" =~ "darwin" ]]; then
-  # TODO: either drop this in favour of os pgks or fix pkg issue
-  source $(brew --prefix)/opt/zinit/zinit.zsh 2> /dev/null
+  source /opt/homebrew/opt/zinit/zinit.zsh 2> /dev/null # ignore manpage issue for now
 fi
 
 
@@ -57,15 +56,6 @@ ZSH_AUTOSUGGEST_HISTORY_IGNORE="cd *"
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 bindkey '^[[Z' autosuggest-accept # shift-tab for suggestions, tab for completions
 
-#if [[ "${OSTYPE}" =~ "darwin" ]]; then
-#  source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#  #source /opt/homebrew/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-#  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-#else
-#  source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# # TODO: https://aur.archlinux.org/packages/zsh-fast-syntax-highlighting
-#  source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-#fi
 zstyle ":completion:*" list-colors ${(s.:.)LS_COLORS}
 
 # -----------------------------------------------------------------------------
