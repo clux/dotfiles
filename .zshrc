@@ -6,25 +6,24 @@
 # -----------------------------------------------------------------------------
 # modules
 
+source ~/.exports
 eval "$(starship init zsh)" # prompt
 eval "$(zoxide init zsh)" # directory jumping
 source ~/.functions
-source ~/.exports
 source ~/.aliases
 source ~/.git-helpers
 source ~/.k8s-helpers
 [ -f ~/repos/bashlayer/bashrc ] && source ~/repos/bashlayer/bashrc
-
 if [[ "${OSTYPE}" =~ "darwin" ]]; then
-  source /opt/homebrew/opt/zinit/zinit.zsh
-else
-  echo "TODO: install zinit"
+  # TODO: either drop this in favour of os pgks or fix pkg issue
+  source $(brew --prefix)/opt/zinit/zinit.zsh 2> /dev/null
 fi
-zinit light zsh-users/zsh-autosuggestions
-zinit light zdharma-continuum/fast-syntax-highlighting
+
 
 # -----------------------------------------------------------------------------
 # completions
+
+setopt automenu # auto-selections in auto-complete
 
 # generate comp file via exe ..varargs in ~/.zfunc/_exename
 _gencmp() {
@@ -50,17 +49,24 @@ fpath+=~/.zfunc
 autoload -Uz compinit && compinit
 autoload bashcompinit && bashcompinit
 
-# -----------------------------------------------------------------------------
-# Key management via keychain
+zinit light zsh-users/zsh-autosuggestions
+zinit light zdharma-continuum/fast-syntax-highlighting
 
-if [[ ${HOSTNAME} = "kjttks" ]]; then
-  key github work main
-elif [[ ${HOSTNAME} = "cluxm1.local" ]]; then
-  key github work tl
-else
-  [ -f ~/.keychain/agent-sh ] && source ~/.keychain/agent-sh
-  [ -f ~/.keychain/agent-sh-gpg ] && source ~/.keychain/agent-sh-gpg
-fi
+# avoid auto suggesting directories, but otherwise favour history
+ZSH_AUTOSUGGEST_HISTORY_IGNORE="cd *"
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+bindkey '^[[Z' autosuggest-accept # shift-tab for suggestions, tab for completions
+
+#if [[ "${OSTYPE}" =~ "darwin" ]]; then
+#  source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#  #source /opt/homebrew/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+#  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+#else
+#  source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# # TODO: https://aur.archlinux.org/packages/zsh-fast-syntax-highlighting
+#  source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+#fi
+zstyle ":completion:*" list-colors ${(s.:.)LS_COLORS}
 
 # -----------------------------------------------------------------------------
 # History
@@ -87,9 +93,19 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 # Allow ** recursive globbing
 #shopt -s globstar
 
-unsetopt automenu # no auto-selections in auto-complete
-
 bindkey -e
 bindkey "^[[1;5C" forward-word  # CTRL right_arrow to move a word forward
 bindkey "^[[1;5D" backward-word # CTRL left_arrow to move a word backward
 bindkey '\e[3~'   delete-char
+
+# -----------------------------------------------------------------------------
+# Key management via keychain
+
+if [[ ${HOSTNAME} = "kjttks" ]]; then
+  key github work main
+elif [[ ${HOSTNAME} = "cluxm1.local" ]]; then
+  key github work tl
+else
+  [ -f ~/.keychain/agent-sh ] && source ~/.keychain/agent-sh
+  [ -f ~/.keychain/agent-sh-gpg ] && source ~/.keychain/agent-sh-gpg
+fi

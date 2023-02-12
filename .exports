@@ -1,5 +1,46 @@
 #!/bin/bash
 
+# -----------------------------------------------------------------------------
+# PATH
+
+export PATH=$HOME/.cargo/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/.node_modules/bin:$PATH
+export PATH=$GOPATH/bin:$PATH
+export PATH=$HOME/local/bin:$PATH
+
+if [[ "${OSTYPE}" =~ "darwin" ]] ; then
+  # No good way with brew to get coreutils installed without g prefix
+  # even sources in /opt/homebrew/share/man/man1/g
+  # or their roots in Cellar/coreutils/9.1/share/man/man1
+  # have correct setups.
+  #
+  # we **can** extend PATH into specific pkgs, to unprefixed binaries.
+  # but manpages are not always done right here.
+  # e.g. we cannot type "man rm" no matter what, have to type "man grm"
+  # TODO: look into installing coreutils with macports instead
+
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+  # single binaries: make, gnu-sed, gnu-tar, grep
+  # alias back to what it should be, and only update MANPATH so docs are up-to-date
+  export MANPATH="/opt/homebrew/opt/make/libexec/man:$MANPATH"
+  export MANPATH="/opt/homebrew/opt/grep/libexec/man:$MANPATH"
+  export MANPATH="/opt/homebrew/opt/gnu-tar/libexec/man:$MANPATH"
+  export MANPATH="/opt/homebrew/opt/gnu-sed/libexec/man:$MANPATH"
+
+  # binutils, findutils (more than one binary, so taking the whole thing)
+  export PATH="/opt/homebrew/opt/binutils/bin:$PATH"
+  export PATH="/opt/homebrew/opt/findutils/libexec/gnubin:$PATH"
+  # extra coreutils pkgs wo/evars: watch, diffutils
+  # others: rsync, bash, gpatch, less, zsh
+
+  # Misc darwin
+  export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+fi
+
+# -----------------------------------------------------------------------------
+# misc
+
 export EDITOR=hx;
 export TERM="xterm-256color"
 
@@ -8,9 +49,6 @@ export LS_COLORS
 # Nord meshes well with rose-pine alacritty theme
 LS_COLORS="$(vivid generate nord)" # vivid theme
 # https://github.com/sharkdp/vivid/tree/master/themes
-
-export ZLS_COLORS
-ZLS_COLORS="$(vivid generate catppuccin-mocha)"
 
 # colored manpage theme through bat
 # https://github.com/sharkdp/bat/tree/master/assets/themes
@@ -35,47 +73,6 @@ export FZF_DEFAULT_OPTS="${_FZF_LAYOUT} \
 --color=spinner:#f5e0dc,hl:#f38ba8 \
 --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
 --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
-
-# -----------------------------------------------------------------------------
-# PATH
-
-export PATH=$HOME/.cargo/bin:$PATH
-export PATH=$HOME/.local/bin:$PATH
-export PATH=$HOME/.node_modules/bin:$PATH
-export PATH=$GOPATH/bin:$PATH
-export PATH=$HOME/local/bin:$PATH
-
-if [[ "${OSTYPE}" =~ "darwin" ]] ; then
-  # No good way with brew to get coreutils installed without g prefix
-  # even sources in /opt/homebrew/share/man/man1/g
-  # or their roots in Cellar/coreutils/9.1/share/man/man1
-  # have correct setups.
-  #
-  # we **can** extend PATH into specific pkgs, to unprefixed binaries.
-  # but manpages are not always done right here.
-  # e.g. we cannot type "man rm" no matter what, have to type "man grm"
-  # TODO: look into installing coreutils with macports instead
-
-  export PATH="/opt/homebrew/bin:$PATH"
-  # single binaries: make, gnu-sed, gnu-tar, grep
-  # alias back to what it should be, and only update MANPATH so docs are up-to-date
-  export MANPATH="/opt/homebrew/opt/make/libexec/man:$MANPATH"
-  export MANPATH="/opt/homebrew/opt/grep/libexec/man:$MANPATH"
-  export MANPATH="/opt/homebrew/opt/gnu-tar/libexec/man:$MANPATH"
-  export MANPATH="/opt/homebrew/opt/gnu-sed/libexec/man:$MANPATH"
-
-  # binutils, findutils (more than one binary, so taking the whole thing)
-  export PATH="/opt/homebrew/opt/binutils/bin:$PATH"
-  export PATH="/opt/homebrew/opt/findutils/libexec/gnubin:$PATH"
-  # extra coreutils pkgs wo/evars: watch, diffutils
-  # others: rsync, bash, gpatch, less, zsh
-
-  # Misc darwin
-  export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-fi
-
-# -----------------------------------------------------------------------------
-# misc
 
 # Prefer GB English and use UTF-8
 export LANG="en_GB.UTF-8"

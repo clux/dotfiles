@@ -75,7 +75,7 @@ format = '[$symbol]($style)[$context[󰛢](bg:black 27)$namespace](bg:black whit
 style = "bg:black bold 38"
 symbol = ' '
 format = "[$symbol]($style)[$branch](bg:black 38)"
-truncation_length = 12
+truncation_length = 8
 truncation_symbol = "."
 
 [git_status]
@@ -95,11 +95,11 @@ deleted = "󱡂 " #⚑
 #up_to_date = "✔ "
 
 [python]
-symbol = '' #🐍
+symbol = ' ' #🐍
 pyenv_version_name = true
 pyenv_prefix = ''
-style = "purple bold"
-format = ' [${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+style = "bg:black yellow"
+format = '[${symbol}${pyenv_prefix}(${version} )($virtualenv )]($style)'
 
 [line_break]
 disabled = true
