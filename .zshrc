@@ -24,24 +24,26 @@ fi
 
 setopt automenu # auto-selections in auto-complete
 
-# generate comp file via exe ..varargs in ~/.zfunc/_exename
+# generate comp file for bin via vararg cmd in ~/.zfunc/_bin
 _gencmp() {
-    local -r exe="$1"
-    if [ ! -e ~/.zfunc/_${exe} -a $commands[${exe}] ]; then
+    local -r bin="$1"
+    if [ ! -e ~/.zfunc/_${bin} -a $commands[${bin}] ]; then
         mkdir -p ~/.zfunc
-        ${exe} ${@:2} > ~/.zfunc/_${exe}
+        ${@:2} > ~/.zfunc/_${bin}
     fi
 }
-_gencmp rustup completions zsh
-_gencmp kubectl completion zsh
-_gencmp helm completion zsh
-_gencmp just --completions zsh
-_gencmp k3d completion zsh
-_gencmp procs --completion-out zsh
-_gencmp fd --gen-completions zsh
-_gencmp kopium completions zsh
+_gencmp kubectl kubectl completion zsh
+_gencmp helm helm completion zsh
+_gencmp just just --completions zsh
+_gencmp k3d k3d completion zsh
+_gencmp procs procs --completion-out zsh
+_gencmp fd fd --gen-completions zsh
+_gencmp kopium kopium completions zsh
+_gencmp rustup rustup completions zsh
+_gencmp cargo rustup completions zsh cargo
 #_gencmp lal completions zsh
 #_gencmp shipcat completions zsh
+# NB: kill ~/.zcompdump if something is not working
 
 fpath+=~/.zfunc
 
