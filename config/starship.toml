@@ -2,7 +2,6 @@ format = """\
 ${status}\
 ${username}\
 ${hostname}\
-${time}\
 ${directory}\
 ${git_branch}\
 ${git_status}\
@@ -17,6 +16,8 @@ right_format = """\
 ${cmd_duration}\
 ${kubernetes}\
 """
+
+"$schema" = 'https://starship.rs/config-schema.json'
 
 # This setup generally uses characters from powerline
 # see https://github.com/ryanoasis/powerline-extra-symbols for codes
@@ -37,7 +38,7 @@ disabled = false
 style = "bg:black red"
 symbol = ""
 recognize_signal_code = false
-format = "[$symbol ]($style)"
+format = "[$symbol]($style)"
 
 [hostname]
 ssh_only = true
@@ -52,14 +53,22 @@ version_format = "${minor}"
 detect_extensions = []
 
 [directory]
-truncation_length = 3
 style = "bg:black white"
-format = "[$path ]($style)"
+# regular format style
+format = '[$path]($style)[$read_only]($read_only_style)'
+# same, but if at repo
+repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style )[$read_only ]($read_only_style)'
+repo_root_style = "bg:black bold white"
+# before repo applies basically to the truncation symbol
+before_repo_root_style = "bg:black blue"
+read_only = "[\uf023]"
+read_only_style = "bg:black red"
 truncate_to_repo = true
-fish_style_pwd_dir_length = 5
+#fish_style_pwd_dir_length = 3
 # MISSING: cannot change the separator between dirs (looks cluttered)
 # https://github.com/starship/starship/pull/1222
-truncation_symbol = ""
+truncation_symbol = '󰩽'
+truncation_length = 5
 
 [time]
 disabled = true
@@ -74,7 +83,7 @@ format = '[$symbol]($style)[$context[󰛢](bg:black 27)$namespace](bg:black whit
 
 [git_branch]
 style = "bg:black bold 38"
-symbol = ' '
+symbol = ' ' #󰳏
 format = "[$symbol]($style)[$branch](bg:black 38)"
 truncation_length = 8
 truncation_symbol = "."
