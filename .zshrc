@@ -83,7 +83,7 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 # options
 
 # Allow ** recursive globbing
-#shopt -s globstar
+setopt GLOB_STAR_SHORT
 
 bindkey -e
 bindkey "^[[1;5C" forward-word  # CTRL right_arrow to move a word forward
