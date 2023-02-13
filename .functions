@@ -22,24 +22,22 @@ zl() {
   zellij action new-tab --layout "$HOME/.config/zellij/layouts/${layout}" --name="${name}"
 }
 
-# override zoxide's z to auto-rename tab
-z() {
-  __zoxide_z "$@"
-  zz
-}
+# ensure directory traversal updates tab names (if terminal mux exists)
+cd() { builtin cd "$@" && zz; }
+z() { __zoxide_z "$@" && zz; }
 
 # terminal mux helpers to rename the tab we do something
 zz() {
   if [[ ! "${OSTYPE}" =~ "darwin" ]]; then
     guake --rename-tab="${PWD##*/}" -i "$(guake -g)"
-  else
+  elif [ -n "${ZELLIJ_SESSION_NAME}" ]; then
     zellij action rename-tab "${PWD##*/}"
   fi
 }
 zzh() {
   if [[ ! "${OSTYPE}" =~ "darwin" ]]; then
     guake --rename-tab="$1" -i "$(guake -g)"
-  else
+  elif [ -n "${ZELLIJ_SESSION_NAME}" ]; then
     zellij action rename-tab "$1"
   fi
   # shellcheck disable=SC2068
