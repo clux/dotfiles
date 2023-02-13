@@ -29,8 +29,6 @@ alias WC="wc -l"
 alias G="grep"
 alias XG="xargs grep"
 alias L="less"
-alias H='head -n "$(($LINES-5))"'
-alias T='tail -n "$(($LINES-5))"'
 
 if [[ "${OSTYPE}" =~ "darwin" ]]; then
   alias XC="pbcopy"
@@ -61,17 +59,6 @@ alias drmi="docker rmi"
 alias db="docker build"
 alias de="docker exec"
 
-# darwin coreutils/gnu
-if [[ "${OSTYPE}" =~ "darwin" ]] ; then
-  alias sed=gsed
-  alias grep=ggrep
-  alias sed=gsed
-  alias make=gmake
-  alias date=gdate
-  alias rm=grm
-  alias ps=procs
-fi
-
 # cargo
 alias c="cargo"
 alias cb="cargo build"
@@ -81,12 +68,7 @@ alias ct="cargo test"
 alias ccln="cargo clean" # avoid conflict with cc :)
 
 # rsync
-alias rsync-copy="rsync -avz --progress -h"
-alias rsync-move="rsync -avz --progress -h --remove-source-files"
-alias rsync-update="rsync -avzu --progress -h"
-alias rsync-synchronize="rsync -avzu --delete --progress -h"
-
-# node dev aliases for personal modules
-alias bndgf='./node_modules/.bin/bndg test/*.test.js | faucet'
-alias bndg='./node_modules/.bin/bndg test/*.test.js'
-alias cover='npm run coverage'
+alias rs="rsync -avz --progress -h"
+alias rscp="rs"
+alias rscpf="rs -u --delete"
+alias rsmv="rs --remove-source-files"

@@ -6,7 +6,6 @@
 # -----------------------------------------------------------------------------
 # modules
 
-source ~/.exports
 eval "$(starship init zsh)" # prompt
 eval "$(zoxide init zsh)" # directory jumping
 source ~/.functions
@@ -16,8 +15,13 @@ source ~/.k8s-helpers
 [ -f ~/repos/bashlayer/bashrc ] && source ~/repos/bashlayer/bashrc
 if [[ "${OSTYPE}" =~ "darwin" ]]; then
   source /opt/homebrew/opt/zinit/zinit.zsh 2> /dev/null # ignore manpage issue for now
+  eval "$(brew shellenv)"
 fi
 
+export EXA_COLORS
+# Nord meshes well with rose-pine alacritty theme
+# https://github.com/sharkdp/vivid/tree/master/themes
+EXA_COLORS="$(vivid generate nord)" # vivid theme
 
 # -----------------------------------------------------------------------------
 # completions
@@ -42,8 +46,7 @@ _gencmp kopium kopium completions zsh
 _gencmp rustup rustup completions zsh
 _gencmp cargo rustup completions zsh cargo
 _gencmp zellij zellij setup --generate-completion zsh
-#_gencmp lal completions zsh
-#_gencmp shipcat completions zsh
+_gencmp procs procs --completion-out zsh
 # NB: kill ~/.zcompdump if something is not working
 
 fpath+=~/.zfunc
