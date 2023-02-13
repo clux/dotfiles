@@ -16,6 +16,7 @@ source ~/.k8s-helpers
 if [[ "${OSTYPE}" =~ "darwin" ]]; then
   source /opt/homebrew/opt/zinit/zinit.zsh 2> /dev/null # ignore manpage issue for now
   eval "$(brew shellenv)"
+  fpath+=$HOMEBREW_PREFIX/share/zsh/site-functions
 fi
 
 # Nord meshes well with rose-pine alacritty theme
@@ -29,6 +30,8 @@ export LS_COLORS="$(vivid generate dracula)" # for autocomplete
 setopt automenu # auto-selections in auto-complete
 
 # generate comp file for bin via vararg cmd in ~/.zfunc/_bin
+# only need to do this for out-of-band installations due to fpath above
+# NB: kill ~/.zcompdump if something is not working
 _gencmp() {
     local -r bin="$1"
     if [ ! -e ~/.zfunc/_${bin} -a $commands[${bin}] ]; then
@@ -36,19 +39,9 @@ _gencmp() {
         ${@:2} > ~/.zfunc/_${bin}
     fi
 }
-_gencmp kubectl kubectl completion zsh
-_gencmp helm helm completion zsh
-_gencmp just just --completions zsh
-_gencmp k3d k3d completion zsh
-_gencmp procs procs --completion-out zsh
-_gencmp fd fd --gen-completions zsh
 _gencmp kopium kopium completions zsh
 _gencmp rustup rustup completions zsh
 _gencmp cargo rustup completions zsh cargo
-_gencmp zellij zellij setup --generate-completion zsh
-_gencmp procs procs --completion-out zsh
-# NB: kill ~/.zcompdump if something is not working
-
 fpath+=~/.zfunc
 
 autoload -Uz compinit && compinit
@@ -62,7 +55,8 @@ ZSH_AUTOSUGGEST_HISTORY_IGNORE="cd *"
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 bindkey '^[[Z' autosuggest-accept # shift-tab for suggestions, tab for completions
 
-zstyle ":completion:*" list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*:*:*:*:*' menu select
 
 # -----------------------------------------------------------------------------
 # History
