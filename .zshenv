@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# -----------------------------------------------------------------------------
-# misc
-
 export EDITOR=hx;
 export TERM="xterm-256color"
 
@@ -45,17 +42,6 @@ export RUST_BACKTRACE=1
 export GOPATH=$HOME/.go
 export GO111MODULE=auto
 
-# Download dir for `dl` + brotorr
-export DOWNLOAD_DIR=~/Downloads
-if [[ $HOSTNAME = kjttks ]]; then
-  export DOWNLOAD_DIR=/media/gauss/DL
-elif [[ $HOSTNAME = broxy ]]; then
-  export DOWNLOAD_DIR=/media/dumptruck/DL
-fi
-
-# disable cowsay in ansible even though we have it installed
-export ANSIBLE_NOCOWS=1
-
 # disable analytics sending to homebrew
 export HOMEBREW_NO_ANALYTICS=1
 
@@ -63,9 +49,9 @@ export HOMEBREW_NO_ANALYTICS=1
 # PATH
 
 export PATH=$HOME/.cargo/bin:$PATH
-export PATH=$HOME/.local/bin:$PATH                                                                                                          export PATH=$GOPATH/bin:$PATH
-export PATH=/opt/homebrew/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
 export PATH=$GOPATH/bin:$PATH
+export PATH=/opt/homebrew/bin:$PATH
 
 # The macos compatibility shitshow
 if [[ "${OSTYPE}" =~ "darwin" ]]; then

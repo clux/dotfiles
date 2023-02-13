@@ -18,10 +18,10 @@ if [[ "${OSTYPE}" =~ "darwin" ]]; then
   eval "$(brew shellenv)"
 fi
 
-export EXA_COLORS
 # Nord meshes well with rose-pine alacritty theme
 # https://github.com/sharkdp/vivid/tree/master/themes
-EXA_COLORS="$(vivid generate nord)" # vivid theme
+export EXA_COLORS="$(vivid generate nord)" # vivid theme for exa
+export LS_COLORS="$(vivid generate dracula)" # for autocomplete
 
 # -----------------------------------------------------------------------------
 # completions

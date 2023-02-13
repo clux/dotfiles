@@ -41,6 +41,7 @@ fi
 alias cwd='pwd | tr -d "\r\n" | XC'
 alias week='date +%V'
 alias ymd='date +%Y-%m-%d'
+alias tree='tree -aC -I "node_modules|target|site-packages|.git|bower_components|venv" --dirsfirst'
 
 # chrome with proxy-pac
 alias chrome='google-chrome-stable --proxy-pac-url="$(~/.ssh/genpac)"'
@@ -58,14 +59,6 @@ alias drm="docker rm"
 alias drmi="docker rmi"
 alias db="docker build"
 alias de="docker exec"
-
-# cargo
-alias c="cargo"
-alias cb="cargo build"
-alias cbr="cargo build --release"
-alias cbrm="cargo build --release --target=x86_64-unknown-linux-musl"
-alias ct="cargo test"
-alias ccln="cargo clean" # avoid conflict with cc :)
 
 # rsync
 alias rs="rsync -avz --progress -h"

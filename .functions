@@ -100,6 +100,17 @@ ch() {
     xargs "${open}" > /dev/null
 }
 
+# systemd; follow / reload
+sysf() {
+  local -r unit="${1:-$(systemctl list-units --no-pager --no-legend | awk '{ print $1 }' | fzf)}"
+  journalctl -u "$unit" -fl
+}
+sysr() {
+  local -r unit="${1:-$(systemctl list-units --no-pager --no-legend | awk '{ print $1 }' | fzf)}"
+  sudo systemctl daemon-reload
+  sudo systemctl restart "$unit"
+}
+
 # -----------------------------------------------------------------------------
 # package manager abstraction - mostly for my own memory
 
@@ -160,39 +171,10 @@ elif grep -qE "Alpine Linux" /etc/os-release; then
 fi
 
 # -----------------------------------------------------------------------------
-# systemd - general interface can use sysz
-# but have some things that here for quick convenience
-
-sysfollow() {
-  local -r unit="${1:-$(systemctl list-units --no-pager --no-legend | awk '{ print $1 }')}"
-  journalctl -u "$unit" -fl
-}
-
-sysreload() {
-  local -r unit="${1:-$(systemctl list-units --no-pager --no-legend | awk '{ print $1 }')}"
-  sudo systemctl daemon-reload
-  sudo systemctl restart "$unit"
-}
-
-# -----------------------------------------------------------------------------
 # misc
-
-# command line diff override
-diffd() {
-  # shellcheck disable=SC2068
-  diff -Naur --color=auto $@ | delta
-}
-
-# browse non-generated / build files in a simple unix tree
-t() {
-  tree -aC -I "node_modules|target|site-packages|.git|bower_components|venv" --dirsfirst "$@" | less -FRX
-}
 
 # Create a new directory and enter it
 mkd() { mkdir -p "$@" && cd "$@" || return 1 ;}
-
-kill-tabs() { pkill -u "$USER" -f "chrome.*renderer" ;}
-# NB: renderer tabs are not 1-1 with tabs :/
 
 docker-clean() {
   docker ps -aq | xargs -r docker rm -f
@@ -206,12 +188,25 @@ serve() {
 }
 
 # upload a single file in PWD to transfer.sh
-transfer() {
+transfersh() {
   curl --upload-file "$1" "https://transfer.sh/$1" | xclip -sel clip
 }
 
+# Not sure this works anymore - even on linux; renderer ps are not 1-1 with tabs :/
+kill-tabs() { pkill -u "$USER" -f "chrome.*renderer" ;}
+
+# horizontal ruler
+hr() {
+  echo "$(tput setaf 33)$(printf '%.s─' $(seq 1 "$(tput cols)"))"
+}
+
+wifihotspot() {
+  sudo create_ap wlp2s0 enp0s20f0u1 "Bathroom Cam 2" "$(pass network/ea-laptop)"
+}
+
+
 # -----------------------------------------------------------------------------
-# games
+# gaming related linux hacks
 
 # override monitor refresh rate
 # super meat boy: refresh-rate 60
@@ -259,21 +254,72 @@ q3() {
   # First sound you hear after boot should be quake
 }
 
+# -----------------------------------------------------------------------------
+# misc node/py
 
-hr() {
-  local -r COLS=$(tput cols)
-  local -r SEP="*"
-  local HR=''
-  while (( ${#HR} < COLS )); do
-      HR="$HR$SEP"
-  done
-  echo "$(tput setaf 33)${HR:0:$COLS}$(tput sgr0)"
-}
-
-cs() {
+node-deopts() {
   # shellcheck disable=SC2068
-  cowsay -f flaming-sheep $@ | lolcat -S 60;
+  node --trace_opt --trace_deopt --allow-natives-syntax $@
 }
+
+node-deps() {
+  npm ls | grep -oE "[[:alnum:]\@\.]*" | sort -u
+}
+
+npm-patch() {
+  npm version patch && git push && git push --tags && npm publish
+}
+npm-minor() {
+  npm version minor && git push && git push --tags && npm publish
+}
+npm-major() {
+  npm version major && git push && git push --tags && npm publish
+}
+
+venv() {
+  if [ -d venv ]; then
+    source venv/bin/activate
+  elif [ -d .venv ]; then
+    source .venv/bin/activate
+  else
+    python3 -m venv venv
+    source venv/bin/activate
+    pip install -r requirements.txt
+  fi
+}
+
+# -----------------------------------------------------------------------------
+# extraction shortcuts
+
+# insert xkcd tar joke here
+extract () {
+  if [ -f "$1" ] ; then
+      case "$1" in
+          *.tar.bz2)   tar xvjf "$1"    ;;
+          *.tar.gz)    tar xvzf "$1"    ;;
+          *.tar.xz)    tar xvJf "$1"    ;;
+          *.bz2)       bunzip2 "$1"     ;;
+          *.rar)       unrar x "$1"     ;;
+          *.gz)        gunzip "$1"      ;;
+          *.tar)       tar xvf "$1"     ;;
+          *.tbz2)      tar xvjf "$1"    ;;
+          *.tgz)       tar xvzf "$1"    ;;
+          *.zip)       unzip "$1"       ;;
+          *.Z)         uncompress "$1"  ;;
+          *.7z)        7z x "$1"        ;;
+          *)           echo "unknown extension for '$1'" ;;
+      esac
+  else
+      echo "$1 is not a valid file!"
+  fi
+}
+# ball: output [inputs]
+ball () { tar czf "$1.tar" "${@:2}" ;}
+# 7zsplit output [inputs]
+7zsplit() { 7z a "$1.7z" -mx0 -V500M "${@:2}" ;}
+
+# -----------------------------------------------------------------------------
+# storage manipulation (mostly linux only)
 
 openimage() {
   local types='*.jpg *.JPG *.png *.PNG *.gif *.GIF *.jpeg *.JPEG'
@@ -317,124 +363,18 @@ vcc() {
   exit
 }
 
-wifihotspot() {
-  sudo create_ap wlp2s0 enp0s20f0u1 "Bathroom Cam 2" "$(pass network/ea-laptop)"
-}
-
 # -----------------------------------------------------------------------------
-# system statistics/usage
+# Broxy + brotorr integrations (massively out of date)
 
-mem() {
-  free -t | grep Mem | awk '{ printf("%3.1f%%\n", $3*100/$2)}'
-}
-disk() {
-  # Total usage of currently mounted logical drives
-  df -l --total \
-    | grep total \
-    | awk '{printf("%3.1f%%\n", $3*100/$2)}'
-}
-cpu() { awk '{printf("%3.1f%%\n", $1*100/'"$(nproc)"') }' < /proc/loadavg ;}
-# average cpu frequency based on current mean info across cores /proc/cpuinfo divided by max
-cpufreq() {
-  local -r maxkhz="$(cat /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq)"
-  local -r current_mhz="$(grep 'cpu MHz' /proc/cpuinfo | awk '{print $4}' | datamash mean 1)"
-  echo "scale=2; 100* $current_mhz * 1000 / $maxkhz" | bc -l | xargs printf "%s%%\n"
-}
+# Download dir for `dl` + brotorr
+export DOWNLOAD_DIR=~/Downloads
+if [[ $HOSTNAME = kjttks ]]; then
+  export DOWNLOAD_DIR=/media/gauss/DL
+elif [[ $HOSTNAME = broxy ]]; then
+  export DOWNLOAD_DIR=/media/dumptruck/DL
+fi
 
-iface() {
-  # first interface with state UP
-  ip link show | grep "state UP" | awk '{print $2}' | cut -d':' -f1 | head -n 1
-}
-network() {
-  # transferred numbers are in first column, print everything with space separation
-  local -r netdata=$(ip -s link show "$(iface)" | awk -v ORS=" " '{ print $1 }')
-  # convert relevant numbers to gigabytes
-  local -r RX=$(echo "$netdata" | cut -d" " -f4 | awk '{printf("%3.1fGB\n", $1/1073741824)}')
-  local -r TX=$(echo "$netdata" | cut -d" " -f6 | awk '{printf("%3.1fGB\n", $1/1073741824)}')
-  echo -e "Sent: ${TX}\nRecv: ${RX}"
-}
-
-localip() {
-  ip addr show "$(iface)" | grep inet | awk '{ print $2 }'
-}
-
-# legacy
-pstree() { echo "use procs"; }
-
-# -----------------------------------------------------------------------------
-# misc node/py
-
-node-deopts() {
-  # shellcheck disable=SC2068
-  node --trace_opt --trace_deopt --allow-natives-syntax $@
-}
-
-node-deps() {
-  npm ls | grep -oE "[[:alnum:]\@\.]*" | sort -u
-}
-
-venv() {
-  if [ -d venv ]; then
-    source venv/bin/activate
-  elif [ -d .venv ]; then
-    source .venv/bin/activate
-  else
-    python3 -m venv venv
-    source venv/bin/activate
-    pip install -r requirements.txt
-  fi
-}
-
-# -----------------------------------------------------------------------------
-# rust misc
-
-cargo-fund() {
-  cargo fund --github-api-token="$(pass github/cargo-fund-pat)"
-}
-
-musl-cross() {
-  cross build --target x86_64-unknown-linux-musl --release --verbose
-}
-musl-build() {
-  docker run \
-    -v cargo-cache:/root/.cargo \
-    -v "$PWD:/volume" -w /volume \
-    --rm -it clux/muslrust cargo build --release
-}
-
-# -----------------------------------------------------------------------------
-# extraction shortcuts
-
-# insert xkcd tar joke here
-extract () {
-  if [ -f "$1" ] ; then
-      case "$1" in
-          *.tar.bz2)   tar xvjf "$1"    ;;
-          *.tar.gz)    tar xvzf "$1"    ;;
-          *.tar.xz)    tar xvJf "$1"    ;;
-          *.bz2)       bunzip2 "$1"     ;;
-          *.rar)       unrar x "$1"     ;;
-          *.gz)        gunzip "$1"      ;;
-          *.tar)       tar xvf "$1"     ;;
-          *.tbz2)      tar xvjf "$1"    ;;
-          *.tgz)       tar xvzf "$1"    ;;
-          *.zip)       unzip "$1"       ;;
-          *.Z)         uncompress "$1"  ;;
-          *.7z)        7z x "$1"        ;;
-          *)           echo "unknown extension for '$1'" ;;
-      esac
-  else
-      echo "$1 is not a valid file!"
-  fi
-}
-# ball: output [inputs]
-ball () { tar czf "$1.tar" "${@:2}" ;}
-# 7zsplit output [inputs]
-7zsplit() { 7z a "$1.7z" -mx0 -V500M "${@:2}" ;}
-
-# -----------------------------------------------------------------------------
-# Broxy + brotorr integrations
-
+# Download dir for `dl` + brotorr
 dl() { cd "$DOWNLOAD_DIR" || return 1 ;}
 
 movies-diff () {
@@ -487,25 +427,38 @@ broxy-grab() {
 }
 
 # -----------------------------------------------------------------------------
-# Publishing helpers
+# system statistics/usage (linux only)
 
-npm-patch() {
-  npm version patch && git push && git push --tags && npm publish
+mem() {
+  free -t | grep Mem | awk '{ printf("%3.1f%%\n", $3*100/$2)}'
 }
-npm-minor() {
-  npm version minor && git push && git push --tags && npm publish
+disk() {
+  # Total usage of currently mounted logical drives
+  df -l --total \
+    | grep total \
+    | awk '{printf("%3.1f%%\n", $3*100/$2)}'
 }
-npm-major() {
-  npm version major && git push && git push --tags && npm publish
+cpu() { awk '{printf("%3.1f%%\n", $1*100/'"$(nproc)"') }' < /proc/loadavg ;}
+# average cpu frequency based on current mean info across cores /proc/cpuinfo divided by max
+cpufreq() {
+  local -r maxkhz="$(cat /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq)"
+  local -r current_mhz="$(grep 'cpu MHz' /proc/cpuinfo | awk '{print $4}' | datamash mean 1)"
+  echo "scale=2; 100* $current_mhz * 1000 / $maxkhz" | bc -l | xargs printf "%s%%\n"
 }
 
-# rust bumping for small repos (otherwise use cargo-release)
-cargo-tag() {
-  git diff --exit-code || return 1
-  git diff --cached --exit-code || return 1
-  local -r ver="$(grep version Cargo.toml | awk -F"\"" '{print $2}' | head -n 1)"
-  git tag -a "${ver}" -m "${ver}"
-  git push
-  git push --tags
-  cargo publish
+iface() {
+  # first interface with state UP
+  ip link show | grep "state UP" | awk '{print $2}' | cut -d':' -f1 | head -n 1
+}
+network() {
+  # transferred numbers are in first column, print everything with space separation
+  local -r netdata=$(ip -s link show "$(iface)" | awk -v ORS=" " '{ print $1 }')
+  # convert relevant numbers to gigabytes
+  local -r RX=$(echo "$netdata" | cut -d" " -f4 | awk '{printf("%3.1fGB\n", $1/1073741824)}')
+  local -r TX=$(echo "$netdata" | cut -d" " -f6 | awk '{printf("%3.1fGB\n", $1/1073741824)}')
+  echo -e "Sent: ${TX}\nRecv: ${RX}"
+}
+
+localip() {
+  ip addr show "$(iface)" | grep inet | awk '{ print $2 }'
 }
