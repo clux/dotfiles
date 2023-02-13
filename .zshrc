@@ -57,6 +57,7 @@ bindkey '^[[Z' autosuggest-accept # shift-tab for suggestions, tab for completio
 
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:*:*:*:*' menu select
+zstyle :compinstall filename "$HOME/.zshrc"
 
 # -----------------------------------------------------------------------------
 # History
