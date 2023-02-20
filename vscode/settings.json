@@ -21,5 +21,7 @@
     "rust-analyzer.diagnostics.enable": false,
     "rust-analyzer.cachePriming.numThreads": 2,
     "rust-analyzer.check.allTargets": false,
-    "rust-analyzer.hover.actions.run.enable": false
+    "rust-analyzer.hover.actions.run.enable": false,
+    "gitlens.telemetry.enabled": false,
+    "telemetry.telemetryLevel": "crash"
 }

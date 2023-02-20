@@ -40,7 +40,7 @@ export RUST_BACKTRACE=1
 
 # go
 export GOPATH=$HOME/.go
-export GO111MODULE=auto
+export GO111MODULE=on
 
 # disable analytics sending to homebrew
 export HOMEBREW_NO_ANALYTICS=1
