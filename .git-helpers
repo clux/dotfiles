@@ -40,7 +40,7 @@ alias gblam='git blam'
 gitlog() {
   git log --graph --color=always --no-merges \
       --format="%C(auto)%h%d %s <%C(blue)%an%Creset> %C(black)%C(bold)%cr" "$@" |
-  fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+  fzf --ansi --no-sort --reverse --height 100% --tiebreak=index --bind=ctrl-s:toggle-sort \
       --bind "f3:execute:
                 (grep -o '[a-f0-9]\{7\}' | head -1 |
                 xargs -I % sh -c 'git open %') << 'FZF-EOF'
@@ -48,10 +48,9 @@ gitlog() {
 FZF-EOF" \
       --bind "ctrl-m:execute:
                 (grep -o '[a-f0-9]\{7\}' | head -1 |
-                xargs -I % sh -c 'git show --color=always %') << 'FZF-EOF'
+                xargs -I % sh -c 'git show --color=always %' | delta | less -R) << 'FZF-EOF'
                 {}
 FZF-EOF"
-  # TODO: fix git show not always showing on all changesets...
 }
 
 
