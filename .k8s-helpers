@@ -139,7 +139,7 @@ kpfs() {
   else
     portjson="$(echo "${spec}" | jq ".ports[0]" -Mc)"
   fi
-  local -r port="$(echo "${portjson}" | jq ".targetPort" -r)"
+  local -r port="$(echo "${portjson}" | jq ".port" -r)"
   echo "Forwarding to svc/${service}:${port} via local 8000"
   kubectl port-forward "svc/${service}" "8000:${port}"
 }
