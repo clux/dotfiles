@@ -87,10 +87,10 @@
   aur = "!f() { git clone https://aur.archlinux.org/$1.git && git idclone clux $1; }; f"
 
   # clone from main account/org using personal identity (overrides includeIf defaults)
-  hub ="!f() { git github clux/$i; }; f"
-  lab ="!f() { git gitlab clux/$i; }; f"
-  bb ="!f() { git bitbucket clux/$i; }; f"
-  tl ="!f() { git work truelayer/$i; }; f"
+  hub = !sh -ic 'git github clux/${1}' x
+  lab = !sh -ic 'git gitlab clux/${1}' x
+  bb = !sh -ic 'git bitbucket clux/${1}' x
+  tl = !sh -ic 'git work truelayer/${1}' x
 
   # initializing and setting identities correctly
   # usage: `git new ea` or `git new clux`
@@ -133,19 +133,13 @@
   syntax-theme = OneHalfDark
   # customized reds (little yellowy)
   whitespace-error-style = reverse "#b81a00"
-  #minus-emph-style = normal "#a03a2f"
-  #minus-style = normal "#5f1a2a "
-  # customized greens (bits of blue and red)
-  #plus-emph-style = normal "#1a6622 "
-  #plus-style = normal "#11311f"
-
-  # try collared-trogon here instead
+  # other colors based on collared-trogon
+  # To limit chaos UX; only use syntax highlighting on plus
   minus-emph-style = normal "#80002a"
   minus-style = normal "#330011"
   plus-emph-style = syntax "#003300"
   plus-style = syntax "#001a00"
-
-  # trying blame
+  # format for git blame
   blame-code-style = syntax
   blame-format = "{author:<15.12} {commit:<8} {timestamp:<17.14}"
   blame-palette = "#2E3440" "#3B4252" "#434C5E" "#4C566A"
