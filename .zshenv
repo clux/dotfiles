@@ -4,7 +4,6 @@ export EDITOR=hx;
 export TERM="xterm-256color"
 
 # colored manpage theme through bat
-# https://github.com/sharkdp/bat/tree/master/assets/themes
 export MANPAGER="sh -c 'col -bx | bat -l man'"
 
 # use shellcheck for current file only

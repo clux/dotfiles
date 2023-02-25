@@ -1,5 +1,6 @@
 
 --theme="Catppuccin-mocha"
+# https://github.com/sharkdp/bat/tree/master/assets/themes
 --plain
 
 # Syntax mappings: map a certain filename pattern to a language.
