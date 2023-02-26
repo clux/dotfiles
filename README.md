@@ -12,6 +12,8 @@ Designed for a minimal Arch Linux installation, but retrofitted to support MacOS
 
 ## Terminal Setup
 
+![terminal layout; ncspot, hx vsplit on rust, symlink with dircolors, fzf helpers for k8s](./img/2023-02-26.jpg)
+
 - [zellij](https://zellij.dev/) in [alacritty](https://github.com/alacritty/alacritty/) using [zsh](https://github.com/clux/dotfiles/blob/main/.zshrc)
 - [zoxide](https://github.com/ajeetdsouza/zoxide) for jumping (updates `zellij` tab names)
 - [powerline](https://github.com/b-ryan/powerline-shell) style [starship prompt](https://github.com/clux/dotfiles/blob/main/config/starship.toml)
