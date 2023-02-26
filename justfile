@@ -1,7 +1,8 @@
 # See https://just.systems/man/
 SHELLCHECK_OPTS := "-e SC1091 -e SC1090 -e SC1117 -s bash"
 SHELLCHECKED_FILES := ".aliases .zshenv .functions .xprofile .git-helpers .k8s-helpers git/hooks/* defaults.sh"
-VSCODE_PATH := if os() == "macos" { "~/Library/Application\\ Support" } else { "~/.config" }
+CONFIG_HOME := if os() == "macos" { "~/Library/Application\\ Support" } else { "~/.config" }
+
 
 [private]
 default:
@@ -11,10 +12,10 @@ default:
 config: fontguard
   fd -g '.*' -H --max-depth 1 --type f -a -x ln -sfn {} ~/
   fd --base-directory config/ --max-depth 1 -a -x ln -sfn {} ~/.config/
+  ln -sfn $PWD/vscode/settings.json {{CONFIG_HOME}}/Code/User/settings.json
 
 # install vs code plugins
 vscode:
-  ln -sfn $PWD/vscode/settings.json {{VSCODE_PATH}}/Code/User/settings.json
   cat vscode/extensions | xargs -n 1 code --install-extension
   cat vscode/themes | xargs -n 1 code --install-extension
 
