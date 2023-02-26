@@ -3,7 +3,6 @@ SHELLCHECK_OPTS := "-e SC1091 -e SC1090 -e SC1117 -s bash"
 SHELLCHECKED_FILES := ".aliases .zshenv .functions .xprofile .git-helpers .k8s-helpers git/hooks/* defaults.sh"
 CONFIG_HOME := if os() == "macos" { "~/Library/Application\\ Support" } else { "~/.config" }
 
-
 [private]
 default:
   @just --list --unsorted
