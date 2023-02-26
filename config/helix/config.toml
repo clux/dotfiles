@@ -10,6 +10,6 @@ select = "underline"
 hidden = false
 
 [editor.whitespace.render]
-space = "all"
+#space = "all"
 tab = "all"
 newline = "none"
