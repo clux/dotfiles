@@ -3,9 +3,10 @@ use_nerdfont = true
 [keybindings]
 "F4" = "search"
 # Shift-P toggle play
+# Shift-O menu about currently playing
 
 [theme] # dracula
-background = "black"
+background = "default"
 primary = "#F8F8F2"
 secondary = "light black"
 title = "#bd93f9"
