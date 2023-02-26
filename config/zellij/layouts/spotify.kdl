@@ -1,0 +1,7 @@
+layout {
+    pane command="ncspot" size="60%" name="spotify" focus=true
+    pane name="cava" command="cava"
+    pane size=1 {
+        plugin location="zellij:compact-bar"
+    }
+}
