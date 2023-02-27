@@ -8,7 +8,7 @@ default:
   @just --list --unsorted
 
 # create symlinks pointing to this repo checkout
-config: fontguard
+link: fontguard
   fd -g '.*' -H --max-depth 1 --type f -a -x ln -sfn {} ~/
   fd --base-directory config/ --max-depth 1 -a -x ln -sfn {} ~/.config/
   ln -sfn $PWD/vscode/settings.json {{CONFIG_HOME}}/Code/User/settings.json

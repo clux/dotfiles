@@ -29,7 +29,7 @@ Plus lots of misc [.functions](https://github.com/clux/dotfiles/blob/main/.funct
 Clone and apply:
 
 ```sh
-just config # force symlink to ~/ and ~/.config/
+just link # force symlink to ~/ and ~/.config/
 just system # defaults write (mac) / dconf load (linux)
 ```
 
@@ -41,4 +41,4 @@ All recipes are idempotent.
 System configuration includes `vscode` recipe to symlink [settings.json](https://github.com/clux/dotfiles/blob/main/vscode/settings.json) and install a [snapshot of extensions](https://github.com/clux/dotfiles/blob/main/vscode/extensions) and themes via `code --list-extensions`. This avoids the builtin cloud sync.
 
 ### Helix
-Automatic install via `just config` relying on `EDITOR`. Tiny [config](https://github.com/clux/dotfiles/blob/main/config/helix/config.toml) always linked.
+Automatic install via `just link` relying on `EDITOR` + linked [config](https://github.com/clux/dotfiles/blob/main/config/helix/config.toml).
