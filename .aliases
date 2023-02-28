@@ -10,11 +10,11 @@ alias .....="cd ../../../.."
 alias cat="bat"
 
 # ls + tree -> exa
-alias lla='exa -la --group-directories-first --git-ignore --git --sort ext --color=always'
-alias ll='exa -l  --group-directories-first --git-ignore --git --sort ext --color=always'
-alias la='exa -a --group-directories-first'
+alias lla='exa -la --group-directories-first --icons --git-ignore --git --sort ext --color=always'
+alias ll='exa -l  --group-directories-first --icons --git-ignore --git --sort ext --color=always'
+alias la='exa -a --group-directories-first --icons'
 alias ls='exa --group-directories-first'
-alias tree='exa --tree -I "node_modules|target|site-packages|.git|venv" --group-directories-first'
+alias tree='exa --tree --group-directories-first --icons --git-ignore -git --sort -I "node_modules|target|site-packages|.git|venv"'
 
 # top/htop -> btm
 alias top='btm -b'

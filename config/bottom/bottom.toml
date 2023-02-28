@@ -1,9 +1,11 @@
+# See https://clementtsang.github.io/bottom/
+
 [flags]
 basic = false # -b invoked via alias
 battery = false
 tree = true
 
-# Layout
+# Layout - see
 [[row]]
 ratio=30
 [[row.child]]
@@ -18,6 +20,7 @@ type="net"
 type="proc"
 default=true
 
+# theme from https://github.com/catppuccin/bottom
 [colors] # catppuccin mocha
 table_header_color = "#f5e0dc"
 all_cpu_color = "#f5e0dc"
