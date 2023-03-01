@@ -48,26 +48,25 @@ zzh() {
 # Key management via keychain
 
 key() {
-  local keys=""
+  local keys=()
   for k in "$@"; do
     case $k in
-      tl) keys="2D67048E41E0AA6C $keys" ;;
-      pass) keys="B71E94106D1B408B $keys" ;; # enc subkey
-      sign) keys="5D4B685DE5BEAE01 $keys" ;; # signing subkey
-      *) keys="${k}_id ${keys}" ;; # assume ssh key
+      tl) keys+=("2D67048E41E0AA6C") ;;
+      pass) keys+=("B71E94106D1B408B") ;; # enc subkey
+      sign) keys+=("5D4B685DE5BEAE01") ;; # signing subkey
+      *) keys+=("${k}_id") ;; # assume ssh key
     esac
   done
-  keys="$(echo "${keys}" | awk '{$1=$1};1')" # trim trailing whitespace
-  # shellcheck disable=SC2086
-  keychain --nogui --timeout $((16*60)) --quiet --host agent --agents ssh,gpg $keys
+  # shellcheck disable=SC2068
+  keychain --nogui --timeout $((16*60)) --quiet --host agent --agents ssh,gpg ${keys[@]}
   source ~/.keychain/agent-sh
   source ~/.keychain/agent-sh-gpg
 }
 keys() {
   # join static list of gpg keys with dynamic list of ssh keys
-  local -r keys="$( ( (fd --max-depth 1 -u --type f -g '*_id' ~/.ssh | cut -d'/' -f5 | sed 's/_id//g'); echo -e "tl\npass\nsign") | fzf )"
+  local -r available="$( ( (fd --max-depth 1 -u --type f -g '*_id' ~/.ssh | cut -d'/' -f5 | sed 's/_id//g'); echo -e "tl\npass\nsign") | fzf )"
   # shellcheck disable=SC2086
-  key $keys
+  key $available
 }
 
 # -----------------------------------------------------------------------------

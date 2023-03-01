@@ -47,6 +47,8 @@ export HOMEBREW_NO_ANALYTICS=1
 # -----------------------------------------------------------------------------
 # PATH
 
+
+export PATH=/usr/local/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$GOPATH/bin:$PATH

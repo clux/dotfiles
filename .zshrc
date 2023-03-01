@@ -94,7 +94,7 @@ bindkey '\e[3~'   delete-char
 
 if [[ ${HOSTNAME} = "kjttks" ]]; then
   key github work main
-elif [[ ${HOSTNAME} = "cluxm1.local" ]]; then
+elif [[ $(hostname) = "cluxm1.local" ]]; then
   key github work tl
 else
   [ -f ~/.keychain/agent-sh ] && source ~/.keychain/agent-sh
