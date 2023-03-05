@@ -13,6 +13,7 @@ link: fontguard
   fd --base-directory config/ --max-depth 1 -a -x ln -sfn {} ~/.config/
   ln -sfn $PWD/vscode/settings.json {{CONFIG_HOME}}/Code/User/settings.json
   ln -sfn $PWD/share/k9s {{CONFIG_HOME}}/k9s
+  ln -sfn $PWD/share/ruff {{CONFIG_HOME}}/ruff
 
 # install vs code plugins
 vscode:
