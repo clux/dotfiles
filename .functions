@@ -17,7 +17,7 @@ ra() { zellij run -- zsh -ic $@ ;}
 
 # zellij tab from layout
 zl() {
-  local -r layout="$(cd ~/.config/zellij/layouts && fd . | fzf)"
+  local -r layout="$(builtin cd ~/.config/zellij/layouts && fd . | fzf)"
   local -r name="${layout%%.kdl}"
   zellij action new-tab --layout "$HOME/.config/zellij/layouts/${layout}" --name="${name}"
 }
