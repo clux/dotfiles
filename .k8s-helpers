@@ -208,20 +208,11 @@ if [[ ! "${OSTYPE}" =~ "darwin" ]]; then
   }
 fi
 
-k3dmake23() {
-  # could implement versions via
-  # https://github.com/nolar/setup-k3d-k3s/blob/v1/action.sh
-  # but ideally rancher/k3s should have better tags
-  # pick one from https://hub.docker.com/r/rancher/k3s
-  k3dmake "$1" "--image=rancher/k3s:v1.23.14-k3s1-$(arch)"
-}
-
-k3dmake24() {
-  k3dmake "$1" "--image=rancher/k3s:v1.24.8-k3s1-$(arch)"
-}
-k3dmake25() {
-  k3dmake "$1" "--image=rancher/k3s:v1.25.4-k3s1-$(arch)"
-}
+# pinning some versions from https://hub.docker.com/r/rancher/k3s/tags
+# TODO: do something like https://github.com/nolar/setup-k3d-k3s/blob/v1/action.sh
+k3dmake24() { k3dmake "$1" "--image=rancher/k3s:v1.24.10-k3s1-$(arch)"; }
+k3dmake25() { k3dmake "$1" "--image=rancher/k3s:v1.25.6-k3s1-$(arch)"; }
+k3dmake26() { k3dmake "$1" "--image=rancher/k3s:v1.26.1-k3s1-$(arch)"; }
 
 # -----------------------------------------------------------------------------
 # misc kubernetes helpers
