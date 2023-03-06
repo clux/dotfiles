@@ -22,7 +22,7 @@ Designed for a minimal Arch Linux installation, but retrofitted to support MacOS
 - [gitconfig](https://github.com/clux/dotfiles/blob/main/.gitconfig) with [fzf](https://github.com/junegunn/fzf) based [git helpers](https://github.com/clux/dotfiles/blob/main/.git-helpers), diff via [delta](https://github.com/dandavison/delta), and account switching by `includeIf` dirs
 - [keychain](https://wiki.archlinux.org/index.php/SSH_keys#Keychain) loading specific ssh keys by host
 - [aliases](https://github.com/clux/dotfiles/blob/main/.aliases) to gracefully move from `ls`->`exa`, `ag`->`rg`, `cat`->`bat`
-- editor configs for [helix](https://github.com/clux/dotfiles/blob/main/config/helix/config.toml) + [vscode](https://github.com/clux/dotfiles/tree/main/share/Code/User)
+- editor settings for [helix](https://github.com/clux/dotfiles/blob/main/config/helix/config.toml) + [vscode](https://github.com/clux/dotfiles/tree/main/share/Code/User)
 
 Plus lots of misc [.functions](https://github.com/clux/dotfiles/blob/main/.functions). As usual, copy what you find interesting.
 
