@@ -37,8 +37,4 @@ All recipes are idempotent.
 
 ## Editors
 
-### VS Code
-System configuration includes `vscode` recipe to symlink [settings.json](https://github.com/clux/dotfiles/blob/main/vscode/settings.json) and install a [snapshot of extensions](https://github.com/clux/dotfiles/blob/main/vscode/extensions) and themes via `code --list-extensions`. This avoids the builtin cloud sync.
-
-### Helix
-Automatic install via `just link` relying on `EDITOR` + linked [config](https://github.com/clux/dotfiles/blob/main/config/helix/config.toml).
+Editor configs for [vscode](https://github.com/clux/dotfiles/blob/main/share/Code/settings.json) and [helix](https://github.com/clux/dotfiles/blob/main/config/helix/config.toml) are linked to via `just link`.

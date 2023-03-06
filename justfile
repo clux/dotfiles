@@ -9,16 +9,12 @@ default:
 
 # create symlinks pointing to this repo checkout
 link: fontguard
+  # Dot prefixed files at root go into $HOME
   fd -g '.*' -H --max-depth 1 --type f -a -x ln -sfn {} ~/
+  # Children of config go into $HOME/.config
   fd --base-directory config/ --max-depth 1 -a -x ln -sfn {} ~/.config/
-  ln -sfn $PWD/vscode/settings.json {{CONFIG_HOME}}/Code/User/settings.json
-  ln -sfn $PWD/share/k9s {{CONFIG_HOME}}/k9s
-  ln -sfn $PWD/share/ruff {{CONFIG_HOME}}/ruff
-
-# install vs code plugins
-vscode:
-  cat vscode/extensions | xargs -n 1 code --install-extension
-  cat vscode/themes | xargs -n 1 code --install-extension
+  # Children of share go into platform specific {{CONFIG_HOME}}
+  fd --base-directory share/ --max-depth 1 -a -x echo ln -sfn {} {{CONFIG_HOME}}/
 
 # font guard helper (linux)
 [linux]
@@ -34,13 +30,13 @@ fontguard:
 
 # configure system properties (linux)
 [linux]
-system: fontguard vscode
+system: fontguard
   dconf load /org/ < org.dconf
   dconf load /apps/ < apps.dconf
 
 # configure system properties (mac)
 [macos]
-system: vscode
+system:
   ./defaults.sh
 
 # reload configs insofar as possible
