@@ -22,6 +22,7 @@ Designed for a minimal Arch Linux installation, but retrofitted to support MacOS
 - [gitconfig](https://github.com/clux/dotfiles/blob/main/.gitconfig) with [fzf](https://github.com/junegunn/fzf) based [git helpers](https://github.com/clux/dotfiles/blob/main/.git-helpers), diff via [delta](https://github.com/dandavison/delta), and account switching by `includeIf` dirs
 - [keychain](https://wiki.archlinux.org/index.php/SSH_keys#Keychain) loading specific ssh keys by host
 - [aliases](https://github.com/clux/dotfiles/blob/main/.aliases) to gracefully move from `ls`->`exa`, `ag`->`rg`, `cat`->`bat`
+- editor configs for [helix](https://github.com/clux/dotfiles/blob/main/config/helix/config.toml) + [vscode](https://github.com/clux/dotfiles/tree/main/share/Code/User)
 
 Plus lots of misc [.functions](https://github.com/clux/dotfiles/blob/main/.functions). As usual, copy what you find interesting.
 
@@ -29,12 +30,10 @@ Plus lots of misc [.functions](https://github.com/clux/dotfiles/blob/main/.funct
 Clone and apply:
 
 ```sh
-just link # force symlink to ~/ and ~/.config/
+just link # force symlink to ~/ + ~/.config/ + CONFIG_HOME
 just system # defaults write (mac) / dconf load (linux)
 ```
 
 All recipes are idempotent.
 
-## Editors
-
-Editor configs for [vscode](https://github.com/clux/dotfiles/blob/main/share/Code/settings.json) and [helix](https://github.com/clux/dotfiles/blob/main/config/helix/config.toml) are linked to via `just link`.
+Note the distinction between the [config](https://github.com/clux/dotfiles/blob/main/config) directory (for unix apps that hardcode `~/.config` or `XDG_CONFIG_HOME`) vs. the [share](https://github.com/clux/dotfiles/blob/main/share) directory for apps that uses [platform specifics](https://docs.rs/dirs/4.0.0/dirs/fn.config_dir.html). While these two folders could have been the same on Linux, they are separated to support other platforms.

@@ -9,12 +9,12 @@ default:
 
 # create symlinks pointing to this repo checkout
 link: fontguard
-  # Dot prefixed files at root go into $HOME
+  # Dot prefixed files are linked to from $HOME
   fd -g '.*' -H --max-depth 1 --type f -a -x ln -sfn {} ~/
-  # Children of config go into $HOME/.config
+  # Children of config are linked to from $HOME/.config
   fd --base-directory config/ --max-depth 1 -a -x ln -sfn {} ~/.config/
-  # Children of share go into platform specific {{CONFIG_HOME}}
-  fd --base-directory share/ --max-depth 1 -a -x echo ln -sfn {} {{CONFIG_HOME}}/
+  # Children of share are linked to from platform specific {{CONFIG_HOME}}
+  fd --base-directory share/ --max-depth 1 -a -x ln -sfn {} {{CONFIG_HOME}}/
 
 # font guard helper (linux)
 [linux]
