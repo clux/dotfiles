@@ -123,7 +123,7 @@
 
 [core]
   hooksPath = ~/repos/dotfiles/git/hooks
-  pager = delta
+  pager = delta | less -+X
   whitespace = "fix,-indent-with-non-tab,trailing-space,cr-at-eol"
 
 [delta "clux-dark"]
