@@ -36,8 +36,7 @@ format = '[$user]($style)'
 [status]
 disabled = false
 style = "bg:black red"
-symbol = ""
-recognize_signal_code = false
+symbol = "⏎"
 format = "[$symbol]($style)"
 
 [hostname]

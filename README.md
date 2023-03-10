@@ -36,4 +36,4 @@ just system # defaults write (mac) / dconf load (linux)
 
 All recipes are idempotent.
 
-Note the distinction between the [config](https://github.com/clux/dotfiles/blob/main/config) directory (for unix apps that hardcode `~/.config` or `XDG_CONFIG_HOME`) vs. the [share](https://github.com/clux/dotfiles/blob/main/share) directory (for apps that uses [platform specifics](https://docs.rs/dirs/4.0.0/dirs/fn.config_dir.html)). These two folders are the same on Linux, but are separated here to support other platforms.
+Note the distinction between the [config](https://github.com/clux/dotfiles/blob/main/config) directory (for unix apps that hardcode `~/.config` or `XDG_CONFIG_HOME`) vs. the [share](https://github.com/clux/dotfiles/blob/main/share) directory (for apps that uses [platform specifics](https://docs.rs/dirs/4.0.0/dirs/fn.config_dir.html)). These two folders happen to be the same on Linux, but are separated here to support other platforms.
