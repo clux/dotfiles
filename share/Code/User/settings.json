@@ -23,5 +23,6 @@
     "rust-analyzer.check.allTargets": false,
     "rust-analyzer.hover.actions.run.enable": false,
     "gitlens.telemetry.enabled": false,
-    "telemetry.telemetryLevel": "off"
+    "telemetry.telemetryLevel": "off",
+    "extensions.ignoreRecommendations": true
 }

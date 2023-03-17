@@ -54,6 +54,12 @@ alias ymd='date +%Y-%m-%d'
 # chrome with proxy-pac
 alias chrome='google-chrome-stable --proxy-pac-url="$(~/.ssh/genpac)"'
 
+# cargo
+alias c="cargo"
+alias cb="cargo build"
+alias cbb="cargo build --bin"
+alias ct="cargo test"
+
 # docker
 alias d="docker"
 alias dps="docker ps"

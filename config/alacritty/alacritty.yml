@@ -16,6 +16,8 @@ window:
   startup_mode: Maximized
   decorations: buttonless
   opacity: 0.8
+  # TODO: next version, can use alt-+ and alt-hjkl
+  #option_as_alt: Both
 
 key_bindings:
   - { key: F1, action: ToggleSimpleFullscreen } # NB: mac only

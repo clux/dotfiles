@@ -89,7 +89,7 @@ truncation_symbol = "."
 
 [git_status]
 disabled = false
-format = '[ $ahead_behind$modified$conflicted$stashed$deleted$renamed$staged$untracked]($style)'
+format = '[ ${ahead}${behind}${modified}${conflicted}${stashed}${deleted}${renamed}${staged}${untracked}]($style)'
 style = "bg:black 38"
 conflicted = "🏳 "
 ahead = "↑$count "
