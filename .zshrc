@@ -28,6 +28,8 @@ if [[ "${OSTYPE}" =~ "darwin" ]]; then
   fpath+=$HOMEBREW_PREFIX/share/zsh/site-functions
   # initialize z plugin manager zinit
   source $HOMEBREW_PREFIX/opt/zinit/zinit.zsh 2> /dev/null # ignore manpage issue for now
+else
+  source /usr/share/zinit/zinit.zsh
 fi
 
 # custom completions - generate comp file for misc executables in ~/.zfunc/_bin

@@ -20,7 +20,6 @@ link: fontguard
 [linux]
 fontguard:
   fd . /usr/share/fonts/ -e ttf | rg -q Liberation
-  fd . /usr/share/fonts/ -e ttf | rg -q Powerline
   fd . /usr/share/fonts/ -e ttf | rg -q "Inconsolata.*Mono"
 
 # font guard helper (mac)
