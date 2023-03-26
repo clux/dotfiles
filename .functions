@@ -8,7 +8,7 @@ hf() { hx "$(fzf)" ;}
 h() { $EDITOR . ;}
 
 # -----------------------------------------------------------------------------
-# zellij/guake + terminal mux helpers
+# zellij + terminal mux helpers
 
 # shellcheck disable=SC2068
 rc() { zellij run -- $@ ;}
@@ -30,15 +30,11 @@ z() { __zoxide_z "$@" && zz; }
 zz() {
   if [ -n "${ZELLIJ_SESSION_NAME}" ]; then
     zellij action rename-tab "${PWD##*/}"
-  elif [[ ! "${OSTYPE}" =~ "darwin" ]]; then
-    guake --rename-tab="${PWD##*/}" -i "$(guake -g)"
   fi
 }
 zzh() {
   if [ -n "${ZELLIJ_SESSION_NAME}" ]; then
     zellij action rename-tab "$1"
-  elif [[ ! "${OSTYPE}" =~ "darwin" ]]; then
-    guake --rename-tab="$1" -i "$(guake -g)"
   fi
   # shellcheck disable=SC2068
   ssh $@

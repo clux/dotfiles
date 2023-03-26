@@ -31,7 +31,6 @@ fontguard:
 [linux]
 system: fontguard
   dconf load /org/ < org.dconf
-  dconf load /apps/ < apps.dconf
 
 # configure system properties (mac)
 [macos]
