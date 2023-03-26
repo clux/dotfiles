@@ -1,3 +1,4 @@
+# https://github.com/alacritty/alacritty/blob/master/alacritty.yml
 shell:
   program: zsh
   # start zellij with a small sleep to ensure it gets right dimensions
@@ -14,7 +15,8 @@ import:
 
 window:
   startup_mode: Maximized
-  decorations: buttonless
+  decorations: buttonless # mac only
+  decorations: none # linux
   opacity: 0.8
   # TODO: next version, can use alt-+ and alt-hjkl
   #option_as_alt: Both
