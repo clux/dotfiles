@@ -3,6 +3,13 @@
 # If not running interactively, don't do anything
 [[ $- == *i* ]] || return 0
 
+# If running in zellij on linux, save the window for refocus keybinds
+if [ -n "${ZELLIJ_SESSION_NAME}" ] && [ ! -f /tmp/wraise ]; then
+  xdotool getactivewindow > /tmp/wraise
+  # F2 keybind in cinnamon hits toggle_terminal
+  # Mac uses Hammerspoon to do the same thing
+fi
+
 # -----------------------------------------------------------------------------
 # modules
 

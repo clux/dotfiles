@@ -44,6 +44,17 @@ zzh() {
   ssh $@
 }
 
+# hooked up to wm via a bind to /bin/zsh -c 'source .functions && terminal_toggle'
+# expects alacritty to have been started first
+terminal_toggle() {
+  local -r id="$(cat /tmp/wraise)"
+  if xprop -id "${id}" | grep -Fq 'window state: Iconic'; then
+    wmctrl -ia "${id}"
+  else
+    xdotool windowminimize $(xdotool getactivewindow)
+  fi
+}
+
 # -----------------------------------------------------------------------------
 # Key management via keychain
 

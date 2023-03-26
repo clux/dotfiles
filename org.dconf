@@ -15,20 +15,25 @@ tap-to-click=false
 [cinnamon/settings-daemon/peripherals/keyboard]
 numlock-state='on'
 
-[cinnamon/desktop/keybindings/custom-keybindings/custom2]
-binding=['AudioPrev']
-command='mpc prev'
-name='MPD Prev'
+[custom0]
+binding=['AudioPlay']
+command='mpc toggle'
+name='MPD Toggle'
 
-[cinnamon/desktop/keybindings/custom-keybindings/custom1]
+[custom1]
 binding=['AudioNext']
 command='mpc next'
 name='MPD Next'
 
-[cinnamon/desktop/keybindings/custom-keybindings/custom0]
-binding=['AudioPlay']
-command='mpc toggle'
-name='MPD Toggle'
+[custom2]
+binding=['AudioPrev']
+command='mpc prev'
+name='MPD Prev'
+
+[custom3]
+binding=['F1']
+command="/bin/zsh -c 'source .functions && terminal_toggle'"
+name='Toggle Alacritty'
 
 [cinnamon/desktop/keybindings]
 custom-list=['custom0', 'custom1', 'custom2']
