@@ -28,17 +28,17 @@ z() { __zoxide_z "$@" && zz; }
 
 # terminal mux helpers to rename the tab we do something
 zz() {
-  if [[ ! "${OSTYPE}" =~ "darwin" ]]; then
-    guake --rename-tab="${PWD##*/}" -i "$(guake -g)"
-  elif [ -n "${ZELLIJ_SESSION_NAME}" ]; then
+  if [ -n "${ZELLIJ_SESSION_NAME}" ]; then
     zellij action rename-tab "${PWD##*/}"
+  elif [[ ! "${OSTYPE}" =~ "darwin" ]]; then
+    guake --rename-tab="${PWD##*/}" -i "$(guake -g)"
   fi
 }
 zzh() {
-  if [[ ! "${OSTYPE}" =~ "darwin" ]]; then
-    guake --rename-tab="$1" -i "$(guake -g)"
-  elif [ -n "${ZELLIJ_SESSION_NAME}" ]; then
+  if [ -n "${ZELLIJ_SESSION_NAME}" ]; then
     zellij action rename-tab "$1"
+  elif [[ ! "${OSTYPE}" =~ "darwin" ]]; then
+    guake --rename-tab="$1" -i "$(guake -g)"
   fi
   # shellcheck disable=SC2068
   ssh $@
