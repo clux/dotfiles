@@ -210,9 +210,9 @@ fi
 
 # pinning some versions from https://hub.docker.com/r/rancher/k3s/tags
 # TODO: do something like https://github.com/nolar/setup-k3d-k3s/blob/v1/action.sh
-k3dmake24() { k3dmake "$1" "--image=rancher/k3s:v1.24.10-k3s1-$(arch)"; }
-k3dmake25() { k3dmake "$1" "--image=rancher/k3s:v1.25.6-k3s1-$(arch)"; }
-k3dmake26() { k3dmake "$1" "--image=rancher/k3s:v1.26.1-k3s1-$(arch)"; }
+k3dmake24() { k3dmake "$1" "--image=rancher/k3s:v1.24.11-k3s1-$(arch)"; }
+k3dmake25() { k3dmake "$1" "--image=rancher/k3s:v1.25.7-k3s1-$(arch)"; }
+k3dmake26() { k3dmake "$1" "--image=rancher/k3s:v1.26.2-k3s1-$(arch)"; }
 
 # -----------------------------------------------------------------------------
 # misc kubernetes helpers
