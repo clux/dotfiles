@@ -98,9 +98,14 @@ bindkey "^[[B" down-line-or-beginning-search # key_down / kcud1
 
 bindkey "^[[1;5C" forward-word  # ctrl + right_arrow to move a word forwards
 bindkey "^[[1;5D" backward-word # ctrl + left_arrow to move a word backwards
-# on linux we can have backward-delete-word on modifire-backspace but hard on mac
+# NB: deleting words is alt-backspace and alt-d
+# Fullsize keyboard binds:
+bindkey  "^[[3~"  delete-char   # delete key to delete forwards (mac has fn-backspace)
+bindkey  "^[[H"   beginning-of-line # HOME == alternate ctrl-a
+bindkey  "^[[F"   end-of-line # END alternate ctrl-e
 
-# defaults:
+
+# defaults that work in alacritty cross-os:
 # ctrl-w is delete word (werase)
 # ctrl-a go to start of line
 # ctrl-e go to end of line

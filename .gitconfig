@@ -43,7 +43,7 @@
 
   # BRANCH HELPERS
   # since github started changing the default master branch:
-  master = !git rev-parse --abbrev-ref origin/HEAD | cut -c8-
+  master = !git remote show origin | grep 'HEAD branch' | choose 2
   # checkout remote ref to a github pr
   # https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/checking-out-pull-requests-locally
   pr = !"pr() { git fetch origin pull/$1/head:pr-$1; git checkout pr-$1; }; pr"
