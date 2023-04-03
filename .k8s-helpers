@@ -197,8 +197,6 @@ k3dmake() {
     --k3s-arg '--kubelet-arg=eviction-hard=imagefs.available<1%,nodefs.available<1%@agent:*' \
     --k3s-arg '--kubelet-arg=eviction-minimum-reclaim=imagefs.available=1%,nodefs.available=1%@agent:*'
   k3d kubeconfig get --all > ~/.kube/k3d
-  # rustls workaround
-  sd "0.0.0.0" "localhost" ~/.kube/k3d
 }
 
 if [[ ! "${OSTYPE}" =~ "darwin" ]]; then
