@@ -7,7 +7,7 @@ Designed for a minimal Arch Linux installation, but retrofitted to support MacOS
 
 ## Desktop Setup
 
-- **Linux**: [cinnamon](https://wiki.archlinux.org/index.php/cinnamon) + [guake](https://wiki.archlinux.org/index.php/Guake) via `dconf`
+- **Linux**: [cinnamon](https://wiki.archlinux.org/index.php/cinnamon) via `dconf`
 - **Mac**: [defaults](https://github.com/clux/dotfiles/blob/main/defaults.sh) with [hammerspoon](https://github.com/Hammerspoon/hammerspoon) + [karabiner](https://karabiner-elements.pqrs.org/docs/)
 
 ## Terminal Setup
