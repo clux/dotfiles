@@ -31,11 +31,13 @@ fontguard:
 [linux]
 system: fontguard
   dconf load /org/ < org.dconf
+  ln -sf $PWD/config/alacritty/linux.yml config/alacritty/os.yml
 
 # configure system properties (mac)
 [macos]
 system:
   ./defaults.sh
+  ln -sf $PWD/config/alacritty/mac.yml config/alacritty/os.yml
 
 # reload configs insofar as possible
 reload:

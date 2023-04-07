@@ -10,19 +10,17 @@ env:
   RUST_BACKTRACE: "1"
 
 import:
-- ~/.config/alacritty/rose-pine.yaml
 # NB: decent themes: nord, challenger_deep, wombat
+- ~/.config/alacritty/rose-pine.yaml
+# NB: This file is a symlink to either linux.yml or mac.yml (see justfile)
+- ~/.config/alacritty/os.yml
+
 
 window:
   startup_mode: Maximized
-  decorations: buttonless # mac only
-  decorations: none # linux
   opacity: 0.8
   # TODO: next version, can use alt-+ and alt-hjkl
   #option_as_alt: Both
-
-key_bindings:
-  - { key: F1, action: ToggleSimpleFullscreen } # NB: mac only
 
 font:
   size: 20
