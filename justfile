@@ -39,6 +39,11 @@ system:
   ./defaults.sh
   ln -sf $PWD/config/alacritty/mac.yml config/alacritty/os.yml
 
+# configure flatpaks
+[linux]
+flatpaks:
+  ln -sf $PWD/var/app/com.vscodium.codium ~/.var/app
+
 # reload configs insofar as possible
 reload:
   bat cache --build | rg -v "okay"
