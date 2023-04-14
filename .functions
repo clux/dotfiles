@@ -6,6 +6,7 @@
 vf() { vlc "$(fzf)" > /dev/null 2>&1 ;}
 hf() { hx "$(fzf)" ;}
 h() { $EDITOR . ;}
+codium() { flatpak run com.vscodium.codium . }
 
 # -----------------------------------------------------------------------------
 # zellij + terminal mux helpers
