@@ -16,7 +16,6 @@
     "gitlens.currentLine.scrollable": false,
     "editor.acceptSuggestionOnEnter": "off",
     "editor.acceptSuggestionOnCommitCharacter": false,
-    "workbench.colorTheme": "Catppuccin Mocha",
     "rust-analyzer.checkOnSave": false,
     "rust-analyzer.diagnostics.enable": false,
     "rust-analyzer.cachePriming.numThreads": 2,
@@ -24,5 +23,9 @@
     "rust-analyzer.hover.actions.run.enable": false,
     "gitlens.telemetry.enabled": false,
     "telemetry.telemetryLevel": "off",
-    "extensions.ignoreRecommendations": true
+    "extensions.ignoreRecommendations": true,
+    "window.zoomLevel": 1,
+    "git.openRepositoryInParentFolders": "never",
+    "workbench.colorTheme": "Catppuccin Mocha",
+    "window.menuBarVisibility": "toggle"
 }
