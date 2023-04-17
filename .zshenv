@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export EDITOR=hx;
+export EDITOR="hx"
 export TERM="xterm-256color"
 
 # colored manpage theme through bat

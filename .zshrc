@@ -116,8 +116,8 @@ export WORDCHARS="${WORDCHARS:s@/@}"
 # -----------------------------------------------------------------------------
 # Key management via keychain
 
-if [[ ${HOSTNAME} = "kjttks" ]]; then
-  key github work main
+if [[ ${HOST} = "kjttks" ]]; then
+  key github main
 elif [[ $(hostname) = "cluxm1.local" ]]; then
   key github work tl
 else

@@ -245,7 +245,7 @@ wifihotspot() {
 # everything else: refresh-rate 144
 refresh-rate() {
   local -r rate="${1-144}"
-  if [[ ${HOSTNAME} = kjttks ]]; then
+  if [[ ${HOST} = kjttks ]]; then
     # Main screen refresh rate
     xrandr --output HDMI-0 --mode 1920x1080 --rate "$rate"
     xrandr -q | grep -E "$rate\.00\*"
@@ -405,9 +405,9 @@ vcc() {
 
 # Download dir for `dl` + brotorr
 export DOWNLOAD_DIR=~/Downloads
-if [[ $HOSTNAME = kjttks ]]; then
+if [[ $HOST = kjttks ]]; then
   export DOWNLOAD_DIR=/media/gauss/DL
-elif [[ $HOSTNAME = broxy ]]; then
+elif [[ $HOST = broxy ]]; then
   export DOWNLOAD_DIR=/media/dumptruck/DL
 fi
 
