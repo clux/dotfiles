@@ -17,7 +17,8 @@ alias ls='exa --group-directories-first'
 alias tree='exa --tree --group-directories-first --icons --git-ignore -git --sort -I "node_modules|target|site-packages|.git|venv"'
 
 # top/htop -> btm
-alias top='btm -b'
+#alias top='btm -b'
+alias top='btop'
 
 # make rg look like ag
 alias rg="rg --colors 'match:bg:yellow' --colors 'match:fg:black' --colors 'match:style:nobold' --colors 'line:style:bold' --colors 'path:fg:green' --glob=!.git/"
