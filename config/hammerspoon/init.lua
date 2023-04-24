@@ -12,7 +12,7 @@ local function toggleApp(name)
 end
 
 -- Global terminal toggle
-hs.hotkey.bind({}, "F2", function() toggleApp("alacritty") end)
+hs.hotkey.bind({}, "F1", function() toggleApp("alacritty") end)
 
 -- Misc app shortcuts
 hs.hotkey.bind(mash, "v", function() toggleApp("Visual Studio Code") end)

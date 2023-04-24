@@ -2,4 +2,4 @@ window:
   decorations: buttonless # mac only
 
 key_bindings:
-  - { key: F1, action: ToggleSimpleFullscreen } # NB: mac only
+  - { key: F2, action: ToggleSimpleFullscreen } # NB: mac only
