@@ -41,10 +41,10 @@ alias XG="xargs grep"
 alias L="less"
 
 if [[ "${OSTYPE}" =~ "darwin" ]]; then
-  alias XC="pbcopy"
+  alias C="pbcopy"
   alias xdg-open="open"
 else
-  alias XC="xclip -i -sel c"
+  alias C="wl-copy"
 fi
 
 # misc

@@ -7,7 +7,7 @@ Designed for a minimal Arch Linux installation, but retrofitted to support MacOS
 
 ## Desktop Setup
 
-- **Linux**: [cinnamon](https://wiki.archlinux.org/index.php/cinnamon) via `dconf`
+- **Linux**: [hyprland](https://hyprland.org) / waybar / wofi
 - **Mac**: [defaults](https://github.com/clux/dotfiles/blob/main/defaults.sh) with [hammerspoon](https://github.com/Hammerspoon/hammerspoon) + [karabiner](https://karabiner-elements.pqrs.org/docs/)
 
 ## Terminal Setup
@@ -30,7 +30,7 @@ Clone and apply:
 
 ```sh
 just link # force symlink to ~/ + ~/.config/ + CONFIG_HOME
-just system # defaults write (mac) / dconf load (linux)
+just system # defaults write (mac) / ??? (linux)
 ```
 
 All recipes are idempotent.

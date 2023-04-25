@@ -3,13 +3,6 @@
 # If not running interactively, don't do anything
 [[ $- == *i* ]] || return 0
 
-# If running in zellij on linux, save the window for refocus keybinds
-if [ -n "${ZELLIJ_SESSION_NAME}" ] && [ ! -f /tmp/wraise ]; then
-  xdotool getactivewindow > /tmp/wraise
-  # F2 keybind in cinnamon hits toggle_terminal
-  # Mac uses Hammerspoon to do the same thing
-fi
-
 # -----------------------------------------------------------------------------
 # modules
 
@@ -35,7 +28,7 @@ if [[ "${OSTYPE}" =~ "darwin" ]]; then
   fpath+=$HOMEBREW_PREFIX/share/zsh/site-functions
   # initialize z plugin manager zinit
   source $HOMEBREW_PREFIX/opt/zinit/zinit.zsh 2> /dev/null # ignore manpage issue for now
-else
+elif [ -f /usr/share/zinit/zinit.zsh ]; then
   source /usr/share/zinit/zinit.zsh
 fi
 
@@ -49,7 +42,7 @@ _gencmp() {
     ${@:2} > ~/.zfunc/_${bin}
   fi
 }
-_gencmp kopium kopium completions zsh
+#_gencmp kopium kopium completions zsh
 _gencmp rustup rustup completions zsh
 _gencmp cargo rustup completions zsh cargo
 fpath+=~/.zfunc
@@ -59,8 +52,8 @@ autoload -Uz compinit && compinit
 autoload bashcompinit && bashcompinit
 
 # addons from zinit
-zinit light zsh-users/zsh-autosuggestions
-zinit light zdharma-continuum/fast-syntax-highlighting
+command -v zinit > /dev/null && zinit light zsh-users/zsh-autosuggestions
+command -v zinit > /dev/null && zinit light zdharma-continuum/fast-syntax-highlighting
 
 # configure autosuggestions; avoid suggesting directories, but otherwise favour history
 ZSH_AUTOSUGGEST_HISTORY_IGNORE="cd *"
@@ -116,7 +109,7 @@ export WORDCHARS="${WORDCHARS:s@/@}"
 # -----------------------------------------------------------------------------
 # Key management via keychain
 
-if [[ ${HOST} = "kjttks" ]]; then
+if [[ ${HOST} = "hprks" ]]; then
   key github main
 elif [[ $(hostname) = "cluxm1.local" ]]; then
   key github work tl

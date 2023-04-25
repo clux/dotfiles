@@ -30,7 +30,6 @@ fontguard:
 # configure system properties (linux)
 [linux]
 system: fontguard
-  dconf load /org/ < org.dconf
   ln -sf $PWD/config/alacritty/linux.yml config/alacritty/os.yml
 
 # configure system properties (mac)
@@ -59,7 +58,7 @@ lint:
 lint-docker:
   docker run \
     -e SHELLCHECK_OPTS="{{SHELLCHECK_OPTS}}" \
-    -v $$PWD:/volume -w /volume \
+    -v $PWD:/volume -w /volume \
     -t koalaman/shellcheck:stable \
     shellcheck {{SHELLCHECKED_FILES}}
 
