@@ -62,8 +62,9 @@
         "format": " {}"
     },
      "custom/language": {
-         "exec": "localectl status |grep 'X11 Variant' | choose 2",
-         "interval": 3600,
+         "exec": "hyprctl devices -j | jq '.keyboards[] | select(.name == \"fnatic-gear-fnatic-gear-ministreak-keyboard\") | .active_keymap' -r | sed 's/, with dead keys//'",
+         "interval": 900,
+         "on-click": "hyprctl switchxkblayout fnatic-gear-fnatic-gear-ministreak-keyboard next > /dev/null && sleep 1 && hyprctl devices -j | jq '.keyboards[] | select(.name == \"fnatic-gear-fnatic-gear-ministreak-keyboard\") | .active_keymap' -r | sed 's/, with dead keys//'",
          "format": " {}",
          "tooltip": false
     },
