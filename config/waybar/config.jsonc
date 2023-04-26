@@ -10,7 +10,7 @@
         "clock",
         //"cpu",
         //"memory",
-        "custom/weather",
+        //"custom/weather",
         "wlr/workspaces"
     ],
     "modules-center": ["hyprland/window"],
@@ -68,6 +68,7 @@
          "format": " {}",
          "tooltip": false
     },
+    // TODO: fix, currently gets wrong location and crashes after a while
     "custom/weather" : {
         "tooltip" : true,
         "format" : "{}",
@@ -82,6 +83,7 @@
     },
     "clock": {
         "format": "{: %R   %d/%m}",
+        "timezone": "Europe/London",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "pulseaudio": {
