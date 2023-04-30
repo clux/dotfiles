@@ -31,6 +31,7 @@ fontguard:
 [linux]
 system: fontguard
   ln -sf $PWD/config/alacritty/linux.yml config/alacritty/os.yml
+  gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
 # configure system properties (mac)
 [macos]

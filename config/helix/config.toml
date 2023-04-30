@@ -1,5 +1,12 @@
 #theme = "hex_toxic"
-theme = "catppuccin_mocha"
+#theme = "catppuccin_mocha"
+theme = "base16_transparent"
+
+[editor.soft-wrap]
+enable = true
+max-wrap = 25
+max-indent-retain = 16
+wrap-indicator = ""
 
 [editor.cursor-shape]
 insert = "bar"
@@ -13,3 +20,6 @@ hidden = false
 #space = "all"
 tab = "all"
 newline = "none"
+
+[editor.gutters]
+layout = ["diff", "diagnostics", "line-numbers", "spacer"]

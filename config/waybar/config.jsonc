@@ -7,10 +7,12 @@
     "gtk-layer-shell": true,
     "height": 0,
     "modules-left": [
+        "custom/wofi",
         "clock",
         //"cpu",
         //"memory",
         //"custom/weather",
+        "custom/lockscreen",
         "wlr/workspaces"
     ],
     "modules-center": ["hyprland/window"],
@@ -44,6 +46,11 @@
             "default": ""
           }
     },
+    "custom/wofi": {
+        "format": "",
+        "on-click": "wofi --show drun -I -m -i -l top_left",
+        "tooltip": false
+    },
     "cpu": {
         "interval": 10,
         "format": " {}%",
@@ -55,6 +62,11 @@
         "format": " {}%",
         "format-alt":" {used:0.1f}G",
          "max-length": 10
+    },
+    "custom/lockscreen": {
+        "format": "",
+        "on-click": "sh -c '(sleep 0.5s; swaylock)' & disown",
+        "tooltip": false
     },
     "custom/updates": {
         "exec": "paru -Qua | wc -l",
@@ -84,6 +96,7 @@
     "clock": {
         "format": "{: %R   %d/%m}",
         "timezone": "Europe/London",
+        "on-click": "xdg-open https://calendar.google.com/calendar/u/0/r/week",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "pulseaudio": {

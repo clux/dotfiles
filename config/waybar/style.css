@@ -52,8 +52,10 @@ tooltip {
 #custom-updates,
 #custom-caffeine,
 #custom-weather,
+#custom-lockscreen,
 #window,
 #clock,
+#custom-wofi,
 #battery,
 #pulseaudio,
 #network,
@@ -108,9 +110,10 @@ tooltip {
     margin-right: 60px;
 }
 
-#clock {
+#custom-wofi {
     color: #fab387;
     border-radius: 10px 0px 0px 10px;
+    font-size: 22px;
     margin-left: 5px;
     border-right: 0px;
 }
@@ -127,7 +130,7 @@ tooltip {
     border-right: 0px;
 }
 
-#pulseaudio.microphone {
+#pulseaudio.microphone,#custom-lockscreen {
     color: #cba6f7;
     margin-right: 5px;
     border-radius: 0 10px 10px 0;
