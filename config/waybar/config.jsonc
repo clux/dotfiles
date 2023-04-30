@@ -90,7 +90,7 @@
         "format": "{icon} {volume}%",
         "tooltip": false,
         "format-muted": " Muted",
-        "on-click-middle": "systemctl --user restart pipewire.service",
+        "on-click-middle": "systemctl --user restart pipewire xdg-desktop-portal-hyprland xdg-desktop-portal",
         "on-click": "pamixer -t",
         "on-scroll-up": "pamixer -i 5",
         "on-scroll-down": "pamixer -d 5",
