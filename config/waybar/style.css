@@ -53,6 +53,7 @@ tooltip {
 #custom-caffeine,
 #custom-weather,
 #custom-lockscreen,
+#custom-logout,
 #window,
 #clock,
 #custom-wofi,
@@ -130,7 +131,7 @@ tooltip {
     border-right: 0px;
 }
 
-#pulseaudio.microphone,#custom-lockscreen {
+#pulseaudio.microphone,#custom-logout {
     color: #cba6f7;
     margin-right: 5px;
     border-radius: 0 10px 10px 0;

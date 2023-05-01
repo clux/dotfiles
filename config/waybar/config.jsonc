@@ -13,6 +13,7 @@
         //"memory",
         //"custom/weather",
         "custom/lockscreen",
+        "custom/logout",
         "wlr/workspaces"
     ],
     "modules-center": ["hyprland/window"],
@@ -65,7 +66,12 @@
     },
     "custom/lockscreen": {
         "format": "",
-        "on-click": "sh -c '(sleep 0.5s; swaylock)' & disown",
+        "on-click": "swaylock",
+        "tooltip": false
+    },
+    "custom/logout": {
+        "format": "⏻",
+        "on-click": "wleave -p layer-shell -b 5 -T 550 -B 550 -kf",
         "tooltip": false
     },
     "custom/updates": {

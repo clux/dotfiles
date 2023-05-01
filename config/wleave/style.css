@@ -1,0 +1,59 @@
+window {
+    font-family: monospace;
+    font-size: 16pt;
+    color: #cdd6f4;
+    background-color: rgba(30, 30, 46, 0.5);
+}
+
+button {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 25%;
+    border: none;
+    background-color: rgba(30, 30, 46, 0.9);
+    margin: 5px;
+    transition: box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+/* awkward duality between hover and focus, try to separate them */
+button:hover, button:focus {
+    /* use hyprland border colors as background */
+    background-color: rgba(51, 204, 255, 0.93);
+}
+button:focus {
+    /* extra highlight when using keyboard since two blocks might be active */
+    border-color: rgba(0, 255, 153, 0.93);
+    border: 5px;
+    color: #1e1e2e;
+}
+
+/* button icons bundled by wleave */
+#lock {
+    background-image: image(url("/usr/share/wleave/icons/lock.svg"));
+}
+#lock:focus {
+}
+
+#logout {
+    background-image: image(url("/usr/share/wleave/icons/logout.svg"));
+}
+#logout:focus {
+}
+
+#suspend {
+    background-image: image(url("/usr/share/wleave/icons/suspend.svg"));
+}
+#suspend:focus {
+}
+
+#shutdown {
+    background-image: image(url("/usr/share/wleave/icons/shutdown.svg"));
+}
+#shutdown:focus {
+}
+
+#reboot {
+    background-image: image(url("/usr/share/wleave/icons/reboot.svg"));
+}
+#reboot:focus {
+}
