@@ -19,8 +19,11 @@
     "modules-center": ["hyprland/window"],
     "modules-right": [
         "tray",
+        "network",
+        "gamemode",
         "custom/updates",
         "custom/language",
+        "idle_inhibitor",
         "temperature",
         "custom/power",
         "pulseaudio",
@@ -52,6 +55,74 @@
         "on-click": "wofi --show drun -I -m -i -l top_left",
         "tooltip": false
     },
+
+    // unused - laptop only
+    "backlight": {
+        "interval": 30,
+        "align": 0,
+        "rotate": 0,
+        "format": "<span font='10' rise='1500'>{icon}</span> {percent}",
+        "format-icons": ["", "", "", ""],
+        "on-scroll-up": "~/.config/hypr/scripts/brightness --inc",
+        "on-scroll-down": "~/.config/hypr/scripts/brightness --dec",
+        "smooth-scrolling-threshold": 1
+    },
+
+    // TODO: verify this hooks into swayidle
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "<span color='#f38ba8'></span>",
+            "deactivated": ""
+        },
+        /* "timeout": 30.5 */
+    },
+
+    // TODO: hook up to mpris + waybar-mpris
+    "custom/waybar-mpris": {
+        // "format": "<span rise='1000'>⁙</span> {} <span rise='1000'>⁙</span>",
+        "return-type": "json",
+        "exec": "waybar-mpris --position --autofocus --order 'SYMBOL:POSITION' --separator string '⁙'",
+        "on-click": "waybar-mpris --send toggle",
+        // This option will switch between players on right click.
+        "on-click-right": "waybar-mpris --send player-next",
+        // The options below will switch the selected player on scroll
+        // "on-scroll-up": "waybar-mpris --send player-next",
+        // "on-scroll-down": "waybar-mpris --send player-prev",
+        // The options below will go to next/previous track on scroll
+        "on-scroll-up": "waybar-mpris --send next",
+        "on-scroll-down": "waybar-mpris --send prev",
+        "escape": true,
+    },
+
+    "gamemode": {
+        "format": "{glyph}",
+        "format-alt": "{glyph} {count}",
+        "glyph": "",
+        "hide-not-running": true,
+        "use-icon": true,
+        "icon-name": "input-gaming-symbolic",
+        "icon-spacing": 4,
+        "icon-size": 20,
+        "tooltip": true,
+        "tooltip-format": "Games running: {count}"
+    },
+
+    "network": {
+        "interface": "wlan0",
+        "format": "{ifname}",
+        //"on-click": "alacritty -T nmtui -e 'nmtui'",
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ifname} ",
+        //"format-disconnected": "", //An empty format will hide the module.
+        "format-disconnected": "",
+        "tooltip-format": "{ifname}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+        "tooltip-format-ethernet": "{ifname} ",
+        "tooltip-format-disconnected": "Disconnected",
+        "max-length": 50
+    },
+
     "cpu": {
         "interval": 10,
         "format": " {}%",

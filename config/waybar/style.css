@@ -1,7 +1,8 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: Cartograph CF Nerd Font, monospace;
+    /*font-family: Cartograph CF Nerd Font, monospace;*/
+    font-family: Inconsolata Nerd Font;
     font-weight: bold;
     font-size: 14px;
     min-height: 0;
@@ -54,10 +55,12 @@ tooltip {
 #custom-weather,
 #custom-lockscreen,
 #custom-logout,
+#idle_inhibitor,
 #window,
 #clock,
 #custom-wofi,
 #battery,
+#gamemode,
 #pulseaudio,
 #network,
 #workspaces,
@@ -98,7 +101,7 @@ tooltip {
     border-right: 0px;
 }
 
-#custom-updates {
+#network {
     color: #f5c2e7;
     border-left: 0px;
     border-right: 0px;
