@@ -52,7 +52,7 @@
     },
     "custom/wofi": {
         "format": "",
-        "on-click": "wofi --show drun -I -m -i -l top_left",
+        "on-click": "wofi --show drun -a -I -m -i -l top_left -W 800 -H 600",
         "tooltip": false
     },
 

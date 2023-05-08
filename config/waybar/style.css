@@ -116,9 +116,7 @@ tooltip {
 
 #custom-wofi {
     color: #fab387;
-    border-radius: 10px 0px 0px 10px;
     font-size: 22px;
-    margin-left: 5px;
     border-right: 0px;
 }
 
@@ -134,7 +132,7 @@ tooltip {
     border-right: 0px;
 }
 
-#pulseaudio.microphone,#custom-logout {
+#custom-logout {
     color: #cba6f7;
     margin-right: 5px;
     border-radius: 0 10px 10px 0;
