@@ -4,7 +4,7 @@
     /*font-family: Cartograph CF Nerd Font, monospace;*/
     font-family: Inconsolata Nerd Font;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 28px;
     min-height: 0;
 }
 
@@ -22,9 +22,9 @@ tooltip {
 }
 
 #workspaces button {
-    padding: 5px;
+    padding: 10px;
     color: #313244;
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
 #workspaces button.active {
@@ -69,9 +69,9 @@ tooltip {
 #temperature,
 #backlight {
     background: #1e1e2e;
-    padding: 0px 10px;
+    padding: 0px 20px;
     margin: 3px 0px;
-    margin-top: 10px;
+    margin-top: 0px;
     border: 1px solid #181825;
 }
 
@@ -148,7 +148,9 @@ tooltip {
 }
 
 #custom-weather {
-    border-radius: 0px 10px 10px 0px;
-    border-right: 0px;
     margin-left: 0px;
+}
+
+#custom-updates {
+    padding-right: 0px;
 }

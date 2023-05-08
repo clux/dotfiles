@@ -11,7 +11,7 @@
         "clock",
         //"cpu",
         //"memory",
-        //"custom/weather",
+        "custom/weather",
         "custom/lockscreen",
         "custom/logout",
         "wlr/workspaces"
@@ -114,12 +114,8 @@
         //"on-click": "alacritty -T nmtui -e 'nmtui'",
         "format-wifi": "{essid} ({signalStrength}%) ",
         "format-ethernet": "{ifname} ",
-        //"format-disconnected": "", //An empty format will hide the module.
         "format-disconnected": "",
-        "tooltip-format": "{ifname}",
-        "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
-        "tooltip-format-ethernet": "{ifname} ",
-        "tooltip-format-disconnected": "Disconnected",
+        "tooltip": false,
         "max-length": 50
     },
 
@@ -146,9 +142,9 @@
         "tooltip": false
     },
     "custom/updates": {
-        "exec": "paru -Qua | wc -l",
+        "exec": "echo \"`paru -Qua | wc -l`\nAUR packages\"",
         "interval": 7200,
-        "format": " {}"
+        "format": "\uf487 {}"
     },
      "custom/language": {
          "exec": "hyprctl devices -j | jq '.keyboards[] | select(.name == \"fnatic-gear-fnatic-gear-ministreak-keyboard\") | .active_keymap' -r | sed 's/, with dead keys//'",
@@ -171,7 +167,7 @@
         "spacing": 15
     },
     "clock": {
-        "format": "{: %R   %d/%m}",
+        "format": "{: %R %d/%m}",
         "timezone": "Europe/London",
         "on-click": "xdg-open https://calendar.google.com/calendar/u/0/r/week",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
@@ -179,7 +175,7 @@
     "pulseaudio": {
         "format": "{icon} {volume}%",
         "tooltip": false,
-        "format-muted": " Muted",
+        "format-muted": "\udb81\udfce Muted",
         "on-click-middle": "systemctl --user restart pipewire xdg-desktop-portal-hyprland xdg-desktop-portal",
         "on-click": "pamixer -t",
         "on-scroll-up": "pamixer -i 5",
@@ -198,29 +194,22 @@
     "pulseaudio#microphone": {
         "format": "{format_source}",
         "tooltip": false,
-        "format-source": " {volume}%",
-        "format-source-muted": " Muted",
+        "format-source": "\uf130 {volume}%",
+        "format-source-muted": "\uf131 Muted",
         "on-click": "pamixer --default-source -t",
         "on-scroll-up": "pamixer --default-source -i 5",
         "on-scroll-down": "pamixer --default-source -d 5",
         "scroll-step": 5
     },
 
-    "temperature#power": {
-        // hwmon3=ryzen (1=Tctl), hwmon2=GPU, hwmon1=nvme, hwmon0=aspci
-        "hwmon-path": "/sys/class/hwmon/hwmon2/power1_average",
-        "tooltip-format": "GPU Power (avg)",
-        "format": "{temperatureC}W",
-        "critical-threshold": 300,
-        "format-critical": " {temperatureC}W",
-        "on-click": "alacritty -T btop -e 'btop'"
-    },
-
     "custom/power" : {
-        "tooltip" : true,
+        // customized 'temperature' (normally reads hwmon) formats only temp units
+        "tooltip" : false, // tooltip-format is not a thing :(
         "tooltip-format": "GPU power average",
         "format" : "⚡{}W",
+        "on-click": "alacritty -T sensors -e 'zsh -ic sensors'",
         "restart-interval" : 300,
+         // hwmon3=ryzen (1=Tctl), hwmon2=GPU, hwmon1=nvme, hwmon0=aspci
         "exec" : "echo $(($(cat /sys/class/hwmon/hwmon2/power1_average) / 1000000))"
     },
     "temperature": {
