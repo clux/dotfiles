@@ -27,5 +27,8 @@
     "window.zoomLevel": 1,
     "git.openRepositoryInParentFolders": "never",
     "workbench.colorTheme": "Catppuccin Mocha",
-    "window.menuBarVisibility": "toggle"
+    "window.menuBarVisibility": "toggle",
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": false
+    }
 }
