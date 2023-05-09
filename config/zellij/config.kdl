@@ -43,3 +43,10 @@ themes {
     white "#cdd6f4"
   }
 }
+
+ui {
+    // hmm, doesn't seem to work?
+    pane_frames {
+        hide_session_name true
+    }
+}
