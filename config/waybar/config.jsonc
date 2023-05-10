@@ -147,10 +147,10 @@
         "format": "\uf487 {}"
     },
      "custom/language": {
-         "exec": "hyprctl devices -j | jq '.keyboards[] | select(.name == \"fnatic-gear-fnatic-gear-ministreak-keyboard\") | .active_keymap' -r | sed 's/, with dead keys//'",
+         "exec": "hyprctl devices -j | jq '.keyboards[] | select(.name == \"fnatic-gear-fnatic-gear-ministreak-keyboard\") | .active_keymap' -r | awk -F\"[()]\" '{print $2}' | sed 's/\\.,.*//'",
          "interval": 900,
-         "on-click": "hyprctl switchxkblayout fnatic-gear-fnatic-gear-ministreak-keyboard next > /dev/null && sleep 1 && hyprctl devices -j | jq '.keyboards[] | select(.name == \"fnatic-gear-fnatic-gear-ministreak-keyboard\") | .active_keymap' -r | sed 's/, with dead keys//'",
-         "format": " {}",
+         "on-click": "hyprctl switchxkblayout fnatic-gear-fnatic-gear-ministreak-keyboard next > /dev/null && sleep 1 && hyprctl devices -j | jq '.keyboards[] | select(.name == \"fnatic-gear-fnatic-gear-ministreak-keyboard\") | .active_keymap' -r | awk -F\"[()]\" '{print $2}' | sed 's/\\.,.*//'",
+         "format": "\uf11c  {}",
          "tooltip": false
     },
     // TODO: fix, currently gets wrong location and crashes after a while

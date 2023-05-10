@@ -97,8 +97,9 @@ tooltip {
 
 #custom-language {
     color: #f38ba8;
+    /*margin-right: -10px;*/
     border-left: 0px;
-    border-right: 0px;
+    border-right: 1px;
 }
 
 #network {
@@ -124,12 +125,18 @@ tooltip {
     color: #f9e2af;
     border-left: 0px;
     border-right: 0px;
+    padding-right: 30px;
 }
 
 #pulseaudio {
     color: #89b4fa;
     border-left: 0px;
     border-right: 0px;
+}
+
+#idle_inhibitor {
+    padding-left: 15px;
+    padding-right: 25px
 }
 
 #custom-logout {
@@ -150,5 +157,5 @@ tooltip {
 }
 
 #custom-updates {
-    padding-right: 0px;
+    /*padding-right: 0px;*/
 }
