@@ -1,5 +1,7 @@
 window:
   decorations: buttonless # mac only
+  # allow alt-+ and alt-hjkl
+  option_as_alt: Both
 
 key_bindings:
   - { key: F2, action: ToggleSimpleFullscreen } # NB: mac only

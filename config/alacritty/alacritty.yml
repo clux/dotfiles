@@ -19,8 +19,6 @@ import:
 window:
   startup_mode: Maximized
   opacity: 0.8
-  # TODO: next version, can use alt-+ and alt-hjkl
-  #option_as_alt: Both
 
 font:
   size: 20
