@@ -55,6 +55,7 @@ tooltip {
 #custom-weather,
 #custom-lockscreen,
 #custom-logout,
+#custom-mpris,
 #idle_inhibitor,
 #window,
 #clock,
@@ -102,11 +103,12 @@ tooltip {
     border-right: 1px;
 }
 
-#network {
+#custom-mpris {
     color: #f5c2e7;
+    padding-right: 0px;
     border-left: 0px;
     border-right: 0px;
-    border-radius: 10px 0px 0px 10px;;
+    border-radius: 0px 0px 0px 10px;;
 }
 
 #window {

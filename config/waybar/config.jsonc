@@ -12,6 +12,7 @@
         //"cpu",
         //"memory",
         "custom/weather",
+        "network",
         "custom/lockscreen",
         "custom/logout",
         "wlr/workspaces"
@@ -19,7 +20,7 @@
     "modules-center": ["hyprland/window"],
     "modules-right": [
         "tray",
-        "network",
+        "custom/mpris",
         "gamemode",
         "custom/updates",
         "custom/language",
@@ -78,11 +79,10 @@
         /* "timeout": 30.5 */
     },
 
-    // TODO: hook up to mpris + waybar-mpris
-    "custom/waybar-mpris": {
-        // "format": "<span rise='1000'>⁙</span> {} <span rise='1000'>⁙</span>",
+    "custom/mpris": {
+        //"format": "<span rise='1000'>⁙</span> {} <span rise='1000'>⁙</span>",
         "return-type": "json",
-        "exec": "waybar-mpris --position --autofocus --order 'SYMBOL:POSITION' --separator string '⁙'",
+        // "exec": "waybar-mpris --position --autofocus --play '\udb80\udfe4' --pause '\udb81\udc0a' --order 'SYMBOL:POSITION' --separator string '⁙'",
         "on-click": "waybar-mpris --send toggle",
         // This option will switch between players on right click.
         "on-click-right": "waybar-mpris --send player-next",
