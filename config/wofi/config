@@ -1,0 +1,8 @@
+width=800
+height=600
+show=drun
+insensitive=true
+allow_markup=true
+no_actions=true
+allow_images=true
+prompt=search
