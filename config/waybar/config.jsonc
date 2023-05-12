@@ -20,7 +20,7 @@
     "modules-center": ["hyprland/window"],
     "modules-right": [
         "tray",
-        "custom/mpris",
+        "mpris",
         "gamemode",
         "custom/updates",
         "custom/language",
@@ -79,7 +79,21 @@
         /* "timeout": 30.5 */
     },
 
-    // NB: needs waybar-mpris-git from aur
+    "mpris": {
+        "format": "{status_icon} {artist} {player_icon}",
+        "refresh": 900,
+        "format-paused": "{status_icon} {artist} {player_icon}",
+        "player-icons": {
+            "default": "\udb82\udd60",
+            "chromium": "\uf268"
+         },
+         "status-icons": {
+             "paused": "\udb80\udfe4",
+             "playing": "\udb81\udc0a"
+          }
+    },
+
+    // NB: unused atm, works well, but needs waybar-mpris-git from aur and trying to limit aur deps
     "custom/mpris": {
         //"format": "<span rise='1000'>⁙</span> {} <span rise='1000'>⁙</span>",
         "return-type": "json",
