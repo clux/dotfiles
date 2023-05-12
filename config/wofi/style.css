@@ -8,8 +8,6 @@
 #window {
     background: rgba(41, 42, 55, 0.8);
     background-clip: content-box;
-    width: 5em;
-    height: 5em;
     border: solid 4px rgba(0,0,0,0.3);
 }
 
