@@ -1,39 +1,104 @@
+/* Mocha Rosewater */
+@define-color accent #f5e0dc;
+@define-color txt #cad3f5;
+@define-color bg #24273a;
+@define-color bg2 #494d64;
+
+/* turn colors into vars to adjust opacity */
+:root {
+  /* @bg in decimal RGB */
+  --bg: 36, 39, 58;
+  /* @bg2 in decimal RGB */
+  --bg2: 73, 77, 100;
+}
 * {
-    /*all: unset;*/
-    font-size: 24px;
     font-family: inconsolata nerd font;
     font-weight: bold;
+    font-size: 24px;
+}
+/* rest same as upstream, except for opacity */
+
+
+/* Window */
+window {
+    margin: 0px;
+    padding: 10px;
+    border: 3px solid @accent;
+    border-radius: 7px;
+    background-color: rgba(var(--bg), 0.95);
+    animation: slideIn 0.1s ease-in-out both;
 }
 
-#window {
-    background: rgba(41, 42, 55, 0.8);
-    background-clip: content-box;
-    border: solid 4px rgba(0,0,0,0.3);
+/* Slide In */
+@keyframes slideIn {
+    0% {
+       opacity: 0;
+    }
+
+    100% {
+       opacity: 0.95;
+    }
 }
 
+/* Inner Box */
+#inner-box {
+    margin: 5px;
+    padding: 10px;
+    border: none;
+    background-color: rgba(var(--bg), 0.95);
+    animation: fadeIn 0.1s ease-in-out both;
+}
+
+/* Fade In */
+@keyframes fadeIn {
+    0% {
+       opacity: 0;
+    }
+
+    100% {
+       opacity: 0.95;
+    }
+}
+
+/* Outer Box */
 #outer-box {
-    /*background-color: rgba(41, 42, 55, 0.3);*/
-    /*box-shadow: 0 0 0 4px rgba(41, 42, 55, 0);
-    background-clip: content-box;
-    border: 8px solid rgba(68, 68, 101, 0.1);
-    border-radius: 12px;*/
+    margin: 5px;
+    padding: 10px;
+    border: none;
+    background-color: rgba(var(--bg), 0.95);
 }
 
-#input{
-    margin: 1rem;
-    padding: 0.5rem;
-    border-radius: 10px;
-    background-color: #303241;
+/* Scroll */
+#scroll {
+    margin: 0px;
+    padding: 10px;
+    border: none;
 }
 
-#entry {
-    margin: 0.25rem 0.75rem 0.25rem 0.75rem;
-    padding: 0.25rem 0.75rem 0.25rem 0.75rem;
-    color: #9699b7;
-    border-radius: 8px;
+/* Input */
+#input {
+    margin: 5px;
+    padding: 10px;
+    border: none;
+    color: @accent;
+    background-color: rgba(var(--bg2), 1);
+    animation: fadeIn 0.1s ease-in-out both;
 }
 
+/* Text */
+#text {
+    margin: 5px;
+    padding: 10px;
+    border: none;
+    color: @txt;
+    animation: fadeIn 0.1s ease-in-out both;
+}
+
+/* Selected Entry */
 #entry:selected {
-    background-color: #303241;
-    color: #d9e0ee;
+   background-color: @accent;
+}
+
+#entry:selected #text {
+    color: @bg;
 }
