@@ -79,6 +79,7 @@
         /* "timeout": 30.5 */
     },
 
+    // NB: needs waybar-mpris-git from aur
     "custom/mpris": {
         //"format": "<span rise='1000'>⁙</span> {} <span rise='1000'>⁙</span>",
         "return-type": "json",
