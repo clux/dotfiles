@@ -23,6 +23,7 @@
         "mpris",
         "gamemode",
         "custom/updates",
+        "hyprland/submap",
         "custom/language",
         "idle_inhibitor",
         "temperature",
@@ -80,9 +81,9 @@
     },
 
     "mpris": {
-        "format": "{status_icon} {artist} {player_icon}",
+        "format": "{player_icon}  {status_icon} {artist}",
         "refresh": 900,
-        "format-paused": "{status_icon} {artist} {player_icon}",
+        "format-paused": "{player_icon}  {status_icon} {artist}",
         "player-icons": {
             "default": "\udb82\udd60",
             "chromium": "\uf268"
@@ -161,7 +162,24 @@
         "interval": 7200,
         "format": "\uf487 {}"
     },
-     "custom/language": {
+    // TODO: maybe pick this up for resizing
+    // https://wiki.hyprland.org/Configuring/Binds/#submaps
+    "hyprland/submap": {
+        "format": "\ueb70 {}",
+        "max-length": 8,
+        "on-click": "hyprctl dispatch submap reset",
+        "tooltip": false
+    },
+
+    // unused, quite bad atm
+    "hyprland/language": {
+        "format": "\uf11c {}",
+        "format-us": "colemak",
+        "format-us": "intl",
+        "keyboard-name": "fnatic-gear-fnatic-gear-ministreak-keyboard"
+    },
+    // hacky replacement that switches on click, with some hacky sed name formatting
+    "custom/language": {
          "exec": "hyprctl devices -j | jq '.keyboards[] | select(.name == \"fnatic-gear-fnatic-gear-ministreak-keyboard\") | .active_keymap' -r | awk -F\"[()]\" '{print $2}' | sed 's/\\.,.*//'",
          "interval": 900,
          "on-click": "hyprctl switchxkblayout fnatic-gear-fnatic-gear-ministreak-keyboard next > /dev/null && sleep 1 && hyprctl devices -j | jq '.keyboards[] | select(.name == \"fnatic-gear-fnatic-gear-ministreak-keyboard\") | .active_keymap' -r | awk -F\"[()]\" '{print $2}' | sed 's/\\.,.*//'",
@@ -177,7 +195,7 @@
         "return-type" : "json"
     },
     "tray": {
-        "icon-size": 13,
+        "icon-size": 26,
         "tooltip": false,
         "spacing": 15
     },

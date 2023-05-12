@@ -78,7 +78,7 @@ tooltip {
 }
 
 #tray {
-    border-radius: 10px;
+    border-radius: 0px 0px 10px 10px;
     margin-right: 10px;
 }
 
@@ -106,7 +106,7 @@ tooltip {
 
 #mpris, #custom-mpris {
     color: #f5c2e7;
-    /*padding-right: 0px;*/
+    padding-right: 0px;
     border-left: 0px;
     border-right: 0px;
     border-radius: 0px 0px 0px 10px;;
