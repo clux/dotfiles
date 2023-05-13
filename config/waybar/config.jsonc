@@ -154,7 +154,7 @@
     },
     "custom/logout": {
         "format": "⏻",
-        "on-click": "wleave -p layer-shell -b 5 -T 550 -B 550 -kf",
+        "on-click": "wleave -p layer-shell -b 4 -T 550 -B 550 -kf",
         "tooltip": false
     },
     "custom/updates": {

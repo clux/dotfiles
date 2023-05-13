@@ -17,7 +17,7 @@
     font-size: 24px;
 }
 /* rest same as upstream, except for opacity */
-
+/* https://github.com/laymoth/wofi/blob/main/src/mocha/rosewater/style.css */
 
 /* Window */
 window {
