@@ -9,25 +9,33 @@
     "modules-left": [
         "custom/wofi",
         "clock",
+
+        // diagnostic block
+        "custom/weather",
+        "temperature",
+        "gamemode",
         //"cpu",
         //"memory",
-        "custom/weather",
-        "network",
+        //"custom/updates",
+        "custom/power",
+
+        // exiters
         "custom/lockscreen",
         "custom/logout",
+        // ws indicators
         "wlr/workspaces"
     ],
     "modules-center": ["hyprland/window"],
     "modules-right": [
         "tray",
+
+        // interactive ones
         "mpris",
-        "gamemode",
-        "custom/updates",
+        "network",
         "hyprland/submap",
+        //"hyprland/language",
         "custom/language",
-        "idle_inhibitor",
-        "temperature",
-        "custom/power",
+        //"idle_inhibitor",
         "pulseaudio",
         "pulseaudio#microphone",
     ],
@@ -128,8 +136,8 @@
         "interface": "wlan0",
         "format": "{ifname}",
         //"on-click": "alacritty -T nmtui -e 'nmtui'",
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ifname} ",
+        "format-wifi": "  {essid} ({signalStrength}%)",
+        "format-ethernet": "  {ifname}",
         "format-disconnected": "",
         "tooltip": false,
         "max-length": 50
