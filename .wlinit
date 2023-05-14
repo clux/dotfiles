@@ -1,0 +1,23 @@
+#!/bin/sh
+
+cd ~ || exit
+
+# export HYPRLAND_LOG_WLR=1
+#export _JAVA_AWT_WM_NONREPARENTING=1
+
+# Force a cursor and cursor size early to avoid inconsistencies
+# Hyprland will force 24 in some places otherwise even with nwg-look setting
+export XCURSOR_SIZE=48
+# But do not set GTK_THEME (interefers with everything when using nwg-look)
+
+# Informational
+export XDG_CURRENT_DESKTOP=Hyprland
+export XDG_SESSION_TYPE=wayland
+export XDG_SESSION_DESKTOP=Hyprland
+
+# Preferences for wayland + ff (prolly not necessary anymore)
+export GDK_BACKEND="wayland,x11"
+export MOZ_ENABLE_WAYLAND=1
+
+# exec Hyprland
+exec Hyprland &> /tmp/hyprland-$(date +%Y%m%d%H%M%S).log
