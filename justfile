@@ -12,7 +12,7 @@ link: fontguard
   # Dot prefixed files are linked to from $HOME
   fd -g '.*' -H --max-depth 1 --type f -a -x ln -sfn {} ~/
   # Children of config are linked to from $HOME/.config
-  fd --base-directory config/ --max-depth 1 -a -x ln -sfn {} ~/.config/
+  fd --base-directory config/ --max-depth 1 --no-ignore-vcs -a -x ln -sfn {} ~/.config/
   # Children of share are linked to from platform specific {{CONFIG_HOME}}
   fd --base-directory share/ --max-depth 1 --no-ignore-vcs -a -x ln -sfn {} {{CONFIG_HOME}}/
 
