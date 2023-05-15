@@ -2,9 +2,6 @@
 
 cd ~ || exit
 
-# export HYPRLAND_LOG_WLR=1
-#export _JAVA_AWT_WM_NONREPARENTING=1
-
 # Force a cursor and cursor size early to avoid inconsistencies
 # Hyprland will force 24 in some places otherwise even with nwg-look setting
 export XCURSOR_SIZE=48
@@ -20,4 +17,5 @@ export GDK_BACKEND="wayland,x11"
 export MOZ_ENABLE_WAYLAND=1
 
 # exec Hyprland
+#export HYPRLAND_LOG_WLR=1
 exec Hyprland &> /tmp/hyprland-$(date +%Y%m%d%H%M%S).log
