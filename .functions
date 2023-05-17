@@ -24,7 +24,8 @@ zl() {
 
 # ensure directory traversal updates tab names (if terminal mux exists)
 cd() { builtin cd "$@" && zz; }
-function z() { __zoxide_z "$@" && zz; }
+unalias z
+z() { __zoxide_z "$@" && zz; }
 
 # terminal mux helpers to rename the tab we do something
 zz() {

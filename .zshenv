@@ -89,4 +89,8 @@ if [[ "${OSTYPE}" =~ "darwin" ]]; then
 
   # casks that also should be invokable from the terminal.. may as well individually alias
   alias code="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
+
+  # python on mac is also fun
+  # shellcheck disable=SC2155
+  export PATH="$(python3 -m site --user-base)/bin:$PATH"
 fi
