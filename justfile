@@ -1,6 +1,6 @@
 # See https://just.systems/man/
 SHELLCHECK_OPTS := "-e SC1091 -e SC1090 -e SC1117 -s bash"
-SHELLCHECKED_FILES := ".aliases .zshenv .functions .git-helpers .k8s-helpers git/hooks/* defaults.sh"
+SHELLCHECKED_FILES := ".aliases .zshenv .functions .git-helpers .k8s-helpers git/hooks/*"
 CONFIG_HOME := if os() == "macos" { "~/Library/Application\\ Support" } else { "~/.config" }
 
 [private]
@@ -15,6 +15,8 @@ link: fontguard
   fd --base-directory config/ --max-depth 1 --no-ignore-vcs -a -x ln -sfn {} ~/.config/
   # Children of share are linked to from platform specific {{CONFIG_HOME}}
   fd --base-directory share/ --max-depth 1 --no-ignore-vcs -a -x ln -sfn {} {{CONFIG_HOME}}/
+  # OS specific links
+  just os
 
 # font guard helper (linux)
 [linux]
@@ -29,14 +31,12 @@ fontguard:
 
 # configure system properties (linux)
 [linux]
-system: fontguard
+os:
   ln -sf $PWD/config/alacritty/linux.yml config/alacritty/os.yml
-  gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
 # configure system properties (mac)
 [macos]
-system:
-  ./defaults.sh
+os:
   ln -sf $PWD/config/alacritty/mac.yml config/alacritty/os.yml
 
 # configure flatpaks

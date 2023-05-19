@@ -2,13 +2,13 @@
 
 [![ci status](https://github.com/clux/dotfiles/actions/workflows/lint.yml/badge.svg)](https://github.com/clux/dotfiles/actions/workflows/lint.yml)
 
-Personal dotfiles, and configuration for [provisioned setup](https://github.com/clux/provision).
+Personal dotfiles, for [provisioned packages and system configuration](https://github.com/clux/provision).
 Designed for a minimal Arch Linux installation, but retrofitted to support MacOS under duress.
 
 ## Desktop Setup
 
-- **Linux**: [hyprland](https://hyprland.org) / waybar / wofi
-- **Mac**: [defaults](https://github.com/clux/dotfiles/blob/main/defaults.sh) with [hammerspoon](https://github.com/Hammerspoon/hammerspoon) + [karabiner](https://karabiner-elements.pqrs.org/docs/)
+- **Linux**: [hyprland](https://hyprland.org) / waybar / wofi / dunst / {hypr,mvp}paper / wleave
+- **Mac**: [hammerspoon](https://github.com/Hammerspoon/hammerspoon) + [karabiner](https://karabiner-elements.pqrs.org/docs/)
 
 ## Terminal Setup
 
@@ -30,7 +30,6 @@ Clone and apply:
 
 ```sh
 just link # force symlink to ~/ + ~/.config/ + CONFIG_HOME
-just system # defaults write (mac) / ??? (linux)
 ```
 
 All recipes are idempotent.
