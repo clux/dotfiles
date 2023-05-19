@@ -381,9 +381,9 @@ vcc() {
 
 # Download dir for `dl` + brotorr
 export DOWNLOAD_DIR=~/Downloads
-if [[ $HOST = kjttks ]]; then
+if [[ $HOSTNAME = kjttks ]]; then
   export DOWNLOAD_DIR=/media/gauss/DL
-elif [[ $HOST = broxy ]]; then
+elif [[ $HOSTNAME = broxy ]]; then
   export DOWNLOAD_DIR=/media/dumptruck/DL
 fi
 
