@@ -1,4 +1,5 @@
 window:
   decorations: none # linux
+  startup_mode: Maximized
 
 key_bindings: []
