@@ -28,6 +28,9 @@ if [[ "${OSTYPE}" =~ "darwin" ]]; then
   fpath+=$HOMEBREW_PREFIX/share/zsh/site-functions
   # initialize z plugin manager zinit
   source $HOMEBREW_PREFIX/opt/zinit/zinit.zsh 2> /dev/null # ignore manpage issue for now
+  # TODO: maybe do below in the future to avoid zinit? weird autocomplete slowdown when using these atm
+  #source $HOMEBREW_PREFIX/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+  #source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 elif [ -f /usr/share/zinit/zinit.zsh ]; then
   source /usr/share/zinit/zinit.zsh
 fi
