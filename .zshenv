@@ -36,8 +36,6 @@ export GTEST_COLOR=1
 
 # Always print rust backtraces
 export RUST_BACKTRACE=1
-# try 1.68 sparse registry before it's defaulted in 1.70
-export CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
 
 # go
 export GOPATH=$HOME/.go
