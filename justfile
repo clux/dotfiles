@@ -16,7 +16,9 @@ link: fontguard
   # Children of share are linked to from platform specific {{CONFIG_HOME}}
   fd --base-directory share/ --max-depth 1 --no-ignore-vcs -a -x ln -sfn {} {{CONFIG_HOME}}/
   # OS specific links
-  just os
+  ln -sf $PWD/config/alacritty/{{os()}}.yml config/alacritty/os.yml
+  # reload configs where unsupported
+  just reload
 
 # font guard helper (linux)
 [linux]
@@ -29,16 +31,6 @@ fontguard:
 fontguard:
   fd . ~/Library/Fonts/ -e ttf | rg -q "Inconsolata.*Mono"
 
-# configure system properties (linux)
-[linux]
-os:
-  ln -sf $PWD/config/alacritty/linux.yml config/alacritty/os.yml
-
-# configure system properties (mac)
-[macos]
-os:
-  ln -sf $PWD/config/alacritty/mac.yml config/alacritty/os.yml
-
 # configure flatpaks
 [linux]
 flatpaks:
@@ -47,8 +39,6 @@ flatpaks:
 # reload configs insofar as possible
 reload:
   bat cache --build | rg -v "okay"
-  killall SystemUIServer || true
-  killall Finder || true
 
 # run local shellcheck lint
 lint:
