@@ -18,4 +18,4 @@ export MOZ_ENABLE_WAYLAND=1
 
 # exec Hyprland
 #export HYPRLAND_LOG_WLR=1
-exec Hyprland &> /tmp/hyprland-$(date +%Y%m%d%H%M%S).log
+exec Hyprland &> "/tmp/hyprland-$(date +%Y%m%d%H%M%S).log"
