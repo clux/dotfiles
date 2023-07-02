@@ -192,7 +192,7 @@
         "exec": "~/.config/waybar/scripts/keyboard.sh",
         "return-type": "json",
         "on-click": "hyprctl switchxkblayout fnatic-gear-fnatic-gear-ministreak-keyboard next > /dev/null",
-        "interval": 300,
+        "interval": 60,
     },
     // TODO: fix, currently gets wrong location and crashes after a while
     "custom/weather" : {
