@@ -69,6 +69,7 @@ tooltip {
 #workspaces,
 #tray,
 #custom-power,
+#custom-dunst,
 #temperature,
 #backlight {
     background: #1e1e2e;
@@ -104,13 +105,23 @@ tooltip {
     border-left: 0px;
     border-right: 0px;
 }
-
 #mpris, #custom-mpris {
     color: #f5c2e7;
     padding-right: 0px;
     border-left: 0px;
     border-right: 0px;
     border-radius: 0px 0px 0px 10px;;
+}
+
+.active {
+    color: #89dceb;
+}
+.alert {
+    color: #f5c2e7;
+}
+#custom-dunst {
+    padding-left: 10px;
+    padding-right: 25px;
 }
 
 #window {

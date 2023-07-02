@@ -33,11 +33,12 @@
         "mpris",
         "network",
         "hyprland/submap",
-        //"hyprland/language",
-        "custom/language",
         //"idle_inhibitor",
         "pulseaudio",
         "pulseaudio#microphone",
+        //"hyprland/language",
+        "custom/language",
+        "custom/dunst"
     ],
 
     "hyprland/window": {
@@ -147,7 +148,7 @@
         "interval": 10,
         "format": " {}%",
         "max-length": 10,
-        "on-click": ""
+        //"on-click": ""
     },
     "memory": {
         "interval": 30,
@@ -188,11 +189,10 @@
     },
     // hacky replacement that switches on click, with some hacky sed name formatting
     "custom/language": {
-         "exec": "hyprctl devices -j | jq '.keyboards[] | select(.name == \"fnatic-gear-fnatic-gear-ministreak-keyboard\") | .active_keymap' -r | awk -F\"[()]\" '{print $2}' | sed 's/\\.,.*//'",
-         "interval": 900,
-         "on-click": "hyprctl switchxkblayout fnatic-gear-fnatic-gear-ministreak-keyboard next > /dev/null && sleep 1 && hyprctl devices -j | jq '.keyboards[] | select(.name == \"fnatic-gear-fnatic-gear-ministreak-keyboard\") | .active_keymap' -r | awk -F\"[()]\" '{print $2}' | sed 's/\\.,.*//'",
-         "format": "\uf11c  {}",
-         "tooltip": false
+        "exec": "~/.config/waybar/scripts/keyboard.sh",
+        "return-type": "json",
+        "on-click": "hyprctl switchxkblayout fnatic-gear-fnatic-gear-ministreak-keyboard next > /dev/null",
+        "interval": 300,
     },
     // TODO: fix, currently gets wrong location and crashes after a while
     "custom/weather" : {
@@ -265,5 +265,12 @@
         "format-critical": " {temperatureC}°C",
         "on-click": "alacritty -T btop -e 'btop'"
     },
+
+    "custom/dunst": {
+      "exec": "~/.config/waybar/scripts/dunst.sh",
+      "return-type": "json",
+      "restart-interval": 10,
+      "on-click": "dunstctl set-paused toggle"
+    }
 
 }
