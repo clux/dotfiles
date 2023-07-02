@@ -108,9 +108,6 @@ tooltip {
 #mpris, #custom-mpris {
     color: #f5c2e7;
     padding-right: 0px;
-    border-left: 0px;
-    border-right: 0px;
-    border-radius: 0px 0px 0px 10px;;
 }
 
 .active {
@@ -141,6 +138,9 @@ tooltip {
     border-left: 0px;
     border-right: 0px;
     padding-right: 10px;
+    border-left: 0px;
+    border-right: 0px;
+    border-radius: 0px 0px 0px 10px;;
 }
 
 #pulseaudio {
