@@ -31,3 +31,4 @@ end
 
 bindCmd("1", "/opt/homebrew/bin/yabai -m window --space 1; /opt/homebrew/bin/yabai -m display --focus 1")
 bindCmd("2", "/opt/homebrew/bin/yabai -m window --space 2; /opt/homebrew/bin/yabai -m display --focus 2")
+bindCmd("3", "/opt/homebrew/bin/yabai -m window --space 3; /opt/homebrew/bin/yabai -m display --focus 3")
