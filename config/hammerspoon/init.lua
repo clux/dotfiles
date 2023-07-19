@@ -29,6 +29,13 @@ function bindCmd(key, cmd)
   hs.hotkey.bind({"shift", "alt"}, key, function() os.execute(cmd) end)
 end
 
+-- window moving between monitors
 bindCmd("1", "/opt/homebrew/bin/yabai -m window --space 1; /opt/homebrew/bin/yabai -m display --focus 1")
 bindCmd("2", "/opt/homebrew/bin/yabai -m window --space 2; /opt/homebrew/bin/yabai -m display --focus 2")
 bindCmd("3", "/opt/homebrew/bin/yabai -m window --space 3; /opt/homebrew/bin/yabai -m display --focus 3")
+
+-- window resize
+bindCmd("down", "/opt/homebrew/bin/yabai -m window --resize bottom:0:20") -- increase down
+bindCmd("right",  "/opt/homebrew/bin/yabai -m window --resize right:20:0") -- increase right
+bindCmd("up",    "/opt/homebrew/bin/yabai -m window --resize bottom:0:-20") -- decrease down
+bindCmd("left",  "/opt/homebrew/bin/yabai -m window --resize right:-20:0") -- decrease right
