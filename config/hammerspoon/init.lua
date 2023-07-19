@@ -39,3 +39,8 @@ bindCmd("down", "/opt/homebrew/bin/yabai -m window --resize bottom:0:20") -- inc
 bindCmd("right",  "/opt/homebrew/bin/yabai -m window --resize right:20:0") -- increase right
 bindCmd("up",    "/opt/homebrew/bin/yabai -m window --resize bottom:0:-20") -- decrease down
 bindCmd("left",  "/opt/homebrew/bin/yabai -m window --resize right:-20:0") -- decrease right
+
+-- set a thing to be sticky (excludes it from bsp tiling)
+bindCmd("4", "/opt/homebrew/bin/yabai -m window --toggle sticky; /opt/homebrew/bin/yabai -m window --toggle topmost")
+bindCmd("y", "/opt/homebrew/bin/yabai -m space --layout bsp")
+bindCmd("u", "/opt/homebrew/bin/yabai -m space --layout float")
