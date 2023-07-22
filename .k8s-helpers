@@ -193,23 +193,17 @@ k3dmake() {
   k3d cluster create "${name}" --servers 1 --registry-create "${name}" $@ \
     --no-lb --no-rollback \
     --k3s-arg "--disable=traefik,servicelb,metrics-server@server:*" \
-    --k3s-arg '--kubelet-arg=eviction-hard=imagefs.available<1%,nodefs.available<1%@agent:*' \
-    --k3s-arg '--kubelet-arg=eviction-minimum-reclaim=imagefs.available=1%,nodefs.available=1%@agent:*'
+    --k3s-arg '--kubelet-arg=eviction-hard=imagefs.available<0%,nodefs.available<0%@agent:*' \
+    --k3s-arg '--kubelet-arg=eviction-minimum-reclaim=imagefs.available=0%,nodefs.available=0%@agent:*'
   k3d kubeconfig get --all > ~/.kube/k3d
 }
 
-if [[ ! "${OSTYPE}" =~ "darwin" ]]; then
-  # main machines are amd64, rely on arch bin on mac
-  arch() {
-    echo "amd64"
-  }
-fi
-
-# pinning some versions from https://hub.docker.com/r/rancher/k3s/tags
-# TODO: do something like https://github.com/nolar/setup-k3d-k3s/blob/v1/action.sh
-k3dmake24() { k3dmake "$1" "--image=rancher/k3s:v1.24.11-k3s1-$(arch)"; }
-k3dmake25() { k3dmake "$1" "--image=rancher/k3s:v1.25.7-k3s1-$(arch)"; }
-k3dmake26() { k3dmake "$1" "--image=rancher/k3s:v1.26.2-k3s1-$(arch)"; }
+# pinning multi arch images tags from https://hub.docker.com/r/rancher/k3s/tags
+# NB: do something like https://github.com/nolar/setup-k3d-k3s/blob/v1/action.sh
+k3dmake24() { k3dmake "$1" "--image=rancher/k3s:v1.24.15-k3s1"; }
+k3dmake25() { k3dmake "$1" "--image=rancher/k3s:v1.25.11-k3s1"; }
+k3dmake26() { k3dmake "$1" "--image=rancher/k3s:v1.26.6-k3s1"; }
+k3dmake27() { k3dmake "$i" "--image=rancher/k3s:v1.27.3-k3s1"}
 
 # -----------------------------------------------------------------------------
 # misc kubernetes helpers
