@@ -193,8 +193,8 @@ k3dmake() {
   k3d cluster create "${name}" --servers 1 --registry-create "${name}" $@ \
     --no-lb --no-rollback \
     --k3s-arg "--disable=traefik,servicelb,metrics-server@server:*" \
-    --k3s-arg '--kubelet-arg=eviction-hard=imagefs.available<0%,nodefs.available<0%@agent:*' \
-    --k3s-arg '--kubelet-arg=eviction-minimum-reclaim=imagefs.available=0%,nodefs.available=0%@agent:*'
+    --k3s-arg '--kubelet-arg=eviction-hard=imagefs.available<1Gi,nodefs.available<Gi@agent:*' \
+    --k3s-arg '--kubelet-arg=eviction-minimum-reclaim=imagefs.available=1Gi,nodefs.available=1Gi@agent:*'
   k3d kubeconfig get --all > ~/.kube/k3d
 }
 
@@ -203,7 +203,10 @@ k3dmake() {
 k3dmake24() { k3dmake "$1" "--image=rancher/k3s:v1.24.15-k3s1"; }
 k3dmake25() { k3dmake "$1" "--image=rancher/k3s:v1.25.11-k3s1"; }
 k3dmake26() { k3dmake "$1" "--image=rancher/k3s:v1.26.6-k3s1"; }
-k3dmake27() { k3dmake "$i" "--image=rancher/k3s:v1.27.3-k3s1"}
+k3dmake27() {
+  k3dmake "$1" "--image=rancher/k3s:v1.27.3-k3s1" \
+    --k3s-arg '--kube-apiserver-arg=feature-gates=WatchList=true'
+}
 
 # -----------------------------------------------------------------------------
 # misc kubernetes helpers
