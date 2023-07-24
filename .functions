@@ -131,6 +131,14 @@ sysr() {
   sudo systemctl restart "$unit"
 }
 
+# mount a usb partition with udisks2 - alternative; just use udiskie
+mountz() {
+  # NB: probably assumes a lot, but works for me..
+  # TODO: could simplify with lsblk -J | jq
+  local -r part="$(lsblk -r | grep " part" | grep -v nvme | choose 0 | fzf)"
+  udisksctl mount -b "${part}" # needs to have the partition number e.g. /dev/sda1
+}
+
 # -----------------------------------------------------------------------------
 # package manager abstraction - mostly for my own memory
 
@@ -367,14 +375,14 @@ dslrdump() {
 vc1() {
   sudo echo "got sudo" # cache sudo first
   # For some reason the below cmd does not work without non-interactive in text mode
-  veracrypt -t --mount /dev/sdc1 --slot=1 --verbose -p "$(pass drives/turing)" --non-interactive
+  veracrypt -t --mount /dev/sda1 --slot=1 --verbose -p "$(pass drives/turing)" --non-interactive
   export HISTFILE=/dev/null
   cd /media/veracrypt1 || false
 }
 vc2() {
   sudo echo "got sudo" # cache sudo first
   # For some reason the below cmd does not work without non-interactive in text mode
-  veracrypt -t --mount /dev/sde1 --slot=2 --verbose -p "$(pass drives/hilbert)" --non-interactive
+  veracrypt -t --mount /dev/sda1 --slot=2 --verbose -p "$(pass drives/hilbert)" --non-interactive
   export HISTFILE=/dev/null
   cd /media/veracrypt2 || false
 }
