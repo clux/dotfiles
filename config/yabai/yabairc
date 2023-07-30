@@ -1,0 +1,10 @@
+
+sudo yabai --load-sa
+yabai -m rule --add app="^(Alacritty)$" sticky=true
+yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^Calculator$" manage=off
+yabai -m rule --add app="^Karabiner-Elements$" manage=off
+yabai -m config window_placement second_child
+yabai -m config window_opacity on
+yabai -m config active_window_opacity 1.0
+yabai -m config normal_window_opacity 0.9

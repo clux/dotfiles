@@ -1,6 +1,6 @@
 window:
   decorations: buttonless # mac only option
-  startup_mode: SimpleFullscreen
+  startup_mode: Maximized
   # allow alt-+ and alt-hjkl
   option_as_alt: Both # mac only option
 
