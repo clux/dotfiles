@@ -1,10 +1,62 @@
+#!/usr/bin/env sh
 
+# unload stage manager
+launchctl unload -F /System/Library/LaunchAgents/com.apple.WindowManager.plist >/dev/null 2>&1 &
+
+# load with scripting addition
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 sudo yabai --load-sa
-yabai -m rule --add app="^(Alacritty)$" sticky=true
+
+# terminal is sticky and toggled by hammerspoon api.
+yabai -m rule --add app="^(Alacritty)$" sticky=on
+
+# windows that should float
 yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^Finder" manage=off
+yabai -m rule --add app="^OpenVPN" manage=off
+yabai -m rule --add app="^Code$" manage=off
+yabai -m rule --add app="^mpv" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
+yabai -m rule --add app="^Activity Monitor$" manage=off
 yabai -m rule --add app="^Karabiner-Elements$" manage=off
-yabai -m config window_placement second_child
-yabai -m config window_opacity on
-yabai -m config active_window_opacity 1.0
-yabai -m config normal_window_opacity 0.9
+yabai -m rule --add app="^Hammerspoon" manage=off
+
+# main config
+# see https://github.com/koekeishiya/yabai/wiki/Configuration
+
+# border. similar to hyprland config, but ultimately turned off.
+# too ugly when you can't turn off rounded corners
+yabai -m config \
+  window_border_radius 1 \
+  window_border_width 1 \
+  window_border off \
+  active_window_border_color 0xffcba6f7 \
+  normal_window_border_color 0xff45475a
+
+# style; rely on inactive opacity instead of active border
+yabai -m config \
+  window_opacity on \
+  active_window_opacity 1.0 \
+  normal_window_opacity 0.95 \
+  window_shadow float \
+  left_padding 2 \
+  right_padding 2 \
+  top_padding 0 \
+  bottom_padding 0 \
+  window_gap 4
+
+# behavior: bsp with spawn right, with generally defaults
+yabai -m config \
+  layout bsp \
+  window_placement second_child \
+  focus_follows_mouse autofocus \
+  auto_balance off \
+  mouse_modifier fn \
+  mouse_action1 move \
+  mouse_action2 resize \
+  mouse_drop_action swap
+
+# TODO: sensible mouse_modifier outside mac keyboard
+
+# Debugging:
+# tail -f /tmp/yabai_$USER.err.log
