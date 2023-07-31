@@ -2,6 +2,12 @@
 #theme = "catppuccin_mocha"
 theme = "base16_transparent"
 
+[keys.normal]
+h = "no_op"
+j = "no_op"
+k = "no_op"
+l = "no_op"
+
 [editor.soft-wrap]
 enable = true
 max-wrap = 25

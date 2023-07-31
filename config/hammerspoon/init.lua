@@ -59,11 +59,9 @@ end
 local homeRow = { h = "west", n = "south", e = "north", i = "east" }
 
 for key, direction in pairs(homeRow) do
-	--alt(key, { "window --focus " .. direction })
-  -- TODO: need a good modifier not eaten by chrome for focus without shift
+	alt(key, { "window --focus " .. direction })
 	shiftAlt(key, { "window --swap " .. direction })
 end
-
 
 -- window resize
 shiftAlt("down",  { "window --resize bottom:0:20" }) -- increase down
@@ -73,20 +71,16 @@ shiftAlt("left",  { "window --resize right:-20:0" }) -- decrease right
 
 -- mode toggles for spaces and windows
 shiftAlt("y", { "space --layout bsp" })
-shiftAlt("u", { "space --layout float" }) --probably only want to do this for windows only?
+shiftAlt("u", { "space --layout stack" })
+shiftAlt(";", { "space --layout float" }) --probably only want to do this for windows only?
+alt("f", { "window --toggle zoom-fullscreen" })
 shiftAlt("f", { "window --toggle native-fullscreen" })
---shiftAlt("f", { "window --toggle zoom-fullscreen" })
--- TODO: find a modifier that works so we can use shift for the "stronger fullscreen"
+-- NB: alt-f only works on mac if you keep modifiers in the same position
 
-shiftAlt("p", { "window --toggle pip" })
+-- mini pip window, note; does not retain properties correctly on yabai restart
+shiftAlt("p", { "window --toggle pip", "window --toggle float", "window --toggle sticky", "window --toggle topmost" })
 --shiftAlt("v", { "space --toggle padding", "space --toggle gap" })
 
 -- layout experiments
--- NB: toggling float is a bit awkward because it keeps the window size pinned after making you rename
-shiftAlt("l", { "window --toggle float" })
---shiftalt("b", { "window --grid 5:5:1:1:3:3" }) -- center
--- TODO: find a sensible way to toggle float that pops into centered window IF we are turning it on?
-
+shiftAlt("l", { "window --toggle float", "window --grid 8:10:1:1:8:6" }) -- unfloat/float + center
 shiftAlt("r", { "space --rotate 90" })
-
--- TODO: global configs to set: mouse_follow_focus, mouse_modifier to super? and mouse_action1 == move, mouse_action2 == resize
