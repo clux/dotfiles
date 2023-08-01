@@ -3,7 +3,7 @@
 # -----------------------------------------------------------------------------
 # opening helpers
 
-vf() { vlc "$(fzf)" > /dev/null 2>&1 ;}
+mp() { mpv "$(fzf)" ;} # > /dev/null 2>&1
 hf() { hx "$(fzf)" ;}
 h() { $EDITOR . ;}
 
@@ -18,14 +18,10 @@ ra() { zellij run -- zsh -ic $@ ;}
 # zellij tab from layout
 zl() {
   local -r layout="$(builtin cd ~/.config/zellij/layouts && fd . | fzf)"
-  local -r name="${layout%%.kdl}"
-  zellij action new-tab --layout "$HOME/.config/zellij/layouts/${layout}" --name="${name}"
+  #local -r name="${layout%%.kdl}"
+  # NB: seems to double change cat the name.. zellij bug?
+  zellij action new-tab --layout "$HOME/.config/zellij/layouts/${layout}"
 }
-
-# ensure directory traversal updates tab names (if terminal mux exists)
-cd() { builtin cd "$@" && zz; }
-unalias z
-z() { __zoxide_z "$@" && zz; }
 
 # terminal mux helpers to rename the tab we do something
 zz() {
@@ -33,13 +29,10 @@ zz() {
     zellij action rename-tab "${PWD##*/}"
   fi
 }
-zzh() {
-  if [ -n "${ZELLIJ_SESSION_NAME}" ]; then
-    zellij action rename-tab "$1"
-  fi
-  # shellcheck disable=SC2068
-  ssh $@
-}
+
+# ensure directory traversal updates tab names (if terminal mux exists)
+chpwd_functions+=zz
+zz # initialize name for new tabs/panes
 
 # -----------------------------------------------------------------------------
 # Key management via keychain
