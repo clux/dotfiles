@@ -55,8 +55,8 @@ for i = 1, 4 do
 end
 --shiftAlt("tab", { "space --focus recent" })
 
--- NOTE: use as arrow keys
-local homeRow = { h = "west", n = "south", e = "north", i = "east" }
+-- NOTE: hjkl -> neio in colemak - use as arrow keys
+local homeRow = { n = "west", e = "south", i = "north", o = "east" }
 
 for key, direction in pairs(homeRow) do
 	alt(key, { "window --focus " .. direction })
