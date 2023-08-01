@@ -17,10 +17,8 @@ ra() { zellij run -- zsh -ic $@ ;}
 
 # zellij tab from layout
 zl() {
-  local -r layout="$(builtin cd ~/.config/zellij/layouts && fd . | fzf)"
-  #local -r name="${layout%%.kdl}"
-  # NB: seems to double change cat the name.. zellij bug?
-  zellij action new-tab --layout "$HOME/.config/zellij/layouts/${layout}"
+  local -r layout="$(cd ~/.config/zellij/layouts && fd . -x echo '{.}' | fzf)"
+  zellij action new-tab --layout "${layout}"
 }
 
 # terminal mux helpers to rename the tab we do something
