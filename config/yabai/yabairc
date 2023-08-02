@@ -15,11 +15,15 @@ yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Finder" manage=off
 yabai -m rule --add app="^OpenVPN" manage=off
 yabai -m rule --add app="^Code$" manage=off
-yabai -m rule --add app="^mpv" manage=off
+yabai -m rule --add app="^choose$" manage=off
+yabai -m rule --add app="^Keybase" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^Activity Monitor$" manage=off
-yabai -m rule --add app="^Karabiner-Elements$" manage=off
+yabai -m rule --add app="^Karabiner" manage=off
 yabai -m rule --add app="^Hammerspoon" manage=off
+
+# mpv should float
+yabai -m rule --add app="^mpv" manage=off topmost=on
 
 # main config
 # see https://github.com/koekeishiya/yabai/wiki/Configuration

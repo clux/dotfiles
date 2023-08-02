@@ -47,6 +47,10 @@ local function shiftAlt(key, commands)
 end
 
 
+hs.hotkey.bind({ "shift", "alt" }, "m", function()
+  hs.execute("focus_yabai_window", true)
+end)
+
 -- window moving between monitors/spaces
 for i = 1, 4 do
   local num = tostring(i)
@@ -70,17 +74,19 @@ shiftAlt("up",    { "window --resize bottom:0:-20" }) -- decrease down
 shiftAlt("left",  { "window --resize right:-20:0" }) -- decrease right
 
 -- mode toggles for spaces and windows
-shiftAlt("y", { "space --layout bsp" })
-shiftAlt("u", { "space --layout stack" })
-shiftAlt(";", { "space --layout float" }) --probably only want to do this for windows only?
+--shiftAlt("y", { "space --layout bsp" })
+--shiftAlt("u", { "space --layout stack" })
+--shiftAlt(";", { "space --layout float" }) --probably only want to do this for windows only?
 alt("f", { "window --toggle zoom-fullscreen" })
 shiftAlt("f", { "window --toggle native-fullscreen" })
+alt("l", { "window --toggle float", "window --grid 8:10:1:1:8:6" }) -- unfloat/float + center
+shiftAlt("l", { "window --toggle topmost", "window --grid 5:5:4:1:4:4" }) -- pin cornered on a ws
+
 -- NB: alt-f only works on mac if you keep modifiers in the same position
 
 -- mini pip window, note; does not retain properties correctly on yabai restart
-shiftAlt("p", { "window --toggle pip", "window --toggle float", "window --toggle sticky", "window --toggle topmost" })
+--shiftAlt("p", { "window --toggle pip", "window --toggle float", "window --toggle sticky", "window --toggle topmost" })
 --shiftAlt("v", { "space --toggle padding", "space --toggle gap" })
 
 -- layout experiments
-shiftAlt("l", { "window --toggle float", "window --grid 8:10:1:1:8:6" }) -- unfloat/float + center
 shiftAlt("r", { "space --rotate 90" })
