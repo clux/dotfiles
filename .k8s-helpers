@@ -12,6 +12,7 @@ kc() {
   # Relies on KUBECONFIG set to colon delimeted list of all kubeconfigs ^
   # Exclude fqdn contexts (rancher-ism).
   kubectl config use-context "$(kubectl config get-contexts -o name | grep -v fqdn | fzf)"
+  try_eks_tunnel # auto-reconnect any cloudflared tunnels if they exist as a kubeconfig pereferences.extension
 }
 
 # namespace switcher
@@ -19,6 +20,28 @@ kns() {
   local -r ns="${1:-$(kubectl get ns --no-headers | choose 0 | fzf)}"
   local -r ctx="$(kubectl config current-context)"
   kubectl config set "contexts.${ctx}.namespace" "${ns}"
+}
+
+# -----------------------------------------------------------------------------
+# kubernetes auth mechanisms
+
+# extract a cloudflare host server name to tunnel through for eks
+# relies on the hostname being stored in kubeconfig preferences ala:
+#preferences:
+#  extensions:
+#  - extension:
+#      tunnel: my-eks-euw1.yourmum.zip
+#    name: my-eks-context
+try_eks_tunnel () {
+  local -r ctx="$(kubectl config current-context)"
+  # this lookup can fail, but we ignore the failure - only setup tunnel if it was specified
+  local -r host="$(kubectl config view | yq ".preferences.extensions[] | select(.name == \"${ctx}\") | .extension.tunnel" -r)"
+  # if we did find a kubeconfig extension start a cloudflare tunnel against the given hostname
+  if [ -n ${host} ]; then
+    pkill cloudflared || true
+    # zellij run -cf basically daemonizes the tunnel in a floating pane that is killed in the line above when switching
+    zellij run -cf -- cloudflared access tcp --hostname "${host}" --url 127.0.0.1:1234
+  fi
 }
 
 # -----------------------------------------------------------------------------
