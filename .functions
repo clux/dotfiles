@@ -22,15 +22,15 @@ zl() {
 }
 
 # terminal mux helpers to rename the tab we do something
-rename_tab_to_basedir() {
+zz() {
   if [ -n "${ZELLIJ_SESSION_NAME}" ]; then
     zellij action rename-tab "${PWD##*/}"
   fi
 }
 
 # ensure directory traversal updates tab names (if terminal mux exists)
-chpwd_functions+=rename_tab_to_basedir
-rename_tab_to_basedir # initialize name for new tabs/panes
+chpwd_functions+=zz
+zz # initialize name for new tabs/panes
 
 # -----------------------------------------------------------------------------
 # Key management via keychain
@@ -137,8 +137,8 @@ mountz() {
 # focus a yabai window from title
 focus_yabai_window() {
   local -r CHOOSE_GUI="$(ls ${HOMEBREW_CELLAR}/choose-gui/*/bin/choose | tail -n 1)" # to avoid clashes
-  # snapshot id and names of current active windows as json
-  local -r windows="$(yabai -m query --windows | jq '.[] | [.app, .title, .id]')"
+  # snapshot id and names of current active non-sticky windows as json
+  local -r windows="$(yabai -m query --windows | jq '.[] | select(.["is-sticky"] == false) | [.app, .title, .id]')"
   # present just the human readable components to a sized choice gui in the $windows order and return its index
   local -r height="$(echo "$windows" | jq length | wc -l)" # number of windows
   local -r width="$(echo "$windows" | jq '.[1] | length' | sort -h | tail -n 1)" # longest title
