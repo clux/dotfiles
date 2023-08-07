@@ -37,7 +37,8 @@ try_eks_tunnel () {
   # this lookup can fail, but we ignore the failure - only setup tunnel if it was specified
   local -r host="$(kubectl config view | yq ".preferences.extensions[] | select(.name == \"${ctx}\") | .extension.tunnel" -r)"
   # if we did find a kubeconfig extension start a cloudflare tunnel against the given hostname
-  if [ -n ${host} ]; then
+  if [ -n "${host}" ]; then
+    echo "cloudflare ${host}"
     pkill cloudflared || true
     # zellij run -cf basically daemonizes the tunnel in a floating pane that is killed in the line above when switching
     zellij run -cf -- cloudflared access tcp --hostname "${host}" --url 127.0.0.1:1234
