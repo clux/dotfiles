@@ -12,7 +12,7 @@ kc() {
   # Relies on KUBECONFIG set to colon delimeted list of all kubeconfigs ^
   # Exclude fqdn contexts (rancher-ism).
   kubectl config use-context "$(kubectl config get-contexts -o name | grep -v fqdn | fzf)"
-  try_eks_tunnel # auto-reconnect any cloudflared tunnels if they exist as a kubeconfig pereferences.extension
+  try_eks_tunnel # auto-reconnect any cloudflared tunnels if they exist as a kubeconfig preferences.extension
 }
 
 # namespace switcher
