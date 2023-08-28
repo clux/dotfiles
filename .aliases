@@ -20,6 +20,9 @@ alias tree='exa --tree --group-directories-first --icons --git-ignore -git --sor
 #alias top='btm -b'
 alias top='btop'
 
+# hyprland
+alias hde="hyprctl dispatch exec"
+
 # make rg look like ag
 alias rg="rg --colors 'match:bg:yellow' --colors 'match:fg:black' --colors 'match:style:nobold' --colors 'line:style:bold' --colors 'path:fg:green' --glob=!.git/"
 
