@@ -23,9 +23,13 @@
         "custom/lockscreen",
         "custom/logout",
         // ws indicators
-        "wlr/workspaces"
+        //"wlr/workspaces"
+        "hyprland/workspaces"
     ],
-    "modules-center": ["hyprland/window"],
+    "modules-center": [
+        //"hyprland/window"
+        "wlr/taskbar"
+    ],
     "modules-right": [
         "tray",
 
@@ -44,22 +48,41 @@
     "hyprland/window": {
         "format": "{}"
     },
-    "wlr/workspaces": {
+    "hyprland/workspaces": {
         "on-scroll-up": "hyprctl dispatch workspace e+1",
         "on-scroll-down": "hyprctl dispatch workspace e-1",
-        "all-outputs": true,
+        "all-outputs": false,
+        "show-special": false,
+        "active-only": false,
         "on-click": "activate",
         "format": "{icon}",
         "format-icons": {
-            "1": "",
-            "2": "",
-            "3": "",
-            "4": "",
-            "5": "",
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "",
+            "6": "",
             "urgent": "",
-            "active": "",
-            "default": ""
-          }
+            //"active": "",
+            "default": "S",
+            "special": "",
+            "empty": "ø"
+        },
+        "persistent-workspaces": {
+            "1": ["HDMI-A-2"],
+            "2": ["HDMI-A-2"],
+            "3": ["HDMI-A-2"],
+            "4": ["HDMI-A-2"]
+            //"*": 4 // 4 workspaces by default on every monitor
+        }
+    },
+    "wlr/taskbar": {
+        "on-click": "activate",
+        "on-click-middle": "close",
+        "ignore-list": [
+            "Alacritty"
+        ]
     },
     "custom/wofi": {
         "format": "",
