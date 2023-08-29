@@ -91,4 +91,6 @@ if [[ "${OSTYPE}" =~ "darwin" ]]; then
   # python on mac is also fun
   # shellcheck disable=SC2155
   export PATH="$(python3 -m site --user-base)/bin:$PATH"
+
+  export HOSTNAME="$(scutil --get LocalHostName)"
 fi
