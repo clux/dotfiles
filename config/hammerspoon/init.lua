@@ -52,7 +52,7 @@ hs.hotkey.bind({ "shift", "alt" }, "m", function()
 end)
 
 -- window moving between monitors/spaces
-for i = 1, 4 do
+for i = 1, 9 do
   local num = tostring(i)
   alt(num, { "space --focus " .. num })
   shiftAlt(num, { "window --space " .. num, "space --focus " .. num })

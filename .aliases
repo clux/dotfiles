@@ -23,6 +23,13 @@ alias top='btop'
 # hyprland
 alias hde="hyprctl dispatch exec"
 
+# yabai
+alias yw="yabai -m query --windows"
+ywr() {
+  yw | jq ".[] | select(.app | test(\"$1\"; \"ix\"))"
+}
+alias ym="yabai -m query --spaces"
+
 # make rg look like ag
 alias rg="rg --colors 'match:bg:yellow' --colors 'match:fg:black' --colors 'match:style:nobold' --colors 'line:style:bold' --colors 'path:fg:green' --glob=!.git/"
 
