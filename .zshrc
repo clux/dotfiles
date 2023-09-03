@@ -113,9 +113,10 @@ export WORDCHARS="${WORDCHARS:s@/@}"
 # Key management via keychain
 
 if [[ ${HOST} = "hprks" ]]; then
-  key github main
-elif [[ $(hostname) = "cluxm1.local" ]]; then
-  key github work tl
+  key github main pass
+elif [[ ${HOSTNAME} = "cluxm1" ]]; then
+  key github work tl pass
+  # NB: HOST is zsh, HOSTNAME is bash (and polyfilled in zshenv for mac). prov uses HOSTNAME + bash.
 else
   [ -f ~/.keychain/agent-sh ] && source ~/.keychain/agent-sh
   [ -f ~/.keychain/agent-sh-gpg ] && source ~/.keychain/agent-sh-gpg
