@@ -23,7 +23,7 @@
         "custom/lockscreen",
         "custom/logout",
         // ws indicators
-        //"wlr/workspaces"
+        //"wlr/workspaces" - support being removed in hyprland 0.30 apparently
         "hyprland/workspaces"
     ],
     "modules-center": [
