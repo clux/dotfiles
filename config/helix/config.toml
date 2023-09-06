@@ -8,6 +8,13 @@ j = "no_op"
 k = "no_op"
 l = "no_op"
 
+[keys.normal.backspace]
+b = ":sh zellij run -f -- just build"
+r = ":sh zellij run -f -- just run"
+t = ":sh zellij run -f -- just test"
+l = ":sh zellij run -f -- just lint"
+s = ":sh zellij run -cf -- zsh"
+
 [editor.soft-wrap]
 enable = true
 max-wrap = 25
