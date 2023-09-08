@@ -20,6 +20,9 @@ alias tree='exa --tree --group-directories-first --icons --git-ignore -git --sor
 #alias top='btm -b'
 alias top='btop'
 
+# jq on everything
+alias tq='yq -i=toml'
+
 # hyprland
 alias hde="hyprctl dispatch exec"
 
