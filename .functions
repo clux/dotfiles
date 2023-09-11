@@ -79,12 +79,12 @@ codiumrust() {
 # fzf interfaces
 
 # pass clipboard through fzf lookup
-passf() {
+passclip() {
   local -r secret="$(cd ~/.password-store && fd .gpg | fzf --layout=reverse-list)"
   pass "${secret/%.gpg}" -c
 }
 # pass show everything after first line through fzf (first line is pw)
-passt() {
+passdeets() {
   local -r secret="$(cd ~/.password-store && fd .gpg | fzf --layout=reverse-list)"
   pass "${secret/%.gpg}" | tail -n +2 | less
 }
