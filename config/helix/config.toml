@@ -1,16 +1,7 @@
 #theme = "hex_toxic"
-theme = "catppuccin_mocha"
-#theme = "base16_transparent"
-
-[keys.normal]
-h = "no_op"
-j = "no_op"
-k = "no_op"
-l = "no_op"
-# swapping lines up and down is apparently complicated
-C-up = [ "keep_primary_selection", "extend_to_line_bounds", "extend_line_above", "split_selection_on_newline", "select_mode", "goto_line_end_newline", "normal_mode", "rotate_selection_contents_forward", "keep_primary_selection" ]
-C-down = [ "keep_primary_selection", "move_line_down", "extend_to_line_bounds", "extend_line_above", "split_selection_on_newline", "select_mode", "goto_line_end_newline", "normal_mode", "rotate_selection_contents_forward", "keep_primary_selection", "move_line_down" ]
-#esc = ["collapse_selection", "keep_primary_selection"]
+#theme = "catppuccin_mocha"
+theme = "base16_transparent"
+# TODO: transparent bg: https://www.reddit.com/r/HelixEditor/comments/11f6scu/transparent_background/
 
 [keys.normal.backspace]
 b = ":sh zellij run -f -- just build"
@@ -18,15 +9,17 @@ r = ":sh zellij run -f -- just run"
 t = ":sh zellij run -f -- just test"
 l = ":sh zellij run -f -- just lint"
 s = ":sh zellij run -cf -- zsh"
+c = ":config-reload"
+f = ":theme catppuccin_mocha"
 
 # add things into space menu!
-#[keys.normal.space]
-#r = ":config-reload"
-#w = ":write"
+[keys.normal.space]
+w = ":write"
 #q = ":quit"
 
-#[language.yaml.editor]
-#theme = "catppuccin_mocha" # base16 terrible here, need a transparent one
+[editor]
+cursorline = true
+color-modes = true
 
 [editor.soft-wrap]
 enable = true
@@ -43,9 +36,25 @@ select = "underline"
 hidden = false
 
 [editor.whitespace.render]
-#space = "all"
+space = "none"
 tab = "all"
 newline = "none"
 
+[editor.indent-guides]
+render = true
+
 [editor.gutters]
 layout = ["diff", "diagnostics", "line-numbers", "spacer"]
+
+# colemak
+# neio is the equivalent colemak, but don't want to shift everything around..
+[keys.normal]
+h = "no_op"
+j = "no_op"
+k = "no_op"
+l = "no_op"
+[keys.normal.g]
+h = "no_op"
+j = "no_op"
+k = "no_op"
+l = "no_op"

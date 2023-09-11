@@ -20,7 +20,7 @@ window:
   opacity: 0.8
 
 font:
-  size: 20
+  size: 24
   normal:
     family: Inconsolata Nerd Font Mono
     style: Regular
