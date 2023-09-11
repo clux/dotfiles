@@ -1,6 +1,6 @@
 #theme = "hex_toxic"
-#theme = "catppuccin_mocha"
-theme = "base16_transparent"
+theme = "catppuccin_mocha"
+#theme = "base16_transparent"
 
 [keys.normal]
 h = "no_op"
@@ -24,6 +24,9 @@ s = ":sh zellij run -cf -- zsh"
 #r = ":config-reload"
 #w = ":write"
 #q = ":quit"
+
+#[language.yaml.editor]
+#theme = "catppuccin_mocha" # base16 terrible here, need a transparent one
 
 [editor.soft-wrap]
 enable = true
