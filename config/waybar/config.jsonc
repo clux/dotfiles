@@ -24,18 +24,18 @@
         "custom/logout",
         // ws indicators
         //"wlr/workspaces" - support being removed in hyprland 0.30 apparently
-        "hyprland/workspaces"
+        "hyprland/workspaces",
+        "mpris",
+        "wlr/taskbar"
     ],
     "modules-center": [
-        //"hyprland/window"
-        "wlr/taskbar"
+        "hyprland/window"
     ],
     "modules-right": [
         "tray",
 
         // interactive ones
         "network",
-        "mpris",
         "hyprland/submap",
         //"idle_inhibitor",
         "pulseaudio",
@@ -46,7 +46,13 @@
     ],
 
     "hyprland/window": {
-        "format": "{}"
+        "format": "{}",
+        "rewrite": {
+          // attempt to get data pushed from zellij rename-pane actions
+          // would be better if i was able to grab something session-static like the session name
+          // and put something cool like the kube context in there but that is creation static
+          //"Zellij.*- (.*)": "$1"
+        }
     },
     "hyprland/workspaces": {
         "on-scroll-up": "hyprctl dispatch workspace e+1",
@@ -86,8 +92,11 @@
     },
     "custom/wofi": {
         "format": "",
-        "on-click": "wofi -l top_left",
-        "tooltip": false
+        // disabled atm, currently takes over a larger space than it's supposed to..
+        //"on-click": "wofi -l top_left",
+        "tooltip": false,
+        "min-length": 4,
+        "max-length": 4
     },
 
     // unused - laptop only
@@ -160,11 +169,15 @@
         "interface": "wlan0",
         "format": "{ifname}",
         //"on-click": "alacritty -T nmtui -e 'nmtui'",
-        "format-wifi": "  {essid} ({signalStrength}%)",
-        "format-ethernet": "  {ifname}",
+        "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"],
+        //"format-wifi": "",
+        "format-wifi": "{icon}",
+        "format-ethernet": "",
         "format-disconnected": "",
-        "tooltip": false,
-        "max-length": 50
+        "tooltip": true,
+        "tooltip-format-ethernet": "{ifname}",
+        "tooltip-format-wifi": "{essid} {signalStrength}%",
+        //"max-length": 50
     },
 
     "cpu": {
