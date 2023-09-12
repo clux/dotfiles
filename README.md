@@ -21,7 +21,7 @@ Designed for a minimal Arch Linux installation, but retrofitted to support MacOS
 - [kubernetes helpers](https://github.com/clux/dotfiles/blob/main/.k8s-helpers) with abbrev aliases, ns/ctx switchers, interactive lookup fns using `fzf`
 - [gitconfig](https://github.com/clux/dotfiles/blob/main/.gitconfig) with [fzf](https://github.com/junegunn/fzf) based [git helpers](https://github.com/clux/dotfiles/blob/main/.git-helpers), diff via [delta](https://github.com/dandavison/delta), and account switching by `includeIf` dirs
 - [keychain](https://wiki.archlinux.org/index.php/SSH_keys#Keychain) loading specific ssh keys by host
-- [aliases](https://github.com/clux/dotfiles/blob/main/.aliases) to gracefully move from `ls`->`eza`, `ag`->`rg`, `cat`->`bat`
+- [aliases](https://github.com/clux/dotfiles/blob/main/.aliases) to gracefully move from `ls`->`eza`, `cat`->`bat`, `du` -> `dust`
 
 Plus lots of misc [.functions](https://github.com/clux/dotfiles/blob/main/.functions). As usual, copy what you find interesting.
 
