@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # navigation shortcuts
 alias ..="cd .."
@@ -8,6 +8,9 @@ alias .....="cd ../../../.."
 
 # cat -> bat (syntax maps in ~/.config/bat/config)
 alias cat="bat"
+# global help aliases to go through bat
+alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
+alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 
 # ls + tree -> eza
 alias lla='eza -la --group-directories-first --icons --git-ignore --git --sort ext --color=always'
