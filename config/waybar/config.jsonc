@@ -38,8 +38,8 @@
         "network",
         "hyprland/submap",
         //"idle_inhibitor",
-        "pulseaudio",
-        "pulseaudio#microphone",
+        "pulseaudio#sink",
+        "pulseaudio#source",
         //"hyprland/language",
         "custom/language",
         "custom/dunst"
@@ -171,6 +171,11 @@
         //"on-click": "alacritty -T nmtui -e 'nmtui'",
         "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"],
         //"format-wifi": "",
+        "states": {
+          "good": 80,
+          "warning": 30,
+          "critical": 15
+        },
         "format-wifi": "{icon}",
         "format-ethernet": "",
         "format-disconnected": "",
@@ -249,36 +254,45 @@
         "on-click": "xdg-open https://calendar.google.com/calendar/u/0/r/week",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
-    "pulseaudio": {
-        "format": "{icon} {volume}%",
-        "tooltip": false,
-        "format-muted": "\udb81\udfce Muted",
+    "pulseaudio#sink": {
+        "format": "{icon}",
+        "format-muted": "󰖁",
         "on-click-middle": "systemctl --user restart pipewire xdg-desktop-portal-hyprland xdg-desktop-portal",
         "on-click-right": "pavucontrol",
         "on-click": "pamixer -t",
-        "on-scroll-up": "pamixer -i 5",
-        "on-scroll-down": "pamixer -d 5",
+        "on-scroll-up": "pamixer -i 10",
+        "on-scroll-down": "pamixer -d 10",
         "scroll-step": 5,
+        // state experiment, try to highlight color, but not great because does not take into acocunt mute
+        "states": {
+          "urgent": 0,
+          "alert": 15
+        },
+        "tooltip-format": "{desc} {volume}%",
         "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
+            "default": ["", "", "󰕾", ""]
         }
     },
-    "pulseaudio#microphone": {
+    "pulseaudio#source": {
         "format": "{format_source}",
+        "format-source": "",
+        "format-source-muted": "",
         "tooltip": false,
-        "format-source": "\uf130 {volume}%",
-        "format-source-muted": "\uf131 Muted",
+        "maximum-length": 1,
         "on-click": "pamixer --default-source -t",
         "on-click-right": "pavucontrol -t 4",
-        "on-scroll-up": "pamixer --default-source -i 5",
-        "on-scroll-down": "pamixer --default-source -d 5",
-        "scroll-step": 5
+        // because of viz problems we just leave mic input at 100 for now - can right click in
+        //"on-scroll-up": "pamixer --default-source -i 10",
+        //"on-scroll-down": "pamixer --default-source -d 10",
+        //"scroll-step": 5,
+        // icons currently does not work because the source doesn't seem to know it's a "source" thing
+        // the {desc} clearly shows it thinks it's acting on a sink so pointless to try to be smart here atm
+        // this probably means we can't use waybar states (which could be a nice way to color red when muted)
+        //"tooltip-format": "{desc} at {volume}%",
+        //"format-source": "{icon} {volume}",
+        //"format-source-icons": {
+        //  "default": ["󱦊", "󰢳", "󰢴", ""]
+        //}
     },
 
     "custom/power" : {

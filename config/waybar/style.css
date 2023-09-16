@@ -135,8 +135,9 @@ tooltip {
     border-right: 0px;
 }
 
+/* could take these 3 colors as default good/warning/critical */
 #network {
-    color: #f9e2af;
+    color: #89b4fa;
     border-left: 0px;
     border-right: 0px;
     padding-right: 20px;
@@ -144,11 +145,20 @@ tooltip {
     border-right: 0px;
     border-radius: 0px 0px 0px 10px;;
 }
+#network.warning {
+    color: #f9e2af;
+}
+#network.critical {
+    color: #fab387;
+}
 
 #pulseaudio {
     color: #89b4fa;
     border-left: 0px;
     border-right: 0px;
+}
+#pulseaudio.urgent {
+    color: #f5c2e7;
 }
 
 #idle_inhibitor {
