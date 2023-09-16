@@ -174,19 +174,19 @@ kpfp() {
   local -r pod="${1:-$(kubectl get pod --no-headers | choose 0 | fzf)}"
   local -r data="$(kubectl get pod "${pod}" -ojson)"
   if [[ "$(jq '.spec.containers | length' <<< "${data}")" = 1 ]]; then
-    container="$(jq ".spec.containers[0].name" -r <<< "${data}")"
+    local -r cname="$(jq ".spec.containers[0].name" -r <<< "${data}")"
   else
-    container="$(jq ".spec.containers[].name" -r <<< "${data}" | fzf --header='mutliple containers; please pick one')" # user choice
+    local -r cname="$(jq ".spec.containers[].name" -r <<< "${data}" | fzf --header='mutliple containers; please pick one')" # user choice
   fi
-  datajson="$(jq ".spec.containers[] | select(.name==\"${container}\")" <<< "${data}")"
-  if [[ "$(jq ".ports" <<< "${data}")" == "null" ]]; then
-    echo "No ports for $(tput bold)${container}$(tput sgr0) container in $(tput bold)${pod}$(tput sgr0)"
+  local -r containers="$(jq ".spec.containers[] | select(.name==\"${cname}\")" <<< "${data}")"
+  if [[ "$(jq ".ports" <<< "${cname}")" == "null" ]]; then
+    echo "No ports for $(tput bold)${cname}$(tput sgr0) container in $(tput bold)${pod}$(tput sgr0)"
     return 1
   fi
   if [ "$(jq ".ports[]" -Mc <<< "${datajson}" | wc -l)" -gt 1 ]; then
     portjson="$(jq ".ports[]" -Mc <<< "${datajson}" | fzf --header="pick a port object")"
   else
-    portjson="$(jq ".ports[0]" -Mc <<< "${datajson}")"
+    portjson="$(jq ".ports[0]" -Mc <<< "${cname}")"
   fi
   port="$(jq ".containerPort" -r <<< "${portjson}")"
   echo "Forwarding to pod/${pod}:${port} via local 8000"
