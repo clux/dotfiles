@@ -5,6 +5,7 @@ export TERM="xterm-256color"
 
 # colored manpage theme through bat
 export MANPAGER="sh -c 'col -bx | bat -l man'"
+export MANROFFOPT='-c' # https://github.com/sharkdp/bat/issues/2593
 
 # use shellcheck for current file only
 export SHELLCHECK_OPTS="-e SC1091 -e SC1090"
