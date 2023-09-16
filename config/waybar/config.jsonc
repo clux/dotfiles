@@ -8,7 +8,6 @@
     "height": 0,
     "modules-left": [
         "custom/wofi",
-        "clock",
 
         // diagnostic block
         "custom/weather",
@@ -21,18 +20,18 @@
 
         // exiters
         "custom/lockscreen",
-        "custom/logout",
+        "custom/logout"
         // ws indicators
         //"wlr/workspaces" - support being removed in hyprland 0.30 apparently
-        "hyprland/workspaces",
-        "mpris",
-        "wlr/taskbar"
     ],
     "modules-center": [
-        "hyprland/window"
+        //"hyprland/window"
+        "hyprland/workspaces",
+        "wlr/taskbar"
     ],
     "modules-right": [
         "tray",
+        "mpris",
 
         // interactive ones
         "network",
@@ -41,6 +40,7 @@
         "pulseaudio#sink",
         "pulseaudio#source",
         //"hyprland/language",
+        "clock",
         "custom/language",
         "custom/dunst"
     ],
@@ -245,15 +245,45 @@
     },
     "tray": {
         "icon-size": 26,
+        "show-passive-items": true,
         "tooltip": false,
         "spacing": 15
     },
+
     "clock": {
-        "format": "{: %R %d/%m}",
-        "timezone": "Europe/London",
-        "on-click": "xdg-open https://calendar.google.com/calendar/u/0/r/week",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+      "interval": 60,
+      "align": 0,
+      "rotate": 0,
+      "locale": "en_GB.UTF-8",
+      "timezone": "Europe/London",
+      //"format": "{: %I:%M  󰃭 %a %d %b}",
+      "format": "{:%R}", //%d/%m
+      // "format-alt": " {:%a %b %d, %G}": " {:%I:%M %p}",
+      "tooltip-format": "<tt><small>{calendar}</small></tt>",
+      "on-click": "xdg-open https://calendar.google.com/calendar/u/0/r/week",
+      "calendar": {
+        "mode": "month",
+        "mode-mon-col": 2,
+        "weeks-pos": "right",
+        "on-scroll": 1,
+        "on-click-right": "mode",
+        "format": {
+          "months": "<span color='#ffead3'><b>{}</b></span>",
+          "days": "<span color='#ecc6d9'><b>{}</b></span>",
+          "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+          "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+          "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+        }
+      },
+      "actions": {
+        "on-click-right": "mode",
+        "on-click-forward": "tz_up",
+        "on-click-backward": "tz_down",
+        "on-scroll-up": "shift_up",
+        "on-scroll-down": "shift_down"
+      }
     },
+
     "pulseaudio#sink": {
         "format": "{icon}",
         "format-muted": "󰖁",

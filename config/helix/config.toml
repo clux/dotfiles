@@ -46,6 +46,9 @@ render = true
 [editor.gutters]
 layout = ["diff", "diagnostics", "line-numbers", "spacer"]
 
+[editor.lsp]
+display-messages = true # progress on statusbar
+
 # colemak
 # neio is the equivalent colemak, but don't want to shift everything around..
 [keys.normal]
