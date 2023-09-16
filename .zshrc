@@ -106,8 +106,8 @@ bindkey  "^[[F"   end-of-line # END alternate ctrl-e
 # ctrl-a go to start of line
 # ctrl-e go to end of line
 
-# Remove / from WORDCHARS to allow word movement to respect slash as a boundary (better for paths)
-export WORDCHARS="${WORDCHARS:s@/@}"
+# Remove / and = from WORDCHARS to allow word movement to respect these as a boundaries
+export WORDCHARS="${${WORDCHARS:s@/@}:s@=@}"
 
 # -----------------------------------------------------------------------------
 # Key management via keychain
