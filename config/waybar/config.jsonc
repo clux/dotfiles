@@ -248,7 +248,7 @@
         "format" : "{} °",
         "restart-interval" : 300,
         "exec": "wttrbar --date-format \"%m/%d\" --location London --hide-conditions 2> /dev/null",
-        "on-click-right": "xdg-open https://www.yr.no/en/forecast/daily-table/2-2643743/United%20Kingdom/England/Greater%20London/London",
+        "on-click-right": "xdg-open https://www.yr.no/en/forecast/daily-table/2-3333147/United%20Kingdom/England/Greater%20London/Greenwich",
         "return-type" : "json"
     },
     "tray": {
@@ -338,7 +338,7 @@
         "tooltip" : false, // tooltip-format is not a thing :(
         "tooltip-format": "GPU power average",
         "format" : "⚡{}W",
-        "on-click": "alacritty -T sensors -e 'zsh -ic sensors'",
+        "on-click": "alacritty -T sensors -e zsh -c 'watch sensors'",
         "restart-interval" : 300,
          // hwmon3=ryzen (1=Tctl), hwmon2=GPU, hwmon1=nvme, hwmon0=aspci
         "exec" : "echo $(($(cat /sys/class/hwmon/hwmon2/power1_average) / 1000000))"
