@@ -4,7 +4,7 @@ set -euo pipefail
 icon="\uf11c"
 preferred="Colemak"
 
-# NB: Possible to pick from .main == true in .keyboards[], but doing it mostly dynamic
+# NB: Either pick .main == true in .keyboards[], or hardcode:
 #keyboard="fnatic-gear-fnatic-gear-ministreak-keyboard"
 #keymap=$(hyprctl devices -j | jq -r ".keyboards[] | select(.name == \"$keyboard\") | .active_keymap")
 

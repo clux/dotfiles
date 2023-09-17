@@ -33,6 +33,7 @@
         "tray",
         "mpris",
         // interactive ones
+        "custom/k3d",
         "network",
         "hyprland/submap",
         //"idle_inhibitor",
@@ -234,6 +235,13 @@
         "on-click": "hyprctl switchxkblayout fnatic-gear-fnatic-gear-ministreak-keyboard next > /dev/null",
         "interval": 60
     },
+
+    "custom/k3d": {
+        "exec": "~/.config/waybar/scripts/k3d.sh",
+        "return-type": "json",
+        "interval": 360
+    },
+
     // wttr.in dump via https://github.com/bjesus/wttrbar (aur wttrbar-git)
     "custom/weather" : {
         "tooltip" : true,
