@@ -32,7 +32,6 @@
     "modules-right": [
         "tray",
         "mpris",
-
         // interactive ones
         "network",
         "hyprland/submap",
@@ -235,12 +234,13 @@
         "on-click": "hyprctl switchxkblayout fnatic-gear-fnatic-gear-ministreak-keyboard next > /dev/null",
         "interval": 60
     },
-    // TODO: fix, currently gets wrong location and crashes after a while
+    // wttr.in dump via https://github.com/bjesus/wttrbar (aur wttrbar-git)
     "custom/weather" : {
         "tooltip" : true,
-        "format" : "{}",
+        "format" : "{} °",
         "restart-interval" : 300,
-        "exec" : "~/.config/waybar/scripts/waybar-wttr.py",
+        "exec": "wttrbar --date-format \"%m/%d\" --location London --hide-conditions 2> /dev/null",
+        "on-click-right": "xdg-open https://www.yr.no/en/forecast/daily-table/2-2643743/United%20Kingdom/England/Greater%20London/London",
         "return-type" : "json"
     },
     "tray": {
