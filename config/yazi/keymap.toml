@@ -1,0 +1,6 @@
+[manager]
+# kind of want to have --confirm option
+# but that implies having to also fork the whole keymap atm
+#keymap = [
+#  { on = ["d"], exec = "remove --confirm", desc = "Move the files to the trash" },
+#]

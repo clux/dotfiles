@@ -1,0 +1,13 @@
+[preview]
+syntect_theme = "~/.config/bat/themes/Catppuccin-mocha.tmTheme"
+
+[opener]
+image = [
+  { exec = 'feh "$@"', display_name = "Open" },
+]
+video = [
+  { exec = 'mpv "$@"' },
+]
+audio = [
+  { exec = 'mpv "$@"' },
+]
