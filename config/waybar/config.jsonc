@@ -359,7 +359,8 @@
     "custom/dunst": {
       "exec": "~/.config/waybar/scripts/dunst.sh",
       "return-type": "json",
-      "restart-interval": 10,
+      "signal": 5,
+      "restart-interval": 60,
       "on-click": "dunstctl set-paused toggle"
     }
 
