@@ -233,6 +233,7 @@
     "custom/language": {
         "exec": "~/.config/waybar/scripts/keyboard.sh",
         "return-type": "json",
+        "signal": 4,
         "on-click": "hyprctl switchxkblayout fnatic-gear-fnatic-gear-ministreak-keyboard next > /dev/null",
         "interval": 60
     },
