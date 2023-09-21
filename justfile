@@ -26,11 +26,6 @@ fontguard:
   fd . {{FONT_DIR}} -e ttf | rg -q "Inconsolata.*Mono"
   fd . {{FONT_DIR}} -e ttf | rg -q "Liberation"
 
-# configure flatpaks
-[linux]
-flatpaks:
-  ln -sf $PWD/var/app/com.vscodium.codium ~/.var/app
-
 # reload configs insofar as possible
 reload:
   bat cache --build | rg -v "okay"
