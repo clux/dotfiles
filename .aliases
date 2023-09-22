@@ -25,6 +25,7 @@ alias top='btop'
 
 # jq on everything
 alias tq='yq --input=toml'
+alias JQ='yq --input=json'
 
 # hyprland
 alias hde="hyprctl dispatch exec"
