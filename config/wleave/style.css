@@ -57,3 +57,7 @@ button:focus {
 }
 #reboot:focus {
 }
+
+#softboot {
+    background-image: image(url("/usr/share/wleave/icons/reboot.svg"));
+}

@@ -5,6 +5,12 @@
     "keybind" : "l"
 }
 {
+    "label" : "softboot",
+    "action" : "systemctl soft-reboot",
+    "text" : "Soft Reboot",
+    "keybind" : "b"
+}
+{
     "label" : "reboot",
     "action" : "systemctl reboot",
     "text" : "Reboot",
