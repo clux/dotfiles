@@ -57,6 +57,7 @@ tooltip {
 #custom-lockscreen,
 #custom-logout,
 #custom-k3d,
+#custom-kc,
 #custom-mpris,
 #language,
 #mpris,
@@ -156,6 +157,12 @@ tooltip {
 /*#custom-k3d.inactive {}*/
 #custom-k3d.active {
     color: #89b4fa;
+}
+#custom-k3d {
+  background-image: url('/home/clux/.config/waybar/k3s.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 35px; /*contain;*/
 }
 #pulseaudio {
     color: #89b4fa;

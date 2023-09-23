@@ -12,6 +12,7 @@ kc() {
   # Relies on KUBECONFIG set to colon delimeted list of all kubeconfigs ^
   # Exclude fqdn contexts (rancher-ism).
   kubectl config use-context "$(kubectl config get-contexts -o name | grep -v fqdn | fzf)"
+  pkill -RTMIN+3 waybar # redraw a waybar module (if we are on linux)
   try_eks_tunnel # auto-reconnect any cloudflared tunnels if they exist as a kubeconfig preferences.extension
 }
 
@@ -34,6 +35,11 @@ kns() {
 #    name: my-eks-context
 try_eks_tunnel () {
   local -r ctx="$(kubectl config current-context)"
+  local -r prefs="$(kubectl config view | yq '.preferences')"
+  if [[ $prefs == "{}" ]]; then
+    # bail out if nothing in preferences
+    return 0
+  fi
   # this lookup can fail, but we ignore the failure - only setup tunnel if it was specified
   local -r host="$(kubectl config view | yq ".preferences.extensions[] | select(.name == \"${ctx}\") | .extension.tunnel" -r)"
   # if we did find a kubeconfig extension start a cloudflare tunnel against the given hostname
@@ -44,7 +50,6 @@ try_eks_tunnel () {
     zellij run -cf -- cloudflared access tcp --hostname "${host}" --url 127.0.0.1:1234
   fi
 }
-
 # -----------------------------------------------------------------------------
 # kubernetes aliases
 

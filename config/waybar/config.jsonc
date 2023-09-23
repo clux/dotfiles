@@ -33,6 +33,7 @@
         "tray",
         "mpris",
         // interactive ones
+        "custom/kc",
         "custom/k3d",
         "network",
         "hyprland/submap",
@@ -242,6 +243,14 @@
         "exec": "~/.config/waybar/scripts/k3d.sh",
         "return-type": "json",
         "interval": 360
+    },
+    "custom/kc": {
+        "exec": "~/.config/waybar/scripts/kc.sh",
+        "on-click-right": "kubectl config use-context $(kubectl config get-contexts -o name | fuzzel -d -l $(kubectl config get-contexts --no-headers |wc -l)) && pkill -RTMIN+3 waybar",
+        "on-click": "kubectl config set \"contexts.$(kubectl config current-context).namespace\" \"$(kubectl get ns --no-headers | choose 0 | fuzzel -d)\" && pkill -RTMIN+3 waybar",
+        "return-type": "json",
+        "signal": 3,
+        "interval": 5
     },
 
     // wttr.in dump via https://github.com/bjesus/wttrbar (aur wttrbar-git)

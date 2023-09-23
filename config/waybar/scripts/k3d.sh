@@ -1,19 +1,19 @@
 #!/bin/bash
 set -euo pipefail
 
-# Module that displays an icon with the running k3d cluster(s) if any
-icon="󱃾"
+# Module that displays k3d tooltip on a k3s svg with cluster info
 active="$(k3d cluster list -ojson | jq '.[] | select(.serversRunning == 1) | .name' -rj)"
 inactive="$(k3d cluster list -ojson | jq '.[] | select(.serversRunning == 0) | .name' -rj)"
 
 if [ -n "$active" ]; then
   class="active"
+  #pods="$(kubectl --context="${active}" get pods --no-headers | choose "0:2" | column -t)"
   if [ -n "$inactive" ]; then
     alt="active: ${active}, inactive: ${inactive}"
   else
     alt="active: ${active}"
   fi
-  text="${icon}"
+  text=" "
 elif [ -n "${inactive}" ]; then
   alt="inactive: ${inactive}"
   class="inactive"
