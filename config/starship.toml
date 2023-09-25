@@ -11,8 +11,6 @@ ${character}\
 """
 
 add_newline = false
-# Dropping right menu now since it's annoying for copy-paste
-# and moved cmd_kubernetes into kubecontext cask or waybar module
 right_format = """\
 [\ue0b6](fg:black black)\
 ${cmd_duration}\
