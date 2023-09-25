@@ -367,6 +367,7 @@
 
     "custom/dunst": {
       "exec": "~/.config/waybar/scripts/dunst.sh",
+      "on-click-right": "dunstctl history-pop",
       "return-type": "json",
       "signal": 5,
       "restart-interval": 60,

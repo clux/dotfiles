@@ -11,3 +11,6 @@ video = [
 audio = [
   { exec = 'mpv "$@"' },
 ]
+fallback = [
+  { exec = 'xdg-open "$@"', display_name = "Open" },
+]
