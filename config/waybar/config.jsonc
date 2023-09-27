@@ -257,8 +257,10 @@
     "custom/weather" : {
         "tooltip" : true,
         "format" : "{}°",
-        "restart-interval" : 300,
+        "restart-interval" : 900,
         "exec": "wttrbar --date-format \"%m/%d\" --location London --hide-conditions 2> /dev/null",
+        // TODO: scroll through locations and put alocation in a file
+        "exec-on-event": true,
         "on-click-right": "xdg-open https://www.yr.no/en/forecast/daily-table/2-3333147/United%20Kingdom/England/Greater%20London/Greenwich",
         "return-type" : "json"
     },
