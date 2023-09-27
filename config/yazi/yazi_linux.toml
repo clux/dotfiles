@@ -2,6 +2,9 @@
 syntect_theme = "~/.config/bat/themes/Catppuccin-mocha.tmTheme"
 
 [opener]
+#folder = [
+#  { exec = 'yazi "$@"', display_name = "Reveal in Finder" },
+#]
 image = [
   { exec = 'feh "$@"', display_name = "Open" },
 ]
