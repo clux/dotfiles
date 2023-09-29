@@ -12,8 +12,11 @@ kc() {
   # Relies on KUBECONFIG set to colon delimeted list of all kubeconfigs ^
   # Exclude fqdn contexts (rancher-ism).
   kubectl config use-context "$(kubectl config get-contexts -o name | grep -v fqdn | fzf)"
-  pkill -RTMIN+3 waybar # redraw a waybar module (if we are on linux)
-  try_eks_tunnel # auto-reconnect any cloudflared tunnels if they exist as a kubeconfig preferences.extension
+  if [[ "${OSTYPE}" =~ "darwin" ]]; then
+    try_eks_tunnel # auto-reconnect any cloudflared tunnels if they exist as a kubeconfig preferences.extension
+  else
+    pkill -RTMIN+3 waybar # trigger re-render of waybar kc module
+  fi
 }
 
 # namespace switcher
