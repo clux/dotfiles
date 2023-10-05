@@ -180,7 +180,7 @@
         "format-wifi": "{icon}",
         "format-ethernet": "",
         "format-disconnected": "",
-        "on-click": "alacritty -T nmtui -e nmtui",
+        "on-click-right": "alacritty -T nmtui -e nmtui",
         "tooltip": true,
         "tooltip-format-ethernet": "{ifname}",
         "tooltip-format-wifi": "{essid} {signalStrength}%",

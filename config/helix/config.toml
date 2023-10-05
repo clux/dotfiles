@@ -11,15 +11,12 @@ l = ":sh zellij run -f -- just lint"
 s = ":sh zellij run -cf -- zsh"
 c = ":config-reload"
 f = ":theme catppuccin_mocha"
-
-# add things into space menu!
-[keys.normal.space]
-w = ":write"
-#q = ":quit"
+d = ":theme tokyonight"
 
 [editor]
 cursorline = true
 color-modes = true
+bufferline = "always"
 
 [editor.soft-wrap]
 enable = true
@@ -49,9 +46,11 @@ layout = ["diff", "diagnostics", "line-numbers", "spacer"]
 [editor.lsp]
 display-messages = true # progress on statusbar
 
-# colemak
-# neio is the equivalent colemak, but don't want to shift everything around..
+# NB: cross reference binds with command palette (S-?)
 [keys.normal]
+esc = ["collapse_selection", "keep_primary_selection"] # comma is awkward for removing multi-caret
+
+# disable hjkl because colemak; neio is the equivalent colemak, but don't want to shift everything around..
 h = "no_op"
 j = "no_op"
 k = "no_op"
