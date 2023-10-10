@@ -50,13 +50,49 @@ display-messages = true # progress on statusbar
 [keys.normal]
 esc = ["collapse_selection", "keep_primary_selection"] # comma is awkward for removing multi-caret
 
+#"x" = "extend_to_line_bounds"
+#"X" = "extend_line_below"
+#"C-x" = "shrink_to_line_bounds"
+
+# rebind alt keys to ctrl where necessary WIP
+"A-u" = "no_op" # previous: earlier
+"A-U" = "no_op" # previous: later
+"A-!" = "no_op" # previous: shell_apend_output
+# word movement as in shell - might be a bad idea
+#"C-left" = "move_prev_word_end"
+#"C-S-left" = "move_prev_long_word_start"
+#"C-right" = "move_next_word_end"
+#"C-S-right" = "move_next_long_word_end"
+
+# move selections
+"C-up" = ["extend_to_line_bounds", "search_selection", "delete_selection", "move_line_up", "paste_before", "move_line_up", "goto_line_end", "search_next"]
+"C-down" = ["extend_to_line_bounds", "search_selection", "delete_selection", "move_line_down", "paste_before", "move_line_up", "goto_line_end", "search_next"]
+
 # disable hjkl because colemak; neio is the equivalent colemak, but don't want to shift everything around..
 h = "no_op"
 j = "no_op"
 k = "no_op"
 l = "no_op"
+
 [keys.normal.g]
 h = "no_op"
 j = "no_op"
-k = "no_op"
 l = "no_op"
+k = "no_op"
+
+[keys.normal.z]
+h = "no_op"
+j = "no_op"
+l = "no_op"
+k = "no_op"
+
+
+
+[keys.select]
+# word movement as in shell and normal mode TODO: currently this breaks selection?!
+# maybe this is a bug based on: https://docs.helix-editor.com/keymap.html#select--extend-mode
+#"C-left" = "move_prev_word_end"
+#"C-S-left" = "move_prev_long_word_start"
+#"C-right" = "move_next_word_end"
+#"C-S-right" = "move_next_long_word_end"
+#S = "surround_add"
