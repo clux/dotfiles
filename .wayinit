@@ -2,10 +2,7 @@
 
 cd ~ || exit
 
-# Force a cursor and cursor size early to avoid inconsistencies
-# Hyprland will force 24 in some places otherwise even with nwg-look setting
-export XCURSOR_SIZE=48
-# But do not set GTK_THEME (interefers with everything when using nwg-look)
+# NB: XCURSOR_SIZE and GTK_THEME not set; using nwg-look instead
 
 # Informational
 export XDG_CURRENT_DESKTOP=Hyprland
