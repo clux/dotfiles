@@ -2,7 +2,8 @@
 
 cd ~ || exit
 
-# NB: XCURSOR_SIZE and GTK_THEME not set; using nwg-look instead
+# NB: GTK_THEME not set; using nwg-look instead
+export XCURSOR_SIZE=48 # to avoid default 24 to hit terminals that are not nwg-look styled
 
 # Informational
 export XDG_CURRENT_DESKTOP=Hyprland
