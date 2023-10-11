@@ -25,7 +25,7 @@ yabai -m rule --add app="^Karabiner" manage=off
 yabai -m rule --add app="^Hammerspoon" manage=off
 
 # mpv should float
-yabai -m rule --add app="^mpv" manage=off
+yabai -m rule --add app="^mpv" manage=off layer=above
 
 # main config
 # see https://github.com/koekeishiya/yabai/wiki/Configuration
