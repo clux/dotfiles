@@ -25,19 +25,10 @@ yabai -m rule --add app="^Karabiner" manage=off
 yabai -m rule --add app="^Hammerspoon" manage=off
 
 # mpv should float
-yabai -m rule --add app="^mpv" manage=off topmost=on
+yabai -m rule --add app="^mpv" manage=off
 
 # main config
 # see https://github.com/koekeishiya/yabai/wiki/Configuration
-
-# border. similar to hyprland config, but ultimately turned off.
-# too ugly when you can't turn off rounded corners
-yabai -m config \
-  window_border_radius 1 \
-  window_border_width 1 \
-  window_border off \
-  active_window_border_color 0xffcba6f7 \
-  normal_window_border_color 0xff45475a
 
 # style; rely on inactive opacity instead of active border
 yabai -m config \
