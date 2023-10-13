@@ -87,6 +87,17 @@ j = "no_op"
 l = "no_op"
 k = "no_op"
 
+[keys.normal.space.w]
+h = "no_op"
+j = "no_op"
+l = "no_op"
+k = "no_op"
+[keys.normal.C-w]
+h = "no_op"
+j = "no_op"
+l = "no_op"
+k = "no_op"
+
 [keys.normal.z]
 h = "no_op"
 j = "no_op"
