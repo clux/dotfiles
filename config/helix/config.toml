@@ -104,7 +104,26 @@ j = "no_op"
 l = "no_op"
 k = "no_op"
 
-
+# window
+[keys.select.space.w]
+h = "no_op"                   # default: jump_view_left
+j = "no_op"                   # default: jump_view_down
+k = "no_op"                   # default: jump_view_up
+l = "no_op"                   # default: jump_view_right
+C-h = "no_op"                 # default: jump_view_left
+C-j = "no_op"                 # default: jump_view_down
+C-k = "no_op"                 # default: jump_view_up
+C-l = "no_op"                 # default: jump_view_right
+n = "hsplit_new"              # default: hsplit_new or vsplit_new menu
+[keys.select.C-w]
+h = "no_op"                   # default: jump_view_left
+j = "no_op"                   # default: jump_view_down
+k = "no_op"                   # default: jump_view_up
+l = "no_op"                   # default: jump_view_right
+C-h = "no_op"                 # default: jump_view_left
+C-j = "no_op"                 # default: jump_view_down
+C-k = "no_op"                 # default: jump_view_up
+C-l = "no_op"                 # default: jump_view_right
 
 [keys.select]
 # word movement as in shell and normal mode TODO: currently this breaks selection?!
