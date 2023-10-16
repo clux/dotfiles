@@ -79,19 +79,22 @@ l = "no_op" # default: move_char_right
 "C-S-left" = "move_prev_long_word_start"
 "C-right" = "move_next_word_end"
 "C-S-right" = "move_next_long_word_end"
-"C-down" = "half_page_down"
-"C-up" = "half_page_up"
-"C-S-down" = "page_down"
-"C-S-up" = "page_up"
+"C-down" = ["half_page_down", "goto_window_center"]
+"C-up" = ["half_page_up", "goto_window_center"]
+"C-S-down" = ["page_down", "goto_window_center"]
+"C-S-up" = ["page_up", "goto_window_center"]
 
 [keys.select]
-# word movement as in shell and normal mode TODO: currently this breaks selection?!
-# maybe this is a bug based on: https://docs.helix-editor.com/keymap.html#select--extend-mode
-#"C-left" = "move_prev_word_end"
-#"C-S-left" = "move_prev_long_word_start"
-#"C-right" = "move_next_word_end"
-#"C-S-right" = "move_next_long_word_end"
-
+# word movement as in shell and normal mode
+# TODO: paragraph or fn based movement?
+"C-left" = "extend_prev_word_end"
+"C-S-left" = "extend_prev_long_word_start"
+"C-right" = "extend_next_word_end"
+"C-S-right" = "extend_next_long_word_end"
+"C-down" = ["half_page_down", "goto_window_center"]
+"C-up" = ["half_page_up", "goto_window_center"]
+"C-S-down" = ["page_down", "goto_window_center"]
+"C-S-up" = ["page_up", "goto_window_center"]
 
 # remaining effort to kill hjkl
 [keys.normal.g]
