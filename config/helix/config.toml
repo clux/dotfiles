@@ -54,7 +54,23 @@ esc = ["collapse_selection", "keep_primary_selection"] # comma is awkward for re
 #"X" = "extend_line_below"
 #"C-x" = "shrink_to_line_bounds"
 
-# rebind alt keys to ctrl where necessary WIP
+# disable hjkl because colemak; neio is the equivalent colemak, but don't want to shift everything around..
+# NB: tons more of this later
+h = "no_op" # default: move_char_left
+j = "no_op" # default: move_visual_line_down
+k = "no_op" # default: move_visual_line_up
+l = "no_op" # default: move_char_right
+
+# move selections
+#"C-down" = ["extend_to_line_bounds", "search_selection", "delete_selection", "move_line_down", "paste_before", "move_line_up", "goto_line_end", "search_next"]
+#"C-up" = ["extend_to_line_bounds", "search_selection", "delete_selection", "move_line_up", "paste_before", "move_line_up", "goto_line_end", "search_next"]# NB: this limits command binds on mac when using modifier remap
+# in particular have to remove ^-up bind for mission control, leaving the last mac native bind as: ^-space (spotlight)
+# .. super is effectively unused in the terminal as a result of this
+# maybe we pivot away from the standard modifiers in helix entirely?
+
+#S = "surround_add"
+
+# rebind some alt based keys to ctrl to avoid zellij clashes
 "A-u" = "no_op" # previous: earlier
 "A-U" = "no_op" # previous: later
 "A-!" = "no_op" # previous: shell_apend_output
@@ -68,41 +84,44 @@ esc = ["collapse_selection", "keep_primary_selection"] # comma is awkward for re
 "C-S-down" = "page_down"
 "C-S-up" = "page_up"
 
-# move selections
-#"C-down" = ["extend_to_line_bounds", "search_selection", "delete_selection", "move_line_down", "paste_before", "move_line_up", "goto_line_end", "search_next"]
-#"C-up" = ["extend_to_line_bounds", "search_selection", "delete_selection", "move_line_up", "paste_before", "move_line_up", "goto_line_end", "search_next"]# NB: this limits command binds on mac when using modifier remap
-# in particular have to remove ^-up bind for mission control, leaving the last mac native bind as: ^-space (spotlight)
-# .. super is effectively unused in the terminal as a result of this
-# maybe we pivot away from the standard modifiers in helix entirely?
+[keys.select]
+# word movement as in shell and normal mode TODO: currently this breaks selection?!
+# maybe this is a bug based on: https://docs.helix-editor.com/keymap.html#select--extend-mode
+#"C-left" = "move_prev_word_end"
+#"C-S-left" = "move_prev_long_word_start"
+#"C-right" = "move_next_word_end"
+#"C-S-right" = "move_next_long_word_end"
 
-# disable hjkl because colemak; neio is the equivalent colemak, but don't want to shift everything around..
-h = "no_op"
-j = "no_op"
-k = "no_op"
-l = "no_op"
 
+# remaining effort to kill hjkl
 [keys.normal.g]
 h = "no_op"
 j = "no_op"
 l = "no_op"
 k = "no_op"
 
-[keys.normal.space.w]
-h = "no_op"
-j = "no_op"
-l = "no_op"
-k = "no_op"
-[keys.normal.C-w]
-h = "no_op"
-j = "no_op"
-l = "no_op"
-k = "no_op"
-
 [keys.normal.z]
-h = "no_op"
-j = "no_op"
-l = "no_op"
-k = "no_op"
+j = "no_op"                   # default: scroll_down
+k = "no_op"                   # default: scroll_up
+
+[keys.normal.space.w]
+h = "no_op"                   # default: jump_view_left
+j = "no_op"                   # default: jump_view_down
+k = "no_op"                   # default: jump_view_up
+l = "no_op"                   # default: jump_view_right
+H = "no_op"                   # default: swap_view_left
+J = "no_op"                   # default: swap_view_down
+K = "no_op"                   # default: swap_view_up
+L = "no_op"                   # default: swap_view_right
+[keys.normal.C-w]
+h = "no_op"                   # default: jump_view_left
+j = "no_op"                   # default: jump_view_down
+k = "no_op"                   # default: jump_view_up
+l = "no_op"                   # default: jump_view_right
+H = "no_op"                   # default: swap_view_left
+J = "no_op"                   # default: swap_view_down
+K = "no_op"                   # default: swap_view_up
+L = "no_op"                   # default: swap_view_right
 
 # window
 [keys.select.space.w]
@@ -114,7 +133,13 @@ C-h = "no_op"                 # default: jump_view_left
 C-j = "no_op"                 # default: jump_view_down
 C-k = "no_op"                 # default: jump_view_up
 C-l = "no_op"                 # default: jump_view_right
-n = "hsplit_new"              # default: hsplit_new or vsplit_new menu
+H = "no_op"                   # default: swap_view_left
+J = "no_op"                   # default: swap_view_down
+K = "no_op"                   # default: swap_view_up
+L = "no_op"                   # default: swap_view_right
+
+#n = "hsplit_new"              # default: hsplit_new or vsplit_new menu
+
 [keys.select.C-w]
 h = "no_op"                   # default: jump_view_left
 j = "no_op"                   # default: jump_view_down
@@ -124,12 +149,8 @@ C-h = "no_op"                 # default: jump_view_left
 C-j = "no_op"                 # default: jump_view_down
 C-k = "no_op"                 # default: jump_view_up
 C-l = "no_op"                 # default: jump_view_right
+H = "no_op"                   # default: swap_view_left
+J = "no_op"                   # default: swap_view_down
+K = "no_op"                   # default: swap_view_up
+L = "no_op"                   # default: swap_view_right
 
-[keys.select]
-# word movement as in shell and normal mode TODO: currently this breaks selection?!
-# maybe this is a bug based on: https://docs.helix-editor.com/keymap.html#select--extend-mode
-#"C-left" = "move_prev_word_end"
-#"C-S-left" = "move_prev_long_word_start"
-#"C-right" = "move_next_word_end"
-#"C-S-right" = "move_next_long_word_end"
-#S = "surround_add"
