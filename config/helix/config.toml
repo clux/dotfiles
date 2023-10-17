@@ -1,7 +1,5 @@
 #theme = "hex_toxic"
 theme = "catppuccin_mocha"
-#theme = "base16_transparent"
-# TODO: transparent bg: https://www.reddit.com/r/HelixEditor/comments/11f6scu/transparent_background/
 
 [keys.normal.backspace]
 b = ":sh zellij run -f -- just build"
@@ -11,7 +9,7 @@ l = ":sh zellij run -f -- just lint"
 s = ":sh zellij run -cf -- zsh"
 c = ":config-reload"
 f = ":theme tokyonight"
-d = ":theme base16_transparent"
+d = ":theme catppuccin_mocha_transparent"
 
 [editor]
 cursorline = true
