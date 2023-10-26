@@ -8,3 +8,4 @@ validation = true
 "https://raw.githubusercontent.com/ansible-community/schemas/main/f/ansible-tasks.json" = "roles/{tasks,handlers}/*.{yml,yaml}"
 "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible-lint-config.json" = ".ansible-lint"
 "https://json.schemastore.org/circleciconfig.json" = ".circleci/config.yml"
+#"values.schema.json" = "values.yaml" -> helm charts must add an inline $schema=./values.schema.json instead
