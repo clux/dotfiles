@@ -100,11 +100,15 @@ bindkey  "^[[3~"  delete-char   # delete key to delete forwards (mac has fn-back
 bindkey  "^[[H"   beginning-of-line # HOME == alternate ctrl-a
 bindkey  "^[[F"   end-of-line # END alternate ctrl-e
 
-
 # defaults that work in alacritty cross-os:
 # ctrl-w is delete word (werase)
 # ctrl-a go to start of line
 # ctrl-e go to end of line
+
+# NB: currently impossible to bind ctrl-backspace to delete-word-backwards in mac
+# so moving with ctrl (to avoid clashing with zellij which cannot use ctrl-left)
+# See https://github.com/zellij-org/zellij/issues/735
+# and deleting with alt-backspace (this also matches the helix config)
 
 # Remove / and = from WORDCHARS to allow word movement to respect these as a boundaries
 export WORDCHARS="${${WORDCHARS:s@/@}:s@=@}"

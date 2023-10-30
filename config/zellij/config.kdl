@@ -122,10 +122,14 @@ keybinds clear-defaults=true {
         bind "Ctrl s" { SwitchToMode "Scroll"; }
         bind "d" { Detach; }
     }
+    locked {
+        bind "Ctrl g" { SwitchToMode "Normal"; }
+    }
 
     // main binds that work everywhere
     shared_except "locked" { // normal mode binds; home row, movement
         bind "Ctrl q" { Quit; }
+        bind "Ctrl g" { SwitchToMode "locked"; }
         // simple focus left right (try pane first, then tab)
         bind "Alt Left" { MoveFocusOrTab "Left"; }
         bind "Alt Right" { MoveFocusOrTab "Right"; }
