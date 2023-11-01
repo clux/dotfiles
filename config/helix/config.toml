@@ -49,6 +49,7 @@ display-messages = true # progress on statusbar
 [keys.insert]
 #Alt-backspace = "kill_to_line_start" # works on mac, but then we lose word backward delete
 #S-backspace = "delete_word_backward" # all these variants eaten on mac
+#..can just rely on C-u or C-k to delete to start or end of line
 
 [keys.normal]
 esc = ["collapse_selection", "keep_primary_selection"] # comma is awkward for removing multi-caret

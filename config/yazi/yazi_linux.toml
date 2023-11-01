@@ -1,19 +1,30 @@
 [preview]
 syntect_theme = "~/.config/bat/themes/Catppuccin-mocha.tmTheme"
 
+[open]
+rules = [
+	{ mime = "text/*", use = "edit" },
+	{ mime = "image/*", use = "image" },
+	{ mime = "video/*", use = "play" },
+	{ mime = "audio/*", use = "play" },
+
+	{ mime = "application/json", use = "edit" },
+	{ mime = "*/javascript",     use = "edit" },
+  { mime = "*", use = "open" },
+]
+
 [opener]
-#folder = [
-#  { exec = 'yazi "$@"', display_name = "Reveal in Finder" },
-#]
+edit = [
+	{ exec = '$EDITOR "$@"', block = true,  for = "unix" },
+]
 image = [
-  { exec = 'feh "$@"', display_name = "Open" },
+  { exec = 'feh "$@"', desc = "feh", for = "linux" },
+  { exec = 'open "$@"', desc = "Open", for = "macos" },
 ]
-video = [
+play = [
   { exec = 'mpv "$@"' },
 ]
-audio = [
-  { exec = 'mpv "$@"' },
-]
-fallback = [
-  { exec = 'xdg-open "$@"', display_name = "Open" },
+open = [
+	{ exec = 'xdg-open "$@"',             desc = "Open", for = "linux" },
+	{ exec = 'open "$@"',                 desc = "Open", for = "macos" },
 ]
