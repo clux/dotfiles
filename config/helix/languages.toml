@@ -9,3 +9,11 @@ validation = true
 "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible-lint-config.json" = ".ansible-lint"
 "https://json.schemastore.org/circleciconfig.json" = ".circleci/config.yml"
 #"values.schema.json" = "values.yaml" -> helm charts must add an inline $schema=./values.schema.json instead
+
+[language-server.mdpls]
+# Experiment; this works once you install https://github.com/euclio/mdpls
+# and add it to the markdown language: https://github.com/helix-editor/helix/blob/a069b928973aad99b85dffb9d5ade7dae4b58c43/languages.toml#L1375-L1382
+# but it doesn't feel amazing
+name = "markdown"
+command = "mdpls"
+config = { markdown.preview.auto = true, markdown.preview.browser = "firefox" }
