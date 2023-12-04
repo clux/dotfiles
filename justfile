@@ -9,7 +9,7 @@ default:
   @just --list --unsorted
 
 # create symlinks pointing to this repo checkout
-link: fontguard
+link: fontguard && reload
   # Dot prefixed files are linked to from $HOME
   fd -g '.*' -H --max-depth 1 --type f -a -x ln -sfn {} ~/
   # Children of config are linked to from $HOME/.config
@@ -18,15 +18,13 @@ link: fontguard
   fd --base-directory share/ --max-depth 1 --no-ignore-vcs -a -x ln -sfn {} {{CONFIG_HOME}}/
   # OS specific links
   ln -sf $PWD/config/alacritty/{{os()}}.yml config/alacritty/os.yml
-  # reload configs where unsupported
-  just reload
 
 # font guard helper
 fontguard:
   fd . {{FONT_DIR}} -e ttf | rg -q "Inconsolata.*Mono"
   fd . {{FONT_DIR}} -e ttf | rg -q "Liberation"
 
-# reload configs insofar as possible
+# reload configs insofar as possible/necessary
 reload:
   bat cache --build | rg -v "okay"
 
