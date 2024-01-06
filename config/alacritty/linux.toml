@@ -1,0 +1,4 @@
+dynamic_title = true # TODO: try this with waybar window to inject PS into window
+
+[window]
+decorations = "none"

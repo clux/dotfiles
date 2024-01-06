@@ -1,5 +1,5 @@
 ncspot/userstate.cbor
-alacritty/os.yml
+alacritty/os.toml
 helix/runtime
 karabiner/automatic_backups
 karabiner/assets

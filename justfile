@@ -17,7 +17,7 @@ link: fontguard && reload
   # Children of share are linked to from platform specific {{CONFIG_HOME}}
   fd --base-directory share/ --max-depth 1 --no-ignore-vcs -a -x ln -sfn {} {{CONFIG_HOME}}/
   # OS specific links
-  ln -sf $PWD/config/alacritty/{{os()}}.yml config/alacritty/os.yml
+  ln -sf $PWD/config/alacritty/{{os()}}.toml config/alacritty/os.toml
 
 # font guard helper
 fontguard:

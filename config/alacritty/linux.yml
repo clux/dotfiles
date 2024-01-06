@@ -1,6 +1,0 @@
-window:
-  decorations: none # linux
-  startup_mode: Maximized
-dynamic_title: true # TODO: try this with waybar window to inject PS into window
-
-key_bindings: []
