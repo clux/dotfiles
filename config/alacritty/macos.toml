@@ -6,5 +6,6 @@ key = "F2"
 size = 20
 
 [window]
-decorations = "buttonless" # mac only option
+decorations = "Buttonless" # mac only option
 option_as_alt = "Both" # allow alt-+
+startup_mode = "SimpleFullscreen"

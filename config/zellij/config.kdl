@@ -130,12 +130,13 @@ keybinds clear-defaults=true {
     shared_except "locked" { // normal mode binds; home row, movement
         bind "Ctrl q" { Quit; }
         bind "Ctrl g" { SwitchToMode "locked"; }
+        // Trying without this to avoid interfering with helix
         // simple focus left right (try pane first, then tab)
-        bind "Alt Left" { MoveFocusOrTab "Left"; }
-        bind "Alt Right" { MoveFocusOrTab "Right"; }
+        //bind "Alt Left" { MoveFocusOrTab "Left"; }
+        //bind "Alt Right" { MoveFocusOrTab "Right"; }
         // simple pane focus up/dn
-        bind "Alt Down" { MoveFocus "Down"; }
-        bind "Alt Up" { MoveFocus "Up"; }
+        //bind "Alt Down" { MoveFocus "Down"; }
+        //bind "Alt Up" { MoveFocus "Up"; }
         // cheaper resize than the full resize mode:
         bind "Alt =" "Alt +" { Resize "Increase"; }
         bind "Alt -" { Resize "Decrease"; }
