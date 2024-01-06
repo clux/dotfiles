@@ -11,12 +11,11 @@ sudo yabai --load-sa
 yabai -m rule --add app="^(Alacritty)$" sticky=on
 
 # windows that should float
+yabai -m rule --add app="^kitty$" manage=off
 yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Finder" manage=off
 yabai -m rule --add app="^OpenVPN" manage=off
-yabai -m rule --add app="^Code$" manage=off
-yabai -m rule --add app="^mpv" manage=off
-yabai -m rule --add app="^Slack" manage=off
+#yabai -m rule --add app="^mpv" manage=off
 yabai -m rule --add app="^choose$" manage=off
 yabai -m rule --add app="^Keybase" manage=off
 yabai -m rule --add app="^Calculator$" manage=off

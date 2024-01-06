@@ -47,7 +47,7 @@ display-messages = true # progress on statusbar
 # NB: cross reference binds with command palette (S-?)
 
 [keys.insert]
-# home/end replacement
+# home/end replacement (for consistency added to both insert/normal):
 "C-e" = ["goto_line_end", "move_char_right"]
 "C-a" = "goto_line_start"
 # line killing is more complicated:
@@ -59,6 +59,7 @@ display-messages = true # progress on statusbar
 
 [keys.normal]
 esc = ["collapse_selection", "keep_primary_selection"] # comma is awkward for removing multi-caret
+# home/end replacement (interferes with increment/decrement):
 "C-e" = ["goto_line_end", "move_char_right"]
 "C-a" = "goto_line_start" # previous: increment
 "C-x" = "no_op" # previous: decrement
@@ -101,6 +102,11 @@ l = "no_op" # default: move_char_right
 # NB: Alt-arrow movement defaults require zellij locked mode (C-g toggle)
 # See https://github.com/zellij-org/zellij/issues/735
 # Pertains to: A-{left,right,up,down} for sibling/hierarchical select in syntax tree
+"A-i" = "no_op" # default: shrink_selection
+"A-o" = "no_op" # default: expand_selection
+"A-n" = "no_op" # default: select_next_sibling
+"A-p" = "no_op" # default: select_prev_sibling
+
 
 [keys.select]
 # word movement as in shell and normal mode

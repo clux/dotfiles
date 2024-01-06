@@ -7,6 +7,8 @@ local function toggleApp(name)
   elseif hs.application.frontmostApplication() ~= app then
     app:activate()
   else
+    -- NB: does not bring back fullscreen if we were fullscreen..
+    -- Could maybe write a dedicated toggler that remembers fullscreen, but don't care that much.
     app:hide()
   end
 end

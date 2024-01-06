@@ -13,6 +13,7 @@ alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
 alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 
 # ls + tree -> eza
+alias lll=lla
 alias lla='eza -la --group-directories-first --icons=always --git-ignore --git --sort ext --color=always'
 alias ll='eza -l  --group-directories-first --icons=always --git-ignore --git --sort ext --color=always'
 alias la='eza -a --group-directories-first --icons=always'
