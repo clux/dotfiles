@@ -2,6 +2,9 @@
 action = "ToggleSimpleFullscreen"
 key = "F2"
 
+[font]
+size = 20
+
 [window]
 decorations = "buttonless" # mac only option
 option_as_alt = "Both" # allow alt-+

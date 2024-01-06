@@ -2,3 +2,6 @@ dynamic_title = true # TODO: try this with waybar window to inject PS into windo
 
 [window]
 decorations = "none"
+
+[font]
+size = 24

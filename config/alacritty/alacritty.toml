@@ -4,9 +4,6 @@ import = ["~/.config/alacritty/rose-pine.toml", "~/.config/alacritty/os.toml"]
 [env]
 RUST_BACKTRACE = "1"
 
-[font]
-size = 24
-
 [font.bold]
 family = "Inconsolata Nerd Font Mono"
 style = "Bold"
