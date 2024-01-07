@@ -15,6 +15,7 @@ d = ":theme catppuccin_mocha_transparent"
 cursorline = true
 color-modes = true
 bufferline = "always"
+text-width = 100
 
 [editor.soft-wrap]
 enable = true
@@ -44,75 +45,12 @@ layout = ["diff", "diagnostics", "line-numbers", "spacer"]
 [editor.lsp]
 display-messages = true # progress on statusbar
 
+# ---------------------------------------------------------
+# KEYS
+# ---------------------------------------------------------
+
 # NB: cross reference binds with command palette (S-?)
-
-[keys.insert]
-# home/end replacement (for consistency added to both insert/normal):
-"C-e" = ["goto_line_end", "move_char_right"]
-"C-a" = "goto_line_start"
-# line killing is more complicated:
-#Alt-backspace = "kill_to_line_start" # works on mac, but then we lose word backward delete
-#S-backspace = "delete_word_backward" # all other backspace variants fail on mac
-# so we just rely on default C-u or C-k to delete to start or end of line:
-#"C-u" = "kill_to_line_start" # default
-#"C-k" = "kill_to_line_end" # default
-
-[keys.normal]
-esc = ["collapse_selection", "keep_primary_selection"] # comma is awkward for removing multi-caret
-# home/end replacement (interferes with increment/decrement):
-"C-e" = ["goto_line_end", "move_char_right"]
-"C-a" = "goto_line_start" # previous: increment
-"C-x" = "no_op" # previous: decrement
-
-# select + search word under cursor (then use n or p - visual for multi) - basically A-up in select + *
-"`" = ["move_char_right", "move_prev_word_start", "move_next_word_end", "search_selection"] # previous: switch_to_lowercase
-"A-`" = "no_op" # previous: switch_to_uppercase
-
-# rebind some alt based keys to ctrl to avoid zellij clashes
-"A-u" = "no_op" # previous: earlier
-"A-U" = "no_op" # previous: later
-"A-!" = "no_op" # previous: shell_apend_output
-
-# experiments
-#"x" = "extend_to_line_bounds"
-#"X" = "extend_line_below"
-#"C-x" = "shrink_to_line_bounds"
-#S = "surround_add"
-# move selections
-#"C-down" = ["extend_to_line_bounds", "search_selection", "delete_selection", "move_line_down", "paste_before", "move_line_up", "goto_line_end", "search_next"]
-#"C-up" = ["extend_to_line_bounds", "search_selection", "delete_selection", "move_line_up", "paste_before", "move_line_up", "goto_line_end", "search_next"]
-
-# disable hjkl because colemak; neio is the equivalent colemak, but don't want to shift everything around..
-# NB: tons more of this later
-h = "no_op" # default: move_char_left
-j = "no_op" # default: move_visual_line_down
-k = "no_op" # default: move_visual_line_up
-l = "no_op" # default: move_char_right
-
-# word movement as in shell
-# On mac, unbind all native keys (except ^-space for spotlight)
-"C-left" = "move_prev_word_end"
-"C-S-left" = "move_prev_long_word_start"
-"C-right" = "move_next_word_end"
-"C-S-right" = "move_next_long_word_end"
-"C-down" = ["half_page_down", "goto_window_center"]
-"C-up" = ["half_page_up", "goto_window_center"]
-"C-S-down" = ["page_down", "goto_window_center"]
-"C-S-up" = ["page_up", "goto_window_center"]
-# NB: Alt-arrow movement defaults require zellij locked mode (C-g toggle)
-# See https://github.com/zellij-org/zellij/issues/735
-# Pertains to: A-{left,right,up,down} for sibling/hierarchical select in syntax tree
-"A-i" = "no_op" # default: shrink_selection
-"A-o" = "no_op" # default: expand_selection
-"A-n" = "no_op" # default: select_next_sibling
-"A-p" = "no_op" # default: select_prev_sibling
-"C-b" = "no_op" # default: page_up
-"C-f" = "expand_selection" # default: page_down
-"C-s" = "shrink_selection" # default: save_selection
-"C-r" = "select_prev_sibling" # default: no_op
-"C-t" = "select_next_sibling" # default: no_op
-"C-d" = "no_op" # default: half_page_down - using for zellij tab
-"C-u" = "no_op" # default: half_page_up
+# Nice to document what we are replacing here for future you.
 
 [keys.select]
 # word movement as in shell and normal mode
@@ -126,8 +64,88 @@ l = "no_op" # default: move_char_right
 "C-S-down" = ["page_down", "goto_window_center"]
 "C-S-up" = ["page_up", "goto_window_center"]
 
+[keys.insert]
+# home/end replacement (added to both insert/normal):
+"C-e" = ["goto_line_end", "move_char_right"]
+"C-a" = "goto_line_start"
+
+# line killing is more complicated:
+#Alt-backspace = "kill_to_line_start" # works on mac, but then we lose word backward delete
+#S-backspace = "delete_word_backward" # all other backspace variants fail on mac
+# so we just rely on default C-u or C-k to delete to start or end of line:
+#"C-u" = "kill_to_line_start" # default
+#"C-k" = "kill_to_line_end" # default
+
+[keys.normal]
+esc = ["collapse_selection", "keep_primary_selection"] # comma is awkward for removing multi-caret
+"," = "no_op" # default: keep_primary_selection
+# home/end replacement (interferes with increment/decrement):
+"C-e" = ["goto_line_end", "move_char_right"]
+"C-a" = "goto_line_start" # previous: increment (decrement on C-x reclaimed by save_selection)
+
+# select + search word under cursor (then use n or p - visual for multi) - basically A-up in select + *
+"`" = ["move_char_right", "move_prev_word_start", "move_next_word_end", "search_selection"] # previous: switch_to_lowercase
+"A-`" = "no_op" # previous: switch_to_uppercase
+# NB: S-` (~) is toggle switch_case
+
+# rebind some alt based keys to ctrl to avoid zellij clashes
+"A-u" = "no_op" # previous: earlier
+"A-U" = "no_op" # previous: later
+"A-!" = "no_op" # previous: shell_apend_output
+
+# word movement as in shell
+# On mac, unbind all native keys (except ^-space for spotlight)
+"C-left" = "move_prev_word_end"
+"C-S-left" = "move_prev_long_word_start"
+"C-right" = "move_next_word_end"
+"C-S-right" = "move_next_long_word_end"
+"C-down" = ["half_page_down", "goto_window_center"]
+"C-up" = ["half_page_up", "goto_window_center"]
+"C-S-down" = ["page_down", "goto_window_center"]
+"C-S-up" = ["page_up", "goto_window_center"]
+# TODO: ^ movement keys should be listed in keys.normal.z for consistency (the old keys are listed there as a helpful reminder - but it's wrong in our case)
+
+# A-{arrows} use sibling/hierarchical selection gotos BUT
+# zellij locked mode required (C-g toggle)
+# See https://github.com/zellij-org/zellij/issues/735
+# We thus map them to FRST (ASDF-shift-right on colemak):
+"C-f" = "select_prev_sibling" # default: no_op
+"C-r" = "shrink_selection" # default: save_selection
+"C-s" = "select_next_sibling" # default: no_op
+"C-t" = "expand_selection" # default: page_down
+# and unbind the other variants (to avoid cluttering commands)
+"A-i" = "no_op" # default: shrink_selection
+"A-o" = "no_op" # default: expand_selection
+"A-n" = "no_op" # default: select_next_sibling
+"A-p" = "no_op" # default: select_prev_sibling
+
+# Selection saving and jumping
+"C-b" = "no_op" # default: page_up
+"C-d" = "no_op" # default: half_page_down - using for zellij tab
+"C-u" = "no_op" # default: half_page_up
+"C-x" = "save_selection" # default: decrement
+#"C-i" = "jump_forward" # default
+#"C-o" = "jump_backward" # default
+
+# experiments
+#S = "surround_add" # unfortunately cannot chain with something
+M = ["collapse_selection", "select_mode", "match_brackets", "exit_select_mode"]
+#"C-down" = ["extend_to_line_bounds", "search_selection", "delete_selection", "move_line_down", "paste_before", "move_line_up", "goto_line_end", "search_next"]
+#"C-up" = ["extend_to_line_bounds", "search_selection", "delete_selection", "move_line_up", "paste_before", "move_line_up", "goto_line_end", "search_next"]
+
+# ---------------------------------------------------------
+# COLEMAK DISABLING
+# ---------------------------------------------------------
+
+# disable hjkl because colemak; neio is the equivalent colemak, but don't want to shift everything around..
+
+# NB: tons more of this later
+h = "no_op" # default: move_char_left
+j = "no_op" # default: move_visual_line_down
+k = "no_op" # default: move_visual_line_up
+l = "no_op" # default: move_char_right
+
 [keys.normal.g]
-# remaining effort to kill hjkl
 h = "no_op"
 j = "no_op"
 l = "no_op"

@@ -87,7 +87,7 @@ keybinds clear-defaults=true {
         bind "o" "Right" { MovePane "Right"; }
     }
     tab { // numbers, left/right or tab cycle
-        bind "Ctrl t" { SwitchToMode "Normal"; }
+        bind "Ctrl d" { SwitchToMode "Normal"; }
         bind "Left" { GoToPreviousTab; }
         bind "Right" { GoToNextTab; }
         bind "n" { NewTab; SwitchToMode "Normal"; }
@@ -128,7 +128,6 @@ keybinds clear-defaults=true {
 
     // main binds that work everywhere
     shared_except "locked" { // normal mode binds; home row, movement
-        //bind "Ctrl q" { Quit; } - big accident
         bind "Ctrl g" { SwitchToMode "locked"; }
         // Trying without this to avoid interfering with helix
         // simple focus left right (try pane first, then tab)
@@ -155,9 +154,9 @@ keybinds clear-defaults=true {
     //shared_except "scroll" "locked" {
     //    bind "Ctrl s" { SwitchToMode "Scroll"; }
     //}
-    shared_except "session" "locked" {
-        bind "Ctrl o" { SwitchToMode "Session"; }
-    }
+    //shared_except "session" "locked" {
+    //    bind "Ctrl o" { SwitchToMode "Session"; }
+    //}
     shared_except "tab" "locked" {
         bind "Ctrl d" { SwitchToMode "Tab"; }
     }
