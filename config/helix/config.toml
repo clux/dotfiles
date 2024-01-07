@@ -106,7 +106,13 @@ l = "no_op" # default: move_char_right
 "A-o" = "no_op" # default: expand_selection
 "A-n" = "no_op" # default: select_next_sibling
 "A-p" = "no_op" # default: select_prev_sibling
-
+"C-b" = "no_op" # default: page_up
+"C-f" = "expand_selection" # default: page_down
+"C-s" = "shrink_selection" # default: save_selection
+"C-r" = "select_prev_sibling" # default: no_op
+"C-t" = "select_next_sibling" # default: no_op
+"C-d" = "no_op" # default: half_page_down - using for zellij tab
+"C-u" = "no_op" # default: half_page_up
 
 [keys.select]
 # word movement as in shell and normal mode

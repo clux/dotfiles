@@ -92,7 +92,7 @@ keybinds clear-defaults=true {
         bind "Right" { GoToNextTab; }
         bind "n" { NewTab; SwitchToMode "Normal"; }
         bind "x" { CloseTab; SwitchToMode "Normal"; }
-        bind "s" { ToggleActiveSyncTab; SwitchToMode "Normal"; }
+        //bind "s" { ToggleActiveSyncTab; SwitchToMode "Normal"; }
         bind "1" { GoToTab 1; SwitchToMode "Normal"; }
         bind "2" { GoToTab 2; SwitchToMode "Normal"; }
         bind "3" { GoToTab 3; SwitchToMode "Normal"; }
@@ -128,19 +128,19 @@ keybinds clear-defaults=true {
 
     // main binds that work everywhere
     shared_except "locked" { // normal mode binds; home row, movement
-        bind "Ctrl q" { Quit; }
+        //bind "Ctrl q" { Quit; } - big accident
         bind "Ctrl g" { SwitchToMode "locked"; }
         // Trying without this to avoid interfering with helix
         // simple focus left right (try pane first, then tab)
-        //bind "Alt Left" { MoveFocusOrTab "Left"; }
-        //bind "Alt Right" { MoveFocusOrTab "Right"; }
+        bind "Alt Left" { MoveFocusOrTab "Left"; }
+        bind "Alt Right" { MoveFocusOrTab "Right"; }
         // simple pane focus up/dn
-        //bind "Alt Down" { MoveFocus "Down"; }
-        //bind "Alt Up" { MoveFocus "Up"; }
-        // cheaper resize than the full resize mode:
-        bind "Alt =" "Alt +" { Resize "Increase"; }
-        bind "Alt -" { Resize "Decrease"; }
-        // NB: command +- resizes term
+        bind "Alt Down" { MoveFocus "Down"; }
+        bind "Alt Up" { MoveFocus "Up"; }
+        // cheaper resize than the full resize mode (unbound - i seem to prefer resize mode)
+        //bind "Alt =" "Alt +" { Resize "Increase"; }
+        //bind "Alt -" { Resize "Decrease"; }
+        // NB: command +- resizes term (alacritty bind)
     }
     shared_except "normal" "locked" {
         bind "Enter" "Esc" { SwitchToMode "Normal"; }
@@ -152,14 +152,14 @@ keybinds clear-defaults=true {
     shared_except "resize" "locked" {
         bind "Ctrl n" { SwitchToMode "Resize"; }
     }
-    shared_except "scroll" "locked" {
-        bind "Ctrl s" { SwitchToMode "Scroll"; }
-    }
+    //shared_except "scroll" "locked" {
+    //    bind "Ctrl s" { SwitchToMode "Scroll"; }
+    //}
     shared_except "session" "locked" {
         bind "Ctrl o" { SwitchToMode "Session"; }
     }
     shared_except "tab" "locked" {
-        bind "Ctrl t" { SwitchToMode "Tab"; }
+        bind "Ctrl d" { SwitchToMode "Tab"; }
     }
     shared_except "move" "locked" {
         bind "Ctrl h" { SwitchToMode "Move"; }
