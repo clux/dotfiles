@@ -64,6 +64,12 @@ display-messages = true # progress on statusbar
 "C-S-down" = ["page_down", "goto_window_center"]
 "C-S-up" = ["page_up", "goto_window_center"]
 
+# alternates for Alt-{arrows}, C-{FRST} (colemak esdf)
+"C-f" = "select_prev_sibling" # default: no_op
+"C-r" = "shrink_selection" # default: save_selection
+"C-s" = "select_next_sibling" # default: no_op
+"C-t" = "expand_selection" # default: page_down
+
 [keys.insert]
 # home/end replacement (added to both insert/normal):
 "C-e" = ["goto_line_end", "move_char_right"]
@@ -139,7 +145,6 @@ M = ["collapse_selection", "select_mode", "match_brackets", "exit_select_mode"]
 
 # disable hjkl because colemak; neio is the equivalent colemak, but don't want to shift everything around..
 
-# NB: tons more of this later
 h = "no_op" # default: move_char_left
 j = "no_op" # default: move_visual_line_down
 k = "no_op" # default: move_visual_line_up
@@ -164,6 +169,10 @@ H = "no_op"                   # default: swap_view_left
 J = "no_op"                   # default: swap_view_down
 K = "no_op"                   # default: swap_view_up
 L = "no_op"                   # default: swap_view_right
+C-h = "no_op"                 # default: jump_view_left
+C-j = "no_op"                 # default: jump_view_down
+C-k = "no_op"                 # default: jump_view_up
+C-l = "no_op"                 # default: jump_view_right
 [keys.normal.C-w]
 h = "no_op"                   # default: jump_view_left
 j = "no_op"                   # default: jump_view_down
@@ -173,6 +182,10 @@ H = "no_op"                   # default: swap_view_left
 J = "no_op"                   # default: swap_view_down
 K = "no_op"                   # default: swap_view_up
 L = "no_op"                   # default: swap_view_right
+C-h = "no_op"                 # default: jump_view_left
+C-j = "no_op"                 # default: jump_view_down
+C-k = "no_op"                 # default: jump_view_up
+C-l = "no_op"                 # default: jump_view_right
 
 # window
 [keys.select.space.w]
