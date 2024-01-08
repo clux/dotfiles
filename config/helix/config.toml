@@ -8,6 +8,7 @@ t = ":sh zellij run -f -- just test"
 l = ":sh zellij run -f -- just lint"
 s = ":sh zellij run -cf -- zsh"
 c = ":config-reload"
+p = ":toggle-option lsp.display-inlay-hints"
 f = ":theme tokyonight"
 d = ":theme catppuccin_mocha_transparent"
 
@@ -94,6 +95,9 @@ esc = ["collapse_selection", "keep_primary_selection"] # comma is awkward for re
 "A-`" = "no_op" # previous: switch_to_uppercase
 # NB: S-` (~) is toggle switch_case
 
+# replacement for A-minus (clashes with zellij)
+"h" = "flip_selections" # unbound by colemak
+
 # rebind some alt based keys to ctrl to avoid zellij clashes
 "A-u" = "no_op" # previous: earlier
 "A-U" = "no_op" # previous: later
@@ -145,7 +149,7 @@ M = ["collapse_selection", "select_mode", "match_brackets", "exit_select_mode"]
 
 # disable hjkl because colemak; neio is the equivalent colemak, but don't want to shift everything around..
 
-h = "no_op" # default: move_char_left
+#h = "no_op" # default: move_char_left - reclaimed above
 j = "no_op" # default: move_visual_line_down
 k = "no_op" # default: move_visual_line_up
 l = "no_op" # default: move_char_right
