@@ -113,24 +113,6 @@ mountz() {
 }
 
 # -----------------------------------------------------------------------------
-# mac wofi like choosers
-# unfortunately the binaries for choose-gui and choose-rust clash on mac so installing choose-gui unlinked
-
-# focus a yabai window from title
-focus_yabai_window() {
-  local -r CHOOSE_GUI="$(ls ${HOMEBREW_CELLAR}/choose-gui/*/bin/choose | tail -n 1)" # to avoid clashes
-  # snapshot id and names of current active non-sticky windows as json
-  local -r windows="$(yabai -m query --windows | jq '.[] | select(.["is-sticky"] == false) | [.app, .title, .id]')"
-  # present just the human readable components to a sized choice gui in the $windows order and return its index
-  local -r height="$(echo "$windows" | jq length | wc -l)" # number of windows
-  local -r width="$(echo "$windows" | jq '.[1] | length' | sort -h | tail -n 1)" # longest title
-  local -r index="$(echo "$windows" | jq '[.[0], .[1]] | join(" :: ")' -r | ${CHOOSE_GUI} -b ff79c6 -w $width -n $height -i)"
-  # reverse map the index to the window .id
-  local -r id="$(echo "$windows" | jq '.[2]' | jq --slurp ".[$index]")"
-  yabai -m window "${id}" --focus
-}
-
-# -----------------------------------------------------------------------------
 # package manager abstraction - mostly for my own memory
 
 if [[ "${OSTYPE}" =~ "darwin" ]]; then

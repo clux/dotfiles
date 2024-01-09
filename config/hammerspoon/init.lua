@@ -45,7 +45,7 @@ end
 
 
 hs.hotkey.bind({ "shift", "alt" }, "m", function()
-  hs.execute("focus_yabai_window", true)
+  hs.execute("~/.config/yabai/focus.sh", true)
 end)
 
 -- window moving between monitors/spaces
