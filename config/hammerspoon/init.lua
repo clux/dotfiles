@@ -16,12 +16,7 @@ end
 -- Global terminal toggle
 hs.hotkey.bind({}, "F1", function() toggleApp("alacritty") end)
 
--- Misc app shortcuts
-hs.hotkey.bind(mash, "v", function() toggleApp("Visual Studio Code") end)
-hs.hotkey.bind(mash, "p", function() toggleApp("System Preferences") end)
-hs.hotkey.bind(mash, "s", function() toggleApp("Slack") end)
-hs.hotkey.bind(mash, "d", function() toggleApp("Discord") end)
-
+-- Reload yabai
 hs.hotkey.bind(mash, "r", function() hs.reload(); os.execute("/opt/homebrew/bin/yabai --restart-service"); end)
 hs.alert("HS + yabai loaded")
 
