@@ -213,21 +213,12 @@ wifihotspot() {
   sudo create_ap wlp2s0 enp0s20f0u1 "Bathroom Cam 2" "$(pass network/ea-laptop)"
 }
 
-
 # -----------------------------------------------------------------------------
 # gaming related linux hacks
 
-steam-tf2() {
-  export __GL_SYNC_TO_VBLANK=0
-  export __GLVND_DISALLOW_PATCHING=1 # helped tf2 in the past
-  steam
-}
-
-steam-mesa-old() {
-  # A helper wrapper that made an older mesa laptop work better
-  # shellcheck disable=SC2016
-  LD_PRELOAD='/usr/$LIB/libstdc++.so.6 /usr/$LIB/libgcc_s.so.1 /usr/$LIB/libxcb.so.1 /usr/$LIB/libgpg-error.so' steam
-}
+# TODO: try https://github.com/ec-/Quake3e/blob/master/BUILD.md and SDL_VIDEODRIVER=wayland
+# https://aur.archlinux.org/packages/quake3-cpma works with all quake3 deps
+# the below setup was for X with DMA sound buffers - was super buggy
 
 q3() {
   set -x
