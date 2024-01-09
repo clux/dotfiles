@@ -114,6 +114,7 @@ format = '[${symbol}${pyenv_prefix}(${version} )($virtualenv )]($style)'
 disabled = true
 
 [cmd_duration]
+disabled = true
 min_time = 2_000
 format = '[took $duration ]($style)'
 style = 'bg:black bold yellow'
