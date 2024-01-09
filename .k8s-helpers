@@ -186,13 +186,13 @@ kpfp() {
   else
     local -r cname="$(jq ".spec.containers[].name" -r <<< "${data}" | fzf --header='mutliple containers; please pick one')" # user choice
   fi
-  local -r containers="$(jq ".spec.containers[] | select(.name==\"${cname}\")" <<< "${data}")"
-  if [[ "$(jq ".ports" <<< "${cname}")" == "null" ]]; then
+  local -r container="$(jq ".spec.containers[] | select(.name==\"${cname}\")" <<< "${data}")"
+  if [[ "$(jq ".ports" <<< "${container}")" == "null" ]]; then
     echo "No ports for $(tput bold)${cname}$(tput sgr0) container in $(tput bold)${pod}$(tput sgr0)"
     return 1
   fi
-  if [ "$(jq ".ports[]" -Mc <<< "${datajson}" | wc -l)" -gt 1 ]; then
-    portjson="$(jq ".ports[]" -Mc <<< "${datajson}" | fzf --header="pick a port object")"
+  if [ "$(jq ".ports[]" -Mc <<< "${container}" | wc -l)" -gt 1 ]; then
+    portjson="$(jq ".ports[]" -Mc <<< "${container}" | fzf --header="pick a port object")"
   else
     portjson="$(jq ".ports[0]" -Mc <<< "${cname}")"
   fi
