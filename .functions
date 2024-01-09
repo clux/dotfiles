@@ -4,7 +4,7 @@
 # opening helpers
 
 mp() { mpv "$(fzf)" ;} # > /dev/null 2>&1
-hf() { hx "$(fzf)" ;}
+mp2() { mpv --speed=2 "$(fzf)" ;} # > /dev/null 2>&1
 h() { $EDITOR . ;}
 
 # -----------------------------------------------------------------------------
@@ -55,24 +55,6 @@ keys() {
   local -r available="$( ( (fd --max-depth 1 -u --type f -g '*_id' ~/.ssh | cut -d'/' -f5 | sed 's/_id//g'); echo -e "tl\npass\nsign") | fzf )"
   # shellcheck disable=SC2086
   key $available
-}
-
-# -----------------------------------------------------------------------------
-# flatpak codium experiment
-
-codium() {
-  # mounts only current dir plus necessary files
-  # prevents command escalation from sandbox to host
-  flatpak run \
-    --no-talk-name=org.freedesktop.Flatpak \
-    --filesystem="$PWD" --nofilesystem="$HOME" \
-    com.vscodium.codium .
-}
-codiumrust() {
-  # may need to run update occasionally:
-  # flatpak update org.freedesktop.Sdk.Extension.rust-stable
-  export FLATPAK_ENABLE_SDK_EXT=rust-stable
-  codium
 }
 
 # -----------------------------------------------------------------------------
