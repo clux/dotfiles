@@ -72,9 +72,10 @@ if [[ "${OSTYPE}" =~ "darwin" ]]; then
   alias grep=ggrep
   alias sed=gsed
   alias make=gmake
-  # and make most coreutils appear working (but man need g prefix)
+  # and make most coreutils appear working (but man pages need g prefix)
   alias date=gdate
   alias rm=grm
+  alias awk=gawk
   # for multiple bins in binutils, findutils, simple PATH extension is enough:
   export PATH=/opt/homebrew/opt/binutils/bin:$PATH
   export PATH=/opt/homebrew/opt/findutils/libexec/gnubin:$PATH
