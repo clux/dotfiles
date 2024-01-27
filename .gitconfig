@@ -16,6 +16,13 @@
   co = checkout
   nu = switch -c
   m = !"m() { git switch \"$(git master)\"; }; m"
+  # React to "Update branch" button by synchronising with: gpu,gp
+  pu = !"pu() { git branch --set-upstream-to=origin/$(git branch --show-current); }; pu"
+  # I would like to auto whitespace, but that screws with CI systems that run generation commands without correcting
+  ws = !"ws() { git commit --no-verify -m temp && git rebase --whitespace=fix HEAD^ && git uncommit; }; ws"
+  uncommit = reset --soft HEAD^
+  unstage = reset HEAD
+  amend = commit --amend
 
   # fuzzy interactive helpers
   # NB: interactive shell sources .git-helpers for these
@@ -24,17 +31,12 @@
   blam = !zsh -ic 'gitblame $@' x
 
   # OCCASIONAL
-  amend = commit --amend
   ping = "!f() { git commit --signoff --allow-empty -m \"ping hooks - $(date +%Y-%m-%d)\"; }; f"
-  uncommit = reset --soft HEAD^
-  unstage = reset HEAD
   count = shortlog --summary --numbered --no-merges
   ps = !git pull --recurse-submodules && git submodule update --init --recursive
   chk = diff --cached --check
   stat = diff --stat
   root = rev-parse --show-toplevel
-  ws = !"ws() { git commit --no-verify -m temp && git rebase --whitespace=fix HEAD^ && git uncommit; }; ws"
-  pu = !"pu() { git branch --set-upstream-to=origin/$(git branch --show-current); }; pu"
 
   # Listers
   tags = tag -l
