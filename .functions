@@ -3,7 +3,7 @@
 # -----------------------------------------------------------------------------
 # opening helpers
 
-mp() { mpv "$(fzf)" ;} # > /dev/null 2>&1
+mp() { mpv --window-scale=0.1 --loop "$(fzf)" ;} # > /dev/null 2>&1
 mp2() { mpv --speed=2 "$(fzf)" ;} # > /dev/null 2>&1
 h() { $EDITOR . ;}
 
