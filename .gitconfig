@@ -186,6 +186,9 @@
 
 [diff]
   colorMoved = default
+  # TODO: trying patience and histogram
+  # https://luppeng.wordpress.com/2020/10/10/when-to-use-each-of-the-git-diff-algorithms/
+  algorithm = histogram
 
 [checkout]
   defaultRemote = "origin"
