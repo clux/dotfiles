@@ -76,6 +76,7 @@ keybinds clear-defaults=true {
         bind "d" { NewPane "Down"; SwitchToMode "Normal"; }
         bind "r" { NewPane "Right"; SwitchToMode "Normal"; }
         bind "x" { CloseFocus; SwitchToMode "Normal"; }
+        bind "z" { ToggleFloatingPanes; SwitchToMode "Normal"; }
     }
     move { // home row + arrow keys or tab cycle - don't really use this a lot...
         bind "Ctrl h" { SwitchToMode "Normal"; }
