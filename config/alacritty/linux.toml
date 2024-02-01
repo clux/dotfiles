@@ -1,8 +1,6 @@
-dynamic_title = true # TODO: try this with waybar window to inject PS into window
-
 [window]
 decorations = "none"
 startup_mode = "Maximized"
 
 [font]
-size = 24
+size = 28
