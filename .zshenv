@@ -83,6 +83,7 @@ if [[ "${OSTYPE}" =~ "darwin" ]]; then
   # other common linux tools need just brew packages to get updated;
   # brew install watch diffutils rsync bash gpatch less
   # alternatively; cargo install coreutils and alias head="coreutils head"
+  # TODO: in the future try out the rust rewrite https://github.com/uutils/coreutils
 
   # oh, and no ps, so try to move to procs:
   alias ps=procs
