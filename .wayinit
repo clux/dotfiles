@@ -10,6 +10,10 @@ export XDG_CURRENT_DESKTOP=Hyprland
 export XDG_SESSION_TYPE=wayland
 export XDG_SESSION_DESKTOP=Hyprland
 
+# uim for japanese
+export GTK_IM_MODULE='uim'
+export QT_IM_MODULE='uim'
+
 # Preferences for wayland + ff (prolly not necessary anymore)
 export GDK_BACKEND="wayland,x11"
 export MOZ_ENABLE_WAYLAND=1
