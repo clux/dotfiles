@@ -1,9 +1,6 @@
 #!/bin/bash
 set -euo pipefail
 
-icon="\uf11c"
-preferred="Colemak"
-
 # NB: Either pick .main == true in .keyboards[], or hardcode:
 #keyboard="fnatic-gear-fnatic-gear-ministreak-keyboard"
 #keymap=$(hyprctl devices -j | jq -r ".keyboards[] | select(.name == \"$keyboard\") | .active_keymap")
@@ -17,10 +14,15 @@ text=$(echo "$keymap" | awk -F'[()]' '{print $2}' | tr -d '[:punct:]' | awk '{pr
 alt="$text on $keyboard"
 
 # CSS highlight when using preferred keymap
-if [ "$text" = "$preferred" ]; then
+if [ "$text" = "Colemak" ]; then
   class="active"
+  icon="\uf11c"
+elif [ "$text" = "Kana" ]; then
+  class="alert"
+  icon="本"
 else
   class="alert"
+  icon="\uf11c"
 fi
 
 # NB: Currently not passing on keymap name (CSS classes sufficient for 2 layouts)
