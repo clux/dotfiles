@@ -125,10 +125,3 @@ else
   [ -f ~/.keychain/agent-sh ] && source ~/.keychain/agent-sh
   [ -f ~/.keychain/agent-sh-gpg ] && source ~/.keychain/agent-sh-gpg
 fi
-
-# -----------------------------------------------------------------------------
-# uim init for japanese
-
-if [ -z "${UIM_FEP_PID}" ]; then
-    uim-fep -s backtick && exit
-fi

@@ -239,6 +239,7 @@
         "on-click": "hyprctl switchxkblayout fnatic-gear-fnatic-gear-ministreak-keyboard next > /dev/null",
         "interval": 60
     },
+    // WIP. toggle only really affects terminal - and is not helpful with -s lastline
     "custom/uimfep": {
         "exec": "~/.config/waybar/scripts/uim-read.sh",
         "return-type": "json",

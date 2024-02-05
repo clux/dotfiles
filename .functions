@@ -113,6 +113,23 @@ mountz() {
 }
 
 # -----------------------------------------------------------------------------
+# uim init for japanese in terminal
+
+# one time init fn. waybar uimfep custom module reads fep output.
+fepll() {
+  if [ -z "${UIM_FEP_PID}" ]; then
+    # https://github.com/uim/uim/wiki/Uim-FEP
+    uim-fep -u anthy -s lastline
+  fi
+}
+fepb() {
+  if [ -z "${UIM_FEP_PID}" ]; then
+    # https://github.com/uim/uim/wiki/Uim-FEP
+    uim-fep -u anthy -s backtick
+  fi
+}
+
+# -----------------------------------------------------------------------------
 # package manager abstraction - mostly for my own memory
 
 if [[ "${OSTYPE}" =~ "darwin" ]]; then
