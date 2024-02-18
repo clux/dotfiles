@@ -22,6 +22,13 @@ export LS_COLORS="$(vivid generate dracula)" # theme for autocomplete
 # -----------------------------------------------------------------------------
 # autocomplete
 
+if [[ "${OSTYPE}" =~ "darwin" ]]; then
+  eval "$(brew shellenv)"
+  # load completions from brew installed packages via zsh-completions
+  # needs to be done before the autoload it appears
+  fpath+=$HOMEBREW_PREFIX/share/zsh/site-functions
+fi
+
 # custom completions - generate comp file for misc executables in ~/.zfunc/_bin
 _gencmp() {
   # only need to do this for out-of-band installations due to standard fpath above
@@ -41,19 +48,9 @@ fpath+=~/.zfunc
 autoload -Uz compinit && compinit
 autoload bashcompinit && bashcompinit
 
-
 if [[ "${OSTYPE}" =~ "darwin" ]]; then
-  eval "$(brew shellenv)"
-  # load completions from brew installed packages via zsh-completions
-  fpath+=$HOMEBREW_PREFIX/share/zsh/site-functions
-  # initialize z plugin manager zinit
-  source $HOMEBREW_PREFIX/opt/zinit/zinit.zsh 2> /dev/null # ignore manpage issue for now
-  # TODO: maybe do below in the future to avoid zinit? weird autocomplete slowdown when using these atm
-  #source $HOMEBREW_PREFIX/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-  #source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-  # addons from zinit
-  command -v zinit > /dev/null && zinit light zsh-users/zsh-autosuggestions
-  command -v zinit > /dev/null && zinit light zdharma-continuum/fast-syntax-highlighting
+  source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 else
   source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
   source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
