@@ -34,7 +34,7 @@
         "mpris",
         // interactive ones
         "custom/kc",
-        "custom/k3d",
+        //"custom/k3d",
         "network",
         "hyprland/submap",
         //"idle_inhibitor",
@@ -42,7 +42,6 @@
         "pulseaudio#source",
         //"hyprland/language",
         "clock",
-        "custom/uimfep",
         "custom/language",
         "custom/dunst"
     ],
@@ -238,14 +237,6 @@
         "signal": 4,
         "on-click": "hyprctl switchxkblayout fnatic-gear-fnatic-gear-ministreak-keyboard next > /dev/null",
         "interval": 60
-    },
-    // WIP. toggle only really affects terminal - and is not helpful with -s lastline
-    "custom/uimfep": {
-        "exec": "~/.config/waybar/scripts/uim-read.sh",
-        "return-type": "json",
-        "on-click": "~/.config/waybar/scripts/uim-toggle.sh > /dev/null && pkill -RTMIN+6 waybar",
-        "interval": 60,
-        "signal": 6
     },
 
     "custom/k3d": {

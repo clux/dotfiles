@@ -115,7 +115,7 @@ mountz() {
 # -----------------------------------------------------------------------------
 # uim init for japanese in terminal
 
-# one time init fn. waybar uimfep custom module reads fep output.
+# init uim-fep in either lastlane or backtick mode with anthy on demand per shell instance
 fepll() {
   if [ -z "${UIM_FEP_PID}" ]; then
     # https://github.com/uim/uim/wiki/Uim-FEP
@@ -127,6 +127,32 @@ fepb() {
     # https://github.com/uim/uim/wiki/Uim-FEP
     uim-fep -u anthy -s backtick
   fi
+}
+
+# provided we have uim-fep running; this script toggles between the modes:
+uim-toggle() {
+  if [ -z "$1" ]; then
+    file="${HOME}/.uim.d/fep/getmode-${UIM_FEP_PID}"
+    newstatus=$(( ($(cat "${file}") + 1) % 3))
+  else
+    newstatus=$1
+  fi
+  echo "${newstatus}" | tee "${HOME}/.uim.d/fep/setmode-${UIM_FEP_PID}"
+  case "$newstatus" in
+    1)
+      icon="あ"
+      alt="hiragana"
+      ;;
+    2)
+      icon="ア"
+      alt="katakana"
+      ;;
+    *)
+      icon="ー"
+      alt="off"
+      ;;
+  esac
+  notify-send "${icon} ${alt}" -t 2000 -a uim
 }
 
 # -----------------------------------------------------------------------------
