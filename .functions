@@ -128,6 +128,11 @@ fepb() {
     uim-fep -u anthy -s backtick
   fi
 }
+fep-bind() {
+  # this works as a toggle bind, but have to run it after fepll/fepb
+  zle -N uimtog uim-toggle
+  bindkey "^u" uimtog
+}
 
 # provided we have uim-fep running; this script toggles between the modes:
 uim-toggle() {
@@ -137,7 +142,7 @@ uim-toggle() {
   else
     newstatus=$1
   fi
-  echo "${newstatus}" | tee "${HOME}/.uim.d/fep/setmode-${UIM_FEP_PID}"
+  echo "${newstatus}" | tee "${HOME}/.uim.d/fep/setmode-${UIM_FEP_PID}" > /dev/null
   case "$newstatus" in
     1)
       icon="あ"
