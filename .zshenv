@@ -7,9 +7,6 @@ export TERM="xterm-256color"
 export MANPAGER="sh -c 'col -bx | bat -l man'"
 export MANROFFOPT='-c' # https://github.com/sharkdp/bat/issues/2593
 
-# use shellcheck for current file only
-export SHELLCHECK_OPTS="-e SC1091 -e SC1090"
-
 # openkeychain compat
 export PASSWORD_STORE_GPG_OPTS='--no-throw-keyids'
 
@@ -31,19 +28,14 @@ export FZF_DEFAULT_OPTS="${_FZF_LAYOUT} \
 export LANG="en_GB.UTF-8"
 export LC_ALL="en_GB.UTF-8"
 
-# want short ctest results without having to type --output-on-failure (or -V always)
-export CTEST_OUTPUT_ON_FAILURE=1
-export GTEST_COLOR=1
+# -----------------------------------------------------------------------------
+# Development settings
+
+# shellcheck current file only in editor
+export SHELLCHECK_OPTS="-e SC1091 -e SC1090"
 
 # Always print rust backtraces
 export RUST_BACKTRACE=1
-
-# go
-export GOPATH=$HOME/.go
-export GO111MODULE=on
-
-# disable analytics sending to homebrew
-export HOMEBREW_NO_ANALYTICS=1
 
 # -----------------------------------------------------------------------------
 # PATH
@@ -58,7 +50,9 @@ path+=$HOME/.local/bin
 path+=$GOPATH/bin
 path+=/opt/homebrew/bin
 
+# -----------------------------------------------------------------------------
 # The macos compatibility shitshow
+
 if [[ "${OSTYPE}" =~ "darwin" ]]; then
   # No good universal way to get coreutils installed without g prefix.
   # (and doing so can apparently break python builds)
@@ -93,5 +87,10 @@ if [[ "${OSTYPE}" =~ "darwin" ]]; then
 
   # python on mac is also fun
   path+="$(python3 -m site --user-base)/bin"
+
+  # want a consistent hostname for ansible
   export HOSTNAME="$(scutil --get LocalHostName)"
+
+  # disable analytics sending to homebrew
+  export HOMEBREW_NO_ANALYTICS=1
 fi
