@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 export EDITOR="hx"
 export TERM="xterm-256color"
@@ -48,12 +48,15 @@ export HOMEBREW_NO_ANALYTICS=1
 # -----------------------------------------------------------------------------
 # PATH
 
+# remove duplicate entries from PATH and MANPATH
+typeset -U path PATH manpath MANPATH
 
-export PATH=/usr/local/bin:$PATH
-export PATH=$HOME/.cargo/bin:$PATH
-export PATH=$HOME/.local/bin:$PATH
-export PATH=$GOPATH/bin:$PATH
-export PATH=/opt/homebrew/bin:$PATH
+# standard package locations
+path+=/usr/local/bin
+path+=$HOME/.cargo/bin
+path+=$HOME/.local/bin
+path+=$GOPATH/bin
+path+=/opt/homebrew/bin
 
 # The macos compatibility shitshow
 if [[ "${OSTYPE}" =~ "darwin" ]]; then
@@ -64,10 +67,10 @@ if [[ "${OSTYPE}" =~ "darwin" ]]; then
   # e.g. sources; /opt/homebrew/share/man/man1/g or Cellar/coreutils/*/share/man/man1
   # => we cannot type "man rm" no matter what, have to type "man grm".
   # we can however fix: make, gnu-sed, gnu-tar, grep via MANPATH patching + aliases:
-  export MANPATH="/opt/homebrew/opt/make/libexec/man:$MANPATH"
-  export MANPATH="/opt/homebrew/opt/grep/libexec/man:$MANPATH"
-  export MANPATH="/opt/homebrew/opt/gnu-tar/libexec/man:$MANPATH"
-  export MANPATH="/opt/homebrew/opt/gnu-sed/libexec/man:$MANPATH"
+  manpath+=/opt/homebrew/opt/make/libexec/man
+  manpath+=/opt/homebrew/opt/grep/libexec/man
+  manpath+=/opt/homebrew/opt/gnu-tar/libexec/man
+  manpath+=/opt/homebrew/opt/gnu-sed/libexec/man
   alias sed=gsed
   alias grep=ggrep
   alias sed=gsed
@@ -77,8 +80,8 @@ if [[ "${OSTYPE}" =~ "darwin" ]]; then
   alias rm=grm
   alias awk=gawk
   # for multiple bins in binutils, findutils, simple PATH extension is enough:
-  export PATH=/opt/homebrew/opt/binutils/bin:$PATH
-  export PATH=/opt/homebrew/opt/findutils/libexec/gnubin:$PATH
+  path+=/opt/homebrew/opt/binutils/bin
+  path+=/opt/homebrew/opt/findutils/libexec/gnubin
 
   # other common linux tools need just brew packages to get updated;
   # brew install watch diffutils rsync bash gpatch less
@@ -88,12 +91,7 @@ if [[ "${OSTYPE}" =~ "darwin" ]]; then
   # oh, and no ps, so try to move to procs:
   alias ps=procs
 
-  # casks that also should be invokable from the terminal.. may as well individually alias
-  alias code="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
-
   # python on mac is also fun
-  # shellcheck disable=SC2155
-  export PATH="$(python3 -m site --user-base)/bin:$PATH"
-  # shellcheck disable=SC2155
+  path+="$(python3 -m site --user-base)/bin"
   export HOSTNAME="$(scutil --get LocalHostName)"
 fi

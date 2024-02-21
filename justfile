@@ -1,6 +1,6 @@
 # See https://just.systems/man/
 SHELLCHECK_OPTS := "-e SC1091 -e SC1090 -e SC1117 -s bash"
-SHELLCHECKED_FILES := ".aliases .functions .git-helpers .k8s-helpers git/hooks/* .wayinit .zshenv"
+SHELLCHECKED_FILES := ".aliases .functions .git-helpers .k8s-helpers git/hooks/* .wayinit"
 CONFIG_HOME := if os() == "macos" { "~/Library/Application\\ Support" } else { "~/.config" }
 FONT_DIR := if os() == "macos" { "~/Library/Fonts/" } else { "/usr/share/fonts/" }
 
