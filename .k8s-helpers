@@ -12,9 +12,7 @@ kc() {
   # Relies on KUBECONFIG set to colon delimeted list of all kubeconfigs ^
   # Exclude fqdn contexts (rancher-ism).
   kubectl config use-context "$(kubectl config get-contexts -o name | grep -v fqdn | fzf)"
-  if [[ "${OSTYPE}" =~ "darwin" ]]; then
-    # TODO: redraw bar
-  else
+  if ! [[ "${OSTYPE}" =~ "darwin" ]]; then
     pkill -RTMIN+3 waybar # trigger re-render of waybar kc module
   fi
 }
@@ -216,11 +214,16 @@ k3dmake27() {
 # -----------------------------------------------------------------------------
 # misc kubernetes helpers
 
-kevict() {
+kevictdel() {
   # NB: status.reason=Evicted is not an allowed field selector..
   # => have to either pipe through a filter, or use Failed as an approximation:
   #kubectl delete pod --field-selector 'status.phase=Failed'
   kubectl get pods | awk '/Evicted/ {print $1}' | xargs kubectl delete pod
+}
+
+kfailing() {
+  #shellcheck disable=SC2068
+  kubectl get pods --field-selector="status.phase!=Succeeded,status.phase!=Running" --no-headers $@
 }
 
 # find things left in namespace that kubectl get all might not find
@@ -233,7 +236,8 @@ kleftovers() {
 kcver() {
   for ctx in $(kubectl config get-contexts -o name | grep -v fqdn); do
     kubectl config use-context "${ctx}" > /dev/null
-    echo "${ctx}$(kubectl version --short | grep Server | grep -oE " v.*")"
+    # hide unavoidable version skew warning
+    echo "${ctx} :: $(kubectl version -ojson 2> /dev/null | jq '.serverVersion.gitVersion' -r)"
   done
 }
 
