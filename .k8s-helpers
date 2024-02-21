@@ -203,11 +203,19 @@ k3dmake() {
 
 # pinning multi arch images tags from https://hub.docker.com/r/rancher/k3s/tags
 # NB: do something like https://github.com/nolar/setup-k3d-k3s/blob/v1/action.sh
-k3dmake24() { k3dmake "$1" "--image=rancher/k3s:v1.24.15-k3s1"; }
-k3dmake25() { k3dmake "$1" "--image=rancher/k3s:v1.25.11-k3s1"; }
-k3dmake26() { k3dmake "$1" "--image=rancher/k3s:v1.26.6-k3s1"; }
+k3dmake24() { k3dmake "$1" "--image=rancher/k3s:v1.24.17-k3s1"; }
+k3dmake25() { k3dmake "$1" "--image=rancher/k3s:v1.25.16-k3s1"; }
+k3dmake26() { k3dmake "$1" "--image=rancher/k3s:v1.26.13-k3s1"; }
 k3dmake27() {
-  k3dmake "$1" "--image=rancher/k3s:v1.27.3-k3s1" \
+  k3dmake "$1" "--image=rancher/k3s:v1.27.10-k3s1" \
+    --k3s-arg '--kube-apiserver-arg=feature-gates=WatchList=true'
+}
+k3dmake28() {
+  k3dmake "$1" "--image=rancher/k3s:v1.27.6-k3s1" \
+    --k3s-arg '--kube-apiserver-arg=feature-gates=WatchList=true'
+}
+k3dmake29() {
+  k3dmake "$1" "--image=rancher/k3s:v1.29.1-k3s1" \
     --k3s-arg '--kube-apiserver-arg=feature-gates=WatchList=true'
 }
 
