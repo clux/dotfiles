@@ -77,6 +77,9 @@ if [[ "${OSTYPE}" =~ "darwin" ]]; then
   path+=/opt/homebrew/opt/binutils/bin
   path+=/opt/homebrew/opt/findutils/libexec/gnubin
 
+  # NB: mac also reverses the PATH, tried .zprofile, but found .zshenv to be more reliable
+  # ref: https://gist.github.com/Linerre/f11ad4a6a934dcf01ee8415c9457e7b2
+
   # other common linux tools need just brew packages to get updated;
   # brew install watch diffutils rsync bash gpatch less
   # alternatively; cargo install coreutils and alias head="coreutils head"
