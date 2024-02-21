@@ -1,3 +1,6 @@
 Code/
 !Code/User/settings.json
-k9s/config.yml
+k9s/config.*
+k9s/aliases.yaml
+k9s/clusters
+k9s/*.log
