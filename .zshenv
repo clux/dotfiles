@@ -37,6 +37,11 @@ export SHELLCHECK_OPTS="-e SC1091 -e SC1090"
 # Always print rust backtraces
 export RUST_BACKTRACE=1
 
+# Don't store history in repls
+export NODE_REPL_HISTORY=""
+# ... https://docs.python.org/3/library/site.html#readline-configuration
+export PYTHONSTARTUP="${HOME}/.config/python/startup.py"
+
 # -----------------------------------------------------------------------------
 # PATH
 
