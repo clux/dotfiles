@@ -7,15 +7,16 @@ ${git_branch}\
 ${git_status}\
 ${rust}\
 ${python}\
+${kubernetes}\
+${custom.uim}\
 ${character}\
 """
 
 add_newline = false
-right_format = """\
-[\ue0b6](fg:black black)\
-${cmd_duration}\
-${kubernetes}\
-"""
+#right_format = """\
+#[\ue0b6](fg:black black)\
+#${cmd_duration}\
+#"""
 
 "$schema" = 'https://starship.rs/config-schema.json'
 
@@ -75,14 +76,20 @@ style = "bg:black bold white"
 format = "[$time]($style) "
 
 [kubernetes]
-symbol = "☸ "
-style = "bg:black 27"
+symbol = "☸ " # dharmanetes > 󱃾
+detect_folders = ["kube", ".kube", "tl", "controller"]
+detect_files = ["Cargo.toml", "Chart.yaml"]
 disabled = false
 format = '[$symbol]($style)[$context[󰛢](bg:black 27)$namespace](bg:black white)'
+contexts = [
+  # NB: can also context_alias for more readability
+  { context_pattern = ".*prod.*", style = "bg:black red" },
+  { context_pattern = ".*", style = "bg:black 27" },
+]
 
 [git_branch]
 style = "bg:black bold 38"
-symbol = ' ' #󰳏
+symbol = ' ' #󰳏/
 format = "[$symbol]($style)[$branch](bg:black 38)"
 truncation_length = 8
 truncation_symbol = "."
@@ -118,3 +125,9 @@ disabled = true
 min_time = 2_000
 format = '[took $duration ]($style)'
 style = 'bg:black bold yellow'
+
+[custom.uim]
+command = 'case $(cat ~/.uim.d/fep/getmode-${UIM_FEP_PID}) in; 1) echo -n "あ" ;; 2) echo -n "ア" ;; *) echo -n "ー" ;; esac'
+when = ''' test -n "$UIM_FEP_PID" '''
+style = "bg:black yellow"
+format = '[ $output]($style)'

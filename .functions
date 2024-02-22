@@ -119,13 +119,13 @@ mountz() {
 fepll() {
   if [ -z "${UIM_FEP_PID}" ]; then
     # https://github.com/uim/uim/wiki/Uim-FEP
-    uim-fep -u anthy -s lastline
+    uim-fep -u anthy-utf8 -s lastline
   fi
 }
 fepb() {
   if [ -z "${UIM_FEP_PID}" ]; then
     # https://github.com/uim/uim/wiki/Uim-FEP
-    uim-fep -u anthy -s backtick
+    uim-fep -u anthy-utf8 -s backtick
   fi
 }
 fep-bind() {
@@ -135,6 +135,7 @@ fep-bind() {
 }
 
 # provided we have uim-fep running; this script toggles between the modes:
+# NB: custom.uim in starship also contains a small version of the icon printer
 uim-toggle() {
   if [ -z "$1" ]; then
     file="${HOME}/.uim.d/fep/getmode-${UIM_FEP_PID}"
