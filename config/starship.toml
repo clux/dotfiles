@@ -3,12 +3,12 @@ ${status}\
 ${username}\
 ${hostname}\
 ${directory}\
-${python}\
-${custom.pythonvenv}\
-${kubernetes}\
-${custom.uim}\
 ${git_branch}\
 ${git_status}\
+${kubernetes}\
+${python}\
+${custom.pythonvenv}\
+${custom.uim}\
 ${character}\
 """
 
@@ -24,7 +24,7 @@ add_newline = false
 # see https://github.com/ryanoasis/powerline-extra-symbols for codes
 
 [character]
-format = "[](bg:black)[$symbol](bold) "
+format = "[ ](bg:black)[$symbol](bold) "
 success_symbol = "[](fg:black black)"
 error_symbol = "[](fg:black black)"
 disabled = false
@@ -68,21 +68,21 @@ disabled = true
 style = "bg:black bold white"
 format = "[$time]($style) "
 
-[kubernetes]
-symbol = "󰛢" # or ☸ 󱃾
-detect_folders = ["kube", ".kube", "tl", "controller"]
-detect_files = ["Cargo.toml", "Chart.yaml", "justfile"]
-disabled = false
+[kubernetes] # ☸ 󱃾
+symbol = "  " # module acts as powerline separator
+disabled = false # but only when we deem it context-worthy
+detect_extensions = ["yaml"] #..let's see if i regret this as a condition
+detect_files = ["Cargo.toml", "Chart.yaml"] # maybe rust detection is better?
 style = "bg:black 117"
-format = '[$context[$symbol](bg:black 251)$namespace ]($style)'
+format = '[[$symbol](bg:black 251)${context}[󰛢](bg:black bold white)${namespace}]($style)'
 contexts = [
   { context_pattern = "prod.*", context_alias = "prod", style = "bg:black 204" },
   { context_pattern = "sandbox.*", context_alias = "sbx" },
   { context_pattern = "dev.*", context_alias = "dev" },
   { context_pattern = ".*eks-dev.*", context_alias = "eks-dev" },
   { context_pattern = ".*eks-play.*", context_alias = "eks-play" },
-  { context_pattern = ".*eks-anal.*", context_alias = "eks-anal" },
-  { context_pattern = "k3d-.*(?P<k3d>[\\d]{2})", context_alias = "房$k3d" },
+  { context_pattern = ".*eks-anal.*", context_alias = "eks-anal" }, # ..analytics (yes,yes)
+  { context_pattern = "k3d-.*(?P<k3d>[\\d]{2})", context_alias = "$k3d" },
   { context_pattern = ".*" },
 ]
 
@@ -94,39 +94,45 @@ truncation_length = 8
 truncation_symbol = "."
 
 [git_status]
-disabled = false
-# This module will always cause a non-constant gap betwen the last git thing and the next module;
-# if the format string has ANY characters; 1 space added + format gunk + 0 spaces => no gap at the end
-# if the format string has nothing; 1 space added => 1 space gap at the end
-# you can change the end, but you always get an inconsistency: https://github.com/starship/starship/issues/1724
-# because of this, we put git at the end so it doesn't look like "obviously misconfigured padding"
-format = '[ ${ahead}${behind}${modified}${conflicted}${stashed}${deleted}${renamed}${staged}${untracked}]($style)'
+# module sometimes has NO output, so we have VARYING padding if we include spaces
+# https://github.com/starship/starship/issues/1724
+# to avoid a janky look, we avoid spaces in the string and thus compact module output..
+# this is consistent (albeit crammed into branch) but looks good if we use thin chars below
+format = '[${ahead}${behind}${modified}${conflicted}${stashed}${deleted}${renamed}${staged}${untracked}]($style)'
 style = "bg:black 85"
 conflicted = "🏳 "
-ahead = "⇡"#"↑$count"
-behind = "⇣"#"↓$count"
+ahead = "⇡$count" #↑
+behind = "⇣$count" #↓
 diverged = "⇕"
-untracked = "?" #…
-stashed = "≡"
-modified = '+$count'
+untracked = "?"
+stashed = "󰏖"
+modified = '+'
 staged = "●"
 renamed = "󱞸"#
 deleted = "󱡂" #⚑
-#up_to_date = "✔"
+up_to_date = "✔"
 
 [python]
-disabled = true # dislike this module because it adds padding even when virtualenv is empty string
-symbol = '' #'' # nice quick python detect
+disabled = true # this adds padding even when no python detected
 style = "bg:black yellow"
-format = '[${symbol}${virtualenv} ]($style)'
+format = '[${virtualenv} ]($style)'
 
 [custom.pythonvenv]
 # alternative python.. better padding because the whole thing is off when no venv
 disabled = false
 when = ''' test -n "$VIRTUAL_ENV" '''
-command = "echo -n ${VIRTUAL_ENV##*/}"
-style = "bg:black yellow"
-format = '[($output )]($style)'
+#command = "echo -n ${VIRTUAL_ENV##*/}"
+symbol = '' # ..if i am always using the same venv name, icon is better
+style = "bg:black 75"
+format = '[ ${symbol}]($style)' # ${output} has venv folder
+
+[custom.rustdisk]
+# rustlang problems: show if ./target > 20G
+command = '''dust -cb -d0 -n0 target | rg -e '[\d]+G' -o --color=never'''
+#when = '''dust -cb -d0 -n0 target | rg -e '[\d]+' -o --color=never | xargs -I{} test {} -gt 20'''
+when = false # command is too slow
+style = "bg:black 166"
+format = '[${output}]($style)'
 
 [line_break]
 disabled = true
