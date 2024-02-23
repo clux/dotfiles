@@ -80,29 +80,30 @@ symbol = "󰛢" # or ☸ 󱃾
 detect_folders = ["kube", ".kube", "tl", "controller"]
 detect_files = ["Cargo.toml", "Chart.yaml", "justfile"]
 disabled = false
-style = "bg:black 27"
-format = '[ $namespace[$symbol]($style)(bg:black 27)$context](bg:black 75)'
+style = "bg:black 117"
+format = '[ $context[$symbol](bg:black 251)$namespace]($style)'
 contexts = [
-  { context_pattern = "prod.*", context_alias = "prod", style = "bg:black red" },
+  { context_pattern = "prod.*", context_alias = "prod", style = "bg:black 204" },
   { context_pattern = "sandbox.*", context_alias = "sbx" },
   { context_pattern = "dev.*", context_alias = "dev" },
   { context_pattern = ".*eks-dev.*", context_alias = "eks-dev" },
   { context_pattern = ".*eks-play.*", context_alias = "eks-play" },
   { context_pattern = ".*eks-anal.*", context_alias = "eks-anal" },
+  { context_pattern = "k3d-.*(?P<k3d>[\\d]{2})", context_alias = "房$k3d" },
   { context_pattern = ".*" },
 ]
 
 [git_branch]
-style = "bg:black bold 38"
+style = "bg:black bold 85"
 symbol = ' ' #󰳏/
-format = "[$symbol]($style)[$branch](bg:black 38)"
+format = "[$symbol]($style)[$branch](bg:black 85)"
 truncation_length = 8
 truncation_symbol = "."
 
 [git_status]
 disabled = false
 format = '[ ${ahead}${behind}${modified}${conflicted}${stashed}${deleted}${renamed}${staged}${untracked}]($style)'
-style = "bg:black 38"
+style = "bg:black 85"
 conflicted = "🏳 "
 ahead = "↑$count "
 behind = "↓$count "

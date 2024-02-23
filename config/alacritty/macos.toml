@@ -13,7 +13,7 @@ key = "N"
 action = "None"
 
 [font]
-size = 24
+size = 28
 
 [window]
 decorations = "Buttonless" # mac only option
