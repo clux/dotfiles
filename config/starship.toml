@@ -8,6 +8,7 @@ ${git_status}\
 ${kubernetes}\
 ${python}\
 ${custom.pythonvenv}\
+${jobs}\
 ${custom.uim}\
 ${character}\
 """
@@ -19,12 +20,11 @@ add_newline = false
 #"""
 
 "$schema" = 'https://starship.rs/config-schema.json'
-
 # This setup generally uses characters from powerline
 # see https://github.com/ryanoasis/powerline-extra-symbols for codes
 
 [character]
-format = "[ ](bg:black)[$symbol](bold) "
+format = "[](bg:black)[$symbol](bold) "
 success_symbol = "[](fg:black black)"
 error_symbol = "[](fg:black black)"
 disabled = false
@@ -60,7 +60,7 @@ truncate_to_repo = true
 #fish_style_pwd_dir_length = 3
 # MISSING: cannot change the separator between dirs (looks cluttered)
 # https://github.com/starship/starship/pull/1222
-truncation_symbol = "…"
+#truncation_symbol = "…"
 truncation_length = 5
 
 [time]
@@ -68,8 +68,8 @@ disabled = true
 style = "bg:black bold white"
 format = "[$time]($style) "
 
-[kubernetes] # ☸ 󱃾
-symbol = "  " # module acts as powerline separator
+[kubernetes] # ☸ 󱃾☀
+symbol = " " # module acts as separator
 disabled = false # but only when we deem it context-worthy
 detect_extensions = ["yaml"] #..let's see if i regret this as a condition
 detect_files = ["Cargo.toml", "Chart.yaml"] # maybe rust detection is better?
@@ -82,7 +82,7 @@ contexts = [
   { context_pattern = ".*eks-dev.*", context_alias = "eks-dev" },
   { context_pattern = ".*eks-play.*", context_alias = "eks-play" },
   { context_pattern = ".*eks-anal.*", context_alias = "eks-anal" }, # ..analytics (yes,yes)
-  { context_pattern = "k3d-.*(?P<k3d>[\\d]{2})", context_alias = "$k3d" },
+  { context_pattern = "k3d-.*(?P<k3d>[\\d]{2})", context_alias = "房${k3d}" },
   { context_pattern = ".*" },
 ]
 
@@ -112,10 +112,23 @@ renamed = "󱞸"#
 deleted = "󱡂" #⚑
 up_to_date = "✔"
 
+[cmd_duration]
+disabled = true
+min_time = 2_000
+format = '[took $duration ]($style)'
+style = 'bg:black bold yellow'
+
+[jobs] # got an EDITOR running?
+symbol = "▧ "
+style = "bg:black blue"
+format = "[ $number$symbol]($style)"
+
 [python]
 disabled = true # this adds padding even when no python detected
 style = "bg:black yellow"
 format = '[${virtualenv} ]($style)'
+
+# can benchmark with https://github.com/romkatv/zsh-prompt-benchmark
 
 [custom.pythonvenv]
 # alternative python.. better padding because the whole thing is off when no venv
@@ -126,25 +139,9 @@ symbol = '' # ..if i am always using the same venv name, icon is better
 style = "bg:black 75"
 format = '[ ${symbol}]($style)' # ${output} has venv folder
 
-[custom.rustdisk]
-# rustlang problems: show if ./target > 20G
-command = '''dust -cb -d0 -n0 target | rg -e '[\d]+G' -o --color=never'''
-#when = '''dust -cb -d0 -n0 target | rg -e '[\d]+' -o --color=never | xargs -I{} test {} -gt 20'''
-when = false # command is too slow
-style = "bg:black 166"
-format = '[${output}]($style)'
-
-[line_break]
-disabled = true
-
-[cmd_duration]
-disabled = true
-min_time = 2_000
-format = '[took $duration ]($style)'
-style = 'bg:black bold yellow'
-
 [custom.uim]
 command = 'case $(cat ~/.uim.d/fep/getmode-${UIM_FEP_PID}) in; 1) echo -n "あ" ;; 2) echo -n "ア" ;; *) echo -n "ー" ;; esac'
 when = ''' test -n "$UIM_FEP_PID" '''
 style = "bg:black yellow"
 format = '[ $output]($style)'
+os = "linux"
