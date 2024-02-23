@@ -100,7 +100,7 @@ truncation_symbol = "."
 # this is consistent (albeit crammed into branch) but looks good if we use thin chars below
 format = '[${ahead}${behind}${modified}${conflicted}${stashed}${deleted}${renamed}${staged}${untracked}]($style)'
 style = "bg:black 85"
-conflicted = "🏳 "
+conflicted = "≠"
 ahead = "⇡$count" #↑
 behind = "⇣$count" #↓
 diverged = "⇕"
@@ -108,8 +108,8 @@ untracked = "?"
 stashed = "󰏖"
 modified = '+'
 staged = "●"
-renamed = "󱞸"#
-deleted = "󱡂" #⚑
+renamed = "󱞸"
+deleted = "󱡂"
 up_to_date = "✔"
 
 [cmd_duration]
