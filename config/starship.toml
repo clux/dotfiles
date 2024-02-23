@@ -3,12 +3,12 @@ ${status}\
 ${username}\
 ${hostname}\
 ${directory}\
-${git_branch}\
-${git_status}\
-${rust}\
 ${python}\
+${custom.pythonvenv}\
 ${kubernetes}\
 ${custom.uim}\
+${git_branch}\
+${git_status}\
 ${character}\
 """
 
@@ -24,7 +24,7 @@ add_newline = false
 # see https://github.com/ryanoasis/powerline-extra-symbols for codes
 
 [character]
-format = "[$symbol](bold) "
+format = "[](bg:black)[$symbol](bold) "
 success_symbol = "[](fg:black black)"
 error_symbol = "[](fg:black black)"
 disabled = false
@@ -44,13 +44,6 @@ format = "[$symbol]($style)"
 ssh_only = true
 style = 'bg:black bold dimmed green'
 format = "[ $hostname ]($style)"
-
-[rust]
-disabled = true # MAYBE for later with a right_prompt
-style = "bg:black 202"
-format = "[ $symbol($version)]($style)"
-version_format = "${minor}"
-detect_extensions = []
 
 [directory]
 style = "bg:black white"
@@ -81,7 +74,7 @@ detect_folders = ["kube", ".kube", "tl", "controller"]
 detect_files = ["Cargo.toml", "Chart.yaml", "justfile"]
 disabled = false
 style = "bg:black 117"
-format = '[ $context[$symbol](bg:black 251)$namespace]($style)'
+format = '[$context[$symbol](bg:black 251)$namespace ]($style)'
 contexts = [
   { context_pattern = "prod.*", context_alias = "prod", style = "bg:black 204" },
   { context_pattern = "sandbox.*", context_alias = "sbx" },
@@ -102,26 +95,38 @@ truncation_symbol = "."
 
 [git_status]
 disabled = false
+# This module will always cause a non-constant gap betwen the last git thing and the next module;
+# if the format string has ANY characters; 1 space added + format gunk + 0 spaces => no gap at the end
+# if the format string has nothing; 1 space added => 1 space gap at the end
+# you can change the end, but you always get an inconsistency: https://github.com/starship/starship/issues/1724
+# because of this, we put git at the end so it doesn't look like "obviously misconfigured padding"
 format = '[ ${ahead}${behind}${modified}${conflicted}${stashed}${deleted}${renamed}${staged}${untracked}]($style)'
 style = "bg:black 85"
 conflicted = "🏳 "
-ahead = "↑$count "
-behind = "↓$count "
-diverged = "⇕ "
+ahead = "⇡"#"↑$count"
+behind = "⇣"#"↓$count"
+diverged = "⇕"
 untracked = "?" #…
-stashed = "≡ "
-modified = '+$count '
-staged = "● "
-renamed = "󱞸 "#
-deleted = "󱡂 " #⚑
-#up_to_date = "✔ "
+stashed = "≡"
+modified = '+$count'
+staged = "●"
+renamed = "󱞸"#
+deleted = "󱡂" #⚑
+#up_to_date = "✔"
 
 [python]
-symbol = ' ' #🐍
-pyenv_version_name = true
-pyenv_prefix = ''
+disabled = true # dislike this module because it adds padding even when virtualenv is empty string
+symbol = '' #'' # nice quick python detect
 style = "bg:black yellow"
-format = '[${symbol}${pyenv_prefix}(${version} )($virtualenv )]($style)'
+format = '[${symbol}${virtualenv} ]($style)'
+
+[custom.pythonvenv]
+# alternative python.. better padding because the whole thing is off when no venv
+disabled = false
+when = ''' test -n "$VIRTUAL_ENV" '''
+command = "echo -n ${VIRTUAL_ENV##*/}"
+style = "bg:black yellow"
+format = '[($output )]($style)'
 
 [line_break]
 disabled = true
