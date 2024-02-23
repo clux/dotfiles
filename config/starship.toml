@@ -76,15 +76,20 @@ style = "bg:black bold white"
 format = "[$time]($style) "
 
 [kubernetes]
-symbol = "☸ " # dharmanetes > 󱃾
+symbol = "󰛢" # or ☸ 󱃾
 detect_folders = ["kube", ".kube", "tl", "controller"]
-detect_files = ["Cargo.toml", "Chart.yaml"]
+detect_files = ["Cargo.toml", "Chart.yaml", "justfile"]
 disabled = false
-format = '[$symbol]($style)[$context[󰛢](bg:black 27)$namespace](bg:black white)'
+style = "bg:black 27"
+format = '[ $namespace[$symbol]($style)(bg:black 27)$context](bg:black 75)'
 contexts = [
-  # NB: can also context_alias for more readability
-  { context_pattern = ".*prod.*", style = "bg:black red" },
-  { context_pattern = ".*", style = "bg:black 27" },
+  { context_pattern = "prod.*", context_alias = "prod", style = "bg:black red" },
+  { context_pattern = "sandbox.*", context_alias = "sbx" },
+  { context_pattern = "dev.*", context_alias = "dev" },
+  { context_pattern = ".*eks-dev.*", context_alias = "eks-dev" },
+  { context_pattern = ".*eks-play.*", context_alias = "eks-play" },
+  { context_pattern = ".*eks-anal.*", context_alias = "eks-anal" },
+  { context_pattern = ".*" },
 ]
 
 [git_branch]
