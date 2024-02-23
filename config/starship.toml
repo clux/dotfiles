@@ -82,7 +82,7 @@ contexts = [
   { context_pattern = ".*eks-dev.*", context_alias = "eks-dev" },
   { context_pattern = ".*eks-play.*", context_alias = "eks-play" },
   { context_pattern = ".*eks-anal.*", context_alias = "eks-anal" }, # ..analytics (yes,yes)
-  { context_pattern = "k3d-.*(?P<k3d>[\\d]{2})", context_alias = "房${k3d}" },
+  { context_pattern = "k3d-.*(?P<k3d>[\\d]{2})", context_alias = "団${k3d}" },
   { context_pattern = ".*" },
 ]
 
