@@ -198,3 +198,8 @@
 
 [credential]
 	helper = store
+
+[transfer]
+    fsckobjects = true
+[fetch]
+    fsckobjects = true
