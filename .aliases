@@ -97,3 +97,8 @@ alias rs="rsync -avz --progress -h"
 alias rscp="rs"
 alias rscpf="rs -u --delete"
 alias rsmv="rs --remove-source-files"
+
+# jira / work specific shortcuts that hook into starship + git
+alias jls="jira-stories" # list in-progress stories in our board, assigned to me
+alias js="jira-set" # write the first in-progress one to ~/.jira_story
+alias jc="jira-clean" # delete ~/.jira_story

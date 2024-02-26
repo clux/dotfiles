@@ -10,6 +10,7 @@ ${python}\
 ${custom.pythonvenv}\
 ${jobs}\
 ${custom.uim}\
+${custom.story}\
 ${character}\
 """
 
@@ -145,3 +146,11 @@ when = ''' test -n "$UIM_FEP_PID" '''
 style = "bg:black yellow"
 format = '[ $output]($style)'
 os = "linux"
+
+[custom.story]
+command = '''echo -ne "$(cat ~/.jira_story | rg -oe "[\d]+" --color=never)"'''
+when = ''' test -f ~/.jira_story '''
+style = "bg:black yellow"
+symbol = ""
+format = '[ ${symbol}${output}]($style)'
+os = "macos"

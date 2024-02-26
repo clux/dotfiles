@@ -469,6 +469,20 @@ broxy-grab() {
 }
 
 # -----------------------------------------------------------------------------
+# jira shortcuts
+
+# via https://crates.io/crates/jira-terminal
+jira-stories() {
+  jira-terminal list -p ENOPS -S "In Progress" -a "Eirik Albrigtsen" -J | jq '.[]'
+}
+jira-set() {
+  jira-terminal list -p ENOPS -S "In Progress" -a "Eirik Albrigtsen" -J | jq '.[0].key' -r > ~/.jira_story
+}
+jira-clean() {
+  rm ~/.jira_story
+}
+
+# -----------------------------------------------------------------------------
 # system statistics/usage (linux only)
 
 mem() {

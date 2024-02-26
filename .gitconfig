@@ -8,6 +8,7 @@
   dcs = -c delta.side-by-side=true diff --cached
   dm = !"db() { git log -p $(git master)..HEAD; }; db"
   c = commit --signoff --verbose
+  cj = !"cj() { git commit --verbose --template $HOME/.jira_story; }; cj"
   a = add
   p = pull
   f = fetch
