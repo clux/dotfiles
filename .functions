@@ -477,7 +477,7 @@ jira-set() {
   echo "${story}" | choose 0 > ~/.jira_story
 }
 jira-clean() {
-  rm ~/.jira_story
+  rm -f ~/.jira_story
 }
 
 # -----------------------------------------------------------------------------

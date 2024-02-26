@@ -99,5 +99,5 @@ alias rscpf="rs -u --delete"
 alias rsmv="rs --remove-source-files"
 
 # jira / work specific shortcuts that hook into starship + git
-alias js="jira-set" # write selected story id to ~/.jira_story
-alias jc="jira-clean" # delete ~/.jira_story
+alias jc="jira-set" # write selected story id to ~/.jira_story
+alias jcc="jira-clean" # delete ~/.jira_story
