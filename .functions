@@ -472,11 +472,9 @@ broxy-grab() {
 # jira shortcuts
 
 # via https://crates.io/crates/jira-terminal
-jira-stories() {
-  jira-terminal list -p ENOPS -S "In Progress" -a "Eirik Albrigtsen" -J | jq '.[]'
-}
 jira-set() {
-  jira-terminal list -p ENOPS -S "In Progress" -a "Eirik Albrigtsen" -J | jq '.[0].key' -r > ~/.jira_story
+  local -r story="$(jira-terminal list -p ENOPS -S "In Progress" -a "Eirik Albrigtsen" -J | jq '.[] | .key + " :: " + .summary' -r | fzf)"
+  echo "${story}" | choose 0 > ~/.jira_story
 }
 jira-clean() {
   rm ~/.jira_story
