@@ -34,25 +34,14 @@ alias gblam='git blam'
 
 # git commit browser
 # based on https://gist.github.com/junegunn/f4fca918e937e6bf5bad#gistcomment-1666125
-# F3 -> opens commit in browser (relies on "git open $changeset" alias)
-# ENTER -> opens commit with "git show" (q to return)
-# ESC in main to exit
-# NB: relies on pager being set in .gitconfig!
+# NB: relies on pager and "git open" alias being set in .gitconfig!
 gitlog() {
-  git log --graph --color=always --no-merges \
+  git log --color=always --no-merges \
       --format="%C(auto)%h%d %s <%C(blue)%an%Creset> %C(black)%C(bold)%cr" "$@" |
   fzf --ansi --no-sort --reverse --height 100% --tiebreak=index \
-      --header="enter:show, F3:open, ESC: quit, q: quit-show" \
-      --bind "f3:execute:
-                (grep -o '[a-f0-9]\{7\}' | head -1 |
-                xargs -I % sh -c 'git open %') << 'FZF-EOF'
-                {}
-FZF-EOF" \
-      --bind "ctrl-m:execute:
-                (grep -o '[a-f0-9]\{7\}' | head -1 |
-                xargs -I % sh -c 'git show --color=always %' | delta | less -R) << 'FZF-EOF'
-                {}
-FZF-EOF"
+      --header="enter:show, F3:open, ESC:quit, q:quit-show" \
+      --bind="ctrl-m:execute:(git show {1} | delta | less -R)" \
+      --bind="f3:execute:(git open {1})"
 }
 
 
