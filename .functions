@@ -473,8 +473,11 @@ broxy-grab() {
 
 # via https://crates.io/crates/jira-terminal
 jira-set() {
-  local -r story="$(jira-terminal list -p ENOPS -S "In Progress" -a "Eirik Albrigtsen" -J | jq '.[] | .key + " :: " + .summary' -r | fzf)"
-  echo "${story}" | choose 0 > ~/.jira_story
+  # shellcheck disable=SC2016
+  jira-terminal list -p ENOPS -S "In Progress" -a "Eirik Albrigtsen" -J \
+    | jq '.[] | .key + " :: " + .summary' -r | fzf --ansi \
+    --preview='jira-terminal detail -f all $(cut -d" " -f1 <<< {})' \
+    | choose 0 > ~/.jira_story
 }
 jira-clean() {
   rm -f ~/.jira_story
