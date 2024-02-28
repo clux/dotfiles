@@ -475,11 +475,20 @@ broxy-grab() {
 jira-set() {
   jira-terminal list -p ENOPS -S "In Progress" -a "Eirik Albrigtsen" -J \
     | jq '.[] | .key + " :: " + .summary' -r \
-    | fzf --header="Enter:set, F3:open" \
+    | fzf --header="Enter:set, F3:open, F4:risk" \
+      --bind="f4:execute(jira-terminal update -f risk -v Low {1})" \
       --bind="f3:execute:(open 'https://truelayer.atlassian.net/browse/{1}')" \
       --preview='jira-terminal detail -f all {1}' \
       --preview-window=down:80% --height=100% \
-      --nth 1 > ~/.jira_story
+      | choose 0 > ~/.jira_story
+}
+jira-risk() {
+  if [ -f ~/.jira_story ]; then
+    jira-terminal update -f risk -v "Low" "$(cat ~/.jira_story)"
+  else
+    echo "Set story first"
+    return 1
+  fi
 }
 jira-clean() {
   rm -f ~/.jira_story
