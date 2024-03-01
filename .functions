@@ -479,7 +479,7 @@ jira-set() {
       --bind="f3:execute:(open 'https://truelayer.atlassian.net/browse/{1}')" \
       --preview='jira-terminal detail -f all {1}' \
       --preview-window=down:80% --height=100% \
-      | choose 0 > ~/.jira_story
+      | choose 0 -f " :: " > ~/.jira_story
 }
 jira-risk() {
   if [ -f ~/.jira_story ]; then
