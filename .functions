@@ -60,15 +60,14 @@ keys() {
 # -----------------------------------------------------------------------------
 # fzf interfaces
 
-# pass clipboard through fzf lookup
-passclip() {
-  local -r secret="$(cd ~/.password-store && fd .gpg | fzf --layout=reverse-list)"
-  pass "${secret/%.gpg}" -c
-}
-# pass show everything after first line through fzf (first line is pw)
-passdeets() {
-  local -r secret="$(cd ~/.password-store && fd .gpg | fzf --layout=reverse-list)"
-  pass "${secret/%.gpg}" | tail -n +2 | less
+passz() {
+  # TODO: force a gpg prompt here
+  # TODO: better sanitization strategy for deets (not safe to show atm)
+  fd --base-directory ~/.password-store .gpg --type=file | choose 0 -f '.gpg' \
+    | fzf --no-sort --reverse --height 100% --tiebreak=index \
+    --header="Enter:deets, F3:clip, ESC:quit, q:quit-deets" \
+    --bind="ctrl-m:execute:(pass {1} | tail -n +2 | less -R)" \
+    --bind="F3:execute:(pass {1} -c)"
 }
 
 # chrome history
