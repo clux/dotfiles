@@ -9,28 +9,28 @@ show_hidden = true
 
 [open]
 rules = [
-	{ mime = "text/*", use = "edit" },
-	{ mime = "image/*", use = "image" },
-	{ mime = "video/*", use = "play" },
-	{ mime = "audio/*", use = "play" },
+  { mime = "text/*", use = "edit" },
+  { mime = "image/*", use = "image" },
+  { mime = "video/*", use = "play" },
+  { mime = "audio/*", use = "play" },
 
-	{ mime = "application/json", use = "edit" },
-	{ mime = "*/javascript",     use = "edit" },
+  { mime = "application/json", use = "edit" },
+  { mime = "*/javascript",     use = "edit" },
   { mime = "*", use = "open" },
 ]
 
 [opener]
 edit = [
-	{ exec = '$EDITOR "$@"', block = true,  for = "unix" },
+  { run = '$EDITOR "$@"', block = true,  for = "unix" },
 ]
 image = [
-  { exec = 'feh "$@"', desc = "feh", for = "linux" },
-  { exec = 'open "$@"', desc = "Open", for = "macos" },
+  { run = 'feh "$@"', desc = "feh", for = "linux" },
+  { run = 'open "$@"', desc = "Open", for = "macos" },
 ]
 play = [
-  { exec = 'mpv "$@"' },
+  { run = 'mpv "$@"' },
 ]
 open = [
-	{ exec = 'xdg-open "$@"',             desc = "Open", for = "linux" },
-	{ exec = 'open "$@"',                 desc = "Open", for = "macos" },
+  { run = 'xdg-open "$@"',             desc = "Open", for = "linux" },
+  { run = 'open "$@"',                 desc = "Open", for = "macos" },
 ]
