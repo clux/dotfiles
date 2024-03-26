@@ -192,9 +192,10 @@ ke() {
 k3dmake() {
   local -r name="$1"
   shift
+  # NB: ports and --no-lb clash and causes nodefilter requirements (TODO: add back --no-lb once it works)
   # shellcheck disable=SC2068
-  k3d cluster create "${name}" --servers 1 --registry-create "${name}" $@ \
-    --no-lb --no-rollback \
+  k3d cluster create "${name}" --servers 1 -p 10250:10250 --registry-create "${name}" $@ \
+    --no-rollback \
     --k3s-arg "--disable=traefik,servicelb,metrics-server@server:*" \
     --k3s-arg '--kubelet-arg=eviction-hard=imagefs.available<1Gi,nodefs.available<Gi@agent:*' \
     --k3s-arg '--kubelet-arg=eviction-minimum-reclaim=imagefs.available=1Gi,nodefs.available=1Gi@agent:*'
@@ -203,20 +204,23 @@ k3dmake() {
 
 # pinning multi arch images tags from https://hub.docker.com/r/rancher/k3s/tags
 # NB: do something like https://github.com/nolar/setup-k3d-k3s/blob/v1/action.sh
-k3dmake24() { k3dmake "$1" "--image=rancher/k3s:v1.24.17-k3s1"; }
-k3dmake25() { k3dmake "$1" "--image=rancher/k3s:v1.25.16-k3s1"; }
-k3dmake26() { k3dmake "$1" "--image=rancher/k3s:v1.26.13-k3s1"; }
+k3dmake24() { k3dmake "24" "--image=rancher/k3s:v1.24.17-k3s1"; }
+k3dmake25() { k3dmake "25" "--image=rancher/k3s:v1.25.16-k3s1"; }
+k3dmake26() { k3dmake "26" "--image=rancher/k3s:v1.26.13-k3s1"; }
 k3dmake27() {
-  k3dmake "$1" "--image=rancher/k3s:v1.27.10-k3s1" \
+  k3dmake "27" "--image=rancher/k3s:v1.27.10-k3s1" \
     --k3s-arg '--kube-apiserver-arg=feature-gates=WatchList=true'
 }
 k3dmake28() {
-  k3dmake "$1" "--image=rancher/k3s:v1.27.6-k3s1" \
+  k3dmake "28" "--image=rancher/k3s:v1.27.6-k3s1" \
     --k3s-arg '--kube-apiserver-arg=feature-gates=WatchList=true'
 }
 k3dmake29() {
-  k3dmake "$1" "--image=rancher/k3s:v1.29.1-k3s1" \
-    --k3s-arg '--kube-apiserver-arg=feature-gates=WatchList=true'
+  k3dmake "29" "--image=rancher/k3s:v1.29.1-k3s1" \
+    --k3s-arg '--kube-apiserver-arg=feature-gates=WatchList=true@server:*'
+}
+k3dmake29-2() {
+  k3dmake "29" "--image=rancher/k3s:v1.29.1-k3s1"
 }
 
 # -----------------------------------------------------------------------------
