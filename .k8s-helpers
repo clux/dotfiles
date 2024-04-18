@@ -80,6 +80,8 @@ alias kyn="ky node"
 alias kyh="ky hpa"
 # kpf - fzf port-forward (see below)
 alias kpf="kpfs"
+# presentation mode
+alias kuwuctl="kubectl"
 
 # -----------------------------------------------------------------------------
 # kubernetes interactive getters using fzf to pick unspecified args
