@@ -188,6 +188,13 @@ ke() {
   fi
 }
 
+# kubectl events --for shorthand
+kev() {
+  local -r resource="${1:-$(kubectl api-resources --no-headers | choose 0 | fzf)}"
+  local -r name="${2:-$(kubectl get "${resource}" --no-headers | choose 0 | fzf)}"
+  kubectl events --for "${resource}/${name}"
+}
+
 # -----------------------------------------------------------------------------
 # k3d setup helpers
 
