@@ -9,7 +9,6 @@ ${kubernetes}\
 ${python}\
 ${custom.pythonvenv}\
 ${jobs}\
-${custom.uim}\
 ${custom.story}\
 ${character}\
 """
@@ -139,13 +138,6 @@ when = ''' test -n "$VIRTUAL_ENV" '''
 symbol = '' # ..if i am always using the same venv name, icon is better
 style = "bg:black 75"
 format = '[ ${symbol}]($style)' # ${output} has venv folder
-
-[custom.uim]
-command = 'case $(cat ~/.uim.d/fep/getmode-${UIM_FEP_PID}) in; 1) echo -n "あ" ;; 2) echo -n "ア" ;; *) echo -n "ー" ;; esac'
-when = ''' test -n "$UIM_FEP_PID" '''
-style = "bg:black yellow"
-format = '[ $output]($style)'
-os = "linux"
 
 [custom.story]
 command = '''echo -ne "$(cat ~/.jira_story | rg -oe "[\d]+" --color=never)"'''
