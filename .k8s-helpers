@@ -231,6 +231,10 @@ k3dmake29() {
 k3dmake29-2() {
   k3dmake "29" "--image=rancher/k3s:v1.29.1-k3s1"
 }
+k3dmake30() {
+  k3dmake "30" "--image=rancher/k3s:v1.30.0-k3s1" \
+    --k3s-arg '--kube-apiserver-arg=feature-gates=WatchList=true@server:*'
+}
 
 # -----------------------------------------------------------------------------
 # misc kubernetes helpers
