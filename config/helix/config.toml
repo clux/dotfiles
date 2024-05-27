@@ -9,7 +9,8 @@ b = ":sh zellij run -f -x=0 -y=60% --width=100% -- just build"
 r = ":sh zellij run -f -x=0 -y=60% --width=100% -- just run"
 t = ":sh zellij run -f -x=0 -y=60% --width=100% -- just test" #TODO: run test under cursor?
 l = ":sh zellij run -f -x=0 -y=60% --width=100% -- just lint"
-#g = ":sh zellij run -f -- rg " # TODO: interpolate with selected
+m = ":sh zellij run -- mdt" # Decent, but better if https://github.com/helix-editor/helix/issues/3134 lands
+#g = ":sh zellij run -f -- rg " # ..actually requires interpolation ^
 s = ":sh zellij run -cf -x=0 -y=60% --width=100% -- zsh"
 c = ":config-reload"
 p = ":toggle-option lsp.display-inlay-hints"
