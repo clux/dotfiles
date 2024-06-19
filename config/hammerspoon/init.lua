@@ -24,14 +24,18 @@ hs.alert("HS + yabai loaded")
 --  hs.hotkey.bind({"shift", "alt"}, key, function() os.execute(cmd) end)
 --end
 
-
 -- Yabai
 local function yabai(commands)
   for _, cmd in ipairs(commands) do
     os.execute("/opt/homebrew/bin/yabai -m " .. cmd)
   end
 end
--- bind on alt/shift only (modifier switch + ctrl intercepted elsewhere in e.g. alacritty)
+-- bind on alt/shift only
+--
+-- For adopters: my binds ends up being shift-alt on a windows keyboard
+-- ..but that is AFTER remapping Control and Command on the keyboard globally in mac settings
+-- change these two binds to something that works
+-- (modifier switch + ctrl intercepted elsewhere in e.g. alacritty)
 local function alt(key, commands)
   hs.hotkey.bind({ "alt" }, key, function()
     yabai(commands)
