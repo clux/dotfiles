@@ -152,9 +152,9 @@ keybinds clear-defaults=true {
     shared_except "resize" "locked" {
         bind "Ctrl n" { SwitchToMode "Resize"; }
     }
-    //shared_except "scroll" "locked" {
-    //    bind "Ctrl s" { SwitchToMode "Scroll"; }
-    //}
+    shared_except "scroll" "locked" {
+        bind "Ctrl s" { SwitchToMode "Scroll"; }
+    }
     //shared_except "session" "locked" {
     //    bind "Ctrl o" { SwitchToMode "Session"; }
     //}
