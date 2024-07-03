@@ -41,7 +41,7 @@ alias ym="yabai -m query --spaces"
 alias rg="rg --colors 'match:bg:yellow' --colors 'match:fg:black' --colors 'match:style:nobold' --colors 'line:style:bold' --colors 'path:fg:green' --glob=!.git/"
 
 # du -> dust
-alias du='dust -brH -z1000000'
+alias du='dust -br -z1000000'
 alias du1='du -d1'
 alias du2='du -d2'
 
