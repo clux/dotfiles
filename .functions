@@ -92,15 +92,17 @@ ch() {
     xargs "${open}" > /dev/null
 }
 
-# systemd; follow / reload
+# systemd unit and log viewer
 sysf() {
-  local -r unit="${1:-$(systemctl list-units --no-pager --no-legend | awk '{ print $1 }' | fzf)}"
-  journalctl -u "$unit" -fl
-}
-sysr() {
-  local -r unit="${1:-$(systemctl list-units --no-pager --no-legend | awk '{ print $1 }' | fzf)}"
-  sudo systemctl daemon-reload
-  sudo systemctl restart "$unit"
+  systemctl list-units --no-pager --no-legend | awk '{ print $1 }' | grep -E ".service$" \
+    | fzf --layout=reverse --header="ESC: exit, Enter:logs, F3:cat, F4:show, F10:daemon-reload" \
+      --bind="f3:execute:(SYSTEMD_COLORS=1 systemctl cat {1})" \
+      --bind="f4:execute:(SYSTEMD_COLORS=1 systemctl show {1})" \
+      --bind="f10:execute-silent:(sudo systemctl daemon-reload && sudo systemctl restart {1})" \
+      --preview='SYSTEMD_COLORS=1 systemctl cat {1}' \
+      --preview-window=right:60% --height=100% \
+      --bind 'enter:execute(journalctl -u {} | less +G -R)'
+  # TODO: execute-silent enabled/disable? would need sudo for system units.. split local/system?
 }
 
 # mount a usb partition with udisks2 - alternative; just use udiskie
