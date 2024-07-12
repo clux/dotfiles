@@ -9,7 +9,7 @@ default:
   @just --list --unsorted
 
 # create symlinks pointing to this repo checkout
-link: fontguard && reload
+link: fontguard && check
   # Dot prefixed files are linked to from $HOME
   fd -g '.*' -H --max-depth 1 --type f -a -x ln -sfn {} ~/
   # Children of config are linked to from $HOME/.config
@@ -25,13 +25,13 @@ fontguard:
   fd . {{FONT_DIR}} -e ttf | rg -q "Liberation"
 
 # reload configs insofar as possible/necessary
-reload:
+check:
   bat cache --build | rg -v "okay"
+  zellij setup --check > /dev/null
 
 # run local shellcheck lint
 lint:
   SHELLCHECK_OPTS="{{SHELLCHECK_OPTS}}" shellcheck {{SHELLCHECKED_FILES}}
-  zellij setup --check > /dev/null
 
 # run shellcheck lint via docker
 lint-docker:
