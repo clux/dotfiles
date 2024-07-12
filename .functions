@@ -244,17 +244,7 @@ q3() {
 }
 
 # -----------------------------------------------------------------------------
-# misc node/py/rust
-
-cratever() {
-  # shellcheck disable=SC2016
-  rg '^version = "(\S*)"' -r '$1' Cargo.toml | head -n 1
-}
-
-node-deopts() {
-  # shellcheck disable=SC2068
-  node --trace_opt --trace_deopt --allow-natives-syntax $@
-}
+# misc node/py
 
 node-deps() {
   npm ls | grep -oE "[[:alnum:]\@\.]*" | sort -u
