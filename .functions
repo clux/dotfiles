@@ -442,7 +442,8 @@ jira-clean() {
 }
 
 # -----------------------------------------------------------------------------
-# system statistics/usage (linux only)
+# system statistics/usage - linux only - for my own memory
+# better ways of displaying this via fastfetch configs herein
 
 mem() {
   free -t | grep Mem | awk '{ printf("%3.1f%%\n", $3*100/$2)}'

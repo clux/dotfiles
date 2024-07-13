@@ -103,3 +103,7 @@ alias rsmv="rs --remove-source-files"
 alias jc="jira-set" # write selected story id to ~/.jira_story
 alias jcr="jira-risk" # ensure the mandatory fields are set for ~/.jira_story
 alias jcc="jira-clean" # delete ~/.jira_story
+
+# quick sys overview via fastfetch
+alias neosys="fastfetch -c ~/.config/fastfetch/cluxsys.jsonc"
+alias neohw="fastfetch -c ~/.config/fastfetch/cluxhw.jsonc"
