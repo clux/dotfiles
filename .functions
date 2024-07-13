@@ -93,8 +93,9 @@ ch() {
 }
 
 # systemd unit and log viewer
-sysf() {
-  systemctl list-units --no-pager --no-legend | awk '{ print $1 }' | grep -E ".service$" \
+_sysf() {
+  # shellcheck disable=SC2086
+  systemctl list-units --no-pager --no-legend $1 | awk '{ print $1 }' | grep -E ".service$" \
     | fzf --layout=reverse --header="ESC: exit, Enter:logs, F3:cat, F4:show, F10:daemon-reload" \
       --bind="f3:execute:(SYSTEMD_COLORS=1 systemctl cat {1})" \
       --bind="f4:execute:(SYSTEMD_COLORS=1 systemctl show {1})" \
@@ -104,6 +105,10 @@ sysf() {
       --bind 'enter:execute(journalctl -u {} | less +G -R)'
   # TODO: execute-silent enabled/disable? would need sudo for system units.. split local/system?
 }
+# systemd unit and log viewer (global)
+sysf() { _sysf "" ;}
+# systemd unit and log viewer (--user)
+sysu() { _sysf "--user" ;}
 
 # mount a usb partition with udisks2 - alternative; just use udiskie
 mountz() {
