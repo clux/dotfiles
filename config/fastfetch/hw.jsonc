@@ -10,7 +10,9 @@
     },
     "display": {
         "separator": " ",
+        "binaryPrefix": "si",
         "size": {
+            "maxPrefix": "GB",
             "ndigits": 0
         },
         "percent": {
