@@ -117,8 +117,8 @@ _sysf() {
       --preview-window="right:55%" \
       --bind="enter:execute(journalctl -u {} ${userarg} | less +G -R)"
 }
-sysf() { _sysf "" "sudo" "sysu" ;}
-sysu() { _sysf "--user" "" "sysf" ;}
+sysz() { _sysf "" "sudo" "sysu" ;}
+sysu() { _sysf "--user" "" "sysz" ;}
 
 # mount a usb partition with udisks2 - alternative; just use udiskie
 mountz() {
