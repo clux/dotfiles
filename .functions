@@ -93,22 +93,32 @@ ch() {
 }
 
 # systemd unit and log viewer
+# start with sysu or sysf and toggle with ctrl-u
 _sysf() {
-  # shellcheck disable=SC2086
-  systemctl list-units --no-pager --no-legend $1 | awk '{ print $1 }' | grep -E ".service$" \
-    | fzf --layout=reverse --header="ESC: exit, Enter:logs, F3:cat, F4:show, F10:daemon-reload" \
-      --bind="f3:execute:(SYSTEMD_COLORS=1 systemctl cat {1})" \
-      --bind="f4:execute:(SYSTEMD_COLORS=1 systemctl show {1})" \
-      --bind="f10:execute-silent:(sudo systemctl daemon-reload && sudo systemctl restart {1})" \
-      --preview='SYSTEMD_COLORS=1 systemctl cat {1}' \
-      --preview-window=right:60% --height=100% \
-      --bind 'enter:execute(journalctl -u {} | less +G -R)'
-  # TODO: execute-silent enabled/disable? would need sudo for system units.. split local/system?
+  local -r userarg="$1"
+  local -r sudopref="$2"
+  local -r _sysf_toggle="$3"
+  local -r _sysf_list="systemctl list-units --no-pager --no-legend $1"
+  local -r _sysf_list_cmd=("systemctl" "list-units" "--no-pager" "--no-legend" "$1")
+  # shellcheck disable=SC2086,SC2068,SC2091
+  ${_sysf_list_cmd[@]} | choose 0 | grep -E ".service$" \
+    | fzf --layout=reverse --header-lines=0 --info=inline --height=100% \
+      --header="ESC:exit, F4:show, F5/F6: start/stop, F7/F8: enable/disable F9:restart, F10: dr" \
+      --bind="ctrl-r:reload(${_sysf_list} | choose 0 | grep -E .service$)" \
+      --bind="ctrl-u:become(source ~/.functions && ${_sysf_toggle})" \
+      --bind="f4:execute:(SYSTEMD_COLORS=1 ${sudopref} systemctl show ${userarg} {1})" \
+      --bind="f5:execute-silent:(${sudopref} systemctl start ${userarg} {1})" \
+      --bind="f6:execute-silent:(${sudopref} systemctl stop ${userarg} {1})" \
+      --bind="f7:execute-silent:(${sudopref} systemctl enable ${userarg} {1})" \
+      --bind="f8:execute-silent:(${sudopref} systemctl disable ${userarg} {1})" \
+      --bind="f9:execute-silent:(${sudopref} systemctl restart ${userarg} {1})" \
+      --bind="f10:execute-silent:(${sudopref} systemctl daemon-reload ${userarg})" \
+      --preview="SYSTEMD_COLORS=1 ${sudopref} systemctl status ${userarg} {1}; SYSTEMD_COLORS=1 systemctl cat ${userarg} {1}" \
+      --preview-window="right:55%" \
+      --bind="enter:execute(journalctl -u {} ${userarg} | less +G -R)"
 }
-# systemd unit and log viewer (global)
-sysf() { _sysf "" ;}
-# systemd unit and log viewer (--user)
-sysu() { _sysf "--user" ;}
+sysf() { _sysf "" "sudo" "sysu" ;}
+sysu() { _sysf "--user" "" "sysf" ;}
 
 # mount a usb partition with udisks2 - alternative; just use udiskie
 mountz() {
