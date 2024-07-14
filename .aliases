@@ -105,5 +105,5 @@ alias jcr="jira-risk" # ensure the mandatory fields are set for ~/.jira_story
 alias jcc="jira-clean" # delete ~/.jira_story
 
 # quick sys overview via fastfetch
-alias neosys="fastfetch -c ~/.config/fastfetch/cluxsys.jsonc"
-alias neohw="fastfetch -c ~/.config/fastfetch/cluxhw.jsonc"
+alias neosys="fastfetch -c ~/.config/fastfetch/sys.jsonc"
+alias neohw="fastfetch -c ~/.config/fastfetch/hw.jsonc"
