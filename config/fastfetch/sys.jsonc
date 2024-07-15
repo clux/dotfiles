@@ -22,8 +22,9 @@
         {
             "type": "os",
             "key": "",
-            // 1 2 resulted in Darwin macOS (sysname is Darwin, codename Sonoma, id macos). now; "Sonoma arm64"
-            "format": "{codename} {arch}",
+            // name="Arch Linux", arch="x86_64", codename="", id="arch"
+            // name="Darwin", arch="arm64", codeame="Sonoma", id="macos", sysname="Darwin"
+            "format": "{name} {arch} {codename}",
             "keyColor": "blue"
         },
         {
