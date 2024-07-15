@@ -28,7 +28,7 @@
             "type": "cpu",
             "key": "󰻠",
             // NB: mac does not have freq-base
-            "format": "{name} ({cores-online}/{cores-logical}) @ {freq-max} GHz ({temperature})",
+            "format": "{name} ({cores-physical}/{cores-logical}) @ {freq-max} GHz ({temperature})",
             "keyColor": "yellow",
             "temp": true
         },
