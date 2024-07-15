@@ -107,3 +107,4 @@ alias jcc="jira-clean" # delete ~/.jira_story
 # quick sys overview via fastfetch
 alias neosys="fastfetch -c ~/.config/fastfetch/sys.jsonc"
 alias neohw="fastfetch -c ~/.config/fastfetch/hw.jsonc"
+alias neopriv="fastfetch -c ~/.config/fastfetch/priv.jsonc"

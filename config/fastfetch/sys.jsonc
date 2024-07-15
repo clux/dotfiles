@@ -12,26 +12,19 @@
     },
     "modules": [
         //"format": "1:{1}, 2:{2}, 3:{3}, 4:{4}, 5:{5}, 6:{6}, 7:{7}, 8:{8}, 9:{9}, 10:{10}, 11:{11}, 12:{12}, 13:{13}, 14:{14}, 15:{15}, 16:{16}",
-        {
-            "type": "title",
-            "key": "",
-            // MacOS bug: host name is first digit of IP
-            "format": "{user-name-colored}@{host-name-colored}",
-            "keyColor": "blue"
-        },
+        //{
+        //    "type": "title",
+        //    "key": "",
+        //    // MacOS bug: host name is first digit of IP
+        //    "format": "{user-name-colored}@{host-name-colored}",
+        //    "keyColor": "blue"
+        //},
         {
             "type": "os",
             "key": "",
-            // name="Arch Linux", arch="x86_64", codename="", id="arch"
-            // name="Darwin", arch="arm64", codeame="Sonoma", id="macos", sysname="Darwin"
-            "format": "{name} {arch} {codename}",
-            "keyColor": "blue"
-        },
-        {
-            "type": "kernel",
-            "key": "",
-            // Darwin 23.4.0 with sysname release
-            "format": "{sysname} {release}",
+            // name="Arch Linux", arch="x86_64", codename="", sysname="Linux", version="" -> Pick name
+            // name="macOS", arch="arm64", codeame="Sonoma", sysname="Darwin", version="14.4.1" -> Pick sysname + codename
+            "format": "{?codename}{sysname} {codename}{?}{/codename}{name}{/} {arch}",
             "keyColor": "blue"
         },
         {
@@ -50,24 +43,31 @@
             "keyColor": "blue"
         },
         {
-            "type": "terminalfont",
+            "type": "kernel",
+            "key": "",
+            "format": "{sysname} {release}", // Darwin 23.4.0 / Linux 6.9.9-arch
+            "keyColor": "blue"
+        },
+        {
+            "type": "initsystem",
             "key": "",
             "keyColor": "blue"
         },
-        //{
-        //    "type": "lm",
-        //    "key": "󰧨",
-        //    "keyColor": "blue"
-        //},
-        //{
-        //    "type": "de",
-        //    "key": "",
-        //   "keyColor": "blue"
-        //},
+        {
+            "type": "lm",
+            "key": "󰧨",
+            "keyColor": "blue"
+        },
         {
             "type": "wm",
             "key": "",
             "keyColor": "blue"
         },
+        // {
+        //     "type": "bios",
+        //     "format": "{version} @ {release} (Bios)",
+        //     "key": "",
+        //    "keyColor": "blue"
+        // },
     ]
 }
