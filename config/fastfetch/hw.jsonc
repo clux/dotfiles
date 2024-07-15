@@ -23,17 +23,12 @@
         }
     },
     "modules": [
-        // DBG: "format": "1:{1}, 2:{2}, 3:{3}, 4:{4}, 5:{5}, 6:{6}, 7:{7}, 8:{8}, 9:{9}, 10:{10}, 11:{11}, 12:{12}, 13:{13}, 14:{14}, 15:{15}, 16:{16}",
-        //{
-        //    "type": "title",
-        //    "key": "",
-        //    "format": "{user-name-colored}@{host-name}",
-        //    "keyColor": "yellow"
-        //},
+        //"format": "1:{1}, 2:{2}, 3:{3}, 4:{4}, 5:{5}, 6:{6}, 7:{7}, 8:{8}, 9:{9}, 10:{10}, 11:{11}, 12:{12}, 13:{13}, 14:{14}, 15:{15}, 16:{16}",
         {
             "type": "cpu",
             "key": "󰻠",
-            "format": "{name} ({cores-online}) @ {freq-base} GHz ({8})",
+            // NB: mac does not have freq-base
+            "format": "{name} ({cores-online}/{cores-logical}) @ {freq-max} GHz ({temperature})",
             "keyColor": "yellow",
             "temp": true
         },
@@ -48,7 +43,8 @@
         {
             "type": "display",
             "key": "󰍹",
-            "format": "{name} {width}x{height} ({#;33}{refresh-rate}Hz{#})",
+            // NB: mac keeps generating multiple monitor entries via KVM, but that's not really fastfetch's fault..
+            "format": "{name} {scaled-width}x{scaled-height} ({#;33}{refresh-rate}Hz{#})",
             "keyColor": "yellow"
         },
         {

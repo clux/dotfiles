@@ -11,22 +11,25 @@
         "separator": " "
     },
     "modules": [
-        // DBG: "format": "1:{1}, 2:{2}, 3:{3}, 4:{4}, 5:{5}, 6:{6}, 7:{7}, 8:{8}, 9:{9}, 10:{10}, 11:{11}, 12:{12}, 13:{13}, 14:{14}, 15:{15}, 16:{16}",
+        //"format": "1:{1}, 2:{2}, 3:{3}, 4:{4}, 5:{5}, 6:{6}, 7:{7}, 8:{8}, 9:{9}, 10:{10}, 11:{11}, 12:{12}, 13:{13}, 14:{14}, 15:{15}, 16:{16}",
         {
             "type": "title",
             "key": "",
-            "format": "{user-name-colored}@{host-name}",
+            // MacOS bug: host name is first digit of IP
+            "format": "{user-name-colored}@{host-name-colored}",
             "keyColor": "blue"
         },
         {
             "type": "os",
             "key": "",
-            "format": "{1} {2}",
+            // 1 2 resulted in Darwin macOS (sysname is Darwin, codename Sonoma, id macos). now; "Sonoma arm64"
+            "format": "{codename} {arch}",
             "keyColor": "blue"
         },
         {
             "type": "kernel",
             "key": "",
+            // Darwin 23.4.0 with sysname release
             "format": "{sysname} {release}",
             "keyColor": "blue"
         },
