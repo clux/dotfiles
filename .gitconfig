@@ -179,6 +179,7 @@
 
 [delta]
   features = clux-layout clux-dark
+  dark = true
 
 [color "status"]
   added = yellow
