@@ -254,7 +254,9 @@ kleftovers() {
 
 # find crds without instances
 kcrdunused() {
-  kubectl get crds -o jsonpath='{.items[*].metadata.name}' | tr ' ' '\n' | xargs -P16 -I "{}" sh -c '[ "$(kubectl get {} --no-headers -A 2> /dev/null | wc -l)" -eq 0 ] && echo "{}"'
+  # shellcheck disable=SC2016
+  kubectl get crds -o jsonpath='{.items[*].metadata.name}' | tr ' ' '\n' | \
+    xargs -P16 -I "{}" sh -c '[ "$(kubectl get {} --no-headers -A 2> /dev/null | wc -l)" -eq 0 ] && echo "{}"'
 }
 
 # check versions in all contexts
