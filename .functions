@@ -460,7 +460,7 @@ mem() {
 }
 disk() {
   # Total usage of currently mounted logical drives
-  df -l --total \
+  df -l --total -x tmpfs \
     | grep total \
     | awk '{printf("%3.1f%%\n", $3*100/$2)}'
 }

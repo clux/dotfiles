@@ -9,3 +9,4 @@ collection of dotfiles i used to use and want to keep as a historical artifact o
 - cpp tooling; [clang-format](https://clang.llvm.org/docs/ClangFormat.html) (net negative C++ since 2017)
 - python tooling; pep8 -> ruff
 - version control; [mercurial](https://www.mercurial-scm.org/) (Cisco days)
+- X11 linux tooling; x-term-toggle, .xprofile, .Xresources
