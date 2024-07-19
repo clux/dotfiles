@@ -252,6 +252,11 @@ kleftovers() {
   | xargs -n 1 kubectl get --show-kind --ignore-not-found
 }
 
+# find crds without instances
+kcrdunused() {
+  kubectl get crds -o jsonpath='{.items[*].metadata.name}' | tr ' ' '\n' | xargs -P16 -I "{}" sh -c '[ "$(kubectl get {} --no-headers -A 2> /dev/null | wc -l)" -eq 0 ] && echo "{}"'
+}
+
 # check versions in all contexts
 kcver() {
   for ctx in $(kubectl config get-contexts -o name | grep -v fqdn); do
