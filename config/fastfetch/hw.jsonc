@@ -10,8 +10,8 @@
     },
     "display": {
         "separator": " ",
-        "binaryPrefix": "si",
         "size": {
+            "binaryPrefix": "si",
             "maxPrefix": "GB",
             "ndigits": 0
         },
