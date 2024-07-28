@@ -88,7 +88,7 @@ bindkey "^[[A" up-line-or-beginning-search # key_up / kcuu1
 bindkey "^[[B" down-line-or-beginning-search # key_down / kcud1
 
 # unbind regular history search - frees up some zellij binds
-# NB: bindkey lists existing bindings
+# NB: bindkey lists existing bindings, /bin/cat -v show produced codes
 bindkey -r "^R" # history-incremental-search-backward
 bindkey -r "^S" # history-incremental-search-forward
 bindkey -r "^Xr" # history-incremental-search-backward

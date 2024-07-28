@@ -128,6 +128,11 @@ mountz() {
   udisksctl mount -b "${part}" # needs to have the partition number e.g. /dev/sda1
 }
 
+# pacman experiment
+pacq() {
+  pacman -Qq | fzf --preview 'pacman -Qil {}' --height=100% --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'
+}
+
 # -----------------------------------------------------------------------------
 # package manager abstraction - mostly for my own memory
 
