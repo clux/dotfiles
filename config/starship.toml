@@ -76,9 +76,9 @@ detect_files = ["Cargo.toml", "Chart.yaml"] # maybe rust detection is better?
 style = "bg:black 117"
 format = '[[$symbol](bg:black 251)${context}[󰛢](bg:black bold white)${namespace}]($style)'
 contexts = [
-  { context_pattern = "prod.*", context_alias = "prod", style = "bg:black 204" },
-  { context_pattern = "sandbox.*", context_alias = "sbx" },
-  { context_pattern = "dev.*", context_alias = "dev" },
+  { context_pattern = "legacy-prod.*", context_alias = "prod", style = "bg:black 204" },
+  { context_pattern = "legacy-sandbox.*", context_alias = "sbx" },
+  { context_pattern = "legacy-dev.*", context_alias = "dev" },
   { context_pattern = ".*eks-dev.*", context_alias = "eks-dev" },
   { context_pattern = ".*eks-sandbox.*", context_alias = "eks-sbx" },
   { context_pattern = ".*eks-production.*", context_alias = "eks-prod", style = "bg:black 204" },
