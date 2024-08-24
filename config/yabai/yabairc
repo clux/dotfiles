@@ -47,7 +47,7 @@ yabai -m config \
   window_placement second_child \
   focus_follows_mouse autofocus \
   auto_balance off \
-  mouse_modifier fn \
+  mouse_modifier shift \
   mouse_action1 move \
   mouse_action2 resize \
   mouse_drop_action swap
