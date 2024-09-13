@@ -123,7 +123,7 @@ export WORDCHARS="${${WORDCHARS:s@/@}:s@=@}"
 
 if [[ ${HOST} = "hprks" ]]; then
   key github main
-elif [[ ${HOSTNAME} = "cluxm1" ]]; then
+elif [[ ${HOSTNAME} = "cluxm3" ]]; then
   key github work tl
   # NB: HOST is zsh, HOSTNAME is bash (and polyfilled in zshenv for mac). prov uses HOSTNAME + bash.
 else
