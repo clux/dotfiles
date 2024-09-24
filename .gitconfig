@@ -41,6 +41,7 @@
 
   # Listers
   tags = tag -l
+  taglast = !"t() { git tag -l | head -n 1; }; t" # last according to semver sort order (see [tag])
   branches = branch -a
   remotes = remote -v
 
@@ -125,6 +126,14 @@
 [apply]
   # Detect whitespace errors when applying a patch
   whitespace = fix
+
+[tag]
+  # sort order of git tags / git tag -l
+  # hopefully, i'll remember to port this to any ad-hoc release scripts..
+  sort = "-version:refname"
+[versionsort]
+  # maintain semver standard sort order for pretags of this format
+  suffix = "-pre"
 
 [core]
   hooksPath = ~/repos/dotfiles/git/hooks
