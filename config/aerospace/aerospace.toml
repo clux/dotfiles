@@ -113,7 +113,7 @@ alt-6 = 'workspace 6'
 alt-7 = 'workspace 7'
 alt-8 = 'workspace 8'
 alt-9 = 'workspace 9'
-#alt-t = 'workspace T'
+#alt-t = 'workspace T' # hammerspoon bind F1
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-1 = ['move-node-to-workspace 1', 'workspace 1']
@@ -151,13 +151,12 @@ alt-shift-j = ['join-with down', 'mode main']
 alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
 
-# TODO: focus back with bind for:
-# aerospace focus-back-and-forth || aerospace workspace-back-and-forth
+# Focus binds through hammerspoon
 # https://nikitabobko.github.io/AeroSpace/commands#focus
 
 [[on-window-detected]]
 if.app-id = 'org.alacritty'
-run = 'move-node-to-workspace 1'
+run = 'move-node-to-workspace T'
 
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
