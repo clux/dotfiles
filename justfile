@@ -19,12 +19,12 @@ link: fontguard && check
   # OS specific links
   ln -sf $PWD/config/alacritty/{{os()}}.toml config/alacritty/os.toml
   # key specific overrides (using whyq)
-  yq -i '.SKIP_HOST_UPDATE=true' --input=json ~/.config/discord/settings.json
+  #yq -i '.SKIP_HOST_UPDATE=true' --input=json ~/.config/discord/settings.json
 
 # font guard helper
 fontguard:
   fd . {{FONT_DIR}} -e ttf | rg -q "Inconsolata.*Mono"
-  fd . {{FONT_DIR}} -e ttf | rg -q "Liberation"
+  fd . {{FONT_DIR}} -e ttf | rg -q "Liberation" # font-liberation pkg technically not necessary on mac
 
 # reload configs insofar as possible/necessary
 check:
