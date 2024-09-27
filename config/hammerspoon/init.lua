@@ -8,7 +8,7 @@ function aerospace(args)
   end, args):start()
 end
 
-MAIN="3"
+MAIN="1"
 local function activateApp(name)
   local app = hs.application.find(name)
   if not app or app:isHidden() then
