@@ -8,7 +8,7 @@ Designed for a minimal Arch Linux installation, but retrofitted to support MacOS
 ## Desktop Setup
 
 - **Linux**: [hyprland](https://hyprland.org) with [waybar](https://github.com/Alexays/Waybar) + [wofi](https://hg.sr.ht/~scoopta/wofi) + [dunst](https://github.com/dunst-project/dunst) + {[hypr](https://github.com/hyprwm/hyprpaper),[mvp](https://github.com/GhostNaN/mpvpaper)}paper + [wleave](https://github.com/AMNatty/wleave) + [swaylock](https://github.com/swaywm/swaylock)
-- **Mac**: [yabai](https://github.com/koekeishiya/yabai) via [hammerspoon](https://github.com/Hammerspoon/hammerspoon) + [karabiner](https://karabiner-elements.pqrs.org/docs/)
+- **Mac**: [yabai](https://github.com/koekeishiya/yabai) or [aerospace](https://github.com/nikitabobko/AeroSpace) via [hammerspoon](https://github.com/Hammerspoon/hammerspoon) + [karabiner](https://karabiner-elements.pqrs.org/docs/)
 
 ## Terminal Setup
 
