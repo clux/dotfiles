@@ -123,9 +123,8 @@ export WORDCHARS="${${WORDCHARS:s@/@}:s@=@}"
 
 if [[ ${HOST} = "hprks" ]]; then
   key github main
-elif [[ ${HOSTNAME} = "cluxm3" ]]; then
+elif [[ "${OSTYPE}" =~ "darwin" ]]; then
   key github work tl
-  # NB: HOST is zsh, HOSTNAME is bash (and polyfilled in zshenv for mac). prov uses HOSTNAME + bash.
 else
   [ -f ~/.keychain/agent-sh ] && source ~/.keychain/agent-sh
   [ -f ~/.keychain/agent-sh-gpg ] && source ~/.keychain/agent-sh-gpg

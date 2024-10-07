@@ -102,8 +102,8 @@ if [[ "${OSTYPE}" =~ "darwin" ]]; then
   # python on mac is also fun
   path+="$(python3 -m site --user-base)/bin"
 
-  # Want a consistent hostname for ansible
-  # we re-initialise HostName / LocalHostName / ComputerName props at boot
+  # Consistent hostname var polyfill for scripts
+  # NB: HOST is zsh, HOSTNAME is bash
   export HOSTNAME="$(scutil --get LocalHostName)"
 
   # disable analytics sending to homebrew
