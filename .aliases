@@ -24,8 +24,9 @@ alias tree='eza --tree --group-directories-first --icons --git-ignore -git --sor
 alias top='btop'
 
 # jq on everything
-alias tq='yq --input=toml'
-alias JQ='yq --input=json'
+alias yq='whyq --input=yaml'
+alias tq='whyq --input=toml'
+alias JQ='whyq --input=json'
 
 # hyprland
 alias hde="hyprctl dispatch exec"
