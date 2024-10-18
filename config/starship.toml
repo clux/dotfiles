@@ -142,7 +142,7 @@ style = "bg:black 75"
 format = '[ ${symbol}]($style)' # ${output} has venv folder
 
 [custom.story]
-command = '''echo -ne "$(cat ~/.jira_story | rg -oe "[\d]+" --color=never)"'''
+command = '''rg -oe "[\\d]+" --color=never ~/.jira_story'''
 when = ''' test -f ~/.jira_story '''
 style = "bg:black yellow"
 symbol = ""
