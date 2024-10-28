@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+
+function markdown_command() {
+  local action=$1
+  local text=$2
+  case $action in
+    link)
+      title=$(curl -fsSL "$text" | htmlq -t 'html head title')
+      printf "[%s](%s)" "$title" "$text"
+      ;;
+    bold)
+      printf "**%s**" "$text"
+      ;;
+    italic)
+      printf "*%s*" "$text"
+      ;;
+    strikethrough)
+      printf "~~%s~~" "$text"
+      ;;
+    backtick)
+      printf "\`%s\`" "$text"
+      ;;
+    code)
+      echo "\`\`\`"
+      printf "%s" "$text"
+      echo "\`\`\`"
+      ;;
+    *)
+      printf "%s" "$text"
+      ;;
+  esac
+}
+
+function ccase_command() {
+  local to=$1
+  local text=$2
+  result=$(ccase -t $to "$text")
+  printf "%s" "$result"
+}
+
+function default_command() {
+  echo "Usage: helix-command [markdown|ccase] action"
+}
+
+category="$1"
+
+case $category in
+  markdown)
+    action="$2"
+    text=$(</dev/stdin)
+    markdown_command "$action" "$text"
+    ;;
+  ccase)
+    to="$2"
+    text=$(</dev/stdin)
+    ccase_command "$to" "$text"
+    ;;
+  *)
+    default_command
+    ;;
+esac

@@ -18,6 +18,27 @@ p = ":toggle-option lsp.display-inlay-hints"
 f = ":theme ayu_dark"
 d = ":theme catppuccin_mocha_transparent"
 
+[keys.normal."A-m"] # markdown menu
+# Turn into heading
+"A-1" = ["extend_to_line_bounds", ":pipe sed -E 's/^(#{1,} )?/# /'", "collapse_selection"]
+"A-2" = ["extend_to_line_bounds", ":pipe sed -E 's/^(#{1,} )?/## /'", "collapse_selection"]
+"A-3" = ["extend_to_line_bounds", ":pipe sed -E 's/^(#{1,} )?/### /'", "collapse_selection"]
+"A-4" = ["extend_to_line_bounds", ":pipe sed -E 's/^(#{1,} )?/#### /'", "collapse_selection"]
+"A-5" = ["extend_to_line_bounds", ":pipe sed -E 's/^(#{1,} )?/##### /'", "collapse_selection"]
+"A-6" = ["extend_to_line_bounds", ":pipe sed -E 's/^(#{1,} )?/###### /'", "collapse_selection"]
+# useful, but can we do these with standard ms* ms**?
+i = [":pipe ~/.config/helix/helix-commands markdown italic"]
+b = [":pipe ~/.config/helix/helix-commands markdown bold"]
+s = [":pipe ~/.config/helix/helix-commands markdown strikethrough"]
+"`" = [":pipe ~/.config/helix/helix-commands markdown backtick"]
+h = [":pipe ~/.config/helix/helix-commands markdown link"]
+
+# list creators, awkward, want something like this
+o = ["split_selection_on_newline", "goto_first_nonwhitespace", ":insert-output printf '1. '", "rotate_selections_backward", 'keep_primary_selection', "collapse_selection", "goto_line_end"]
+q = ["split_selection_on_newline", "goto_first_nonwhitespace", ":insert-output printf '> '", "rotate_selections_backward", 'keep_primary_selection', "collapse_selection", "goto_line_end"]
+u = ["split_selection_on_newline", "goto_first_nonwhitespace", ":insert-output printf -- '- '", "rotate_selections_backward", 'keep_primary_selection', "collapse_selection", "goto_line_end"]
+t = ["split_selection_on_newline", "goto_first_nonwhitespace", ":insert-output printf -- '- [ ] '", "rotate_selections_backward", 'keep_primary_selection', "collapse_selection", "goto_line_end"]
+
 [editor]
 cursorline = true
 color-modes = true
