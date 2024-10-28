@@ -1,11 +1,24 @@
 #!/usr/bin/env bash
 
-function markdown_command() {
+# experiments
+#
+# best when surrounding single line substrings or cleanly delimited strings (with trailing newlines) as;
+# - any excess newlines are stripped from helix :pipe
+# - after :pipe, stuff is no longer aligned nicely on multiline replace
+
+ccase_cmd() {
+  local to=$1
+  local text=$2
+  result=$(ccase -t "${to}" "${text}")
+  printf "%s" "$result"
+}
+
+md_cmd() {
   local action=$1
   local text=$2
   case $action in
     link)
-      title=$(curl -fsSL "$text" | htmlq -t 'html head title')
+      title="$(curl -fsSL "$text" | htmlq -t 'html head title')"
       printf "[%s](%s)" "$title" "$text"
       ;;
     bold)
@@ -21,9 +34,19 @@ function markdown_command() {
       printf "\`%s\`" "$text"
       ;;
     code)
-      echo "\`\`\`"
-      printf "%s" "$text"
-      echo "\`\`\`"
+      echo -e "\`\`\`\n${text}\n\`\`\`"
+      ;;
+    untick)
+      output="$(sd '\[.\]' '[ ]' <<< "$text")"
+      printf "%s\n" "$output"
+      ;;
+    tick)
+      output="$(sd '\[.\]' '[x]' <<< "$text")"
+      printf "%s\n" "$output"
+      ;;
+    cancel)
+      output="$(sd '\[.\]' '[~]' <<< "$text")"
+      printf "%s\n" "$output"
       ;;
     *)
       printf "%s" "$text"
@@ -31,31 +54,18 @@ function markdown_command() {
   esac
 }
 
-function ccase_command() {
-  local to=$1
-  local text=$2
-  result=$(ccase -t $to "$text")
-  printf "%s" "$result"
-}
-
-function default_command() {
-  echo "Usage: helix-command [markdown|ccase] action"
-}
-
 category="$1"
-
 case $category in
-  markdown)
+  md)
     action="$2"
     text=$(</dev/stdin)
-    markdown_command "$action" "$text"
+    md_cmd "$action" "$text"
     ;;
   ccase)
     to="$2"
     text=$(</dev/stdin)
-    ccase_command "$to" "$text"
+    ccase_cmd "$to" "$text"
     ;;
   *)
-    default_command
     ;;
 esac

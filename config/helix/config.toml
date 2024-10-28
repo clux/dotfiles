@@ -18,26 +18,39 @@ p = ":toggle-option lsp.display-inlay-hints"
 f = ":theme ayu_dark"
 d = ":theme catppuccin_mocha_transparent"
 
+[keys.normal."A-\\"] # case convert, underlying tool seems so-so
+S = ":pipe ccase -t screamingsnake"
+c = ":pipe ccase -t camel"
+k = ":pipe ccase -t kebab"
+K = ":pipe ccase -t upperkebab"
+p = ":pipe ccase -t pascal"
+s = ":pipe ccase -t snake"
+l = ":pipe ccase -t lower"
+u = ":pipe ccase -t upper"
+
 [keys.normal."A-m"] # markdown menu
 # Turn into heading
-"A-1" = ["extend_to_line_bounds", ":pipe sed -E 's/^(#{1,} )?/# /'", "collapse_selection"]
-"A-2" = ["extend_to_line_bounds", ":pipe sed -E 's/^(#{1,} )?/## /'", "collapse_selection"]
-"A-3" = ["extend_to_line_bounds", ":pipe sed -E 's/^(#{1,} )?/### /'", "collapse_selection"]
-"A-4" = ["extend_to_line_bounds", ":pipe sed -E 's/^(#{1,} )?/#### /'", "collapse_selection"]
-"A-5" = ["extend_to_line_bounds", ":pipe sed -E 's/^(#{1,} )?/##### /'", "collapse_selection"]
-"A-6" = ["extend_to_line_bounds", ":pipe sed -E 's/^(#{1,} )?/###### /'", "collapse_selection"]
-# useful, but can we do these with standard ms* ms**?
-i = [":pipe ~/.config/helix/helix-commands markdown italic"]
-b = [":pipe ~/.config/helix/helix-commands markdown bold"]
-s = [":pipe ~/.config/helix/helix-commands markdown strikethrough"]
-"`" = [":pipe ~/.config/helix/helix-commands markdown backtick"]
-h = [":pipe ~/.config/helix/helix-commands markdown link"]
+"1" = ["extend_to_line_bounds", ":pipe sed -E 's/^(#{1,} )?/# /'", "move_char_right", "insert_newline", "move_char_left"]
+"2" = ["extend_to_line_bounds", ":pipe sed -E 's/^(#{1,} )?/## /'", "move_char_right", "insert_newline", "move_char_left"]
+"3" = ["extend_to_line_bounds", ":pipe sed -E 's/^(#{1,} )?/### /'", "move_char_right", "insert_newline", "move_char_left"]
+"4" = ["extend_to_line_bounds", ":pipe sed -E 's/^(#{1,} )?/#### /'", "move_char_right", "insert_newline", "move_char_left"]
+"5" = ["extend_to_line_bounds", ":pipe sed -E 's/^(#{1,} )?/##### /'", "move_char_right", "insert_newline", "move_char_left"]
+"6" = ["extend_to_line_bounds", ":pipe sed -E 's/^(#{1,} )?/###### /'", "move_char_right", "insert_newline", "move_char_left"]
 
-# list creators, awkward, want something like this
-o = ["split_selection_on_newline", "goto_first_nonwhitespace", ":insert-output printf '1. '", "rotate_selections_backward", 'keep_primary_selection', "collapse_selection", "goto_line_end"]
-q = ["split_selection_on_newline", "goto_first_nonwhitespace", ":insert-output printf '> '", "rotate_selections_backward", 'keep_primary_selection', "collapse_selection", "goto_line_end"]
-u = ["split_selection_on_newline", "goto_first_nonwhitespace", ":insert-output printf -- '- '", "rotate_selections_backward", 'keep_primary_selection', "collapse_selection", "goto_line_end"]
-t = ["split_selection_on_newline", "goto_first_nonwhitespace", ":insert-output printf -- '- [ ] '", "rotate_selections_backward", 'keep_primary_selection', "collapse_selection", "goto_line_end"]
+# xit todo manipulation from any line
+x = ["extend_to_line_bounds", ":pipe ~/.config/helix/helix-commands md tick", "move_char_right", "insert_newline", "move_char_left"]
+z = ["extend_to_line_bounds", ":pipe ~/.config/helix/helix-commands md untick", "move_char_right", "insert_newline", "move_char_left"]
+c = ["extend_to_line_bounds", ":pipe ~/.config/helix/helix-commands md cancel", "move_char_right", "insert_newline", "move_char_left"]
+
+# useful, but can we do these with standard ms* ms**?
+# relying on :pipe is quirky; drops your select, strips trailing newlines
+# stuff is never what you truly want...
+i = ":pipe ~/.config/helix/helix-commands md italic"
+b = ":pipe ~/.config/helix/helix-commands md bold"
+s = ":pipe ~/.config/helix/helix-commands mdstrikethrough"
+"`" = ":pipe ~/.config/helix/helix-commands md backtick"
+h = ":pipe ~/.config/helix/helix-commands md link"
+#c = ":pipe ~/.config/helix/helix-commands md code"
 
 [editor]
 cursorline = true
