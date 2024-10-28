@@ -18,8 +18,8 @@ link: fontguard && check
   fd --base-directory share/ --max-depth 1 --no-ignore-vcs -a -x ln -sfn {} {{CONFIG_HOME}}/
   # OS specific links
   ln -sf $PWD/config/alacritty/{{os()}}.toml config/alacritty/os.toml
-  # key specific overrides (using whyq)
-  #yq -i '.SKIP_HOST_UPDATE=true' --input=json ~/.config/discord/settings.json
+  # key specific overrides
+  lq -i '.SKIP_HOST_UPDATE=true' --input=json ~/.config/discord/settings.json
 
 # font guard helper
 fontguard:
