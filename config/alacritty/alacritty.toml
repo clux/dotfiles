@@ -1,3 +1,4 @@
+[general]
 import = [
   "~/.config/alacritty/rose-pine.toml",
   "~/.config/alacritty/os.toml", # NB: symlinked to linux.toml or macos.toml via justfile
@@ -18,10 +19,9 @@ style = "Italic"
 family = "Inconsolata Nerd Font Mono"
 style = "Regular"
 
-[shell]
+[terminal]
 # start zellij with a small sleep to ensure it gets right dimensions
-args = ["-ic", "sleep 0.2 && zellij -l compact"]
-program = "zsh"
+shell = { program = "zsh", args = ["-ic", "sleep 0.2 && zellij -l compact"] }
 
 [window]
 opacity = 0.8
