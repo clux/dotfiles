@@ -37,6 +37,7 @@ md_cmd() {
       echo -e "\`\`\`\n${text}\n\`\`\`"
       ;;
     untick)
+      # TODO: add brackets if none exist already
       output="$(sd '\[.\]' '[ ]' <<< "$text")"
       printf "%s\n" "$output"
       ;;
