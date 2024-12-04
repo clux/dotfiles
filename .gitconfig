@@ -64,7 +64,8 @@
   # ignore all untrackeds (if first time having gitignore, don't ignore that)
   ignore = !git untracked | grep -v .gitignore >> .gitignore && git add .gitignore
   # open github/github enterprise changesets in the browser
-  open = "!f() { xdg-open \"https://$(echo $(git config --get remote.origin.url) | sed 's|^http.://||' | sed 's|^git@||' | tr : '/' | sed 's|.git$||')/commit/$1\"; }; f"
+  open-url = "!f() { echo \"https://$(echo $(git config --get remote.origin.url) | sed 's|^http.://||' | sed 's|^git@||' | tr : '/' | sed 's|.git$||')/commit/$1\"; }; f"
+  open = "!f() { ([ \"$(uname)\" = "Linux" ] && xdg-open $(git open-url $1)) || open $(git open-url $1); }; f"
   # NB: ^ git remote get-url origin | sed 's/^git@\(.*\):\/*\(.*\).git/https:\/\/\1\/\2/' is easier but cannot get it to work inside gitconfig
   # reset to blank state
   
