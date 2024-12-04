@@ -144,6 +144,7 @@ format = '[ ${symbol}]($style)' # ${output} has venv folder
 [custom.story]
 command = '''rg -oe "[\\d]+" --color=never ~/.jira_story'''
 when = ''' test -f ~/.jira_story '''
+require_repo = true
 style = "bg:black yellow"
 symbol = ""
 format = '[ ${symbol}${output}]($style)'
