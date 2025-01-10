@@ -57,6 +57,10 @@ cursorline = true
 color-modes = true
 bufferline = "always"
 text-width = 100
+end-of-line-diagnostics = "hint"
+
+[editor.inline-diagnostics]
+cursor-line = "error"
 
 [editor.soft-wrap]
 enable = true
