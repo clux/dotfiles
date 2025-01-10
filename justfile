@@ -19,7 +19,7 @@ link: fontguard && check
   # OS specific links
   ln -sf $PWD/config/alacritty/{{os()}}.toml config/alacritty/os.toml
   # key specific overrides
-  lq -i '.SKIP_HOST_UPDATE=true' --input=json ~/.config/discord/settings.json
+  lq -i '.SKIP_HOST_UPDATE=true' --input=json {{CONFIG_HOME}}/discord/settings.json
 
 # font guard helper
 fontguard:
