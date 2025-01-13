@@ -32,6 +32,6 @@ Clone and apply:
 just link # force symlink to ~/ + ~/.config/ + CONFIG_HOME
 ```
 
-All recipes are idempotent.
+All [recipes](https://github.com/clux/dotfiles/blob/main/justfile) are idempotent.
 
 Note the distinction between the [config](https://github.com/clux/dotfiles/blob/main/config) directory (for unix apps that hardcode `~/.config` or `XDG_CONFIG_HOME`) vs. the [share](https://github.com/clux/dotfiles/blob/main/share) directory (for apps that uses [platform specifics](https://docs.rs/dirs/4.0.0/dirs/fn.config_dir.html)). These two folders happen to be the same on Linux, but are separated here to support other platforms.
