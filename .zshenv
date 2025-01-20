@@ -17,7 +17,7 @@ export FZF_ALT_C_COMMAND="fd --type d --strip-cwd-prefix -HE='.git'"
 _fzf_compgen_path() {  fd -HE='.git' . "$1"; }
 _fzf_compgen_gir() { fd --type=d -HE='.git' . "$1"; }
 _FZF_LAYOUT='--height 50% --layout=reverse'
-eval "$(fzf --zsh)"
+#eval "$(fzf --zsh)"
 
 # fzf theme; catppuccin mocha: https://github.com/catppuccin/fzf but no bg
 export FZF_DEFAULT_OPTS="${_FZF_LAYOUT} \
