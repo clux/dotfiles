@@ -111,8 +111,11 @@
 [includeIf "gitdir:~/truelayer/"]
 	path = ~/.gitconfig-tl.inc
 [includeIf "gitdir:/opt/homebrew/Library/Taps/truelayer/"]
-    # this is annoyingly not picked up on by brew update, but you can still brew install truelayer/internal/X
-	path = ~/.gitconfig-tl.inc
+    ; needed for brew tap to work
+    path = ~/.gitconfig-tl.inc
+[includeIf "hasconfig:remote.*.url:https://github.com/truelayer/**"]
+    ; needed for brew update to work on taps
+    path = ~/.gitconfig-tl.inc
 ; include for all repositories inside ~/repos and ~/kube
 [includeIf "gitdir:~/repos/"]
 	path = ~/.gitconfig-clux.inc
