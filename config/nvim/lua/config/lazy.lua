@@ -19,6 +19,9 @@ require("lazy").setup({
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- import/override with your plugins
+    { import = "lazyvim.plugins.extras.lang.rust" },
+    { import = "lazyvim.plugins.extras.dap.core" },
+    { "catppuccin/nvim", name = "catppuccin" },
     { import = "plugins" },
   },
   defaults = {
@@ -32,8 +35,9 @@ require("lazy").setup({
   },
   install = { colorscheme = { "tokyonight", "habamax" } },
   checker = {
-    enabled = true, -- check for plugin updates periodically
-    notify = false, -- notify on update
+    enabled = false, -- manually for now
+    frequency = 2419200, -- check only every 4w
+    notify = true, -- notify on update
   }, -- automatically check for plugin updates
   performance = {
     rtp = {
