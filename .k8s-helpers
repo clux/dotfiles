@@ -208,7 +208,7 @@ k3dmake() {
   # TODO: -p 10250:10250 for kubelet debug interface
   # shellcheck disable=SC2068
   (set -x;
-  k3d cluster create "${name}" --servers 1 --registry-create "${name}" \
+  k3d cluster create "${name}" --servers 1 --registry-create "r${name}" \
     --no-rollback \
     --image="rancher/k3s:${latest_minor}" \
     $@ \
