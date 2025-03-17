@@ -435,7 +435,7 @@ broxy-grab() {
 
 # via https://crates.io/crates/jira-terminal
 jira-set() {
-  jira-terminal list -p ENOPS -S "In Progress" -a "Eirik Albrigtsen" -J \
+  jira-terminal list -p ENOPS -S "In Progress" -a "clux" -J \
     | jq '.[] | .key + " :: " + .summary' -r \
     | fzf --header="Enter:set, F3:open, F4:risk" \
       --bind="f4:execute(jira-terminal update -f risk -v Low {1})" \
