@@ -65,36 +65,29 @@ path+=/opt/homebrew/bin
 # The macos compatibility shitshow
 
 if [[ "${OSTYPE}" =~ "darwin" ]]; then
-  # No good universal way to get coreutils installed without g prefix.
-  # (and doing so can apparently break python builds)
-  # We can extend PATH into certain pkgs (where g-less bins sometimes exist),
-  # or alias to g-less prefixes, but manpages cannot rely on this:
-  # e.g. sources; /opt/homebrew/share/man/man1/g or Cellar/coreutils/*/share/man/man1
-  # => we cannot type "man rm" no matter what, have to type "man grm".
-  # we can however fix: make, gnu-sed, gnu-tar, grep via MANPATH patching + aliases:
-  manpath+=/opt/homebrew/opt/make/libexec/man
-  manpath+=/opt/homebrew/opt/grep/libexec/man
-  manpath+=/opt/homebrew/opt/gnu-tar/libexec/man
-  manpath+=/opt/homebrew/opt/gnu-sed/libexec/man
-  alias sed=gsed
-  alias grep=ggrep
-  alias sed=gsed
-  alias make=gmake
-  # and make most coreutils appear working (but man pages need g prefix)
-  alias date=gdate
-  alias rm=grm
-  alias awk=gawk
-  # for multiple bins in binutils, findutils, simple PATH extension is enough:
-  path+=/opt/homebrew/opt/binutils/bin
-  path+=/opt/homebrew/opt/findutils/libexec/gnubin
+  # Fix modern coreutils/uutils without g (gnu) or u (uutils) prefix.
+  # (doing so can apparently break python builds, so doing in here for user only)
+  # Bin paths for uutils (also sufficient to resolve manpaths now)
+  PATH="/opt/homebrew/opt/uutils-coreutils/libexec/uubin:$PATH"
+  # findutils from gnu has a good gnubin with man pages
+  PATH="/opt/homebrew/opt/findutils/libexec/gnubin:$PATH"
+  # NB: not doing findutils from uutils yet, alpha find.
+  # maybe later do variation of:
+  # PATH="/opt/homebrew/opt/uutils-findutils/libexec/uubin:$PATH"
+  # MANPATH="/opt/homebrew/opt/uutils-coreutils/libexec/uuman:$MANPATH"
+
+  # Then stragglers; sed,grep,make,patch,awk (gnubins all have man dirs o/)
+  PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
+  PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH"
+  PATH="/opt/homebrew/opt/make/libexec/gnubin:$PATH"
+  PATH="/opt/homebrew/opt/gpatch/libexec/gnubin:$PATH"
+  PATH="/opt/homebrew/opt/gawk/libexec/gnubin:$PATH"
 
   # NB: mac also reverses the PATH, tried .zprofile, but found .zshenv to be more reliable
   # ref: https://gist.github.com/Linerre/f11ad4a6a934dcf01ee8415c9457e7b2
 
   # other common linux tools need just brew packages to get updated;
-  # brew install watch diffutils rsync bash gpatch less
-  # alternatively; cargo install coreutils and alias head="coreutils head"
-  # TODO: in the future try out the rust rewrite https://github.com/uutils/coreutils
+  # brew install watch diffutils rsync bash less
 
   # oh, and no ps, so try to move to procs:
   alias ps=procs
