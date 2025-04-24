@@ -1,0 +1,15 @@
+/* requires toolkit.legacyUserProfileCustomizations.stylesheets in about:config*/
+
+/* smaller tabs */
+.tabbrowser-tab {
+  min-width: 5px !important;
+}
+tab > stack.tab-stack > hbox.tab-content {
+  padding: 0 2px !important;
+  margin: 0 !important;
+}
+
+/* remove ff icon on the new tab tab (when it's active) */
+.tabbrowser-tab[label="New Tab"] .tab-content .tab-icon-stack {
+  display: none !important;
+}
