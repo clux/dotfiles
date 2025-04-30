@@ -181,7 +181,7 @@
   keep-plus-minus-markers = false # can use --no-pager for diff compat
   hyperlinks = true
   file-style = omit
-  line-numbers = false
+  line-numbers = true
   commit-style = none
   zero-style = syntax
   hunk-header-style = file line-number syntax
