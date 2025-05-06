@@ -46,7 +46,7 @@ key() {
     esac
   done
   # shellcheck disable=SC2068
-  keychain --nogui --timeout $((16*60)) --quiet --host agent --agents ssh,gpg ${keys[@]}
+  keychain --host agent ${keys[@]} --nogui --quiet --timeout $((16*60))
   source ~/.keychain/agent-sh
   source ~/.keychain/agent-sh-gpg
 }
