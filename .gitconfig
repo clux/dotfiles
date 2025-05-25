@@ -28,8 +28,9 @@
   # fuzzy interactive helpers
   # NB: interactive shell sources .git-helpers for these
   l = !zsh -ic 'gitlog' x
+  ls = log -p -S # give it a regex
   st = !zsh -ic 'gitstash' x
-  blam = !zsh -ic 'gitblame $@' x
+  b = !zsh -ic 'gitblame $@' x
 
   # OCCASIONAL
   ping = "!f() { git commit --signoff --allow-empty -m \"ping hooks - $(date +%Y-%m-%d)\"; }; f"
@@ -132,6 +133,9 @@
   # Detect whitespace errors when applying a patch
   whitespace = fix
 
+[rerere]
+  enabled = true
+
 [tag]
   # sort order of git tags / git tag -l
   # hopefully, i'll remember to port this to any ad-hoc release scripts..
@@ -212,6 +216,12 @@
 [init]
   defaultBranch = main
 
+[branch]
+  sort=-committerdate
+
+[column]
+  ui = auto
+
 [credential]
 	helper = store
 
@@ -219,3 +229,9 @@
     fsckobjects = true
 [fetch]
     fsckobjects = true
+
+# NB: if i'm ever working with very large repos
+# consider git maintenance start
+# fetch.writeCommitGraph, core.fsmonitor, core.untrackedcache
+# and clone with --filter=blob:none (maybe, slows down blame)
+# lots of specific options for large repos apparently
