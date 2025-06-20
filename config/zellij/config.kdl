@@ -1,54 +1,16 @@
 copy_on_select true
 pane_frames false
 theme "catppuccin-mocha"
-themes {
-  tokyo-night-storm {
-    fg 169 177 214
-    bg 36 40 59
-    black 56 62 90
-    red 249 51 87
-    green 158 206 106
-    yellow 224 175 104
-    blue 122 162 247
-    magenta 187 154 247
-    cyan 42 195 222
-    white 192 202 245
-    orange 255 158 100
-  }
-  catppuccin-macchiato {
-    bg "#5b6078" // Surface2
-    fg "#cad3f5"
-    red "#ed8796"
-    green "#a6da95"
-    blue "#8aadf4"
-    yellow "#eed49f"
-    magenta "#f5bde6" // Pink
-    orange "#f5a97f" // Peach
-    cyan "#91d7e3" // Sky
-    black "#1e2030" // Mantle
-    white "#cad3f5"
-  }
-
-  catppuccin-mocha {
-    bg "#585b70" // Surface2
-    fg "#cdd6f4"
-    red "#f38ba8"
-    green "#a6e3a1"
-    blue "#89b4fa"
-    yellow "#f9e2af"
-    magenta "#f5c2e7" // Pink
-    orange "#fab387" // Peach
-    cyan "#89dceb" // Sky
-    black "#181825" // Mantle
-    white "#cdd6f4"
-  }
-}
+default_layout "compact"
+show_startup_tips false
+show_release_notes false
 
 ui {
     pane_frames {
         hide_session_name true
     }
 }
+
 
 // we manage keybinds here mainly for a few main modifications:
 // - remap hjkl binds to neio where appropriate (colemak home row == qwerty jkl;)
@@ -57,109 +19,109 @@ ui {
 // - disable modes: tmux, locked, entersearch, renametab, renamepane (no way into these modes)
 keybinds clear-defaults=true {
     // modal binds first - excluded modes are cleared
-
     resize { // hjkl equivalent + arrows for resizing, nothing else
-        bind "Ctrl n" { SwitchToMode "Normal"; }
-        bind "n" "Left" { Resize "Increase Left"; }
-        bind "e" "Down" { Resize "Increase Down"; }
-        bind "i" "Up" { Resize "Increase Up"; }
-        bind "o" "Right" { Resize "Increase Right"; }
+        bind "Ctrl n" { SwitchToMode "normal"; }
+        bind "n" "left" { Resize "Increase left"; }
+        bind "e" "down" { Resize "Increase down"; }
+        bind "i" "up" { Resize "Increase up"; }
+        bind "o" "right" { Resize "Increase right"; }
     }
     pane { // only arrows for pane switching
-        bind "Ctrl p" { SwitchToMode "Normal"; }
-        bind "Left" { MoveFocus "Left"; }
-        bind "Right" { MoveFocus "Right"; }
-        bind "Down" { MoveFocus "Down"; }
-        bind "Up" { MoveFocus "Up"; }
+        bind "Ctrl p" { SwitchToMode "normal"; }
+        bind "left" { MoveFocus "left"; }
+        bind "down" { MoveFocus "down"; }
+        bind "up" { MoveFocus "up"; }
+        bind "right" { MoveFocus "right"; }
+        bind "d" { NewPane "down"; SwitchToMode "normal"; }
+        bind "n" { NewPane; SwitchToMode "normal"; }
         bind "p" { SwitchFocus; }
-        bind "n" { NewPane; SwitchToMode "Normal"; }
-        bind "d" { NewPane "Down"; SwitchToMode "Normal"; }
-        bind "r" { NewPane "Right"; SwitchToMode "Normal"; }
-        bind "x" { CloseFocus; SwitchToMode "Normal"; }
-        bind "z" { ToggleFloatingPanes; SwitchToMode "Normal"; }
+        bind "r" { NewPane "right"; SwitchToMode "normal"; }
+        bind "x" { CloseFocus; SwitchToMode "normal"; }
+        bind "z" { ToggleFloatingPanes; SwitchToMode "normal"; }
     }
     move { // home row + arrow keys or tab cycle - don't really use this a lot...
-        bind "Ctrl h" { SwitchToMode "Normal"; }
-        bind "Tab" { MovePane; }
+        bind "Ctrl h" { SwitchToMode "normal"; }
+        bind "tab" { MovePane; }
         bind "p" { MovePaneBackwards; }
-        bind "n" "Left" { MovePane "Left"; }
-        bind "e" "Down" { MovePane "Down"; }
-        bind "i" "Up" { MovePane "Up"; }
-        bind "o" "Right" { MovePane "Right"; }
+        bind "n" "left" { MovePane "left"; }
+        bind "e" "down" { MovePane "down"; }
+        bind "i" "up" { MovePane "up"; }
+        bind "o" "right" { MovePane "right"; }
     }
     tab { // numbers, left/right or tab cycle
-        bind "Ctrl d" { SwitchToMode "Normal"; }
-        bind "Left" { GoToPreviousTab; }
-        bind "Right" { GoToNextTab; }
-        bind "n" { NewTab; SwitchToMode "Normal"; }
-        bind "x" { CloseTab; SwitchToMode "Normal"; }
-        //bind "s" { ToggleActiveSyncTab; SwitchToMode "Normal"; }
-        bind "1" { GoToTab 1; SwitchToMode "Normal"; }
-        bind "2" { GoToTab 2; SwitchToMode "Normal"; }
-        bind "3" { GoToTab 3; SwitchToMode "Normal"; }
-        bind "4" { GoToTab 4; SwitchToMode "Normal"; }
-        bind "5" { GoToTab 5; SwitchToMode "Normal"; }
-        bind "6" { GoToTab 6; SwitchToMode "Normal"; }
-        bind "7" { GoToTab 7; SwitchToMode "Normal"; }
-        bind "8" { GoToTab 8; SwitchToMode "Normal"; }
-        bind "9" { GoToTab 9; SwitchToMode "Normal"; }
-        bind "Tab" { ToggleTab; }
+        bind "Ctrl d" { SwitchToMode "normal"; }
+        bind "left" { GoToPreviousTab; }
+        bind "right" { GoToNextTab; }
+        bind "n" { NewTab; SwitchToMode "normal"; }
+        bind "x" { CloseTab; SwitchToMode "normal"; }
+        bind "1" { GoToTab 1; SwitchToMode "normal"; }
+        bind "2" { GoToTab 2; SwitchToMode "normal"; }
+        bind "3" { GoToTab 3; SwitchToMode "normal"; }
+        bind "4" { GoToTab 4; SwitchToMode "normal"; }
+        bind "5" { GoToTab 5; SwitchToMode "normal"; }
+        bind "6" { GoToTab 6; SwitchToMode "normal"; }
+        bind "7" { GoToTab 7; SwitchToMode "normal"; }
+        bind "8" { GoToTab 8; SwitchToMode "normal"; }
+        bind "9" { GoToTab 9; SwitchToMode "normal"; }
+        bind "tab" { ToggleTab; }
     }
     scroll { // f for editor, otherwise pgdn/pgup, up/dn, or home row (outer fastest, inner slowest)
-        bind "Ctrl s" { SwitchToMode "Normal"; }
-        bind "f" { EditScrollback; SwitchToMode "Normal"; } // editor on scrollback elides zellij entersearch
-        bind "Ctrl c" { ScrollToBottom; SwitchToMode "Normal"; }
-        bind "Down" { ScrollDown; }
-        bind "Up" { ScrollUp; }
-        bind "PageDown" "Right" "o" { PageScrollDown; }
-        bind "PageUp" "Left" "n" { PageScrollUp; }
-        bind "i" { HalfPageScrollDown; }
+        bind "Ctrl s" { SwitchToMode "normal"; }
+        bind "f" { EditScrollback; SwitchToMode "normal"; }
+        bind "Ctrl c" { ScrollToBottom; SwitchToMode "normal"; }
+        bind "down" { ScrollDown; }
+        bind "up" { ScrollUp; }
+        bind "PageDown" "right" "o" { PageScrollDown; }
+        bind "PageUp" "left" "n" { PageScrollUp; }
         bind "e" { HalfPageScrollUp; }
+        bind "i" { HalfPageScrollDown; }
         // uncomment this and adjust key if using copy_on_select=false
         // bind "Alt c" { Copy; }
     }
     session {
-        bind "Ctrl o" { SwitchToMode "Normal"; }
-        bind "Ctrl s" { SwitchToMode "Scroll"; }
         bind "d" { Detach; }
+        bind "Ctrl o" { SwitchToMode "normal"; }
+        // TODO: this was removed in migration, does it still work?
+        bind "Ctrl s" { SwitchToMode "scroll"; }
     }
     locked {
-        bind "Ctrl g" { SwitchToMode "Normal"; }
+        bind "Ctrl g" { SwitchToMode "normal"; }
     }
-
     // main binds that work everywhere
     shared_except "locked" { // normal mode binds; home row, movement
         bind "Ctrl g" { SwitchToMode "locked"; }
         // Carefully take arrow key binds that are not super common to avoid stealing a common helix bind
-        bind "Ctrl Alt Left" { MoveFocusOrTab "Left"; }
-        bind "Ctrl Alt Right" { MoveFocusOrTab "Right"; }
-        bind "Ctrl Alt Down" { MoveFocus "Down"; }
-        bind "Ctrl Alt Up" { MoveFocus "Up"; }
+        bind "Ctrl Alt left" { MoveFocusOrTab "left"; }
+        bind "Ctrl Alt down" { MoveFocus "down"; }
+        bind "Ctrl Alt up" { MoveFocus "up"; }
+        bind "Ctrl Alt right" { MoveFocusOrTab "right"; }
         // cheaper resize than the full resize mode (unbound - i seem to prefer resize mode)
+        // NB: from pre-migration
         //bind "Alt =" "Alt +" { Resize "Increase"; }
         //bind "Alt -" { Resize "Decrease"; }
         // NB: command +- resizes term (alacritty bind)
     }
     shared_except "normal" "locked" {
-        bind "Enter" "Esc" { SwitchToMode "Normal"; }
+        bind "esc" { SwitchToMode "normal"; }
+        bind "enter" { SwitchToMode "normal"; }
     }
     // entry keys (has escape hatches out to normal again on the same keys above)
-    shared_except "pane" "locked" {
-        bind "Ctrl p" { SwitchToMode "Pane"; }
+    shared_except "locked" "pane" {
+        bind "Ctrl p" { SwitchToMode "pane"; }
     }
-    shared_except "resize" "locked" {
-        bind "Ctrl n" { SwitchToMode "Resize"; }
+    shared_except "locked" "resize" {
+        bind "Ctrl n" { SwitchToMode "resize"; }
     }
-    shared_except "scroll" "locked" {
-        bind "Ctrl s" { SwitchToMode "Scroll"; }
+    shared_except "locked" "scroll" {
+        bind "Ctrl s" { SwitchToMode "scroll"; }
     }
     //shared_except "session" "locked" {
-    //    bind "Ctrl o" { SwitchToMode "Session"; }
+    //    bind "Ctrl o" { SwitchToMode "session"; }
     //}
-    shared_except "tab" "locked" {
-        bind "Ctrl d" { SwitchToMode "Tab"; }
+    shared_except "locked" "tab" {
+        bind "Ctrl d" { SwitchToMode "tab"; }
     }
-    shared_except "move" "locked" {
-        bind "Ctrl h" { SwitchToMode "Move"; }
+    shared_except "locked" "move" {
+        bind "Ctrl h" { SwitchToMode "move"; }
     }
 }

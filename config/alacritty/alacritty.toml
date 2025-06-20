@@ -21,7 +21,7 @@ style = "Regular"
 
 [terminal]
 # start zellij with a small sleep to ensure it gets right dimensions
-shell = { program = "zsh", args = ["-ic", "sleep 0.2 && zellij -l compact"] }
+shell = { program = "zsh", args = ["-ic", "sleep 0.2 && zellij"] }
 
 [window]
 opacity = 0.8
