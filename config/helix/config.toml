@@ -59,6 +59,15 @@ bufferline = "always"
 text-width = 100
 end-of-line-diagnostics = "hint"
 
+[editor.auto-pairs]
+# https://docs.helix-editor.com/editor.html#editorauto-pairs-section
+'(' = ')'
+'{' = '}'
+'[' = ']'
+# '"' = '"'
+# '`' = '`'
+'<' = '>'
+
 [editor.inline-diagnostics]
 cursor-line = "error"
 
