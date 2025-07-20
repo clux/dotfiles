@@ -1,4 +1,4 @@
-[manager]
+[mgr]
 # kind of want to have --confirm option
 # but that implies having to also fork the whole keymap atm
 #keymap = [

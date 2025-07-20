@@ -1,7 +1,7 @@
 [preview]
 syntect_theme = "~/.config/bat/themes/Catppuccin-mocha.tmTheme"
 
-[manager]
+[mgr]
 sort_by = "alphabetical"
 sort_dir_first = true
 show_symlink = true
