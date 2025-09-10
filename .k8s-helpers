@@ -198,7 +198,7 @@ kev() {
 
 # crd viewer
 kcrd() {
-  kubectl get crds $(kubectl get crd --no-headers | fzf -d' ' -n1 --accept-nth=1) -oyaml | kopium -A -f - | $EDITOR
+  kubectl get crds $(kubectl get crd --no-headers | fzf -d' ' -n1 --accept-nth=1) -oyaml | kopium -A -f - > /tmp/kopium.rs && $EDITOR /tmp/kopium.rs
 }
 
 # -----------------------------------------------------------------------------
