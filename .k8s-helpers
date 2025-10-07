@@ -236,6 +236,9 @@ k3dmake28() { k3dmake "28" "1.28" $(k3dwatchlist); }
 k3dmake29() { k3dmake "29" "1.29" $(k3dwatchlist); }
 k3dmake30() { k3dmake "30" "1.30" $(k3dwatchlist); }
 k3dmake31() { k3dmake "31" "1.31"; } #  Kubernetes has watchlist from 1.31
+k3dmake32() { k3dmake "32" "1.32"; }
+k3dmake33() { k3dmake "33" "1.33"; }
+k3dmake34() { k3dmake "34" "1.34"; }
 
 # -----------------------------------------------------------------------------
 # misc kubernetes helpers
