@@ -82,6 +82,8 @@ if [[ "${OSTYPE}" =~ "darwin" ]]; then
   PATH="/opt/homebrew/opt/make/libexec/gnubin:$PATH"
   PATH="/opt/homebrew/opt/gpatch/libexec/gnubin:$PATH"
   PATH="/opt/homebrew/opt/gawk/libexec/gnubin:$PATH"
+  # and util-linux (column)
+  PATH="/opt/homebrew/opt/util-linux/bin:$PATH"
 
   # NB: mac also reverses the PATH, tried .zprofile, but found .zshenv to be more reliable
   # ref: https://gist.github.com/Linerre/f11ad4a6a934dcf01ee8415c9457e7b2
