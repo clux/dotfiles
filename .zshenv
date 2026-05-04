@@ -49,6 +49,12 @@ export NODE_REPL_HISTORY=""
 export PYTHONSTARTUP="${HOME}/.config/python/startup.py"
 
 # -----------------------------------------------------------------------------
+# Disable tracking (particularly in github cli)
+
+export GH_TELEMETRY=false
+export DO_NOT_TRACK=true
+
+# -----------------------------------------------------------------------------
 # PATH
 
 # remove duplicate entries from PATH and MANPATH
