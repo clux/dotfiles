@@ -80,6 +80,7 @@ contexts = [
   { context_pattern = ".*eks-sandbox.*", context_alias = "sbx" },
   { context_pattern = ".*eks-production.*", context_alias = "prod", style = "bg:black 204" },
   { context_pattern = ".*eks-play.*", context_alias = "play" },
+  { context_pattern = "zimp.*", style = "bg:black 170" },
   { context_pattern = "k3d-.*(?P<k3d>[\\d]{2})", context_alias = "団${k3d}" },
   { context_pattern = ".*" },
 ]
