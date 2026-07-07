@@ -22,12 +22,13 @@ alias -g NE="2> /dev/null"
 alias -s md="hx"
 alias -s png="feh"
 alias -s mp4="mpv"
+# shellcheck disable=SC2139
 alias -s rs="$EDITOR"
 alias -s yaml="bat"
 
 # dirs (can 'cd ~pics')
-# TODO: mac compat
 hash -d pics=~/Pictures
+hash -d mvz=~/Movies
 
 # ls + tree -> eza
 alias lll=lla
@@ -41,7 +42,6 @@ alias tree='eza --tree --group-directories-first --icons --git-ignore -git --sor
 alias top='btop'
 
 # jq on everything
-alias yq='lq --input=yaml'
 alias tq='lq --input=toml'
 alias JQ='lq --input=json'
 
