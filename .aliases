@@ -12,6 +12,23 @@ alias cat="bat"
 alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
 alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 
+# andpipe shortcut
+alias -g ANDP="2>&1 |"
+alias -g DNA="> /dev/null 2>&1"
+alias -g DN="> /dev/null"
+alias -g NE="2> /dev/null"
+
+# suffix aliases
+alias -s md="hx"
+alias -s png="feh"
+alias -s mp4="mpv"
+alias -s rs="$EDITOR"
+alias -s yaml="bat"
+
+# dirs (can 'cd ~pics')
+# TODO: mac compat
+hash -d pics=~/Pictures
+
 # ls + tree -> eza
 alias lll=lla
 alias lla='eza -la --group-directories-first --icons=always --git-ignore --git --sort ext --color=always'
