@@ -127,13 +127,14 @@
         "refresh": 900,
         "format-paused": "{player_icon}  {status_icon} {artist}",
         "player-icons": {
-            "default": "\udb82\udd60",
-            "chromium": "\uf268"
-         },
-         "status-icons": {
-             "paused": "\udb80\udfe4",
-             "playing": "\udb81\udc0a"
-          }
+          "default": "\udb82\udd60",
+          "chromium": "\uf268"
+        },
+        "status-icons": {
+          "paused": "\udb80\udfe4",
+          "playing": "\udb81\udc0a"
+        }
+        // TODO: do a menu for this with more mpris support (mpv-mpris + mpd)
     },
 
     // NB: unused atm, works well, but needs waybar-mpris-git from aur and trying to limit aur deps
@@ -250,7 +251,7 @@
         "on-click": "kubectl config set \"contexts.$(kubectl config current-context).namespace\" \"$(kubectl get ns --no-headers | choose 0 | fuzzel -p '󱃾 ' -d -l $(kubectl get ns --no-headers |wc -l))\" && pkill -RTMIN+3 waybar",
         "return-type": "json",
         "signal": 3,
-        "interval": 5
+        "interval": 60
     },
 
     // wttr.in dump via https://github.com/bjesus/wttrbar (aur wttrbar-git)
