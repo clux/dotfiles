@@ -47,8 +47,7 @@ key() {
   done
   # shellcheck disable=SC2068
   keychain add ${keys[@]} --nogui --quiet --timeout 1440
-  source ~/.keychain/agent-sh
-  source ~/.keychain/agent-sh-gpg
+  eval "$(keychain env)"
 }
 keys() {
   # join static list of gpg keys with dynamic list of ssh keys
