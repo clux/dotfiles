@@ -168,7 +168,7 @@ kpfp() {
   if [ "$(jq ".ports[]" -Mc <<< "${container}" | wc -l)" -gt 1 ]; then
     portjson="$(jq ".ports[]" -Mc <<< "${container}" | fzf --header="pick a port object")"
   else
-    portjson="$(jq ".ports[0]" -Mc <<< "${cname}")"
+    portjson="$(jq ".ports[0]" -Mc <<< "${container}")"
   fi
   port="$(jq ".containerPort" -r <<< "${portjson}")"
   echo "Forwarding to pod/${pod}:${port} via local 8000"
