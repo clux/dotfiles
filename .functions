@@ -126,6 +126,12 @@ mountz() {
   local -r part="$(lsblk -r | grep " part" | grep -v nvme | choose 0 | fzf)"
   udisksctl mount -b "${part}" # needs to have the partition number e.g. /dev/sda1
 }
+# mount camera sdcard (exfat)
+mount_sony() {
+  # NB: needs exfat-utils arch pkg
+  sudo mount -t exfat /dev/sda1 /media/sdcard
+  # can now cp from /media/sdcard DCIM and CLIPS
+}
 
 # pacman experiment
 pacq() {
