@@ -96,6 +96,7 @@ alias cb="cargo build"
 alias cbb="cargo build --bin"
 alias ct="cargo test"
 alias cv="tq .package.version -r Cargo.toml"
+alias cf='export CARGO_RESOLVER_INCOMPATIBLE_PUBLISH_AGE=allow'
 
 # docker
 alias d="docker"
