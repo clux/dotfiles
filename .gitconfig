@@ -108,20 +108,16 @@
   # Ensure user info is set before committing
   useConfigOnly = true
 
-; include for all repositories inside ~truelayer
 [includeIf "gitdir:~/truelayer/"]
 	path = ~/.gitconfig-tl.inc
-[includeIf "gitdir:/opt/homebrew/Library/Taps/truelayer/"]
-    ; needed for brew tap to work
-    path = ~/.gitconfig-tl.inc
-[includeIf "hasconfig:remote.*.url:https://github.com/truelayer/**"]
-    ; needed for brew update to work on taps
-    path = ~/.gitconfig-tl.inc
-; include for all repositories inside ~/repos and ~/kube
 [includeIf "gitdir:~/repos/"]
 	path = ~/.gitconfig-clux.inc
 [includeIf "gitdir:~/kube/"]
 	path = ~/.gitconfig-clux.inc
+
+# force tl org to use ssh config rewrite so brew update can get the key from background job
+[url "git@github-truelayer:TrueLayer/"]
+    insteadOf = git@github.com:TrueLayer/
 
 [push]
   default = current

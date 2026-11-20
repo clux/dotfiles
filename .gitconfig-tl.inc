@@ -7,8 +7,8 @@
 [github]
   user = tl-eirik-albrigtsen
 
-[core]
-  sshCommand = "ssh -i ~/.ssh/work_id"
-
 [commit]
   gpgSign = true
+
+ [url "git@github-truelayer:"]
+    insteadOf = git@github.com:
