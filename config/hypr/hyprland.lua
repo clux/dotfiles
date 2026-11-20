@@ -79,7 +79,6 @@ hl.config({
         -- https://wiki.hypr.land/configuring/layouts/dwindle-layout/
         -- pseudotile = yes # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
         preserve_split = true, -- you probably want this
-        special_scale_factor = 1, -- maximize special workspace
     },
     misc = {
         -- enable adaptive sync
