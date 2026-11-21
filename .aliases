@@ -46,7 +46,9 @@ alias tq='lq --input=toml'
 alias JQ='lq --input=json'
 
 # hyprland
-alias hde="hyprctl dispatch exec"
+hde() {
+  hyprctl eval "hl.exec_cmd(\"$@\")"
+}
 
 # yabai
 alias yw="yabai -m query --windows"
